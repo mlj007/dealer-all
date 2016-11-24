@@ -1,0 +1,2527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chexun.dealer.model.dealers.DealersInfoMapper">
+ 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>   -->
+   
+    <resultMap id="DealersInfoPoResult" type="com.chexun.dealer.po.dealers.DealersInfoPo">
+    	<result property="id" column="id"/>
+    	<result property="createTime" column="create_time"/>
+    	<result property="dealerName" column="company_name"/>
+    	<result property="dealerShortName" column="company_short_name"/>
+    	<result property="cityName" column="city_name"/>
+    	<result property="brandName" column="brand_name"/>
+    	<result property="salePhone" column="sale_phone"/>
+    	<result property="lastLoginTime" column="last_login_time"/>
+    	<result property="beginTime" column="begin_time"/>
+    	<result property="endTime" column="end_time"/>
+    	<result property="dealerlevel" column="dealerlevel"/>
+    	<result property="isrecommendfirst" column="isrecommendfirst"/>
+    	<result property="companyType" column="company_type"/>
+    </resultMap>
+    <resultMap id="DealersInfoResult" type="com.chexun.dealer.model.dealers.DealersInfo">
+        <result property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="companyName" column="company_name"/>
+        <result property="companyShortName" column="company_short_name"/>
+        <result property="companyType" column="company_type"/>
+        <result property="salePhone" column="sale_phone"/>
+        <result property="companyAddress" column="company_address"/>
+        <result property="provinceId" column="province_id"/>
+        <result property="cityId" column="city_id"/>
+        <result property="regionalId" column="regional_id"/>
+        <result property="memberType" column="member_type"/>
+        <result property="createTime" column="create_time"/>
+        <result property="state" column="state"/>
+        <result property="beginTime" column="begin_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="email" column="email"/>
+        <result property="postalCode" column="postal_code"/>
+        <result property="servicePhone" column="service_phone"/>
+        <result property="maintainPhone" column="maintain_phone"/>
+        <result property="contact" column="contact"/>
+        <result property="companyWebsite" column="company_website"/>
+        <result property="companyPhoto" column="company_photo"/>
+        <result property="starLever" column="star_lever"/>
+        <result property="makerAuthorizedProof" column="maker_authorized_proof"/>
+        <result property="businessLicense" column="business_license"/>
+        <result property="organization" column="organization"/>
+        <result property="contactCard" column="contact_card"/>
+        <result property="contactAuthorizedProof" column="contact_authorized_proof"/>
+        <result property="serviceProjects" column="service_projects"/>
+        <result property="companyMap" column="company_map"/>
+        <result property="companyIntroduction" column="company_introduction"/>
+        <result property="isCheck" column="is_check"/>
+        <result property="templateType" column="template_type"/>
+        <result property="englishAlias" column="english_alias"/>
+        <result property="checkTime" column="check_time"/>
+        <result property="checker" column="checker"/>
+        <result property="lastLoginTime" column="last_login_time"/>
+        <result property="currentLoginTime" column="current_login_time"/>
+        <result property="operateBrandId" column="operate_brand_id"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
+        <result property="dealerlevel" column="dealerlevel"/>
+        <result property="updatecount" column="updatecount"/>
+        <result property="updatetime" column="updatetime"/>
+        <result property="isrecommendfirst" column="isrecommendfirst"/>
+        <result property="worktime" column="worktime"/>
+        <result property="businfo" column="businfo"/>
+        <result property="keyword" column="keyword"/>
+        <result property="districtid" column="districtid"/>
+        <result property="commercialid" column="commercialid"/>
+        <result property="remark" column="remark"/>
+        <result property="datasource" column="datasource"/>
+        <result property="bitauo400tel" column="bitauo400tel"/>
+        <result property="companyWebsite2" column="company_website_2"/>
+        <result property="regionalid" column="regionalid"/>
+        <result property="fenji" column="fenji"/>
+        <result property="transfertime" column="transfertime"/>
+        <result property="transfercycle" column="transfercycle"/>
+        <result property="transferphone" column="transferphone"/>
+        <result property="transferstartdate" column="transferstartdate"/>
+        <result property="transferenddate" column="transferenddate"/>
+        <result property="companyWebsite3" column="company_website_3"/>
+        <result property="pushcount" column="pushcount"/>
+        <result property="allpushcount" column="allpushcount"/>
+        <result property="shop" column="shop"/>
+        <result property="shopcount" column="shopcount"/>
+        <result property="allshopcount" column="allshopcount"/>
+        <result property="tel400" column="tel400"/>
+        <result property="telid" column="telid"/>
+        <result property="buycount" column="buycount"/>
+        <result property="buydate" column="buydate"/>
+        <result property="buyStartdate" column="buy_startdate"/>
+        <result property="buyEnddate" column="buy_enddate"/>
+        <result property="isjifen" column="isjifen"/>
+        <result property="daorustatus" column="daorustatus"/>
+        <result property="baozhengjin" column="baozhengjin"/>
+        <result property="frozenbaozhengjin" column="frozenbaozhengjin"/>
+        <result property="frozenshopcount" column="frozenshopcount"/>
+        <result property="pushdealercount" column="pushdealercount"/>
+    </resultMap>
+
+    <sql id="dealers_info_columns">
+        dealers_info.id,
+        dealers_info.username,
+        dealers_info.password,
+        dealers_info.company_name,
+        dealers_info.company_short_name,
+        dealers_info.company_type,
+        dealers_info.sale_phone,
+        dealers_info.company_address,
+        dealers_info.province_id,
+        dealers_info.city_id,
+        dealers_info.regional_id,
+        dealers_info.member_type,
+        dealers_info.create_time,
+        dealers_info.state,
+        dealers_info.begin_time,
+        dealers_info.end_time,
+        dealers_info.email,
+        dealers_info.postal_code,
+        dealers_info.service_phone,
+        dealers_info.maintain_phone,
+        dealers_info.contact,
+        dealers_info.company_website,
+        dealers_info.company_photo,
+        dealers_info.star_lever,
+        dealers_info.maker_authorized_proof,
+        dealers_info.business_license,
+        dealers_info.organization,
+        dealers_info.contact_card,
+        dealers_info.contact_authorized_proof,
+        dealers_info.service_projects,
+        dealers_info.company_map,
+        dealers_info.company_introduction,
+        dealers_info.is_check,
+        dealers_info.template_type,
+        dealers_info.english_alias,
+        dealers_info.check_time,
+        dealers_info.checker,
+        dealers_info.last_login_time,
+        dealers_info.current_login_time,
+        dealers_info.operate_brand_id,
+        dealers_info.longitude,
+        dealers_info.latitude,
+        dealers_info.dealerlevel,
+        dealers_info.updatecount,
+        dealers_info.updatetime,
+        dealers_info.isrecommendfirst,
+        dealers_info.worktime,
+        dealers_info.businfo,
+        dealers_info.keyword,
+        dealers_info.districtid,
+        dealers_info.commercialid,
+        dealers_info.remark,
+        dealers_info.datasource,
+        dealers_info.bitauo400tel,
+        dealers_info.company_website_2,
+        dealers_info.regionalid,
+        dealers_info.fenji,
+        dealers_info.transfertime,
+        dealers_info.transfercycle,
+        dealers_info.transferphone,
+        dealers_info.transferstartdate,
+        dealers_info.transferenddate,
+        dealers_info.company_website_3,
+        dealers_info.pushcount,
+        dealers_info.allpushcount,
+        dealers_info.shop,
+        dealers_info.shopcount,
+        dealers_info.allshopcount,
+        dealers_info.tel400,
+        dealers_info.telid,
+        dealers_info.buycount,
+        dealers_info.buydate,
+        dealers_info.buy_startdate,
+        dealers_info.buy_enddate,
+        dealers_info.isjifen,
+        dealers_info.daorustatus,
+        dealers_info.baozhengjin,
+        dealers_info.frozenbaozhengjin,
+        dealers_info.frozenshopcount,
+        dealers_info.pushdealercount
+    </sql>
+    
+    <sql id="dealers_info_where_conditions_list">
+    	<trim prefix="where" prefixOverrides="and|or">
+    		<if test="cityId != null and cityId!=0">
+        		and dealers_info.city_id=#{cityId} 
+	        </if>
+    		<if test="companyType != null and companyType!=0">
+        		and dealers_info.company_type=#{companyType} 
+	        </if>
+	    	<if test="companyName != null and companyName!=''">
+	    		<bind name="companyName" value="'%' + companyName + '%'" />
+        		and dealers_info.company_short_name like #{companyName}
+	        </if>
+	        <if test="state != null and state!=0">
+        		and dealers_info.state=#{state} 
+	        </if>
+	        <if test="state == null">
+        		and dealers_info.state !=-1	
+	        </if>
+	        <if test="isrecommendfirst != null and isrecommendfirst!=0">
+        		and dealers_info.isrecommendfirst=#{isrecommendfirst} 
+	        </if>
+	        <if test="createbeginTime != null and createbeginTime!=''">
+        		 <![CDATA[ and dealers_info.begin_time >= DATE_FORMAT(#{createbeginTime,jdbcType=DATE},'%Y-%m-%d')]]>
+	        </if>
+	        <if test="createendTime != null and createendTime!=''">
+        		 <![CDATA[ and dealers_info.begin_time <= DATE_FORMAT(#{createendTime,jdbcType=DATE},'%Y-%m-%d')]]>
+	        </if>
+	        <if test="expirebeginTime != null and expirebeginTime!=''">
+        		 <![CDATA[ and dealers_info.end_time >= DATE_FORMAT(#{expirebeginTime,jdbcType=DATE},'%Y-%m-%d')]]>
+	        </if>
+	        <if test="expireendTime != null and expireendTime!=''">
+        		 <![CDATA[ and dealers_info.end_time <= DATE_FORMAT(#{expireendTime,jdbcType=DATE},'%Y-%m-%d')]]>
+	        </if>
+        </trim>
+    </sql>
+    <sql id="dealers_info_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="id != null">
+        	id=#{id},
+        </if>
+        <if test="username != null">
+        	username=#{username},
+        </if>
+        <if test="password != null">
+        	password=#{password},
+        </if>
+        <if test="companyName != null">
+        	company_name=#{companyName},
+        </if>
+        <if test="companyShortName != null">
+        	company_short_name=#{companyShortName},
+        </if>
+        <if test="companyType != null">
+        	company_type=#{companyType},
+        </if>
+        <if test="salePhone != null">
+        	sale_phone=#{salePhone},
+        </if>
+        <if test="companyAddress != null">
+        	company_address=#{companyAddress},
+        </if>
+        <if test="provinceId != null">
+        	province_id=#{provinceId},
+        </if>
+        <if test="cityId != null">
+        	city_id=#{cityId},
+        </if>
+        <if test="regionalId != null">
+        	regional_id=#{regionalId},
+        </if>
+        <if test="memberType != null">
+        	member_type=#{memberType},
+        </if>
+        <if test="createTime != null">
+        	create_time=#{createTime},
+        </if>
+        <if test="state != null">
+        	state=#{state},
+        </if>
+        <if test="beginTime != null">
+        	begin_time=#{beginTime},
+        </if>
+        <if test="endTime != null">
+        	end_time=#{endTime},
+        </if>
+        <if test="email != null">
+        	email=#{email},
+        </if>
+        <if test="postalCode != null">
+        	postal_code=#{postalCode},
+        </if>
+        <if test="servicePhone != null">
+        	service_phone=#{servicePhone},
+        </if>
+        <if test="maintainPhone != null">
+        	maintain_phone=#{maintainPhone},
+        </if>
+        <if test="contact != null">
+        	contact=#{contact},
+        </if>
+        <if test="companyWebsite != null">
+        	company_website=#{companyWebsite},
+        </if>
+        <if test="companyPhoto != null">
+        	company_photo=#{companyPhoto},
+        </if>
+        <if test="starLever != null">
+        	star_lever=#{starLever},
+        </if>
+        <if test="makerAuthorizedProof != null">
+        	maker_authorized_proof=#{makerAuthorizedProof},
+        </if>
+        <if test="businessLicense != null">
+        	business_license=#{businessLicense},
+        </if>
+        <if test="organization != null">
+        	organization=#{organization},
+        </if>
+        <if test="contactCard != null">
+        	contact_card=#{contactCard},
+        </if>
+        <if test="contactAuthorizedProof != null">
+        	contact_authorized_proof=#{contactAuthorizedProof},
+        </if>
+        <if test="serviceProjects != null">
+        	service_projects=#{serviceProjects},
+        </if>
+        <if test="companyMap != null">
+        	company_map=#{companyMap},
+        </if>
+        <if test="companyIntroduction != null">
+        	company_introduction=#{companyIntroduction},
+        </if>
+        <if test="isCheck != null">
+        	is_check=#{isCheck},
+        </if>
+        <if test="templateType != null">
+        	template_type=#{templateType},
+        </if>
+        <if test="englishAlias != null">
+        	english_alias=#{englishAlias},
+        </if>
+        <if test="checkTime != null">
+        	check_time=#{checkTime},
+        </if>
+        <if test="checker != null">
+        	checker=#{checker},
+        </if>
+        <if test="lastLoginTime != null">
+        	last_login_time=#{lastLoginTime},
+        </if>
+        <if test="currentLoginTime != null">
+        	current_login_time=#{currentLoginTime},
+        </if>
+        <if test="operateBrandId != null">
+        	operate_brand_id=#{operateBrandId},
+        </if>
+        <if test="longitude != null">
+        	longitude=#{longitude},
+        </if>
+        <if test="latitude != null">
+        	latitude=#{latitude},
+        </if>
+        <if test="dealerlevel != null">
+        	dealerlevel=#{dealerlevel},
+        </if>
+        <if test="updatecount != null">
+        	updatecount=#{updatecount},
+        </if>
+        <if test="updatetime != null">
+        	updatetime=#{updatetime},
+        </if>
+        <if test="isrecommendfirst != null">
+        	isrecommendfirst=#{isrecommendfirst},
+        </if>
+        <if test="worktime != null">
+        	worktime=#{worktime},
+        </if>
+        <if test="businfo != null">
+        	businfo=#{businfo},
+        </if>
+        <if test="keyword != null">
+        	keyword=#{keyword},
+        </if>
+        <if test="districtid != null">
+        	districtid=#{districtid},
+        </if>
+        <if test="commercialid != null">
+        	commercialid=#{commercialid},
+        </if>
+        <if test="remark != null">
+        	remark=#{remark},
+        </if>
+        <if test="datasource != null">
+        	datasource=#{datasource},
+        </if>
+        <if test="bitauo400tel != null">
+        	bitauo400tel=#{bitauo400tel},
+        </if>
+        <if test="companyWebsite2 != null">
+        	company_website_2=#{companyWebsite2},
+        </if>
+        <if test="regionalid != null">
+        	regionalid=#{regionalid},
+        </if>
+        <if test="fenji != null">
+        	fenji=#{fenji},
+        </if>
+        <if test="transfertime != null">
+        	transfertime=#{transfertime},
+        </if>
+        <if test="transfercycle != null">
+        	transfercycle=#{transfercycle},
+        </if>
+        <if test="transferphone != null">
+        	transferphone=#{transferphone},
+        </if>
+        <if test="transferstartdate != null">
+        	transferstartdate=#{transferstartdate},
+        </if>
+        <if test="transferenddate != null">
+        	transferenddate=#{transferenddate},
+        </if>
+        <if test="companyWebsite3 != null">
+        	company_website_3=#{companyWebsite3},
+        </if>
+        <if test="pushcount != null">
+        	pushcount=#{pushcount},
+        </if>
+        <if test="allpushcount != null">
+        	allpushcount=#{allpushcount},
+        </if>
+        <if test="shop != null">
+        	shop=#{shop},
+        </if>
+        <if test="shopcount != null">
+        	shopcount=#{shopcount},
+        </if>
+        <if test="allshopcount != null">
+        	allshopcount=#{allshopcount},
+        </if>
+        <if test="tel400 != null">
+        	tel400=#{tel400},
+        </if>
+        <if test="telid != null">
+        	telid=#{telid},
+        </if>
+        <if test="buycount != null">
+        	buycount=#{buycount},
+        </if>
+        <if test="buydate != null">
+        	buydate=#{buydate},
+        </if>
+        <if test="buyStartdate != null">
+        	buy_startdate=#{buyStartdate},
+        </if>
+        <if test="buyEnddate != null">
+        	buy_enddate=#{buyEnddate},
+        </if>
+        <if test="isjifen != null">
+        	isjifen=#{isjifen},
+        </if>
+        <if test="daorustatus != null">
+        	daorustatus=#{daorustatus},
+        </if>
+        <if test="baozhengjin != null">
+        	baozhengjin=#{baozhengjin},
+        </if>
+        <if test="frozenbaozhengjin != null">
+        	frozenbaozhengjin=#{frozenbaozhengjin},
+        </if>
+        <if test="frozenshopcount != null">
+        	frozenshopcount=#{frozenshopcount},
+        </if>
+        <if test="pushdealercount != null">
+        	pushdealercount=#{pushdealercount},
+        </if>
+       </trim>
+    </sql>
+    <sql id="dealers_info_set_conditions">
+    	<set>
+        <if test="id != null">
+        	id=#{id},
+        </if>
+        <if test="username != null">
+        	username=#{username},
+        </if>
+        <if test="password != null">
+        	password=#{password},
+        </if>
+        <if test="companyName != null">
+        	company_name=#{companyName},
+        </if>
+        <if test="companyShortName != null">
+        	company_short_name=#{companyShortName},
+        </if>
+        <if test="companyType != null">
+        	company_type=#{companyType},
+        </if>
+        <if test="salePhone != null">
+        	sale_phone=#{salePhone},
+        </if>
+        <if test="companyAddress != null">
+        	company_address=#{companyAddress},
+        </if>
+        <if test="provinceId != null">
+        	province_id=#{provinceId},
+        </if>
+        <if test="cityId != null">
+        	city_id=#{cityId},
+        </if>
+        <if test="regionalId != null">
+        	regional_id=#{regionalId},
+        </if>
+        <if test="memberType != null">
+        	member_type=#{memberType},
+        </if>
+        <if test="createTime != null">
+        	create_time=#{createTime},
+        </if>
+        <if test="state != null">
+        	state=#{state},
+        </if>
+        <if test="beginTime != null">
+        	begin_time=#{beginTime},
+        </if>
+        <if test="endTime != null">
+        	end_time=#{endTime},
+        </if>
+        <if test="email != null">
+        	email=#{email},
+        </if>
+        <if test="postalCode != null">
+        	postal_code=#{postalCode},
+        </if>
+        <if test="servicePhone != null">
+        	service_phone=#{servicePhone},
+        </if>
+        <if test="maintainPhone != null">
+        	maintain_phone=#{maintainPhone},
+        </if>
+        <if test="contact != null">
+        	contact=#{contact},
+        </if>
+        <if test="companyWebsite != null">
+        	company_website=#{companyWebsite},
+        </if>
+        <if test="companyPhoto != null">
+        	company_photo=#{companyPhoto},
+        </if>
+        <if test="starLever != null">
+        	star_lever=#{starLever},
+        </if>
+        <if test="makerAuthorizedProof != null">
+        	maker_authorized_proof=#{makerAuthorizedProof},
+        </if>
+        <if test="businessLicense != null">
+        	business_license=#{businessLicense},
+        </if>
+        <if test="organization != null">
+        	organization=#{organization},
+        </if>
+        <if test="contactCard != null">
+        	contact_card=#{contactCard},
+        </if>
+        <if test="contactAuthorizedProof != null">
+        	contact_authorized_proof=#{contactAuthorizedProof},
+        </if>
+        <if test="serviceProjects != null">
+        	service_projects=#{serviceProjects},
+        </if>
+        <if test="companyMap != null">
+        	company_map=#{companyMap},
+        </if>
+        <if test="companyIntroduction != null">
+        	company_introduction=#{companyIntroduction},
+        </if>
+        <if test="isCheck != null">
+        	is_check=#{isCheck},
+        </if>
+        <if test="templateType != null">
+        	template_type=#{templateType},
+        </if>
+        <if test="englishAlias != null">
+        	english_alias=#{englishAlias},
+        </if>
+        <if test="checkTime != null">
+        	check_time=#{checkTime},
+        </if>
+        <if test="checker != null">
+        	checker=#{checker},
+        </if>
+        <if test="lastLoginTime != null">
+        	last_login_time=#{lastLoginTime},
+        </if>
+        <if test="currentLoginTime != null">
+        	current_login_time=#{currentLoginTime},
+        </if>
+        <if test="operateBrandId != null">
+        	operate_brand_id=#{operateBrandId},
+        </if>
+        <if test="longitude != null">
+        	longitude=#{longitude},
+        </if>
+        <if test="latitude != null">
+        	latitude=#{latitude},
+        </if>
+        <if test="dealerlevel != null">
+        	dealerlevel=#{dealerlevel},
+        </if>
+        <if test="updatecount != null">
+        	updatecount=#{updatecount},
+        </if>
+        <if test="updatetime != null">
+        	updatetime=#{updatetime},
+        </if>
+        <if test="isrecommendfirst != null">
+        	isrecommendfirst=#{isrecommendfirst},
+        </if>
+        <if test="worktime != null">
+        	worktime=#{worktime},
+        </if>
+        <if test="businfo != null">
+        	businfo=#{businfo},
+        </if>
+        <if test="keyword != null">
+        	keyword=#{keyword},
+        </if>
+        <if test="districtid != null">
+        	districtid=#{districtid},
+        </if>
+        <if test="commercialid != null">
+        	commercialid=#{commercialid},
+        </if>
+        <if test="remark != null">
+        	remark=#{remark},
+        </if>
+        <if test="datasource != null">
+        	datasource=#{datasource},
+        </if>
+        <if test="bitauo400tel != null">
+        	bitauo400tel=#{bitauo400tel},
+        </if>
+        <if test="companyWebsite2 != null">
+        	company_website_2=#{companyWebsite2},
+        </if>
+        <if test="regionalid != null">
+        	regionalid=#{regionalid},
+        </if>
+        <if test="fenji != null">
+        	fenji=#{fenji},
+        </if>
+        <if test="transfertime != null">
+        	transfertime=#{transfertime},
+        </if>
+        <if test="transfercycle != null">
+        	transfercycle=#{transfercycle},
+        </if>
+        <if test="transferphone != null">
+        	transferphone=#{transferphone},
+        </if>
+        <if test="transferstartdate != null">
+        	transferstartdate=#{transferstartdate},
+        </if>
+        <if test="transferenddate != null">
+        	transferenddate=#{transferenddate},
+        </if>
+        <if test="companyWebsite3 != null">
+        	company_website_3=#{companyWebsite3},
+        </if>
+        <if test="pushcount != null">
+        	pushcount=#{pushcount},
+        </if>
+        <if test="allpushcount != null">
+        	allpushcount=#{allpushcount},
+        </if>
+        <if test="shop != null">
+        	shop=#{shop},
+        </if>
+        <if test="shopcount != null">
+        	shopcount=#{shopcount},
+        </if>
+        <if test="allshopcount != null">
+        	allshopcount=#{allshopcount},
+        </if>
+        <if test="tel400 != null">
+        	tel400=#{tel400},
+        </if>
+        <if test="telid != null">
+        	telid=#{telid},
+        </if>
+        <if test="buycount != null">
+        	buycount=#{buycount},
+        </if>
+        <if test="buydate != null">
+        	buydate=#{buydate},
+        </if>
+        <if test="buyStartdate != null">
+        	buy_startdate=#{buyStartdate},
+        </if>
+        <if test="buyEnddate != null">
+        	buy_enddate=#{buyEnddate},
+        </if>
+        <if test="isjifen != null">
+        	isjifen=#{isjifen},
+        </if>
+        <if test="daorustatus != null">
+        	daorustatus=#{daorustatus},
+        </if>
+        <if test="baozhengjin != null">
+        	baozhengjin=#{baozhengjin},
+        </if>
+        <if test="frozenbaozhengjin != null">
+        	frozenbaozhengjin=#{frozenbaozhengjin},
+        </if>
+        <if test="frozenshopcount != null">
+        	frozenshopcount=#{frozenshopcount},
+        </if>
+        <if test="pushdealercount != null">
+        	pushdealercount=#{pushdealercount},
+        </if>
+        </set>
+    </sql>
+
+    <sql id="dealers_info_properties">
+        #{id},
+        #{username},
+        #{password},
+        #{companyName},
+        #{companyShortName},
+        #{companyType},
+        #{salePhone},
+        #{companyAddress},
+        #{provinceId},
+        #{cityId},
+        #{regionalId},
+        #{memberType},
+        #{createTime},
+        #{state},
+        #{beginTime},
+        #{endTime},
+        #{email},
+        #{postalCode},
+        #{servicePhone},
+        #{maintainPhone},
+        #{contact},
+        #{companyWebsite},
+        #{companyPhoto},
+        #{starLever},
+        #{makerAuthorizedProof},
+        #{businessLicense},
+        #{organization},
+        #{contactCard},
+        #{contactAuthorizedProof},
+        #{serviceProjects},
+        #{companyMap},
+        #{companyIntroduction},
+        #{isCheck},
+        #{templateType},
+        #{englishAlias},
+        #{checkTime},
+        #{checker},
+        #{lastLoginTime},
+        #{currentLoginTime},
+        #{operateBrandId},
+        #{longitude},
+        #{latitude},
+        #{dealerlevel},
+        #{updatecount},
+        #{updatetime},
+        #{isrecommendfirst},
+        #{worktime},
+        #{businfo},
+        #{keyword},
+        #{districtid},
+        #{commercialid},
+        #{remark},
+        #{datasource},
+        #{bitauo400tel},
+        #{companyWebsite2},
+        #{regionalid},
+        #{fenji},
+        #{transfertime},
+        #{transfercycle},
+        #{transferphone},
+        #{transferstartdate},
+        #{transferenddate},
+        #{companyWebsite3},
+        #{pushcount},
+        #{allpushcount},
+        #{shop},
+        #{shopcount},
+        #{allshopcount},
+        #{tel400},
+        #{telid},
+        #{buycount},
+        #{buydate},
+        #{buyStartdate},
+        #{buyEnddate},
+        #{isjifen},
+        #{daorustatus},
+        #{baozhengjin},
+        #{frozenbaozhengjin},
+        #{frozenshopcount},
+        #{pushdealercount}
+    </sql>
+
+    <insert id="createDealersInfo" parameterType="com.chexun.dealer.vo.dealers.DealersInfoVo" keyColumn="id" keyProperty="id" useGeneratedKeys="true" >
+        insert INTO dealers_info (<include refid="dealers_info_columns"/>) VALUES (<include refid="dealers_info_properties"/>)
+    </insert>
+	
+	<insert id="insertDealersInfo" parameterType="com.chexun.dealer.vo.dealers.DealersInfoVo" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    	insert into dealers_info
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        			id,
+    			</if>
+    			<if test="username != null" >
+        			username,
+    			</if>
+    			<if test="password != null" >
+        			password,
+    			</if>
+    			<if test="companyName != null" >
+        			company_name,
+    			</if>
+    			<if test="companyShortName != null" >
+        			company_short_name,
+    			</if>
+    			<if test="companyType != null" >
+        			company_type,
+    			</if>
+    			<if test="salePhone != null" >
+        			sale_phone,
+    			</if>
+    			<if test="companyAddress != null" >
+        			company_address,
+    			</if>
+    			<if test="provinceId != null" >
+        			province_id,
+    			</if>
+    			<if test="cityId != null" >
+        			city_id,
+    			</if>
+    			<if test="regionalId != null" >
+        			regional_id,
+    			</if>
+    			<if test="memberType != null" >
+        			member_type,
+    			</if>
+    			<if test="createTime != null" >
+        			create_time,
+    			</if>
+    			<if test="state != null" >
+        			state,
+    			</if>
+    			<if test="beginTime != null" >
+        			begin_time,
+    			</if>
+    			<if test="endTime != null" >
+        			end_time,
+    			</if>
+    			<if test="email != null" >
+        			email,
+    			</if>
+    			<if test="postalCode != null" >
+        			postal_code,
+    			</if>
+    			<if test="servicePhone != null" >
+        			service_phone,
+    			</if>
+    			<if test="maintainPhone != null" >
+        			maintain_phone,
+    			</if>
+    			<if test="contact != null" >
+        			contact,
+    			</if>
+    			<if test="companyWebsite != null" >
+        			company_website,
+    			</if>
+    			<if test="companyPhoto != null" >
+        			company_photo,
+    			</if>
+    			<if test="starLever != null" >
+        			star_lever,
+    			</if>
+    			<if test="makerAuthorizedProof != null" >
+        			maker_authorized_proof,
+    			</if>
+    			<if test="businessLicense != null" >
+        			business_license,
+    			</if>
+    			<if test="organization != null" >
+        			organization,
+    			</if>
+    			<if test="contactCard != null" >
+        			contact_card,
+    			</if>
+    			<if test="contactAuthorizedProof != null" >
+        			contact_authorized_proof,
+    			</if>
+    			<if test="serviceProjects != null" >
+        			service_projects,
+    			</if>
+    			<if test="companyMap != null" >
+        			company_map,
+    			</if>
+    			<if test="companyIntroduction != null" >
+        			company_introduction,
+    			</if>
+    			<if test="isCheck != null" >
+        			is_check,
+    			</if>
+    			<if test="templateType != null" >
+        			template_type,
+    			</if>
+    			<if test="englishAlias != null" >
+        			english_alias,
+    			</if>
+    			<if test="checkTime != null" >
+        			check_time,
+    			</if>
+    			<if test="checker != null" >
+        			checker,
+    			</if>
+    			<if test="lastLoginTime != null" >
+        			last_login_time,
+    			</if>
+    			<if test="currentLoginTime != null" >
+        			current_login_time,
+    			</if>
+    			<if test="operateBrandId != null" >
+        			operate_brand_id,
+    			</if>
+    			<if test="longitude != null" >
+        			longitude,
+    			</if>
+    			<if test="latitude != null" >
+        			latitude,
+    			</if>
+    			<if test="dealerlevel != null" >
+        			dealerlevel,
+    			</if>
+    			<if test="updatecount != null" >
+        			updatecount,
+    			</if>
+    			<if test="updatetime != null" >
+        			updatetime,
+    			</if>
+    			<if test="isrecommendfirst != null" >
+        			isrecommendfirst,
+    			</if>
+    			<if test="worktime != null" >
+        			worktime,
+    			</if>
+    			<if test="businfo != null" >
+        			businfo,
+    			</if>
+    			<if test="keyword != null" >
+        			keyword,
+    			</if>
+    			<if test="districtid != null" >
+        			districtid,
+    			</if>
+    			<if test="commercialid != null" >
+        			commercialid,
+    			</if>
+    			<if test="remark != null" >
+        			remark,
+    			</if>
+    			<if test="datasource != null" >
+        			datasource,
+    			</if>
+    			<if test="bitauo400tel != null" >
+        			bitauo400tel,
+    			</if>
+    			<if test="companyWebsite2 != null" >
+        			company_website_2,
+    			</if>
+    			<if test="regionalid != null" >
+        			regionalid,
+    			</if>
+    			<if test="fenji != null" >
+        			fenji,
+    			</if>
+    			<if test="transfertime != null" >
+        			transfertime,
+    			</if>
+    			<if test="transfercycle != null" >
+        			transfercycle,
+    			</if>
+    			<if test="transferphone != null" >
+        			transferphone,
+    			</if>
+    			<if test="transferstartdate != null" >
+        			transferstartdate,
+    			</if>
+    			<if test="transferenddate != null" >
+        			transferenddate,
+    			</if>
+    			<if test="companyWebsite3 != null" >
+        			company_website_3,
+    			</if>
+    			<if test="pushcount != null" >
+        			pushcount,
+    			</if>
+    			<if test="allpushcount != null" >
+        			allpushcount,
+    			</if>
+    			<if test="shop != null" >
+        			shop,
+    			</if>
+    			<if test="shopcount != null" >
+        			shopcount,
+    			</if>
+    			<if test="allshopcount != null" >
+        			allshopcount,
+    			</if>
+    			<if test="tel400 != null" >
+        			tel400,
+    			</if>
+    			<if test="telid != null" >
+        			telid,
+    			</if>
+    			<if test="buycount != null" >
+        			buycount,
+    			</if>
+    			<if test="buydate != null" >
+        			buydate,
+    			</if>
+    			<if test="buyStartdate != null" >
+        			buy_startdate,
+    			</if>
+    			<if test="buyEnddate != null" >
+        			buy_enddate,
+    			</if>
+    			<if test="isjifen != null" >
+        			isjifen,
+    			</if>
+    			<if test="daorustatus != null" >
+        			daorustatus,
+    			</if>
+    			<if test="baozhengjin != null" >
+        			baozhengjin,
+    			</if>
+    			<if test="frozenbaozhengjin != null" >
+        			frozenbaozhengjin,
+    			</if>
+    			<if test="frozenshopcount != null" >
+        			frozenshopcount,
+    			</if>
+    			<if test="pushdealercount != null" >
+        			pushdealercount
+    			</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        		#{id},
+    		</if>
+    			<if test="username != null" >
+        		#{username},
+    		</if>
+    			<if test="password != null" >
+        		#{password},
+    		</if>
+    			<if test="companyName != null" >
+        		#{companyName},
+    		</if>
+    			<if test="companyShortName != null" >
+        		#{companyShortName},
+    		</if>
+    			<if test="companyType != null" >
+        		#{companyType},
+    		</if>
+    			<if test="salePhone != null" >
+        		#{salePhone},
+    		</if>
+    			<if test="companyAddress != null" >
+        		#{companyAddress},
+    		</if>
+    			<if test="provinceId != null" >
+        		#{provinceId},
+    		</if>
+    			<if test="cityId != null" >
+        		#{cityId},
+    		</if>
+    			<if test="regionalId != null" >
+        		#{regionalId},
+    		</if>
+    			<if test="memberType != null" >
+        		#{memberType},
+    		</if>
+    			<if test="createTime != null" >
+        		#{createTime},
+    		</if>
+    			<if test="state != null" >
+        		#{state},
+    		</if>
+    			<if test="beginTime != null" >
+        		#{beginTime},
+    		</if>
+    			<if test="endTime != null" >
+        		#{endTime},
+    		</if>
+    			<if test="email != null" >
+        		#{email},
+    		</if>
+    			<if test="postalCode != null" >
+        		#{postalCode},
+    		</if>
+    			<if test="servicePhone != null" >
+        		#{servicePhone},
+    		</if>
+    			<if test="maintainPhone != null" >
+        		#{maintainPhone},
+    		</if>
+    			<if test="contact != null" >
+        		#{contact},
+    		</if>
+    			<if test="companyWebsite != null" >
+        		#{companyWebsite},
+    		</if>
+    			<if test="companyPhoto != null" >
+        		#{companyPhoto},
+    		</if>
+    			<if test="starLever != null" >
+        		#{starLever},
+    		</if>
+    			<if test="makerAuthorizedProof != null" >
+        		#{makerAuthorizedProof},
+    		</if>
+    			<if test="businessLicense != null" >
+        		#{businessLicense},
+    		</if>
+    			<if test="organization != null" >
+        		#{organization},
+    		</if>
+    			<if test="contactCard != null" >
+        		#{contactCard},
+    		</if>
+    			<if test="contactAuthorizedProof != null" >
+        		#{contactAuthorizedProof},
+    		</if>
+    			<if test="serviceProjects != null" >
+        		#{serviceProjects},
+    		</if>
+    			<if test="companyMap != null" >
+        		#{companyMap},
+    		</if>
+    			<if test="companyIntroduction != null" >
+        		#{companyIntroduction},
+    		</if>
+    			<if test="isCheck != null" >
+        		#{isCheck},
+    		</if>
+    			<if test="templateType != null" >
+        		#{templateType},
+    		</if>
+    			<if test="englishAlias != null" >
+        		#{englishAlias},
+    		</if>
+    			<if test="checkTime != null" >
+        		#{checkTime},
+    		</if>
+    			<if test="checker != null" >
+        		#{checker},
+    		</if>
+    			<if test="lastLoginTime != null" >
+        		#{lastLoginTime},
+    		</if>
+    			<if test="currentLoginTime != null" >
+        		#{currentLoginTime},
+    		</if>
+    			<if test="operateBrandId != null" >
+        		#{operateBrandId},
+    		</if>
+    			<if test="longitude != null" >
+        		#{longitude},
+    		</if>
+    			<if test="latitude != null" >
+        		#{latitude},
+    		</if>
+    			<if test="dealerlevel != null" >
+        		#{dealerlevel},
+    		</if>
+    			<if test="updatecount != null" >
+        		#{updatecount},
+    		</if>
+    			<if test="updatetime != null" >
+        		#{updatetime},
+    		</if>
+    			<if test="isrecommendfirst != null" >
+        		#{isrecommendfirst},
+    		</if>
+    			<if test="worktime != null" >
+        		#{worktime},
+    		</if>
+    			<if test="businfo != null" >
+        		#{businfo},
+    		</if>
+    			<if test="keyword != null" >
+        		#{keyword},
+    		</if>
+    			<if test="districtid != null" >
+        		#{districtid},
+    		</if>
+    			<if test="commercialid != null" >
+        		#{commercialid},
+    		</if>
+    			<if test="remark != null" >
+        		#{remark},
+    		</if>
+    			<if test="datasource != null" >
+        		#{datasource},
+    		</if>
+    			<if test="bitauo400tel != null" >
+        		#{bitauo400tel},
+    		</if>
+    			<if test="companyWebsite2 != null" >
+        		#{companyWebsite2},
+    		</if>
+    			<if test="regionalid != null" >
+        		#{regionalid},
+    		</if>
+    			<if test="fenji != null" >
+        		#{fenji},
+    		</if>
+    			<if test="transfertime != null" >
+        		#{transfertime},
+    		</if>
+    			<if test="transfercycle != null" >
+        		#{transfercycle},
+    		</if>
+    			<if test="transferphone != null" >
+        		#{transferphone},
+    		</if>
+    			<if test="transferstartdate != null" >
+        		#{transferstartdate},
+    		</if>
+    			<if test="transferenddate != null" >
+        		#{transferenddate},
+    		</if>
+    			<if test="companyWebsite3 != null" >
+        		#{companyWebsite3},
+    		</if>
+    			<if test="pushcount != null" >
+        		#{pushcount},
+    		</if>
+    			<if test="allpushcount != null" >
+        		#{allpushcount},
+    		</if>
+    			<if test="shop != null" >
+        		#{shop},
+    		</if>
+    			<if test="shopcount != null" >
+        		#{shopcount},
+    		</if>
+    			<if test="allshopcount != null" >
+        		#{allshopcount},
+    		</if>
+    			<if test="tel400 != null" >
+        		#{tel400},
+    		</if>
+    			<if test="telid != null" >
+        		#{telid},
+    		</if>
+    			<if test="buycount != null" >
+        		#{buycount},
+    		</if>
+    			<if test="buydate != null" >
+        		#{buydate},
+    		</if>
+    			<if test="buyStartdate != null" >
+        		#{buyStartdate},
+    		</if>
+    			<if test="buyEnddate != null" >
+        		#{buyEnddate},
+    		</if>
+    			<if test="isjifen != null" >
+        		#{isjifen},
+    		</if>
+    			<if test="daorustatus != null" >
+        		#{daorustatus},
+    		</if>
+    			<if test="baozhengjin != null" >
+        		#{baozhengjin},
+    		</if>
+    			<if test="frozenbaozhengjin != null" >
+        		#{frozenbaozhengjin},
+    		</if>
+    			<if test="frozenshopcount != null" >
+        		#{frozenshopcount},
+    		</if>
+    			<if test="pushdealercount != null" >
+        		#{pushdealercount}
+    		</if>
+    	</trim>
+  	</insert>
+	
+    <delete id="deleteDealersInfoById" parameterType="Long">
+        delete from dealers_info
+    </delete>
+    
+    <delete id="deleteDealersInfoByObj" parameterType="com.chexun.dealer.vo.dealers.DealersInfoVo">
+        delete from dealers_info
+        <include refid="dealers_info_where_conditions"/>
+    </delete>
+    
+  	<delete id="deleteDealersInfoByIdList" parameterType="java.util.List">
+    	delete from dealers_info 
+    </delete>
+
+    <update id="updateDealersInfo" parameterType="com.chexun.dealer.vo.dealers.DealersInfoVo">
+        update dealers_info SET
+            id = #{id},
+            username = #{username},
+            password = #{password},
+            company_name = #{companyName},
+            company_short_name = #{companyShortName},
+            company_type = #{companyType},
+            sale_phone = #{salePhone},
+            company_address = #{companyAddress},
+            province_id = #{provinceId},
+            city_id = #{cityId},
+            regional_id = #{regionalId},
+            member_type = #{memberType},
+            create_time = #{createTime},
+            state = #{state},
+            begin_time = #{beginTime},
+            end_time = #{endTime},
+            email = #{email},
+            postal_code = #{postalCode},
+            service_phone = #{servicePhone},
+            maintain_phone = #{maintainPhone},
+            contact = #{contact},
+            company_website = #{companyWebsite},
+            company_photo = #{companyPhoto},
+            star_lever = #{starLever},
+            maker_authorized_proof = #{makerAuthorizedProof},
+            business_license = #{businessLicense},
+            organization = #{organization},
+            contact_card = #{contactCard},
+            contact_authorized_proof = #{contactAuthorizedProof},
+            service_projects = #{serviceProjects},
+            company_map = #{companyMap},
+            company_introduction = #{companyIntroduction},
+            is_check = #{isCheck},
+            template_type = #{templateType},
+            english_alias = #{englishAlias},
+            check_time = #{checkTime},
+            checker = #{checker},
+            last_login_time = #{lastLoginTime},
+            current_login_time = #{currentLoginTime},
+            operate_brand_id = #{operateBrandId},
+            longitude = #{longitude},
+            latitude = #{latitude},
+            dealerlevel = #{dealerlevel},
+            updatecount = #{updatecount},
+            updatetime = #{updatetime},
+            isrecommendfirst = #{isrecommendfirst},
+            worktime = #{worktime},
+            businfo = #{businfo},
+            keyword = #{keyword},
+            districtid = #{districtid},
+            commercialid = #{commercialid},
+            remark = #{remark},
+            datasource = #{datasource},
+            bitauo400tel = #{bitauo400tel},
+            company_website_2 = #{companyWebsite2},
+            regionalid = #{regionalid},
+            fenji = #{fenji},
+            transfertime = #{transfertime},
+            transfercycle = #{transfercycle},
+            transferphone = #{transferphone},
+            transferstartdate = #{transferstartdate},
+            transferenddate = #{transferenddate},
+            company_website_3 = #{companyWebsite3},
+            pushcount = #{pushcount},
+            allpushcount = #{allpushcount},
+            shop = #{shop},
+            shopcount = #{shopcount},
+            allshopcount = #{allshopcount},
+            tel400 = #{tel400},
+            telid = #{telid},
+            buycount = #{buycount},
+            buydate = #{buydate},
+            buy_startdate = #{buyStartdate},
+            buy_enddate = #{buyEnddate},
+            isjifen = #{isjifen},
+            daorustatus = #{daorustatus},
+            baozhengjin = #{baozhengjin},
+            frozenbaozhengjin = #{frozenbaozhengjin},
+            frozenshopcount = #{frozenshopcount},
+            pushdealercount = #{pushdealercount}
+    </update>
+    
+    <update id="updateDealersInfoByObj" parameterType="com.chexun.dealer.vo.dealers.DealersInfoVo">
+        update dealers_info 
+        <include refid="dealers_info_set_conditions"/>
+        where id=#{id}
+    </update>
+    
+    <update id="updateDealersInfoByObjAndConditions" parameterType="java.util.HashMap">
+        update dealers_info 
+        <set>
+        <if test="s.id != null">
+        	id=#{s.id},
+        </if>
+        <if test="s.username != null">
+        	username=#{s.username},
+        </if>
+        <if test="s.password != null">
+        	password=#{s.password},
+        </if>
+        <if test="s.companyName != null">
+        	company_name=#{s.companyName},
+        </if>
+        <if test="s.companyShortName != null">
+        	company_short_name=#{s.companyShortName},
+        </if>
+        <if test="s.companyType != null">
+        	company_type=#{s.companyType},
+        </if>
+        <if test="s.salePhone != null">
+        	sale_phone=#{s.salePhone},
+        </if>
+        <if test="s.companyAddress != null">
+        	company_address=#{s.companyAddress},
+        </if>
+        <if test="s.provinceId != null">
+        	province_id=#{s.provinceId},
+        </if>
+        <if test="s.cityId != null">
+        	city_id=#{s.cityId},
+        </if>
+        <if test="s.regionalId != null">
+        	regional_id=#{s.regionalId},
+        </if>
+        <if test="s.memberType != null">
+        	member_type=#{s.memberType},
+        </if>
+        <if test="s.createTime != null">
+        	create_time=#{s.createTime},
+        </if>
+        <if test="s.state != null">
+        	state=#{s.state},
+        </if>
+        <if test="s.beginTime != null">
+        	begin_time=#{s.beginTime},
+        </if>
+        <if test="s.endTime != null">
+        	end_time=#{s.endTime},
+        </if>
+        <if test="s.email != null">
+        	email=#{s.email},
+        </if>
+        <if test="s.postalCode != null">
+        	postal_code=#{s.postalCode},
+        </if>
+        <if test="s.servicePhone != null">
+        	service_phone=#{s.servicePhone},
+        </if>
+        <if test="s.maintainPhone != null">
+        	maintain_phone=#{s.maintainPhone},
+        </if>
+        <if test="s.contact != null">
+        	contact=#{s.contact},
+        </if>
+        <if test="s.companyWebsite != null">
+        	company_website=#{s.companyWebsite},
+        </if>
+        <if test="s.companyPhoto != null">
+        	company_photo=#{s.companyPhoto},
+        </if>
+        <if test="s.starLever != null">
+        	star_lever=#{s.starLever},
+        </if>
+        <if test="s.makerAuthorizedProof != null">
+        	maker_authorized_proof=#{s.makerAuthorizedProof},
+        </if>
+        <if test="s.businessLicense != null">
+        	business_license=#{s.businessLicense},
+        </if>
+        <if test="s.organization != null">
+        	organization=#{s.organization},
+        </if>
+        <if test="s.contactCard != null">
+        	contact_card=#{s.contactCard},
+        </if>
+        <if test="s.contactAuthorizedProof != null">
+        	contact_authorized_proof=#{s.contactAuthorizedProof},
+        </if>
+        <if test="s.serviceProjects != null">
+        	service_projects=#{s.serviceProjects},
+        </if>
+        <if test="s.companyMap != null">
+        	company_map=#{s.companyMap},
+        </if>
+        <if test="s.companyIntroduction != null">
+        	company_introduction=#{s.companyIntroduction},
+        </if>
+        <if test="s.isCheck != null">
+        	is_check=#{s.isCheck},
+        </if>
+        <if test="s.templateType != null">
+        	template_type=#{s.templateType},
+        </if>
+        <if test="s.englishAlias != null">
+        	english_alias=#{s.englishAlias},
+        </if>
+        <if test="s.checkTime != null">
+        	check_time=#{s.checkTime},
+        </if>
+        <if test="s.checker != null">
+        	checker=#{s.checker},
+        </if>
+        <if test="s.lastLoginTime != null">
+        	last_login_time=#{s.lastLoginTime},
+        </if>
+        <if test="s.currentLoginTime != null">
+        	current_login_time=#{s.currentLoginTime},
+        </if>
+        <if test="s.operateBrandId != null">
+        	operate_brand_id=#{s.operateBrandId},
+        </if>
+        <if test="s.longitude != null">
+        	longitude=#{s.longitude},
+        </if>
+        <if test="s.latitude != null">
+        	latitude=#{s.latitude},
+        </if>
+        <if test="s.dealerlevel != null">
+        	dealerlevel=#{s.dealerlevel},
+        </if>
+        <if test="s.updatecount != null">
+        	updatecount=#{s.updatecount},
+        </if>
+        <if test="s.updatetime != null">
+        	updatetime=#{s.updatetime},
+        </if>
+        <if test="s.isrecommendfirst != null">
+        	isrecommendfirst=#{s.isrecommendfirst},
+        </if>
+        <if test="s.worktime != null">
+        	worktime=#{s.worktime},
+        </if>
+        <if test="s.businfo != null">
+        	businfo=#{s.businfo},
+        </if>
+        <if test="s.keyword != null">
+        	keyword=#{s.keyword},
+        </if>
+        <if test="s.districtid != null">
+        	districtid=#{s.districtid},
+        </if>
+        <if test="s.commercialid != null">
+        	commercialid=#{s.commercialid},
+        </if>
+        <if test="s.remark != null">
+        	remark=#{s.remark},
+        </if>
+        <if test="s.datasource != null">
+        	datasource=#{s.datasource},
+        </if>
+        <if test="s.bitauo400tel != null">
+        	bitauo400tel=#{s.bitauo400tel},
+        </if>
+        <if test="s.companyWebsite2 != null">
+        	company_website_2=#{s.companyWebsite2},
+        </if>
+        <if test="s.regionalid != null">
+        	regionalid=#{s.regionalid},
+        </if>
+        <if test="s.fenji != null">
+        	fenji=#{s.fenji},
+        </if>
+        <if test="s.transfertime != null">
+        	transfertime=#{s.transfertime},
+        </if>
+        <if test="s.transfercycle != null">
+        	transfercycle=#{s.transfercycle},
+        </if>
+        <if test="s.transferphone != null">
+        	transferphone=#{s.transferphone},
+        </if>
+        <if test="s.transferstartdate != null">
+        	transferstartdate=#{s.transferstartdate},
+        </if>
+        <if test="s.transferenddate != null">
+        	transferenddate=#{s.transferenddate},
+        </if>
+        <if test="s.companyWebsite3 != null">
+        	company_website_3=#{s.companyWebsite3},
+        </if>
+        <if test="s.pushcount != null">
+        	pushcount=#{s.pushcount},
+        </if>
+        <if test="s.allpushcount != null">
+        	allpushcount=#{s.allpushcount},
+        </if>
+        <if test="s.shop != null">
+        	shop=#{s.shop},
+        </if>
+        <if test="s.shopcount != null">
+        	shopcount=#{s.shopcount},
+        </if>
+        <if test="s.allshopcount != null">
+        	allshopcount=#{s.allshopcount},
+        </if>
+        <if test="s.tel400 != null">
+        	tel400=#{s.tel400},
+        </if>
+        <if test="s.telid != null">
+        	telid=#{s.telid},
+        </if>
+        <if test="s.buycount != null">
+        	buycount=#{s.buycount},
+        </if>
+        <if test="s.buydate != null">
+        	buydate=#{s.buydate},
+        </if>
+        <if test="s.buyStartdate != null">
+        	buy_startdate=#{s.buyStartdate},
+        </if>
+        <if test="s.buyEnddate != null">
+        	buy_enddate=#{s.buyEnddate},
+        </if>
+        <if test="s.isjifen != null">
+        	isjifen=#{s.isjifen},
+        </if>
+        <if test="s.daorustatus != null">
+        	daorustatus=#{s.daorustatus},
+        </if>
+        <if test="s.baozhengjin != null">
+        	baozhengjin=#{s.baozhengjin},
+        </if>
+        <if test="s.frozenbaozhengjin != null">
+        	frozenbaozhengjin=#{s.frozenbaozhengjin},
+        </if>
+        <if test="s.frozenshopcount != null">
+        	frozenshopcount=#{s.frozenshopcount},
+        </if>
+        <if test="s.pushdealercount != null">
+        	pushdealercount=#{s.pushdealercount},
+        </if>
+        </set>
+        <where>
+        <if test="c.id != null">
+        	id=#{c.id} AND 
+        </if>
+        <if test="c.username != null">
+        	username=#{c.username} AND 
+        </if>
+        <if test="c.password != null">
+        	password=#{c.password} AND 
+        </if>
+        <if test="c.companyName != null">
+        	company_name=#{c.companyName} AND 
+        </if>
+        <if test="c.companyShortName != null">
+        	company_short_name=#{c.companyShortName} AND 
+        </if>
+        <if test="c.companyType != null">
+        	company_type=#{c.companyType} AND 
+        </if>
+        <if test="c.salePhone != null">
+        	sale_phone=#{c.salePhone} AND 
+        </if>
+        <if test="c.companyAddress != null">
+        	company_address=#{c.companyAddress} AND 
+        </if>
+        <if test="c.provinceId != null">
+        	province_id=#{c.provinceId} AND 
+        </if>
+        <if test="c.cityId != null">
+        	city_id=#{c.cityId} AND 
+        </if>
+        <if test="c.regionalId != null">
+        	regional_id=#{c.regionalId} AND 
+        </if>
+        <if test="c.memberType != null">
+        	member_type=#{c.memberType} AND 
+        </if>
+        <if test="c.createTime != null">
+        	create_time=#{c.createTime} AND 
+        </if>
+        <if test="c.state != null">
+        	state=#{c.state} AND 
+        </if>
+        <if test="c.beginTime != null">
+        	begin_time=#{c.beginTime} AND 
+        </if>
+        <if test="c.endTime != null">
+        	end_time=#{c.endTime} AND 
+        </if>
+        <if test="c.email != null">
+        	email=#{c.email} AND 
+        </if>
+        <if test="c.postalCode != null">
+        	postal_code=#{c.postalCode} AND 
+        </if>
+        <if test="c.servicePhone != null">
+        	service_phone=#{c.servicePhone} AND 
+        </if>
+        <if test="c.maintainPhone != null">
+        	maintain_phone=#{c.maintainPhone} AND 
+        </if>
+        <if test="c.contact != null">
+        	contact=#{c.contact} AND 
+        </if>
+        <if test="c.companyWebsite != null">
+        	company_website=#{c.companyWebsite} AND 
+        </if>
+        <if test="c.companyPhoto != null">
+        	company_photo=#{c.companyPhoto} AND 
+        </if>
+        <if test="c.starLever != null">
+        	star_lever=#{c.starLever} AND 
+        </if>
+        <if test="c.makerAuthorizedProof != null">
+        	maker_authorized_proof=#{c.makerAuthorizedProof} AND 
+        </if>
+        <if test="c.businessLicense != null">
+        	business_license=#{c.businessLicense} AND 
+        </if>
+        <if test="c.organization != null">
+        	organization=#{c.organization} AND 
+        </if>
+        <if test="c.contactCard != null">
+        	contact_card=#{c.contactCard} AND 
+        </if>
+        <if test="c.contactAuthorizedProof != null">
+        	contact_authorized_proof=#{c.contactAuthorizedProof} AND 
+        </if>
+        <if test="c.serviceProjects != null">
+        	service_projects=#{c.serviceProjects} AND 
+        </if>
+        <if test="c.companyMap != null">
+        	company_map=#{c.companyMap} AND 
+        </if>
+        <if test="c.companyIntroduction != null">
+        	company_introduction=#{c.companyIntroduction} AND 
+        </if>
+        <if test="c.isCheck != null">
+        	is_check=#{c.isCheck} AND 
+        </if>
+        <if test="c.templateType != null">
+        	template_type=#{c.templateType} AND 
+        </if>
+        <if test="c.englishAlias != null">
+        	english_alias=#{c.englishAlias} AND 
+        </if>
+        <if test="c.checkTime != null">
+        	check_time=#{c.checkTime} AND 
+        </if>
+        <if test="c.checker != null">
+        	checker=#{c.checker} AND 
+        </if>
+        <if test="c.lastLoginTime != null">
+        	last_login_time=#{c.lastLoginTime} AND 
+        </if>
+        <if test="c.currentLoginTime != null">
+        	current_login_time=#{c.currentLoginTime} AND 
+        </if>
+        <if test="c.operateBrandId != null">
+        	operate_brand_id=#{c.operateBrandId} AND 
+        </if>
+        <if test="c.longitude != null">
+        	longitude=#{c.longitude} AND 
+        </if>
+        <if test="c.latitude != null">
+        	latitude=#{c.latitude} AND 
+        </if>
+        <if test="c.dealerlevel != null">
+        	dealerlevel=#{c.dealerlevel} AND 
+        </if>
+        <if test="c.updatecount != null">
+        	updatecount=#{c.updatecount} AND 
+        </if>
+        <if test="c.updatetime != null">
+        	updatetime=#{c.updatetime} AND 
+        </if>
+        <if test="c.isrecommendfirst != null">
+        	isrecommendfirst=#{c.isrecommendfirst} AND 
+        </if>
+        <if test="c.worktime != null">
+        	worktime=#{c.worktime} AND 
+        </if>
+        <if test="c.businfo != null">
+        	businfo=#{c.businfo} AND 
+        </if>
+        <if test="c.keyword != null">
+        	keyword=#{c.keyword} AND 
+        </if>
+        <if test="c.districtid != null">
+        	districtid=#{c.districtid} AND 
+        </if>
+        <if test="c.commercialid != null">
+        	commercialid=#{c.commercialid} AND 
+        </if>
+        <if test="c.remark != null">
+        	remark=#{c.remark} AND 
+        </if>
+        <if test="c.datasource != null">
+        	datasource=#{c.datasource} AND 
+        </if>
+        <if test="c.bitauo400tel != null">
+        	bitauo400tel=#{c.bitauo400tel} AND 
+        </if>
+        <if test="c.companyWebsite2 != null">
+        	company_website_2=#{c.companyWebsite2} AND 
+        </if>
+        <if test="c.regionalid != null">
+        	regionalid=#{c.regionalid} AND 
+        </if>
+        <if test="c.fenji != null">
+        	fenji=#{c.fenji} AND 
+        </if>
+        <if test="c.transfertime != null">
+        	transfertime=#{c.transfertime} AND 
+        </if>
+        <if test="c.transfercycle != null">
+        	transfercycle=#{c.transfercycle} AND 
+        </if>
+        <if test="c.transferphone != null">
+        	transferphone=#{c.transferphone} AND 
+        </if>
+        <if test="c.transferstartdate != null">
+        	transferstartdate=#{c.transferstartdate} AND 
+        </if>
+        <if test="c.transferenddate != null">
+        	transferenddate=#{c.transferenddate} AND 
+        </if>
+        <if test="c.companyWebsite3 != null">
+        	company_website_3=#{c.companyWebsite3} AND 
+        </if>
+        <if test="c.pushcount != null">
+        	pushcount=#{c.pushcount} AND 
+        </if>
+        <if test="c.allpushcount != null">
+        	allpushcount=#{c.allpushcount} AND 
+        </if>
+        <if test="c.shop != null">
+        	shop=#{c.shop} AND 
+        </if>
+        <if test="c.shopcount != null">
+        	shopcount=#{c.shopcount} AND 
+        </if>
+        <if test="c.allshopcount != null">
+        	allshopcount=#{c.allshopcount} AND 
+        </if>
+        <if test="c.tel400 != null">
+        	tel400=#{c.tel400} AND 
+        </if>
+        <if test="c.telid != null">
+        	telid=#{c.telid} AND 
+        </if>
+        <if test="c.buycount != null">
+        	buycount=#{c.buycount} AND 
+        </if>
+        <if test="c.buydate != null">
+        	buydate=#{c.buydate} AND 
+        </if>
+        <if test="c.buyStartdate != null">
+        	buy_startdate=#{c.buyStartdate} AND 
+        </if>
+        <if test="c.buyEnddate != null">
+        	buy_enddate=#{c.buyEnddate} AND 
+        </if>
+        <if test="c.isjifen != null">
+        	isjifen=#{c.isjifen} AND 
+        </if>
+        <if test="c.daorustatus != null">
+        	daorustatus=#{c.daorustatus} AND 
+        </if>
+        <if test="c.baozhengjin != null">
+        	baozhengjin=#{c.baozhengjin} AND 
+        </if>
+        <if test="c.frozenbaozhengjin != null">
+        	frozenbaozhengjin=#{c.frozenbaozhengjin} AND 
+        </if>
+        <if test="c.frozenshopcount != null">
+        	frozenshopcount=#{c.frozenshopcount} AND 
+        </if>
+        <if test="c.pushdealercount != null">
+        	pushdealercount=#{c.pushdealercount} AND 
+        </if>
+       (status!=2)
+        </where>
+    </update>
+    
+    <update id="batchUpdateDealersInfo" parameterType="java.util.List">
+		update dealers_info
+		<trim prefix="set" suffixOverrides=",">
+      	 	<trim prefix="id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.id!=null">
+						WHEN  THEN #{i.id}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="username=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.username!=null">
+						WHEN  THEN #{i.username}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="password=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.password!=null">
+						WHEN  THEN #{i.password}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="company_name=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.companyName!=null">
+						WHEN  THEN #{i.companyName}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="company_short_name=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.companyShortName!=null">
+						WHEN  THEN #{i.companyShortName}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="company_type=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.companyType!=null">
+						WHEN  THEN #{i.companyType}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="sale_phone=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.salePhone!=null">
+						WHEN  THEN #{i.salePhone}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="company_address=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.companyAddress!=null">
+						WHEN  THEN #{i.companyAddress}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="province_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.provinceId!=null">
+						WHEN  THEN #{i.provinceId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="city_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.cityId!=null">
+						WHEN  THEN #{i.cityId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="regional_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.regionalId!=null">
+						WHEN  THEN #{i.regionalId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="member_type=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.memberType!=null">
+						WHEN  THEN #{i.memberType}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="create_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.createTime!=null">
+						WHEN  THEN #{i.createTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="state=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.state!=null">
+						WHEN  THEN #{i.state}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="begin_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.beginTime!=null">
+						WHEN  THEN #{i.beginTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="end_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.endTime!=null">
+						WHEN  THEN #{i.endTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="email=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.email!=null">
+						WHEN  THEN #{i.email}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="postal_code=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.postalCode!=null">
+						WHEN  THEN #{i.postalCode}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="service_phone=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.servicePhone!=null">
+						WHEN  THEN #{i.servicePhone}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="maintain_phone=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.maintainPhone!=null">
+						WHEN  THEN #{i.maintainPhone}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="contact=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.contact!=null">
+						WHEN  THEN #{i.contact}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="company_website=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.companyWebsite!=null">
+						WHEN  THEN #{i.companyWebsite}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="company_photo=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.companyPhoto!=null">
+						WHEN  THEN #{i.companyPhoto}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="star_lever=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.starLever!=null">
+						WHEN  THEN #{i.starLever}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="maker_authorized_proof=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.makerAuthorizedProof!=null">
+						WHEN  THEN #{i.makerAuthorizedProof}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="business_license=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.businessLicense!=null">
+						WHEN  THEN #{i.businessLicense}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="organization=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.organization!=null">
+						WHEN  THEN #{i.organization}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="contact_card=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.contactCard!=null">
+						WHEN  THEN #{i.contactCard}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="contact_authorized_proof=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.contactAuthorizedProof!=null">
+						WHEN  THEN #{i.contactAuthorizedProof}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="service_projects=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.serviceProjects!=null">
+						WHEN  THEN #{i.serviceProjects}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="company_map=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.companyMap!=null">
+						WHEN  THEN #{i.companyMap}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="company_introduction=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.companyIntroduction!=null">
+						WHEN  THEN #{i.companyIntroduction}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="is_check=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.isCheck!=null">
+						WHEN  THEN #{i.isCheck}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="template_type=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.templateType!=null">
+						WHEN  THEN #{i.templateType}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="english_alias=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.englishAlias!=null">
+						WHEN  THEN #{i.englishAlias}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="check_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.checkTime!=null">
+						WHEN  THEN #{i.checkTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="checker=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.checker!=null">
+						WHEN  THEN #{i.checker}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="last_login_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.lastLoginTime!=null">
+						WHEN  THEN #{i.lastLoginTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="current_login_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.currentLoginTime!=null">
+						WHEN  THEN #{i.currentLoginTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="operate_brand_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.operateBrandId!=null">
+						WHEN  THEN #{i.operateBrandId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="longitude=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.longitude!=null">
+						WHEN  THEN #{i.longitude}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="latitude=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.latitude!=null">
+						WHEN  THEN #{i.latitude}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="dealerlevel=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.dealerlevel!=null">
+						WHEN  THEN #{i.dealerlevel}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="updatecount=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.updatecount!=null">
+						WHEN  THEN #{i.updatecount}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="updatetime=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.updatetime!=null">
+						WHEN  THEN #{i.updatetime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="isrecommendfirst=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.isrecommendfirst!=null">
+						WHEN  THEN #{i.isrecommendfirst}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="worktime=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.worktime!=null">
+						WHEN  THEN #{i.worktime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="businfo=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.businfo!=null">
+						WHEN  THEN #{i.businfo}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="keyword=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.keyword!=null">
+						WHEN  THEN #{i.keyword}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="districtid=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.districtid!=null">
+						WHEN  THEN #{i.districtid}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="commercialid=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.commercialid!=null">
+						WHEN  THEN #{i.commercialid}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="remark=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.remark!=null">
+						WHEN  THEN #{i.remark}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="datasource=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.datasource!=null">
+						WHEN  THEN #{i.datasource}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="bitauo400tel=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.bitauo400tel!=null">
+						WHEN  THEN #{i.bitauo400tel}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="company_website_2=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.companyWebsite2!=null">
+						WHEN  THEN #{i.companyWebsite2}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="regionalid=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.regionalid!=null">
+						WHEN  THEN #{i.regionalid}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="fenji=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.fenji!=null">
+						WHEN  THEN #{i.fenji}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="transfertime=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.transfertime!=null">
+						WHEN  THEN #{i.transfertime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="transfercycle=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.transfercycle!=null">
+						WHEN  THEN #{i.transfercycle}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="transferphone=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.transferphone!=null">
+						WHEN  THEN #{i.transferphone}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="transferstartdate=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.transferstartdate!=null">
+						WHEN  THEN #{i.transferstartdate}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="transferenddate=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.transferenddate!=null">
+						WHEN  THEN #{i.transferenddate}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="company_website_3=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.companyWebsite3!=null">
+						WHEN  THEN #{i.companyWebsite3}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="pushcount=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.pushcount!=null">
+						WHEN  THEN #{i.pushcount}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="allpushcount=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.allpushcount!=null">
+						WHEN  THEN #{i.allpushcount}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="shop=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.shop!=null">
+						WHEN  THEN #{i.shop}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="shopcount=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.shopcount!=null">
+						WHEN  THEN #{i.shopcount}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="allshopcount=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.allshopcount!=null">
+						WHEN  THEN #{i.allshopcount}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="tel400=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.tel400!=null">
+						WHEN  THEN #{i.tel400}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="telid=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.telid!=null">
+						WHEN  THEN #{i.telid}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="buycount=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.buycount!=null">
+						WHEN  THEN #{i.buycount}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="buydate=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.buydate!=null">
+						WHEN  THEN #{i.buydate}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="buy_startdate=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.buyStartdate!=null">
+						WHEN  THEN #{i.buyStartdate}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="buy_enddate=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.buyEnddate!=null">
+						WHEN  THEN #{i.buyEnddate}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="isjifen=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.isjifen!=null">
+						WHEN  THEN #{i.isjifen}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="daorustatus=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.daorustatus!=null">
+						WHEN  THEN #{i.daorustatus}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="baozhengjin=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.baozhengjin!=null">
+						WHEN  THEN #{i.baozhengjin}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="frozenbaozhengjin=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.frozenbaozhengjin!=null">
+						WHEN  THEN #{i.frozenbaozhengjin}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="frozenshopcount=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.frozenshopcount!=null">
+						WHEN  THEN #{i.frozenshopcount}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="pushdealercount=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.pushdealercount!=null">
+						WHEN  THEN #{i.pushdealercount}
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where
+		<foreach collection="list" separator="or" item="i" index="index">
+		</foreach>
+	</update>
+    
+    
+
+    <select id="getDealersInfoById" resultMap="DealersInfoResult" parameterType="Long">
+        select
+        <include refid="dealers_info_columns"/>
+        from dealers_info
+        where id=#{id}
+    </select>
+    
+    <select id="getDealersInfoByObj" resultMap="DealersInfoPoResult" parameterType="com.chexun.dealer.vo.dealers.DealersInfoVo">
+        select
+        <include refid="dealers_info_columns"/>
+        from dealers_info
+        <include refid="dealers_info_where_conditions_list"/>
+    </select>
+	
+    
+    <select id="getDealersInfoListByObj" resultMap="DealersInfoResult"  parameterType="com.chexun.dealer.vo.dealers.DealersInfoVo">
+        select
+        <include refid="dealers_info_columns"/>
+        from dealers_info 
+        <include refid="dealers_info_where_conditions"/>
+    </select>
+    
+    <select id="getDealersInfoListByMap" resultMap="DealersInfoResult"  parameterType="java.util.HashMap">
+        select
+        <include refid="dealers_info_columns"/>
+        from dealers_info 
+        <include refid="dealers_info_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <select id="getDealersInfoCountByObj" resultType="int" parameterType="com.chexun.dealer.vo.dealers.DealersInfoVo">
+        select count(1) from dealers_info
+        <include refid="dealers_info_where_conditions_list"/>
+    </select>
+    
+    
+    
+    <select id="getDealersInfoIdByObj" resultType="Long" parameterType="com.chexun.dealer.vo.dealers.DealersInfoVo">
+        select 
+        from dealers_info
+        <include refid="dealers_info_where_conditions"/>
+    </select>
+	
+    <select id="getDealersInfoIdList" resultType="Long" parameterType="com.chexun.dealer.vo.dealers.DealersInfoVo">
+       select  from dealers_info where 1=1 
+        id = #{id}
+    </select>
+    
+    <select id="getDealersInfoIdListByObj" resultType="Long"  parameterType="com.chexun.dealer.vo.dealers.DealersInfoVo">
+       select  from dealers_info 
+        <include refid="dealers_info_where_conditions"/>
+    </select>
+    
+    <select id="getDealersInfoIdListByMap" resultType="Long"  parameterType="java.util.HashMap">
+        select  from dealers_info 
+        <include refid="dealers_info_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+    </select>
+    <!--################################## 手动添加功能分割线 getDealersInfoListByMap ###############################################-->
+    <select id="getDealersInfoPoListByMap" resultMap="DealersInfoPoResult"  parameterType="java.util.HashMap">
+        select
+        <include refid="dealers_info_columns"/>,brand_name,r.NAME as city_name
+		from (
+			select tabl1.ID, GROUP_CONCAT(tabl1.BRAND_NAME)as brand_name from (
+				select d.ID,dealers_car.BRAND_NAME 
+				from  dealers_info d left join dealers_car on dealers_car.USER_ID=d.ID
+				where dealers_car.BRAND_NAME is not null group by d.ID,dealers_car.BRAND_NAME
+				union
+select d.id, dealers_car.BRAND_NAME  from dealers_info d left join dealers_car on d.ID=dealers_car.USER_ID and dealers_car.BRAND_NAME is null
+			)tabl1 group by ID
+	    )tabl2 left join dealers_info on tabl2.ID=dealers_info.ID left join city r on dealers_info.CITY_ID=r.ID
+        <include refid="dealers_info_where_conditions_list"/>
+       order by dealers_info.BEGIN_TIME desc
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+</mapper>

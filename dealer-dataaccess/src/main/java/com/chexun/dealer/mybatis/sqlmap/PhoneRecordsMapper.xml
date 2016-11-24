@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chexun.dealer.model.clue.PhoneRecordsMapper">
+ 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>   -->
+    <resultMap id="PhoneRecordsResult" type="com.chexun.dealer.model.clue.PhoneRecords">
+        <result property="id" column="id"/>
+        <result property="dealersid" column="dealersid"/>
+        <result property="cdrId" column="cdr_id"/>
+        <result property="memberId" column="member_id"/>
+        <result property="caller" column="caller"/>
+        <result property="extensionNum" column="extension_num"/>
+        <result property="transferNum" column="transfer_num"/>
+        <result property="callerStartTime" column="caller_start_time"/>
+        <result property="callerConnectTime" column="caller_connect_time"/>
+        <result property="callerCalltime" column="caller_calltime"/>
+        <result property="calledStartTime" column="called_start_time"/>
+        <result property="calledEndTime" column="called_end_time"/>
+        <result property="calledCalltime" column="called_calltime"/>
+        <result property="callResult" column="call_result"/>
+        <result property="hangupDirection" column="hangup_direction"/>
+        <result property="memberFee" column="member_fee"/>
+        <result property="systemFee" column="system_fee"/>
+        <result property="recordFile" column="record_file"/>
+        <result property="callRoute" column="call_route"/>
+        <result property="playurl" column="playurl"/>
+        <result property="tel400" column="tel400"/>
+        <result property="yuanurl" column="yuanurl"/>
+    </resultMap>
+
+    <sql id="phone_records_columns">
+        phone_records.id,
+        phone_records.dealersid,
+        phone_records.cdr_id,
+        phone_records.member_id,
+        phone_records.caller,
+        phone_records.extension_num,
+        phone_records.transfer_num,
+        phone_records.caller_start_time,
+        phone_records.caller_connect_time,
+        phone_records.caller_calltime,
+        phone_records.called_start_time,
+        phone_records.called_end_time,
+        phone_records.called_calltime,
+        phone_records.call_result,
+        phone_records.hangup_direction,
+        phone_records.member_fee,
+        phone_records.system_fee,
+        phone_records.record_file,
+        phone_records.call_route,
+        phone_records.playurl,
+        phone_records.tel400,
+        phone_records.yuanurl
+    </sql>
+    
+    <sql id="phone_records_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="id != null">
+        	and id=#{id} 
+        </if>
+        <if test="dealersid != null">
+        	and dealersid=#{dealersid} 
+        </if>
+        <if test="cdrId != null">
+        	and cdr_id=#{cdrId} 
+        </if>
+        <if test="memberId != null">
+        	and member_id=#{memberId} 
+        </if>
+        
+        <if test="caller != null and caller != ''">
+        	and caller=#{caller} 
+        </if>
+        <if test="extensionNum != null">
+        	and extension_num=#{extensionNum} 
+        </if>
+        
+        <if test="transferNum != null and transferNum != ''">
+        	and transfer_num=#{transferNum} 
+        </if>
+        <if test="callerStartTime != null">
+        	and caller_start_time=#{callerStartTime} 
+        </if>
+        <if test="callerConnectTime != null">
+        	and caller_connect_time=#{callerConnectTime} 
+        </if>
+        <if test="callerCalltime != null">
+        	and caller_calltime=#{callerCalltime} 
+        </if>
+        <if test="calledStartTime != null">
+        	and called_start_time=#{calledStartTime} 
+        </if>
+        <if test="calledEndTime != null">
+        	and called_end_time=#{calledEndTime} 
+        </if>
+        <if test="calledCalltime != null">
+        	and called_calltime=#{calledCalltime} 
+        </if>
+        <if test="callResult != null">
+        	and call_result=#{callResult} 
+        </if>
+        <if test="hangupDirection != null">
+        	and hangup_direction=#{hangupDirection} 
+        </if>
+        <if test="memberFee != null">
+        	and member_fee=#{memberFee} 
+        </if>
+        <if test="systemFee != null">
+        	and system_fee=#{systemFee} 
+        </if>
+        
+        <if test="recordFile != null and recordFile != ''">
+        	and record_file=#{recordFile} 
+        </if>
+        
+        <if test="callRoute != null and callRoute != ''">
+        	and call_route=#{callRoute} 
+        </if>
+        
+        <if test="playurl != null and playurl != ''">
+        	and playurl=#{playurl} 
+        </if>
+        
+        <if test="tel400 != null and tel400 != ''">
+        	and tel400=#{tel400} 
+        </if>
+        
+        <if test="yuanurl != null and yuanurl != ''">
+        	and yuanurl=#{yuanurl} 
+        </if>
+        </trim>
+    </sql>
+    
+    <sql id="phone_records_set_conditions">
+    	<set>
+        <if test="id != null">
+        	id=#{id},
+        </if>
+        <if test="dealersid != null">
+        	dealersid=#{dealersid},
+        </if>
+        <if test="cdrId != null">
+        	cdr_id=#{cdrId},
+        </if>
+        <if test="memberId != null">
+        	member_id=#{memberId},
+        </if>
+        <if test="caller != null">
+        	caller=#{caller},
+        </if>
+        <if test="extensionNum != null">
+        	extension_num=#{extensionNum},
+        </if>
+        <if test="transferNum != null">
+        	transfer_num=#{transferNum},
+        </if>
+        <if test="callerStartTime != null">
+        	caller_start_time=#{callerStartTime},
+        </if>
+        <if test="callerConnectTime != null">
+        	caller_connect_time=#{callerConnectTime},
+        </if>
+        <if test="callerCalltime != null">
+        	caller_calltime=#{callerCalltime},
+        </if>
+        <if test="calledStartTime != null">
+        	called_start_time=#{calledStartTime},
+        </if>
+        <if test="calledEndTime != null">
+        	called_end_time=#{calledEndTime},
+        </if>
+        <if test="calledCalltime != null">
+        	called_calltime=#{calledCalltime},
+        </if>
+        <if test="callResult != null">
+        	call_result=#{callResult},
+        </if>
+        <if test="hangupDirection != null">
+        	hangup_direction=#{hangupDirection},
+        </if>
+        <if test="memberFee != null">
+        	member_fee=#{memberFee},
+        </if>
+        <if test="systemFee != null">
+        	system_fee=#{systemFee},
+        </if>
+        <if test="recordFile != null">
+        	record_file=#{recordFile},
+        </if>
+        <if test="callRoute != null">
+        	call_route=#{callRoute},
+        </if>
+        <if test="playurl != null">
+        	playurl=#{playurl},
+        </if>
+        <if test="tel400 != null">
+        	tel400=#{tel400},
+        </if>
+        <if test="yuanurl != null">
+        	yuanurl=#{yuanurl},
+        </if>
+        </set>
+    </sql>
+
+    <sql id="phone_records_properties">
+        #{id},
+        #{dealersid},
+        #{cdrId},
+        #{memberId},
+        #{caller},
+        #{extensionNum},
+        #{transferNum},
+        #{callerStartTime},
+        #{callerConnectTime},
+        #{callerCalltime},
+        #{calledStartTime},
+        #{calledEndTime},
+        #{calledCalltime},
+        #{callResult},
+        #{hangupDirection},
+        #{memberFee},
+        #{systemFee},
+        #{recordFile},
+        #{callRoute},
+        #{playurl},
+        #{tel400},
+        #{yuanurl}
+    </sql>
+
+    <insert id="createPhoneRecords" parameterType="com.chexun.dealer.model.clue.PhoneRecords" keyColumn="id" keyProperty="id" useGeneratedKeys="true" >
+        insert INTO phone_records (<include refid="phone_records_columns"/>) VALUES (<include refid="phone_records_properties"/>)
+    </insert>
+	
+	<insert id="insertPhoneRecords" parameterType="com.chexun.dealer.model.clue.PhoneRecords" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    	insert into phone_records
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        			id,
+    			</if>
+    			<if test="dealersid != null" >
+        			dealersid,
+    			</if>
+    			<if test="cdrId != null" >
+        			cdr_id,
+    			</if>
+    			<if test="memberId != null" >
+        			member_id,
+    			</if>
+    			<if test="caller != null" >
+        			caller,
+    			</if>
+    			<if test="extensionNum != null" >
+        			extension_num,
+    			</if>
+    			<if test="transferNum != null" >
+        			transfer_num,
+    			</if>
+    			<if test="callerStartTime != null" >
+        			caller_start_time,
+    			</if>
+    			<if test="callerConnectTime != null" >
+        			caller_connect_time,
+    			</if>
+    			<if test="callerCalltime != null" >
+        			caller_calltime,
+    			</if>
+    			<if test="calledStartTime != null" >
+        			called_start_time,
+    			</if>
+    			<if test="calledEndTime != null" >
+        			called_end_time,
+    			</if>
+    			<if test="calledCalltime != null" >
+        			called_calltime,
+    			</if>
+    			<if test="callResult != null" >
+        			call_result,
+    			</if>
+    			<if test="hangupDirection != null" >
+        			hangup_direction,
+    			</if>
+    			<if test="memberFee != null" >
+        			member_fee,
+    			</if>
+    			<if test="systemFee != null" >
+        			system_fee,
+    			</if>
+    			<if test="recordFile != null" >
+        			record_file,
+    			</if>
+    			<if test="callRoute != null" >
+        			call_route,
+    			</if>
+    			<if test="playurl != null" >
+        			playurl,
+    			</if>
+    			<if test="tel400 != null" >
+        			tel400,
+    			</if>
+    			<if test="yuanurl != null" >
+        			yuanurl
+    			</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        		#{id},
+    		</if>
+    			<if test="dealersid != null" >
+        		#{dealersid},
+    		</if>
+    			<if test="cdrId != null" >
+        		#{cdrId},
+    		</if>
+    			<if test="memberId != null" >
+        		#{memberId},
+    		</if>
+    			<if test="caller != null" >
+        		#{caller},
+    		</if>
+    			<if test="extensionNum != null" >
+        		#{extensionNum},
+    		</if>
+    			<if test="transferNum != null" >
+        		#{transferNum},
+    		</if>
+    			<if test="callerStartTime != null" >
+        		#{callerStartTime},
+    		</if>
+    			<if test="callerConnectTime != null" >
+        		#{callerConnectTime},
+    		</if>
+    			<if test="callerCalltime != null" >
+        		#{callerCalltime},
+    		</if>
+    			<if test="calledStartTime != null" >
+        		#{calledStartTime},
+    		</if>
+    			<if test="calledEndTime != null" >
+        		#{calledEndTime},
+    		</if>
+    			<if test="calledCalltime != null" >
+        		#{calledCalltime},
+    		</if>
+    			<if test="callResult != null" >
+        		#{callResult},
+    		</if>
+    			<if test="hangupDirection != null" >
+        		#{hangupDirection},
+    		</if>
+    			<if test="memberFee != null" >
+        		#{memberFee},
+    		</if>
+    			<if test="systemFee != null" >
+        		#{systemFee},
+    		</if>
+    			<if test="recordFile != null" >
+        		#{recordFile},
+    		</if>
+    			<if test="callRoute != null" >
+        		#{callRoute},
+    		</if>
+    			<if test="playurl != null" >
+        		#{playurl},
+    		</if>
+    			<if test="tel400 != null" >
+        		#{tel400},
+    		</if>
+    			<if test="yuanurl != null" >
+        		#{yuanurl}
+    		</if>
+    	</trim>
+  	</insert>
+	
+    <delete id="deletePhoneRecordsById" parameterType="Long">
+        delete from phone_records
+    </delete>
+    
+    <delete id="deletePhoneRecordsByObj" parameterType="com.chexun.dealer.model.clue.PhoneRecords">
+        delete from phone_records
+        <include refid="phone_records_where_conditions"/>
+    </delete>
+    
+  	<delete id="deletePhoneRecordsByIdList" parameterType="java.util.List">
+    	delete from phone_records 
+    </delete>
+
+    <update id="updatePhoneRecords" parameterType="com.chexun.dealer.model.clue.PhoneRecords">
+        update phone_records SET
+            id = #{id},
+            dealersid = #{dealersid},
+            cdr_id = #{cdrId},
+            member_id = #{memberId},
+            caller = #{caller},
+            extension_num = #{extensionNum},
+            transfer_num = #{transferNum},
+            caller_start_time = #{callerStartTime},
+            caller_connect_time = #{callerConnectTime},
+            caller_calltime = #{callerCalltime},
+            called_start_time = #{calledStartTime},
+            called_end_time = #{calledEndTime},
+            called_calltime = #{calledCalltime},
+            call_result = #{callResult},
+            hangup_direction = #{hangupDirection},
+            member_fee = #{memberFee},
+            system_fee = #{systemFee},
+            record_file = #{recordFile},
+            call_route = #{callRoute},
+            playurl = #{playurl},
+            tel400 = #{tel400},
+            yuanurl = #{yuanurl}
+    </update>
+    
+    <update id="updatePhoneRecordsByObj" parameterType="com.chexun.dealer.model.clue.PhoneRecords">
+        update phone_records 
+        <include refid="phone_records_set_conditions"/>
+    </update>
+    
+    <update id="updatePhoneRecordsByObjAndConditions" parameterType="java.util.HashMap">
+        update phone_records 
+        <set>
+        <if test="s.id != null">
+        	id=#{s.id},
+        </if>
+        <if test="s.dealersid != null">
+        	dealersid=#{s.dealersid},
+        </if>
+        <if test="s.cdrId != null">
+        	cdr_id=#{s.cdrId},
+        </if>
+        <if test="s.memberId != null">
+        	member_id=#{s.memberId},
+        </if>
+        <if test="s.caller != null">
+        	caller=#{s.caller},
+        </if>
+        <if test="s.extensionNum != null">
+        	extension_num=#{s.extensionNum},
+        </if>
+        <if test="s.transferNum != null">
+        	transfer_num=#{s.transferNum},
+        </if>
+        <if test="s.callerStartTime != null">
+        	caller_start_time=#{s.callerStartTime},
+        </if>
+        <if test="s.callerConnectTime != null">
+        	caller_connect_time=#{s.callerConnectTime},
+        </if>
+        <if test="s.callerCalltime != null">
+        	caller_calltime=#{s.callerCalltime},
+        </if>
+        <if test="s.calledStartTime != null">
+        	called_start_time=#{s.calledStartTime},
+        </if>
+        <if test="s.calledEndTime != null">
+        	called_end_time=#{s.calledEndTime},
+        </if>
+        <if test="s.calledCalltime != null">
+        	called_calltime=#{s.calledCalltime},
+        </if>
+        <if test="s.callResult != null">
+        	call_result=#{s.callResult},
+        </if>
+        <if test="s.hangupDirection != null">
+        	hangup_direction=#{s.hangupDirection},
+        </if>
+        <if test="s.memberFee != null">
+        	member_fee=#{s.memberFee},
+        </if>
+        <if test="s.systemFee != null">
+        	system_fee=#{s.systemFee},
+        </if>
+        <if test="s.recordFile != null">
+        	record_file=#{s.recordFile},
+        </if>
+        <if test="s.callRoute != null">
+        	call_route=#{s.callRoute},
+        </if>
+        <if test="s.playurl != null">
+        	playurl=#{s.playurl},
+        </if>
+        <if test="s.tel400 != null">
+        	tel400=#{s.tel400},
+        </if>
+        <if test="s.yuanurl != null">
+        	yuanurl=#{s.yuanurl},
+        </if>
+        </set>
+        <where>
+        <if test="c.id != null">
+        	id=#{c.id} AND 
+        </if>
+        <if test="c.dealersid != null">
+        	dealersid=#{c.dealersid} AND 
+        </if>
+        <if test="c.cdrId != null">
+        	cdr_id=#{c.cdrId} AND 
+        </if>
+        <if test="c.memberId != null">
+        	member_id=#{c.memberId} AND 
+        </if>
+        <if test="c.caller != null">
+        	caller=#{c.caller} AND 
+        </if>
+        <if test="c.extensionNum != null">
+        	extension_num=#{c.extensionNum} AND 
+        </if>
+        <if test="c.transferNum != null">
+        	transfer_num=#{c.transferNum} AND 
+        </if>
+        <if test="c.callerStartTime != null">
+        	caller_start_time=#{c.callerStartTime} AND 
+        </if>
+        <if test="c.callerConnectTime != null">
+        	caller_connect_time=#{c.callerConnectTime} AND 
+        </if>
+        <if test="c.callerCalltime != null">
+        	caller_calltime=#{c.callerCalltime} AND 
+        </if>
+        <if test="c.calledStartTime != null">
+        	called_start_time=#{c.calledStartTime} AND 
+        </if>
+        <if test="c.calledEndTime != null">
+        	called_end_time=#{c.calledEndTime} AND 
+        </if>
+        <if test="c.calledCalltime != null">
+        	called_calltime=#{c.calledCalltime} AND 
+        </if>
+        <if test="c.callResult != null">
+        	call_result=#{c.callResult} AND 
+        </if>
+        <if test="c.hangupDirection != null">
+        	hangup_direction=#{c.hangupDirection} AND 
+        </if>
+        <if test="c.memberFee != null">
+        	member_fee=#{c.memberFee} AND 
+        </if>
+        <if test="c.systemFee != null">
+        	system_fee=#{c.systemFee} AND 
+        </if>
+        <if test="c.recordFile != null">
+        	record_file=#{c.recordFile} AND 
+        </if>
+        <if test="c.callRoute != null">
+        	call_route=#{c.callRoute} AND 
+        </if>
+        <if test="c.playurl != null">
+        	playurl=#{c.playurl} AND 
+        </if>
+        <if test="c.tel400 != null">
+        	tel400=#{c.tel400} AND 
+        </if>
+        <if test="c.yuanurl != null">
+        	yuanurl=#{c.yuanurl} AND 
+        </if>
+       (status!=2)
+        </where>
+    </update>
+    
+    <update id="batchUpdatePhoneRecords" parameterType="java.util.List">
+		update phone_records
+		<trim prefix="set" suffixOverrides=",">
+      	 	<trim prefix="id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.id!=null">
+						WHEN  THEN #{i.id}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="dealersid=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.dealersid!=null">
+						WHEN  THEN #{i.dealersid}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="cdr_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.cdrId!=null">
+						WHEN  THEN #{i.cdrId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="member_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.memberId!=null">
+						WHEN  THEN #{i.memberId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="caller=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.caller!=null">
+						WHEN  THEN #{i.caller}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="extension_num=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.extensionNum!=null">
+						WHEN  THEN #{i.extensionNum}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="transfer_num=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.transferNum!=null">
+						WHEN  THEN #{i.transferNum}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="caller_start_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.callerStartTime!=null">
+						WHEN  THEN #{i.callerStartTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="caller_connect_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.callerConnectTime!=null">
+						WHEN  THEN #{i.callerConnectTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="caller_calltime=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.callerCalltime!=null">
+						WHEN  THEN #{i.callerCalltime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="called_start_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.calledStartTime!=null">
+						WHEN  THEN #{i.calledStartTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="called_end_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.calledEndTime!=null">
+						WHEN  THEN #{i.calledEndTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="called_calltime=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.calledCalltime!=null">
+						WHEN  THEN #{i.calledCalltime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="call_result=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.callResult!=null">
+						WHEN  THEN #{i.callResult}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="hangup_direction=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.hangupDirection!=null">
+						WHEN  THEN #{i.hangupDirection}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="member_fee=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.memberFee!=null">
+						WHEN  THEN #{i.memberFee}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="system_fee=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.systemFee!=null">
+						WHEN  THEN #{i.systemFee}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="record_file=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.recordFile!=null">
+						WHEN  THEN #{i.recordFile}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="call_route=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.callRoute!=null">
+						WHEN  THEN #{i.callRoute}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="playurl=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.playurl!=null">
+						WHEN  THEN #{i.playurl}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="tel400=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.tel400!=null">
+						WHEN  THEN #{i.tel400}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="yuanurl=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.yuanurl!=null">
+						WHEN  THEN #{i.yuanurl}
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where
+		<foreach collection="list" separator="or" item="i" index="index">
+		</foreach>
+	</update>
+    
+    
+
+    <select id="getPhoneRecordsById" resultMap="PhoneRecordsResult" parameterType="Long">
+        select
+        <include refid="phone_records_columns"/>
+        from phone_records
+    </select>
+    
+    <select id="getPhoneRecordsByObj" resultMap="PhoneRecordsResult" parameterType="com.chexun.dealer.model.clue.PhoneRecords">
+        select
+        <include refid="phone_records_columns"/>
+        from phone_records
+        <include refid="phone_records_where_conditions"/>
+    </select>
+	
+    
+    <select id="getPhoneRecordsListByObj" resultMap="PhoneRecordsResult"  parameterType="com.chexun.dealer.model.clue.PhoneRecords">
+        select
+        <include refid="phone_records_columns"/>
+        from phone_records 
+        <include refid="phone_records_where_conditions"/>
+    </select>
+    
+    <select id="getPhoneRecordsListByMap" resultMap="PhoneRecordsResult"  parameterType="java.util.HashMap">
+        select
+        <include refid="phone_records_columns"/>
+        from phone_records 
+        <include refid="phone_records_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <select id="getPhoneRecordsCountByObj" resultType="int" parameterType="com.chexun.dealer.model.clue.PhoneRecords">
+        select count(1) from phone_records
+        <include refid="phone_records_where_conditions"/>
+    </select>
+    
+    
+    
+    <select id="getPhoneRecordsIdByObj" resultType="Long" parameterType="com.chexun.dealer.model.clue.PhoneRecords">
+        select 
+        from phone_records
+        <include refid="phone_records_where_conditions"/>
+    </select>
+	
+    <select id="getPhoneRecordsIdList" resultType="Long" parameterType="com.chexun.dealer.model.clue.PhoneRecords">
+       select  from phone_records where 1=1 
+        id = #{id}
+    </select>
+    
+    <select id="getPhoneRecordsIdListByObj" resultType="Long"  parameterType="com.chexun.dealer.model.clue.PhoneRecords">
+       select  from phone_records 
+        <include refid="phone_records_where_conditions"/>
+    </select>
+    
+    <select id="getPhoneRecordsIdListByMap" resultType="Long"  parameterType="java.util.HashMap">
+        select  from phone_records 
+        <include refid="phone_records_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <!-- 手工SQL -->
+    <resultMap id="Phone_DealersResult" type="com.chexun.dealer.model.clue.PhoneRecords">
+        <result property="id" column="id"/>
+        <result property="companyName" column="company_name"/>
+        <result property="caller" column="caller"/>
+        <result property="callerStartTime" column="caller_start_time"/>
+        <result property="callerCalltime" column="caller_calltime"/>
+        <result property="calledCalltime" column="called_calltime"/>
+        <result property="callerConnectTime" column="caller_connect_time"/>
+        <result property="cdrId" column="cdr_id"/>
+        <result property="callRoute" column="call_route"/>
+    </resultMap>
+    <resultMap id="Province" type="com.chexun.dealer.model.common.Province">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+    <resultMap id="City" type="com.chexun.dealer.model.common.City">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="provinceid" column="PROVINCEID"/>
+    </resultMap>
+    
+    <sql id="phone_records_where_like_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+	        <if test="provinceid != null and provinceid != ''">
+	        	and province_id=#{provinceid} 
+	        </if>
+	        <if test="cityid != null and cityid != ''">
+	        	and city_id=#{cityid} 
+	        </if>
+	        <if test="begintime != null and begintime != ''">
+	        	and called_start_time	&gt;=	#{begintime} 
+	        </if>
+	        <if test="endtime != null and endtime != ''">
+	        	and caller_start_time	&lt;=	#{endtime} 
+	        </if>
+	        <if test="companyName != null and companyName != ''">
+	        	and company_name	like  CONCAT('%',#{companyName},'%')
+	        </if>
+	        <if test="extensionNum != null and extensionNum != ''">
+	        	and extension_num	like  CONCAT('%',#{extensionNum},'%')
+	        </if>
+        </trim>
+    </sql>
+    
+    <select id="selectProvince" resultMap="Province" parameterType="com.chexun.dealer.model.common.Province">
+        select ID,NAME from province
+    </select>
+    
+    <select id="selectCity" resultMap="City" parameterType="Long">
+        select ID,NAME,PROVINCEID from city where PROVINCEID = #{value}
+    </select>
+    
+    <select id="selectPhoneRecordsCountByObj" resultType="int" parameterType="com.chexun.dealer.model.clue.PhoneRecords">
+        select count(1) from phone_records p INNER JOIN dealers_info d ON p.dealersid = d.id
+        <include refid="phone_records_where_like_conditions"/>
+    </select>
+    
+    <select id="selectPhoneRecordsListByMap" resultMap="Phone_DealersResult"  parameterType="java.util.HashMap">
+        SELECT
+			p.ID,
+			d.COMPANY_NAME,
+			p.caller,
+			p.caller_start_time,
+			p.called_calltime,
+			p.caller_connect_time,
+			p.call_route,
+			p.cdr_id,
+			p.PlayUrl
+		FROM
+			phone_records p INNER JOIN dealers_info d ON p.dealersid = d.id
+        <include refid="phone_records_where_like_conditions"/>
+        ORDER BY ID DESC 
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+    </select>
+</mapper>

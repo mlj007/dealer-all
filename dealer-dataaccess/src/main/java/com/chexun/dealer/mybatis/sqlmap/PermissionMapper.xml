@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chexun.dealer.model.permission.PermissionMapper">
+ 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>   -->
+    <resultMap id="PermissionGroupIdListResult" type="com.chexun.dealer.model.permission.Permission">
+        <result property="groupIdList" column="group_id_list"/>
+    </resultMap>
+    
+     <resultMap id="PermissionPrivilegeListResult" type="com.chexun.dealer.model.permission.Permission">
+        <result property="privilegeList" column="PRIVILEGE_LIST"/>
+    </resultMap>
+    
+    <resultMap id="PermissionResult" type="com.chexun.dealer.model.permission.Permission">
+     	<result property="moduleId" column="MODULE_ID"/>
+        <result property="moduleName" column="MODULE_NAME"/>
+        <result property="moduleImg" column="MODULE_IMG"/>
+        <result property="moduleUrl" column="MODULE_URL"/>
+        <result property="moduleSuperLevelId" column="MODULE_SUPERLEVEL_ID"/>
+    </resultMap>
+    
+    <!-- 根据用户Id查找角色 -->
+	<select id="selectPermissionGroupIdListByMap" resultMap="PermissionGroupIdListResult" parameterType="java.util.HashMap">
+        select pr.group_id_list from permission_role pr where pr.role_code=
+			(select role_code from permission_user pu where pu.user_name=#{userName})
+    </select>
+    <!-- 根据权限组ID查找功能模块ID  -->
+    <select id="selectPermissionPrivilegeListByMap" resultMap="PermissionPrivilegeListResult" parameterType="java.util.HashMap">
+        select pg.PRIVILEGE_LIST from permission_group pg where  FIND_IN_SET(pg.group_ID,#{groupIdList}) group by pg.PRIVILEGE_LIST
+    </select>
+     <!-- 根据功能模块ID 查找主菜单功能模块详情 -->
+    <select id="selectPermissionParentMenuByMap" resultMap="PermissionResult" parameterType="java.util.HashMap">
+    	select pm.MODULE_ID,pm.MODULE_NAME,pm.MODULE_SUPERLEVEL_ID,pm.MODULE_IMG,pm.MODULE_URL from permission_module pm 
+		where pm.MODULE_REL=#{moduleRel} and  find_in_set(pm.MODULE_ID,#{privilegeList,jdbcType=VARCHAR}) 
+		and  pm.MODULE_SUPERLEVEL_ID=0 order by pm.MODULE_ORDER asc
+    </select>
+    <!-- 根据功能模块ID 查找子菜单功能模块详情 -->
+    <select id="selectPermissionModuleByMap" resultMap="PermissionResult" parameterType="java.util.HashMap">
+    	select pm.MODULE_ID,pm.MODULE_NAME,pm.MODULE_SUPERLEVEL_ID,pm.MODULE_IMG,pm.MODULE_URL from permission_module pm 
+		where pm.MODULE_REL=#{moduleRel} and  find_in_set(pm.MODULE_ID,#{privilegeList}) 
+		and  pm.MODULE_SUPERLEVEL_ID!=0 order by pm.MODULE_ORDER asc
+    </select>
+    <insert id="insertPermissionUser" parameterType="com.chexun.dealer.vo.permission.PermissionUserVo" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    insert into permission_user 
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        			id,
+    			</if>
+    			<if test="userId != null" >
+        			user_id,
+    			</if>
+    			<if test="username != null" >
+        			user_name,
+    			</if>
+    			<if test="roleId != null" >
+        			user_id
+    			</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+    		<if test="id != null" >
+        		#{id},
+    		</if>
+    		<if test="userId != null" >
+        		#{userId}
+    		</if>
+    		<if test="username != null" >
+        		#{userName},
+    		</if>
+    		<if test="roleId != null" >
+        		#{roleId}
+    		</if>
+    	</trim>
+    </insert>
+</mapper>

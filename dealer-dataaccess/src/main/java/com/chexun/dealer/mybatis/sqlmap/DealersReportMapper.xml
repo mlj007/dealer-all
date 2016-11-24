@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chexun.dealer.model.report.DealersReportMapper">
+ 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>   -->
+    <resultMap id="DealersMallReportResult" type="com.chexun.dealer.model.report.DealersMallReport">
+        <result property="dealerid" column="DealersID"/>
+        <result property="salecount" column="SaleCount"/>
+        <result property="companyname" column="COMPANY_NAME"/>
+        <result property="dealerlevel" column="DealerLevel"/>
+        <result property="companytype" column="COMPANY_TYPE"/>
+        <result property="contractsaler" column="ContractSaler"/>
+        <result property="allshopcount" column="AllShopCount"/>
+        <result property="contractnum" column="ContractNum"/>
+        <result property="contractcar" column="ContractCar"/>
+        <result property="contractmoney" column="ContractMoney"/>
+        <result property="contractbegin" column="ContractBegin"/>
+        <result property="contractend" column="ContractEnd"/>
+        <result property="contractremark" column="ContractRemark"/>
+        <result property="backcash" column="BackCash"/>
+        <result property="huodong" column="HuoDong"/>
+        <result property="cityid" column="CityId"/>
+        <result property="cityname" column="CityName"/>        
+    </resultMap>
+    
+    <resultMap id="DealersReportKVResult" type="com.chexun.dealer.model.report.DealersReportKV">
+        <result property="key" column="key"/>
+        <result property="value" column="value"/>
+    </resultMap>
+    
+    <sql id="dealers_dealerlevel_where_conditions">
+        <if test="startDateTime != null and startDateTime != '' and endDateTime != null and endDateTime != ''">
+        	and a.CREATE_TIME BETWEEN #{startDateTime}  AND #{endDateTime}
+        </if>
+    </sql>
+    <sql id="dealers_xunjia_where_conditions">
+        <if test="startDateTime != null and startDateTime != '' and endDateTime != null and endDateTime != ''">
+        	and a.CreateTime BETWEEN #{startDateTime}  AND #{endDateTime}
+        </if>
+    </sql>
+    <sql id="dealers_shopaccesslog_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="startDateTime != null and startDateTime != '' and endDateTime != null and endDateTime != ''">
+        	and AccessTime BETWEEN date_format(#{startDateTime},'%Y%m%d') AND date_format(#{endDateTime},'%Y%m%d')
+        </if>
+        </trim>
+    </sql>
+    <sql id="dealers_shopbaojialog_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="startDateTime != null and startDateTime != '' and endDateTime != null and endDateTime != ''">
+        	and date_format(a.CREATE_TIME,'%Y%m%d') BETWEEN date_format(#{startDateTime},'%Y%m%d') AND date_format(#{endDateTime},'%Y%m%d')
+        </if>
+        </trim>
+    </sql>
+    
+    <select id="getDealersMallReportCountByObj" resultType="int" parameterType="com.chexun.dealer.model.report.DealersMallReport">
+        select count(distinct DealersID) from buy_order where DealersID>0
+    </select>
+    
+    <select id="getDealersMallReportListByMap" resultMap="DealersMallReportResult"  parameterType="java.util.HashMap">
+        select DealersID,count(a.DealersID) as SaleCount,b.COMPANY_NAME,b.DealerLevel,b.COMPANY_TYPE,c.ContractSaler,c.ContractNum,c.ContractCar,c.contractMoney,date_format(c.ContractBegin, '%Y-%m-%d') as ContractBegin,date_format(c.ContractEnd, '%Y-%m-%d') as ContractEnd,c.ContractRemark,sum(d.BackCash) as BackCash,'活动' as HuoDong,e.ID as CityId,e.Name as CityName
+		from buy_order a 
+		left join dealers_info b on b.ID=a.DealersID
+		left join dealers_contract c on c.DealerId=a.DealersID
+		left join dealers_addcarlog d on d.DealerId=a.DealersID
+		left join city e on e.ID=b.CITY_ID
+		where a.DealersID>0
+		group by a.DealersID
+		order by SaleCount desc
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <select id="getDealersLevelReportListByObj" resultMap="DealersReportKVResult" parameterType="com.chexun.dealer.model.report.DealersReportQuery">
+       	select dealerlevel as 'key',count(0) as 'value' from dealers_info a
+       	where DealerLevel>0 <include refid="dealers_dealerlevel_where_conditions"/>
+       	group by DealerLevel
+    </select>
+    
+    <select id="getDealersNewsTypeReportListByObj" resultMap="DealersReportKVResult" parameterType="com.chexun.dealer.model.report.DealersReportQuery">
+       	select TYPE as 'key',COUNT(*) as 'value' from dealers_news a left join dealers_info b on a.DEALER_USER_ID=b.ID 
+		where a.type>0 <include refid="dealers_dealerlevel_where_conditions"/>
+		group by a.TYPE
+    </select>
+    
+    <select id="getDealersMessageReportKVListByObj" resultMap="DealersReportKVResult" parameterType="com.chexun.dealer.model.report.DealersReportQuery">
+       	select a.STATE as 'key',COUNT(*) as 'value' from dealers_messages a left join dealers_info b on a.DEALER_ID=b.ID
+		where 1=1 <include refid="dealers_dealerlevel_where_conditions"/>
+		group by a.STATE
+    </select>
+    <select id="getDealersXunjiaReportKVListByObj" resultMap="DealersReportKVResult" parameterType="com.chexun.dealer.model.report.DealersReportQuery">
+       	select a.state as 'key',COUNT(*) as 'value' from asking_price a
+		left join dealers_info b on a.DealersID=b.ID
+		where a.type=0 <include refid="dealers_xunjia_where_conditions"/>
+		group by a.state
+    </select>
+    <select id="getDealersShijiaReportKVListByObj" resultMap="DealersReportKVResult" parameterType="com.chexun.dealer.model.report.DealersReportQuery">
+       	select a.state as 'key',COUNT(*) as 'value' from asking_price a
+		left join dealers_info b on a.DealersID=b.ID
+		where a.type=0 <include refid="dealers_xunjia_where_conditions"/>
+		group by a.state
+    </select>
+    <select id="getDealersShopAccessLogListByObj" resultMap="DealersReportKVResult" parameterType="com.chexun.dealer.model.report.DealersReportQuery">
+       	select AccessTime as 'key',sum(AccessCount) as 'value' 
+		from shop_access_log a left join dealers_info b on b.ID=a.DealerID 
+		<include refid="dealers_shopaccesslog_where_conditions"/>
+		group by AccessTime
+		order by AccessTime
+    </select>
+    <select id="getDealersShopBaojiaLogListByObj" resultMap="DealersReportKVResult" parameterType="com.chexun.dealer.model.report.DealersReportQuery">
+       	select date_format(a.CREATE_TIME,'%Y%m%d') as 'key',sum(a.ClickCount) as 'value'
+		from dealers_car a left join dealers_info b on b.ID=a.USER_ID 
+		<include refid="dealers_shopbaojialog_where_conditions"/>
+		group by date_format(a.CREATE_TIME,'%Y%m%d')
+		order by date_format(a.CREATE_TIME,'%Y%m%d')
+    </select>
+    <select id="getDealersShopNewsLogListByObj" resultMap="DealersReportKVResult" parameterType="com.chexun.dealer.model.report.DealersReportQuery">
+       	select date_format(a.CREATE_TIME,'%Y%m%d') as 'key',sum(a.ClickCount) as 'value'
+		from dealers_news a left join dealers_info b on b.ID=a.DEALER_USER_ID 
+		<include refid="dealers_shopbaojialog_where_conditions"/>
+		group by date_format(a.CREATE_TIME,'%Y%m%d')
+		order by date_format(a.CREATE_TIME,'%Y%m%d')
+    </select>
+</mapper>

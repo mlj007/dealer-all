@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+</head>
+<body>
+<div class="wrapper">
+	<!--START 左边開始-->
+	${include("/common/left_admin.httl")}
+	<!--END 左边结束-->
+	
+	<!--START 右侧开始-->
+	<div class="right">
+	
+	<!--START 头开始-->
+	${include("/common/top_admin.httl",["topMenuTitle":"线索池管理"])}
+	<!--END 头结束-->
+	
+	<!-- START -->
+    <div class="right-con">
+            <div class="sel"> 
+            	<form action="/admin/clue/localcluepool/list" method="post" id="searchForm">
+            	 	<input type="hidden" id="pageCurrentPage" name="currentPage" value="${page.currentPage}"/>
+	                <input type="button" class="con-sel-search" value="导出数据" />
+                </form>
+            </div>
+            <div class="con">
+                <div class="con-bd" id="tab">
+                        <table  width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <th>联系人 </th>
+                                <th>电话  </th>
+                                <th>城市</th>
+                                <th>品牌</th>
+                                <th>车系/车型 </th>
+                            </tr>
+                            <!--#for(com.chexun.dealer.model.clue.LocalCluePool localCluePool : localCluePoolList)-->
+							<tr>
+                                <td>${localCluePool.name }</td>
+                                <td>${localCluePool.phone }</td>
+                                <td>${localCluePool.city }</td>
+                                <td>${localCluePool.brand }</td>
+                                <td>${localCluePool.series }${localCluePool.model }</td>
+                            </tr>
+                            <!--#end-->
+                        </table>
+                         ${include("/common/page.httl")}
+                </div>
+            </div>
+     </div>
+            	
+    <!-- END-->
+     <!--END  右侧结束-->
+     <!--START 底部开始-->
+        ${include("/common/footer.httl")}
+     <!--END 底部结束-->
+</div>
+</body>
+</html>

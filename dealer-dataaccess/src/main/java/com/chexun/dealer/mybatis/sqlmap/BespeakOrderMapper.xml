@@ -1,0 +1,1105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chexun.dealer.model.clue.BespeakOrderMapper">
+ 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>   -->
+    <resultMap id="BespeakOrderResult" type="com.chexun.dealer.model.clue.BespeakOrder">
+        <result property="id" column="id"/>
+        <result property="dealerId" column="dealer_id"/>
+        <result property="modelId" column="model_id"/>
+        <result property="contact" column="contact"/>
+        <result property="phone" column="phone"/>
+        <result property="provinceId" column="province_id"/>
+        <result property="cityId" column="city_id"/>
+        <result property="email" column="email"/>
+        <result property="sex" column="sex"/>
+        <result property="driveTime" column="drive_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="type" column="type"/>
+        <result property="state" column="state"/>
+        <result property="addedRemarks" column="added_remarks"/>
+        <result property="disposeTime" column="dispose_time"/>
+        <result property="valid" column="valid"/>
+        <result property="runningistance" column="runningistance"/>
+        <result property="brandname" column="brandname"/>
+        <result property="seriesname" column="seriesname"/>
+        <result property="modelname" column="modelname"/>
+        <result property="intention" column="intention"/>
+        <result property="seriesId" column="series_id"/>
+        <result property="source" column="source"/>
+        <result property="code" column="code"/>
+        <result property="source2" column="source2"/>
+        <result property="drtype" column="drtype"/>
+        <result property="buystatus" column="buystatus"/>
+    </resultMap>
+
+    <sql id="bespeak_order_columns">
+        bespeak_order.id,
+        bespeak_order.dealer_id,
+        bespeak_order.model_id,
+        bespeak_order.contact,
+        bespeak_order.phone,
+        bespeak_order.province_id,
+        bespeak_order.city_id,
+        bespeak_order.email,
+        bespeak_order.sex,
+        bespeak_order.drive_time,
+        bespeak_order.create_time,
+        bespeak_order.type,
+        bespeak_order.state,
+        bespeak_order.added_remarks,
+        bespeak_order.dispose_time,
+        bespeak_order.valid,
+        bespeak_order.runningistance,
+        bespeak_order.brandname,
+        bespeak_order.seriesname,
+        bespeak_order.modelname,
+        bespeak_order.intention,
+        bespeak_order.series_id,
+        bespeak_order.source,
+        bespeak_order.code,
+        bespeak_order.source2,
+        bespeak_order.drtype,
+        bespeak_order.buystatus
+    </sql>
+    
+    <sql id="bespeak_order_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="id != null">
+        	and id=#{id} 
+        </if>
+        <if test="dealerId != null">
+        	and dealer_id=#{dealerId} 
+        </if>
+        <if test="modelId != null">
+        	and model_id=#{modelId} 
+        </if>
+        
+        <if test="contact != null and contact != ''">
+        	and contact=#{contact} 
+        </if>
+        
+        <if test="phone != null and phone != ''">
+        	and phone=#{phone} 
+        </if>
+        <if test="provinceId != null">
+        	and province_id=#{provinceId} 
+        </if>
+        <if test="cityId != null">
+        	and city_id=#{cityId} 
+        </if>
+        
+        <if test="email != null and email != ''">
+        	and email=#{email} 
+        </if>
+        <if test="sex != null">
+        	and sex=#{sex} 
+        </if>
+        
+        <if test="driveTime != null and driveTime != ''">
+        	and drive_time=#{driveTime} 
+        </if>
+        <if test="createTime != null">
+        	and create_time=#{createTime} 
+        </if>
+        <if test="type != null">
+        	and type=#{type} 
+        </if>
+        <if test="state != null">
+        	and state=#{state} 
+        </if>
+        
+        <if test="addedRemarks != null and addedRemarks != ''">
+        	and added_remarks=#{addedRemarks} 
+        </if>
+        <if test="disposeTime != null">
+        	and dispose_time=#{disposeTime} 
+        </if>
+        <if test="valid != null">
+        	and valid=#{valid} 
+        </if>
+        <if test="runningistance != null">
+        	and runningistance=#{runningistance} 
+        </if>
+        
+        <if test="brandname != null and brandname != ''">
+        	and brandname=#{brandname} 
+        </if>
+        
+        <if test="seriesname != null and seriesname != ''">
+        	and seriesname=#{seriesname} 
+        </if>
+        
+        <if test="modelname != null and modelname != ''">
+        	and modelname=#{modelname} 
+        </if>
+        
+        <if test="intention != null and intention != ''">
+        	and intention=#{intention} 
+        </if>
+        <if test="seriesId != null">
+        	and series_id=#{seriesId} 
+        </if>
+        <if test="source != null">
+        	and source=#{source} 
+        </if>
+        
+        <if test="code != null and code != ''">
+        	and code=#{code} 
+        </if>
+        
+        <if test="source2 != null and source2 != ''">
+        	and source2=#{source2} 
+        </if>
+        <if test="drtype != null">
+        	and drtype=#{drtype} 
+        </if>
+        <if test="buystatus != null">
+        	and buystatus=#{buystatus} 
+        </if>
+        </trim>
+    </sql>
+    
+    <sql id="bespeak_order_set_conditions">
+    	<set>
+        <if test="id != null">
+        	id=#{id},
+        </if>
+        <if test="dealerId != null">
+        	dealer_id=#{dealerId},
+        </if>
+        <if test="modelId != null">
+        	model_id=#{modelId},
+        </if>
+        <if test="contact != null">
+        	contact=#{contact},
+        </if>
+        <if test="phone != null">
+        	phone=#{phone},
+        </if>
+        <if test="provinceId != null">
+        	province_id=#{provinceId},
+        </if>
+        <if test="cityId != null">
+        	city_id=#{cityId},
+        </if>
+        <if test="email != null">
+        	email=#{email},
+        </if>
+        <if test="sex != null">
+        	sex=#{sex},
+        </if>
+        <if test="driveTime != null">
+        	drive_time=#{driveTime},
+        </if>
+        <if test="createTime != null">
+        	create_time=#{createTime},
+        </if>
+        <if test="type != null">
+        	type=#{type},
+        </if>
+        <if test="state != null">
+        	state=#{state},
+        </if>
+        <if test="addedRemarks != null">
+        	added_remarks=#{addedRemarks},
+        </if>
+        <if test="disposeTime != null">
+        	dispose_time=#{disposeTime},
+        </if>
+        <if test="valid != null">
+        	valid=#{valid},
+        </if>
+        <if test="runningistance != null">
+        	runningistance=#{runningistance},
+        </if>
+        <if test="brandname != null">
+        	brandname=#{brandname},
+        </if>
+        <if test="seriesname != null">
+        	seriesname=#{seriesname},
+        </if>
+        <if test="modelname != null">
+        	modelname=#{modelname},
+        </if>
+        <if test="intention != null">
+        	intention=#{intention},
+        </if>
+        <if test="seriesId != null">
+        	series_id=#{seriesId},
+        </if>
+        <if test="source != null">
+        	source=#{source},
+        </if>
+        <if test="code != null">
+        	code=#{code},
+        </if>
+        <if test="source2 != null">
+        	source2=#{source2},
+        </if>
+        <if test="drtype != null">
+        	drtype=#{drtype},
+        </if>
+        <if test="buystatus != null">
+        	buystatus=#{buystatus},
+        </if>
+            id = id
+        </set>
+    </sql>
+
+    <sql id="bespeak_order_properties">
+        #{id},
+        #{dealerId},
+        #{modelId},
+        #{contact},
+        #{phone},
+        #{provinceId},
+        #{cityId},
+        #{email},
+        #{sex},
+        #{driveTime},
+        #{createTime},
+        #{type},
+        #{state},
+        #{addedRemarks},
+        #{disposeTime},
+        #{valid},
+        #{runningistance},
+        #{brandname},
+        #{seriesname},
+        #{modelname},
+        #{intention},
+        #{seriesId},
+        #{source},
+        #{code},
+        #{source2},
+        #{drtype},
+        #{buystatus}
+    </sql>
+
+    <insert id="createBespeakOrder" parameterType="com.chexun.dealer.model.clue.BespeakOrder" keyColumn="id" keyProperty="id" useGeneratedKeys="true" >
+        insert INTO bespeak_order (<include refid="bespeak_order_columns"/>) VALUES (<include refid="bespeak_order_properties"/>)
+    </insert>
+	
+	<insert id="insertBespeakOrder" parameterType="com.chexun.dealer.model.clue.BespeakOrder" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    	insert into bespeak_order
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        			id,
+    			</if>
+    			<if test="dealerId != null" >
+        			dealer_id,
+    			</if>
+    			<if test="modelId != null" >
+        			model_id,
+    			</if>
+    			<if test="contact != null" >
+        			contact,
+    			</if>
+    			<if test="phone != null" >
+        			phone,
+    			</if>
+    			<if test="provinceId != null" >
+        			province_id,
+    			</if>
+    			<if test="cityId != null" >
+        			city_id,
+    			</if>
+    			<if test="email != null" >
+        			email,
+    			</if>
+    			<if test="sex != null" >
+        			sex,
+    			</if>
+    			<if test="driveTime != null" >
+        			drive_time,
+    			</if>
+    			<if test="createTime != null" >
+        			create_time,
+    			</if>
+    			<if test="type != null" >
+        			type,
+    			</if>
+    			<if test="state != null" >
+        			state,
+    			</if>
+    			<if test="addedRemarks != null" >
+        			added_remarks,
+    			</if>
+    			<if test="disposeTime != null" >
+        			dispose_time,
+    			</if>
+    			<if test="valid != null" >
+        			valid,
+    			</if>
+    			<if test="runningistance != null" >
+        			runningistance,
+    			</if>
+    			<if test="brandname != null" >
+        			brandname,
+    			</if>
+    			<if test="seriesname != null" >
+        			seriesname,
+    			</if>
+    			<if test="modelname != null" >
+        			modelname,
+    			</if>
+    			<if test="intention != null" >
+        			intention,
+    			</if>
+    			<if test="seriesId != null" >
+        			series_id,
+    			</if>
+    			<if test="source != null" >
+        			source,
+    			</if>
+    			<if test="code != null" >
+        			code,
+    			</if>
+    			<if test="source2 != null" >
+        			source2,
+    			</if>
+    			<if test="drtype != null" >
+        			drtype,
+    			</if>
+    			<if test="buystatus != null" >
+        			buystatus
+    			</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        		#{id},
+    		</if>
+    			<if test="dealerId != null" >
+        		#{dealerId},
+    		</if>
+    			<if test="modelId != null" >
+        		#{modelId},
+    		</if>
+    			<if test="contact != null" >
+        		#{contact},
+    		</if>
+    			<if test="phone != null" >
+        		#{phone},
+    		</if>
+    			<if test="provinceId != null" >
+        		#{provinceId},
+    		</if>
+    			<if test="cityId != null" >
+        		#{cityId},
+    		</if>
+    			<if test="email != null" >
+        		#{email},
+    		</if>
+    			<if test="sex != null" >
+        		#{sex},
+    		</if>
+    			<if test="driveTime != null" >
+        		#{driveTime},
+    		</if>
+    			<if test="createTime != null" >
+        		#{createTime},
+    		</if>
+    			<if test="type != null" >
+        		#{type},
+    		</if>
+    			<if test="state != null" >
+        		#{state},
+    		</if>
+    			<if test="addedRemarks != null" >
+        		#{addedRemarks},
+    		</if>
+    			<if test="disposeTime != null" >
+        		#{disposeTime},
+    		</if>
+    			<if test="valid != null" >
+        		#{valid},
+    		</if>
+    			<if test="runningistance != null" >
+        		#{runningistance},
+    		</if>
+    			<if test="brandname != null" >
+        		#{brandname},
+    		</if>
+    			<if test="seriesname != null" >
+        		#{seriesname},
+    		</if>
+    			<if test="modelname != null" >
+        		#{modelname},
+    		</if>
+    			<if test="intention != null" >
+        		#{intention},
+    		</if>
+    			<if test="seriesId != null" >
+        		#{seriesId},
+    		</if>
+    			<if test="source != null" >
+        		#{source},
+    		</if>
+    			<if test="code != null" >
+        		#{code},
+    		</if>
+    			<if test="source2 != null" >
+        		#{source2},
+    		</if>
+    			<if test="drtype != null" >
+        		#{drtype},
+    		</if>
+    			<if test="buystatus != null" >
+        		#{buystatus}
+    		</if>
+    	</trim>
+  	</insert>
+	
+    <delete id="deleteBespeakOrderById" parameterType="Long">
+        delete from bespeak_order
+        where
+            		id = #{            			value
+            		}
+    </delete>
+    
+    <delete id="deleteBespeakOrderByObj" parameterType="com.chexun.dealer.model.clue.BespeakOrder">
+        delete from bespeak_order
+        <include refid="bespeak_order_where_conditions"/>
+    </delete>
+    
+  	<delete id="deleteBespeakOrderByIdList" parameterType="java.util.List">
+    	delete from bespeak_order 
+        	where
+            id
+    		IN 
+    		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </delete>
+
+    <update id="updateBespeakOrder" parameterType="com.chexun.dealer.model.clue.BespeakOrder">
+        update bespeak_order SET
+            id = #{id},
+            dealer_id = #{dealerId},
+            model_id = #{modelId},
+            contact = #{contact},
+            phone = #{phone},
+            province_id = #{provinceId},
+            city_id = #{cityId},
+            email = #{email},
+            sex = #{sex},
+            drive_time = #{driveTime},
+            create_time = #{createTime},
+            type = #{type},
+            state = #{state},
+            added_remarks = #{addedRemarks},
+            dispose_time = #{disposeTime},
+            valid = #{valid},
+            runningistance = #{runningistance},
+            brandname = #{brandname},
+            seriesname = #{seriesname},
+            modelname = #{modelname},
+            intention = #{intention},
+            series_id = #{seriesId},
+            source = #{source},
+            code = #{code},
+            source2 = #{source2},
+            drtype = #{drtype},
+            buystatus = #{buystatus}
+        where
+            id = #{id}
+    </update>
+    
+    <update id="updateBespeakOrderByObj" parameterType="com.chexun.dealer.model.clue.BespeakOrder">
+        update bespeak_order 
+        <include refid="bespeak_order_set_conditions"/>
+        where
+            id = #{id}
+    </update>
+    
+    <update id="updateBespeakOrderByObjAndConditions" parameterType="java.util.HashMap">
+        update bespeak_order 
+        <set>
+        <if test="s.id != null">
+        	id=#{s.id},
+        </if>
+        <if test="s.dealerId != null">
+        	dealer_id=#{s.dealerId},
+        </if>
+        <if test="s.modelId != null">
+        	model_id=#{s.modelId},
+        </if>
+        <if test="s.contact != null">
+        	contact=#{s.contact},
+        </if>
+        <if test="s.phone != null">
+        	phone=#{s.phone},
+        </if>
+        <if test="s.provinceId != null">
+        	province_id=#{s.provinceId},
+        </if>
+        <if test="s.cityId != null">
+        	city_id=#{s.cityId},
+        </if>
+        <if test="s.email != null">
+        	email=#{s.email},
+        </if>
+        <if test="s.sex != null">
+        	sex=#{s.sex},
+        </if>
+        <if test="s.driveTime != null">
+        	drive_time=#{s.driveTime},
+        </if>
+        <if test="s.createTime != null">
+        	create_time=#{s.createTime},
+        </if>
+        <if test="s.type != null">
+        	type=#{s.type},
+        </if>
+        <if test="s.state != null">
+        	state=#{s.state},
+        </if>
+        <if test="s.addedRemarks != null">
+        	added_remarks=#{s.addedRemarks},
+        </if>
+        <if test="s.disposeTime != null">
+        	dispose_time=#{s.disposeTime},
+        </if>
+        <if test="s.valid != null">
+        	valid=#{s.valid},
+        </if>
+        <if test="s.runningistance != null">
+        	runningistance=#{s.runningistance},
+        </if>
+        <if test="s.brandname != null">
+        	brandname=#{s.brandname},
+        </if>
+        <if test="s.seriesname != null">
+        	seriesname=#{s.seriesname},
+        </if>
+        <if test="s.modelname != null">
+        	modelname=#{s.modelname},
+        </if>
+        <if test="s.intention != null">
+        	intention=#{s.intention},
+        </if>
+        <if test="s.seriesId != null">
+        	series_id=#{s.seriesId},
+        </if>
+        <if test="s.source != null">
+        	source=#{s.source},
+        </if>
+        <if test="s.code != null">
+        	code=#{s.code},
+        </if>
+        <if test="s.source2 != null">
+        	source2=#{s.source2},
+        </if>
+        <if test="s.drtype != null">
+        	drtype=#{s.drtype},
+        </if>
+        <if test="s.buystatus != null">
+        	buystatus=#{s.buystatus},
+        </if>
+        </set>
+        <where>
+        <if test="c.id != null">
+        	id=#{c.id} AND 
+        </if>
+        <if test="c.dealerId != null">
+        	dealer_id=#{c.dealerId} AND 
+        </if>
+        <if test="c.modelId != null">
+        	model_id=#{c.modelId} AND 
+        </if>
+        <if test="c.contact != null">
+        	contact=#{c.contact} AND 
+        </if>
+        <if test="c.phone != null">
+        	phone=#{c.phone} AND 
+        </if>
+        <if test="c.provinceId != null">
+        	province_id=#{c.provinceId} AND 
+        </if>
+        <if test="c.cityId != null">
+        	city_id=#{c.cityId} AND 
+        </if>
+        <if test="c.email != null">
+        	email=#{c.email} AND 
+        </if>
+        <if test="c.sex != null">
+        	sex=#{c.sex} AND 
+        </if>
+        <if test="c.driveTime != null">
+        	drive_time=#{c.driveTime} AND 
+        </if>
+        <if test="c.createTime != null">
+        	create_time=#{c.createTime} AND 
+        </if>
+        <if test="c.type != null">
+        	type=#{c.type} AND 
+        </if>
+        <if test="c.state != null">
+        	state=#{c.state} AND 
+        </if>
+        <if test="c.addedRemarks != null">
+        	added_remarks=#{c.addedRemarks} AND 
+        </if>
+        <if test="c.disposeTime != null">
+        	dispose_time=#{c.disposeTime} AND 
+        </if>
+        <if test="c.valid != null">
+        	valid=#{c.valid} AND 
+        </if>
+        <if test="c.runningistance != null">
+        	runningistance=#{c.runningistance} AND 
+        </if>
+        <if test="c.brandname != null">
+        	brandname=#{c.brandname} AND 
+        </if>
+        <if test="c.seriesname != null">
+        	seriesname=#{c.seriesname} AND 
+        </if>
+        <if test="c.modelname != null">
+        	modelname=#{c.modelname} AND 
+        </if>
+        <if test="c.intention != null">
+        	intention=#{c.intention} AND 
+        </if>
+        <if test="c.seriesId != null">
+        	series_id=#{c.seriesId} AND 
+        </if>
+        <if test="c.source != null">
+        	source=#{c.source} AND 
+        </if>
+        <if test="c.code != null">
+        	code=#{c.code} AND 
+        </if>
+        <if test="c.source2 != null">
+        	source2=#{c.source2} AND 
+        </if>
+        <if test="c.drtype != null">
+        	drtype=#{c.drtype} AND 
+        </if>
+        <if test="c.buystatus != null">
+        	buystatus=#{c.buystatus} AND 
+        </if>
+       (status!=2)
+        </where>
+    </update>
+    
+    <update id="batchUpdateBespeakOrder" parameterType="java.util.List">
+		update bespeak_order
+		<trim prefix="set" suffixOverrides=",">
+      	 	<trim prefix="id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.id!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.id}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="dealer_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.dealerId!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.dealerId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="model_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.modelId!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.modelId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="contact=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.contact!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.contact}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="phone=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.phone!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.phone}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="province_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.provinceId!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.provinceId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="city_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.cityId!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.cityId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="email=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.email!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.email}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="sex=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.sex!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.sex}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="drive_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.driveTime!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.driveTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="create_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.createTime!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.createTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="type=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.type!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.type}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="state=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.state!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.state}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="added_remarks=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.addedRemarks!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.addedRemarks}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="dispose_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.disposeTime!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.disposeTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="valid=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.valid!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.valid}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="runningistance=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.runningistance!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.runningistance}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="brandname=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.brandname!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.brandname}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="seriesname=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.seriesname!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.seriesname}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="modelname=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.modelname!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.modelname}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="intention=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.intention!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.intention}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="series_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.seriesId!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.seriesId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="source=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.source!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.source}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="code=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.code!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.code}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="source2=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.source2!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.source2}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="drtype=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.drtype!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.drtype}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="buystatus=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.buystatus!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.buystatus}
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where
+		<foreach collection="list" separator="or" item="i" index="index">
+            	(id = #{i.id})
+		</foreach>
+	</update>
+    
+    
+
+    <select id="getBespeakOrderById" resultMap="BespeakOrderResult" parameterType="Long">
+        select
+        <include refid="bespeak_order_columns"/>
+        from bespeak_order
+        where
+            id = #{value}
+    </select>
+    
+    <select id="getBespeakOrderByObj" resultMap="BespeakOrderResult" parameterType="com.chexun.dealer.model.clue.BespeakOrder">
+        select
+        <include refid="bespeak_order_columns"/>
+        from bespeak_order
+        <include refid="bespeak_order_where_conditions"/>
+    </select>
+	
+    
+    <select id="getBespeakOrderListByObj" resultMap="BespeakOrderResult"  parameterType="com.chexun.dealer.model.clue.BespeakOrder">
+        select
+        <include refid="bespeak_order_columns"/>
+        from bespeak_order 
+        <include refid="bespeak_order_where_conditions"/>
+    </select>
+    
+    <select id="getBespeakOrderListByMap" resultMap="BespeakOrderResult"  parameterType="java.util.HashMap">
+        select
+        <include refid="bespeak_order_columns"/>
+        from bespeak_order 
+        <include refid="bespeak_order_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <select id="getBespeakOrderCountByObj" resultType="int" parameterType="com.chexun.dealer.model.clue.BespeakOrder">
+        select count(1) from bespeak_order
+        <include refid="bespeak_order_where_conditions"/>
+    </select>
+    
+    
+    
+    <select id="getBespeakOrderIdByObj" resultType="Long" parameterType="com.chexun.dealer.model.clue.BespeakOrder">
+        select       id                                                       
+        from bespeak_order
+        <include refid="bespeak_order_where_conditions"/>
+    </select>
+	
+    <select id="getBespeakOrderIdList" resultType="Long" parameterType="com.chexun.dealer.model.clue.BespeakOrder">
+       select       id                                                        from bespeak_order where 1=1 
+        id = #{value}
+    </select>
+    
+    <select id="getBespeakOrderIdListByObj" resultType="Long"  parameterType="com.chexun.dealer.model.clue.BespeakOrder">
+       select       id                                                        from bespeak_order 
+        <include refid="bespeak_order_where_conditions"/>
+    </select>
+    
+    <select id="getBespeakOrderIdListByMap" resultType="Long"  parameterType="java.util.HashMap">
+        select       id                                                        from bespeak_order 
+        <include refid="bespeak_order_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    
+    <!--added订单与经销商关联查询接口返回值-->
+    <resultMap id="BespeakOrderPoResult" type="com.chexun.dealer.po.clue.BespeakOrderPo">
+        <result property="id" column="id"/>
+        <result property="dealerId" column="dealer_id"/>
+        <result property="modelId" column="model_id"/>
+        <result property="contact" column="contact"/>
+        <result property="phone" column="phone"/>
+        <result property="provinceId" column="province_id"/>
+        <result property="cityId" column="city_id"/>
+        <result property="email" column="email"/>
+        <result property="sex" column="sex"/>
+        <result property="driveTime" column="drive_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="type" column="type"/>
+        <result property="state" column="state"/>
+        <result property="addedRemarks" column="added_remarks"/>
+        <result property="disposeTime" column="dispose_time"/>
+        <result property="valid" column="valid"/>
+        <result property="runningistance" column="runningistance"/>
+        <result property="brandname" column="brandname"/>
+        <result property="seriesname" column="seriesname"/>
+        <result property="modelname" column="modelname"/>
+        <result property="intention" column="intention"/>
+        <result property="seriesId" column="series_id"/>
+        <result property="source" column="source"/>
+        <result property="code" column="code"/>
+        <result property="source2" column="source2"/>
+        <result property="drtype" column="drtype"/>
+        <result property="buystatus" column="buystatus"/>
+        <result property="dealerName" column="company_name"/>
+    </resultMap>
+    
+    <!--added订单与经销商关联查询条件-->
+    <sql id="query_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+	        <if test="id != null">
+	        	and bespeak_order.id=#{id} 
+	        </if>
+	        <if test="dealerName != null and dealerName != ''">
+	        	and dealers_info.company_name like "%"#{dealerName}"%"
+	        </if>
+	        <if test="source != null">
+	        	and bespeak_order.source2=#{source} 
+	        </if>
+	        <if test="type != null">
+	        	and bespeak_order.type=#{type} 
+	        </if>
+	        <if test="provinceId != null">
+	        	and bespeak_order.province_id=#{provinceId} 
+	        </if>
+	        <if test="cityId != null">
+	        	and bespeak_order.city_id=#{cityId} 
+	        </if>
+	        <if test="state != null">
+	        	and bespeak_order.state=#{state} 
+	        </if>
+	        <!--
+	        <if test="brandId != null">
+	        	and bespeak_order.brand_id=#{brandId} 
+	        </if>
+	        -->
+	        <if test="seriesId != null">
+	        	and bespeak_order.series_id=#{seriesId} 
+	        </if>
+	        <if test="modelId != null">
+	        	and bespeak_order.model_id=#{modelId} 
+	        </if>		   
+	        <if test="timeEnd != null and timeEnd != ''">
+	        	and bespeak_order.createtime &lt;= str_to_date(#{timeEnd}, '%Y-%m-%d %H:%i:%s')
+	        </if>
+	        <if test="timeStart != null and timeStart != ''">
+	        	and bespeak_order.createtime &gt;= str_to_date(#{timeStart}, '%Y-%m-%d %H:%i:%s')
+	        </if>     
+	        <if test="dealerId != null">
+	        	and bespeak_order.dealer_id=#{dealerId} 
+	        </if>
+    	</trim>
+    </sql>
+    
+    <!--added订单与经销商关联查询总数统计-->
+    <select id="queryBespeakOrderCount" resultType="int" parameterType="com.chexun.dealer.vo.clue.BespeakOrderVo">
+        select count(1) from bespeak_order left join dealers_info on bespeak_order.dealer_id=dealers_info.id 
+        <include refid="query_where_conditions"/>
+    </select>
+    
+    <!--added订单与经销商关联查询-->
+    <select id="queryBespeakOrderList" resultMap="BespeakOrderPoResult" parameterType="java.util.HashMap">
+        select
+        	<include refid="bespeak_order_columns"/>
+        	,dealers_info.COMPANY_NAME 
+        from bespeak_order left join dealers_info on bespeak_order.dealer_id=dealers_info.id 
+        <include refid="query_where_conditions"/>
+        	limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+    </select>
+    
+    <!--added来源列表查询-->
+    <select id="querySourceList" resultType="String" parameterType="int">
+        select distinct(source2) 
+        from bespeak_order  
+    </select>
+</mapper>

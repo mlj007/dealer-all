@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<link type="text/css" href="/statics/plugin/lhgcalendar/skins/lhgcalendar.css" rel="stylesheet" />
+
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<script type="text/javascript" src="/statics/plugin/lhgcalendar/lhgcalendar.min.js"></script>
+
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+<!--#set(com.chexun.dealer.model.clue.PhoneHistor phoneHistor)-->
+<script type="text/javascript">
+	function sub(){
+		var form = document.forms[0];  
+        form.action = "/admin/clue/phonehistor/list";  
+		form.method = "post";
+		form.submit();
+	}
+	$(document).ready(function(){
+		$("#create_beginTime").calendar();
+		$("#create_endTime").calendar();
+	});
+</script>
+</head>
+<body>
+<div class="wrapper">
+	<!--START 左边開始-->
+	${include("/common/left_admin.httl")}
+	<!--END 左边结束-->
+	
+	<!--START 右侧开始-->
+	<div class="right">
+	
+	<!--START 头开始-->
+	${include("/common/top_admin.httl",["topMenuTitle":"400电话历史"])}
+	<!--END 头结束-->
+	
+	<!-- START -->
+    <div class="right-con">
+            <div class="sel"> 
+            	<form action="/admin/clue/phonehistor/list" method="post" id="searchForm">
+		            <input type="hidden" id="pageCurrentPage" name="currentPage" value="${page.currentPage}"/>
+	                <span style="padding:0 0 0 10px">操作时间：</span>
+	                <input type="text" class="sel-inpt" value="${phoneHistor.begintime}" id="create_beginTime" name="beginTime"/>
+	                <span style="padding:0 5px">至</span>
+	                <input type="text" class="sel-inpt" value="${phoneHistor.endtime}" id="create_endTime" name="endTime"/>
+	                <span style="padding:0 0 0 10px">400电话:</span><span style="padding:0 0 0 10px"><input type="text" value="${phoneHistor.tel400}" class="sel-inpt" name="tel400"/></span>
+	                <input type="button" class="con-sel-search" value="搜索" onclick="return sub();"/>
+                </form>
+            </div>
+            <div class="con">
+                <div class="con-bd" id="tab">
+                        <table  width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <th>400电话</th>
+                                <th>操作 </th>
+                                <th>操作时间 </th>
+                                <th>操作人 </th>
+                                <th>经销商</th>
+                            </tr>
+                             <!--#for(com.chexun.dealer.model.clue.PhoneHistor phoneHistor : phoneHistorList)-->
+							<tr>
+                                <td>${phoneHistor.tel400 }</td>
+                                <td>${phoneHistor.status }</td>
+                                <td>${phoneHistor.adddate }</td>
+                                <td>${phoneHistor.username }</td>
+                                <td>${phoneHistor.companyName }</td>
+                            </tr>
+                            <!--#end-->
+                        </table>
+                         ${include("/common/page.httl")}
+                </div>
+            </div>
+     </div>
+            	
+    <!-- END-->
+     <!--END  右侧结束-->
+     <!--START 底部开始-->
+        ${include("/common/footer.httl")}
+     <!--END 底部结束-->
+</div>
+</body>
+</html>

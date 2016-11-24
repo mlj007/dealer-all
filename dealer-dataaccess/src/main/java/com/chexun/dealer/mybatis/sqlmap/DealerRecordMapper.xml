@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chexun.dealer.model.dealers.DealerRecordMapper">
+ 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>   -->
+    <resultMap id="DealerRecordResult" type="com.chexun.dealer.model.dealers.DealerRecord">
+        <result property="id" column="id"/>
+        <result property="editertype" column="editertype"/>
+        <result property="editercontent" column="editercontent"/>
+        <result property="username" column="username"/>
+        <result property="createdate" column="createdate"/>
+        <result property="dealerid" column="dealerid"/>
+        <result property="editerqian" column="editerqian"/>
+    </resultMap>
+
+    <sql id="dealer_record_columns">
+        dealer_record.id,
+        dealer_record.editertype,
+        dealer_record.editercontent,
+        dealer_record.username,
+        dealer_record.createdate,
+        dealer_record.dealerid,
+        dealer_record.editerqian
+    </sql>
+    
+    <sql id="dealer_record_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="id != null">
+        	and id=#{id} 
+        </if>
+        
+        <if test="editertype != null and editertype != ''">
+        	and editertype=#{editertype} 
+        </if>
+        
+        <if test="editercontent != null and editercontent != ''">
+        	and editercontent=#{editercontent} 
+        </if>
+        
+        <if test="username != null and username != ''">
+        	and username=#{username} 
+        </if>
+        <if test="createdate != null">
+        	and createdate=#{createdate} 
+        </if>
+        <if test="dealerid != null">
+        	and dealerid=#{dealerid} 
+        </if>
+        
+        <if test="editerqian != null and editerqian != ''">
+        	and editerqian=#{editerqian} 
+        </if>
+        </trim>
+    </sql>
+     <sql id="dealer_record_where_conditions_list">
+    	<trim prefix="where" prefixOverrides="and|or">
+	        <if test="editertype != null and editertype != ''">
+	       		 <bind name="editertype" value="'%' + editertype + '%'" />
+	        	and editertype like #{editertype} 
+	        </if>
+	        <if test="editercontent != null and editercontent != ''">
+	        	<bind name="editercontent" value="'%' + editercontent + '%'" />
+	        	and editercontent like #{editercontent} 
+	        </if>
+	        
+	        <if test="username != null and username != ''">
+	        	and username=#{username} 
+	        </if>
+	        <if test="createdate != null">
+	        	and createdate=#{createdate} 
+	        </if>
+	        <if test="dealerid != null">
+	        	and dealerid=#{dealerid} 
+	        </if>
+	        <if test="editerqian != null and editerqian != ''">
+	        	and editerqian=#{editerqian} 
+	        </if>
+	        <if test="beginTime != null and beginTime!=''">
+        		 <![CDATA[ and createdate >= DATE_FORMAT(#{beginTime,jdbcType=DATE},'%Y-%m-%d')]]>
+	        </if>
+	        <if test="endTime != null and endTime!=''">
+        		 <![CDATA[ and createdate <= DATE_FORMAT(#{endTime,jdbcType=DATE},'%Y-%m-%d')]]>
+	        </if>
+    	</trim>
+    </sql>
+    <sql id="dealer_record_set_conditions">
+    	<set>
+        <if test="id != null">
+        	id=#{id},
+        </if>
+        <if test="editertype != null">
+        	editertype=#{editertype},
+        </if>
+        <if test="editercontent != null">
+        	editercontent=#{editercontent},
+        </if>
+        <if test="username != null">
+        	username=#{username},
+        </if>
+        <if test="createdate != null">
+        	createdate=#{createdate},
+        </if>
+        <if test="dealerid != null">
+        	dealerid=#{dealerid},
+        </if>
+        <if test="editerqian != null">
+        	editerqian=#{editerqian},
+        </if>
+        </set>
+    </sql>
+
+    <sql id="dealer_record_properties">
+        #{id},
+        #{editertype},
+        #{editercontent},
+        #{username},
+        #{createdate},
+        #{dealerid},
+        #{editerqian}
+    </sql>
+
+    <insert id="createDealerRecord" parameterType="com.chexun.dealer.model.dealers.DealerRecord" keyColumn="id" keyProperty="id" useGeneratedKeys="true" >
+        insert INTO dealer_record (<include refid="dealer_record_columns"/>) VALUES (<include refid="dealer_record_properties"/>)
+    </insert>
+	
+	<insert id="insertDealerRecord" parameterType="com.chexun.dealer.model.dealers.DealerRecord" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    	insert into dealer_record
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        			id,
+    			</if>
+    			<if test="editertype != null" >
+        			editertype,
+    			</if>
+    			<if test="editercontent != null" >
+        			editercontent,
+    			</if>
+    			<if test="username != null" >
+        			username,
+    			</if>
+    			<if test="createdate != null" >
+        			createdate,
+    			</if>
+    			<if test="dealerid != null" >
+        			dealerid,
+    			</if>
+    			<if test="editerqian != null" >
+        			editerqian
+    			</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        		#{id},
+    		</if>
+    			<if test="editertype != null" >
+        		#{editertype},
+    		</if>
+    			<if test="editercontent != null" >
+        		#{editercontent},
+    		</if>
+    			<if test="username != null" >
+        		#{username},
+    		</if>
+    			<if test="createdate != null" >
+        		#{createdate},
+    		</if>
+    			<if test="dealerid != null" >
+        		#{dealerid},
+    		</if>
+    			<if test="editerqian != null" >
+        		#{editerqian}
+    		</if>
+    	</trim>
+  	</insert>
+	
+    <delete id="deleteDealerRecordById" parameterType="Long">
+        delete from dealer_record
+    </delete>
+    
+    <delete id="deleteDealerRecordByObj" parameterType="com.chexun.dealer.model.dealers.DealerRecord">
+        delete from dealer_record
+        <include refid="dealer_record_where_conditions"/>
+    </delete>
+    
+  	<delete id="deleteDealerRecordByIdList" parameterType="java.util.List">
+    	delete from dealer_record 
+    </delete>
+
+    <update id="updateDealerRecord" parameterType="com.chexun.dealer.model.dealers.DealerRecord">
+        update dealer_record SET
+            id = #{id},
+            editertype = #{editertype},
+            editercontent = #{editercontent},
+            username = #{username},
+            createdate = #{createdate},
+            dealerid = #{dealerid},
+            editerqian = #{editerqian}
+    </update>
+    
+    <update id="updateDealerRecordByObj" parameterType="com.chexun.dealer.model.dealers.DealerRecord">
+        update dealer_record 
+        <include refid="dealer_record_set_conditions"/>
+    </update>
+    
+    <update id="updateDealerRecordByObjAndConditions" parameterType="java.util.HashMap">
+        update dealer_record 
+        <set>
+        <if test="s.id != null">
+        	id=#{s.id},
+        </if>
+        <if test="s.editertype != null">
+        	editertype=#{s.editertype},
+        </if>
+        <if test="s.editercontent != null">
+        	editercontent=#{s.editercontent},
+        </if>
+        <if test="s.username != null">
+        	username=#{s.username},
+        </if>
+        <if test="s.createdate != null">
+        	createdate=#{s.createdate},
+        </if>
+        <if test="s.dealerid != null">
+        	dealerid=#{s.dealerid},
+        </if>
+        <if test="s.editerqian != null">
+        	editerqian=#{s.editerqian},
+        </if>
+        </set>
+        <where>
+        <if test="c.id != null">
+        	id=#{c.id} AND 
+        </if>
+        <if test="c.editertype != null">
+        	editertype=#{c.editertype} AND 
+        </if>
+        <if test="c.editercontent != null">
+        	editercontent=#{c.editercontent} AND 
+        </if>
+        <if test="c.username != null">
+        	username=#{c.username} AND 
+        </if>
+        <if test="c.createdate != null">
+        	createdate=#{c.createdate} AND 
+        </if>
+        <if test="c.dealerid != null">
+        	dealerid=#{c.dealerid} AND 
+        </if>
+        <if test="c.editerqian != null">
+        	editerqian=#{c.editerqian} AND 
+        </if>
+       (status!=2)
+        </where>
+    </update>
+    
+    <update id="batchUpdateDealerRecord" parameterType="java.util.List">
+		update dealer_record
+		<trim prefix="set" suffixOverrides=",">
+      	 	<trim prefix="id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.id!=null">
+						WHEN  THEN #{i.id}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="editertype=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.editertype!=null">
+						WHEN  THEN #{i.editertype}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="editercontent=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.editercontent!=null">
+						WHEN  THEN #{i.editercontent}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="username=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.username!=null">
+						WHEN  THEN #{i.username}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="createdate=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.createdate!=null">
+						WHEN  THEN #{i.createdate}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="dealerid=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.dealerid!=null">
+						WHEN  THEN #{i.dealerid}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="editerqian=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.editerqian!=null">
+						WHEN  THEN #{i.editerqian}
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where
+		<foreach collection="list" separator="or" item="i" index="index">
+		</foreach>
+	</update>
+    
+    
+
+    <select id="getDealerRecordById" resultMap="DealerRecordResult" parameterType="Long">
+        select
+        <include refid="dealer_record_columns"/>
+        from dealer_record
+    </select>
+    
+    <select id="getDealerRecordByObj" resultMap="DealerRecordResult" parameterType="com.chexun.dealer.model.dealers.DealerRecord">
+        select
+        <include refid="dealer_record_columns"/>
+        from dealer_record
+        <include refid="dealer_record_where_conditions"/>
+    </select>
+	
+    
+    <select id="getDealerRecordListByObj" resultMap="DealerRecordResult"  parameterType="com.chexun.dealer.model.dealers.DealerRecord">
+        select
+        <include refid="dealer_record_columns"/>
+        from dealer_record 
+        <include refid="dealer_record_where_conditions"/>
+    </select>
+    
+    <select id="getDealerRecordListByMap" resultMap="DealerRecordResult"  parameterType="java.util.HashMap">
+        select
+        <include refid="dealer_record_columns"/>
+        from dealer_record 
+        <include refid="dealer_record_where_conditions_list"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <select id="getDealerRecordCountByObj" resultType="int" parameterType="com.chexun.dealer.vo.dealers.DealerRecordVo">
+        select count(1) from dealer_record
+        <include refid="dealer_record_where_conditions_list"/>
+    </select>
+    
+    
+    
+    <select id="getDealerRecordIdByObj" resultType="Long" parameterType="com.chexun.dealer.model.dealers.DealerRecord">
+        select 
+        from dealer_record
+        <include refid="dealer_record_where_conditions"/>
+    </select>
+	
+    <select id="getDealerRecordIdList" resultType="Long" parameterType="com.chexun.dealer.model.dealers.DealerRecord">
+       select  from dealer_record where 1=1 
+        id = #{id}
+    </select>
+    
+    <select id="getDealerRecordIdListByObj" resultType="Long"  parameterType="com.chexun.dealer.model.dealers.DealerRecord">
+       select  from dealer_record 
+        <include refid="dealer_record_where_conditions"/>
+    </select>
+    
+    <select id="getDealerRecordIdListByMap" resultType="Long"  parameterType="java.util.HashMap">
+        select  from dealer_record 
+        <include refid="dealer_record_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+</mapper>

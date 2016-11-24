@@ -1,0 +1,27 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7, IE=9" />
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript">
+(function () {
+    $.post("/main/checkLogin",function(data){
+    	if(data.ret == 1){//已登录
+			if(data.groupId == 1){//超级管理
+				window.location.href="/admin/index";
+			}else if(data.groupId == 2){
+				window.location.href="/manage/index";
+			}
+    	}else{
+    		window.location.href="http://reg.chexun.com/logon.aspx?gourl="+window.location.href;
+    	}
+	});
+})(this, document);
+</script>
+ 
+</head>
+<body>
+<h2></h2>
+</body>
+</html>

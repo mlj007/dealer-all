@@ -1,0 +1,792 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chexun.dealer.model.clue.LocalCluePoolMapper">
+ 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>   -->
+    <resultMap id="LocalCluePoolResult" type="com.chexun.dealer.model.clue.LocalCluePool">
+        <result property="id" column="id"/>
+        <result property="createDate" column="create_date"/>
+        <result property="province" column="province"/>
+        <result property="phoneProvince" column="phone_province"/>
+        <result property="cityid" column="cityid"/>
+        <result property="city" column="city"/>
+        <result property="phoneCity" column="phone_city"/>
+        <result property="brandid" column="brandid"/>
+        <result property="brand" column="brand"/>
+        <result property="company" column="company"/>
+        <result property="series" column="series"/>
+        <result property="model" column="model"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="source" column="source"/>
+        <result property="firstVisitDate" column="first_visit_date"/>
+        <result property="firstVisitRes" column="first_visit_res"/>
+        <result property="secondVisitDate" column="second_visit_date"/>
+        <result property="secondVisitRes" column="second_visit_res"/>
+        <result property="thirdVisitDate" column="third_visit_date"/>
+        <result property="thirdVisitRes" column="third_visit_res"/>
+        <result property="phoneState" column="phone_state"/>
+    </resultMap>
+
+    <sql id="local_clue_pool_columns">
+        local_clue_pool.id,
+        local_clue_pool.create_date,
+        local_clue_pool.province,
+        local_clue_pool.phone_province,
+        local_clue_pool.cityid,
+        local_clue_pool.city,
+        local_clue_pool.phone_city,
+        local_clue_pool.brandid,
+        local_clue_pool.brand,
+        local_clue_pool.company,
+        local_clue_pool.series,
+        local_clue_pool.model,
+        local_clue_pool.name,
+        local_clue_pool.phone,
+        local_clue_pool.source,
+        local_clue_pool.first_visit_date,
+        local_clue_pool.first_visit_res,
+        local_clue_pool.second_visit_date,
+        local_clue_pool.second_visit_res,
+        local_clue_pool.third_visit_date,
+        local_clue_pool.third_visit_res,
+        local_clue_pool.phone_state
+    </sql>
+    
+    <sql id="local_clue_pool_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="id != null">
+        	and id=#{id} 
+        </if>
+        <if test="createDate != null">
+        	and create_date=#{createDate} 
+        </if>
+        
+        <if test="province != null and province != ''">
+        	and province=#{province} 
+        </if>
+        
+        <if test="phoneProvince != null and phoneProvince != ''">
+        	and phone_province=#{phoneProvince} 
+        </if>
+        
+        <if test="cityid != null and cityid != ''">
+        	and cityid=#{cityid} 
+        </if>
+        
+        <if test="city != null and city != ''">
+        	and city=#{city} 
+        </if>
+        
+        <if test="phoneCity != null and phoneCity != ''">
+        	and phone_city=#{phoneCity} 
+        </if>
+        
+        <if test="brandid != null and brandid != ''">
+        	and brandid=#{brandid} 
+        </if>
+        
+        <if test="brand != null and brand != ''">
+        	and brand=#{brand} 
+        </if>
+        
+        <if test="company != null and company != ''">
+        	and company=#{company} 
+        </if>
+        
+        <if test="series != null and series != ''">
+        	and series=#{series} 
+        </if>
+        
+        <if test="model != null and model != ''">
+        	and model=#{model} 
+        </if>
+        
+        <if test="name != null and name != ''">
+        	and name=#{name} 
+        </if>
+        
+        <if test="phone != null and phone != ''">
+        	and phone=#{phone} 
+        </if>
+        
+        <if test="source != null and source != ''">
+        	and source=#{source} 
+        </if>
+        <if test="firstVisitDate != null">
+        	and first_visit_date=#{firstVisitDate} 
+        </if>
+        
+        <if test="firstVisitRes != null and firstVisitRes != ''">
+        	and first_visit_res=#{firstVisitRes} 
+        </if>
+        <if test="secondVisitDate != null">
+        	and second_visit_date=#{secondVisitDate} 
+        </if>
+        
+        <if test="secondVisitRes != null and secondVisitRes != ''">
+        	and second_visit_res=#{secondVisitRes} 
+        </if>
+        <if test="thirdVisitDate != null">
+        	and third_visit_date=#{thirdVisitDate} 
+        </if>
+        
+        <if test="thirdVisitRes != null and thirdVisitRes != ''">
+        	and third_visit_res=#{thirdVisitRes} 
+        </if>
+        <if test="phoneState != null">
+        	and phone_state=#{phoneState} 
+        </if>
+        </trim>
+    </sql>
+    
+    <sql id="local_clue_pool_set_conditions">
+    	<set>
+        <if test="id != null">
+        	id=#{id},
+        </if>
+        <if test="createDate != null">
+        	create_date=#{createDate},
+        </if>
+        <if test="province != null">
+        	province=#{province},
+        </if>
+        <if test="phoneProvince != null">
+        	phone_province=#{phoneProvince},
+        </if>
+        <if test="cityid != null">
+        	cityid=#{cityid},
+        </if>
+        <if test="city != null">
+        	city=#{city},
+        </if>
+        <if test="phoneCity != null">
+        	phone_city=#{phoneCity},
+        </if>
+        <if test="brandid != null">
+        	brandid=#{brandid},
+        </if>
+        <if test="brand != null">
+        	brand=#{brand},
+        </if>
+        <if test="company != null">
+        	company=#{company},
+        </if>
+        <if test="series != null">
+        	series=#{series},
+        </if>
+        <if test="model != null">
+        	model=#{model},
+        </if>
+        <if test="name != null">
+        	name=#{name},
+        </if>
+        <if test="phone != null">
+        	phone=#{phone},
+        </if>
+        <if test="source != null">
+        	source=#{source},
+        </if>
+        <if test="firstVisitDate != null">
+        	first_visit_date=#{firstVisitDate},
+        </if>
+        <if test="firstVisitRes != null">
+        	first_visit_res=#{firstVisitRes},
+        </if>
+        <if test="secondVisitDate != null">
+        	second_visit_date=#{secondVisitDate},
+        </if>
+        <if test="secondVisitRes != null">
+        	second_visit_res=#{secondVisitRes},
+        </if>
+        <if test="thirdVisitDate != null">
+        	third_visit_date=#{thirdVisitDate},
+        </if>
+        <if test="thirdVisitRes != null">
+        	third_visit_res=#{thirdVisitRes},
+        </if>
+        <if test="phoneState != null">
+        	phone_state=#{phoneState},
+        </if>
+        </set>
+    </sql>
+
+    <sql id="local_clue_pool_properties">
+        #{id},
+        #{createDate},
+        #{province},
+        #{phoneProvince},
+        #{cityid},
+        #{city},
+        #{phoneCity},
+        #{brandid},
+        #{brand},
+        #{company},
+        #{series},
+        #{model},
+        #{name},
+        #{phone},
+        #{source},
+        #{firstVisitDate},
+        #{firstVisitRes},
+        #{secondVisitDate},
+        #{secondVisitRes},
+        #{thirdVisitDate},
+        #{thirdVisitRes},
+        #{phoneState}
+    </sql>
+
+    <insert id="createLocalCluePool" parameterType="com.chexun.dealer.model.clue.LocalCluePool" keyColumn="id" keyProperty="id" useGeneratedKeys="true" >
+        insert INTO local_clue_pool (<include refid="local_clue_pool_columns"/>) VALUES (<include refid="local_clue_pool_properties"/>)
+    </insert>
+	
+	<insert id="insertLocalCluePool" parameterType="com.chexun.dealer.model.clue.LocalCluePool" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    	insert into local_clue_pool
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        			id,
+    			</if>
+    			<if test="createDate != null" >
+        			create_date,
+    			</if>
+    			<if test="province != null" >
+        			province,
+    			</if>
+    			<if test="phoneProvince != null" >
+        			phone_province,
+    			</if>
+    			<if test="cityid != null" >
+        			cityid,
+    			</if>
+    			<if test="city != null" >
+        			city,
+    			</if>
+    			<if test="phoneCity != null" >
+        			phone_city,
+    			</if>
+    			<if test="brandid != null" >
+        			brandid,
+    			</if>
+    			<if test="brand != null" >
+        			brand,
+    			</if>
+    			<if test="company != null" >
+        			company,
+    			</if>
+    			<if test="series != null" >
+        			series,
+    			</if>
+    			<if test="model != null" >
+        			model,
+    			</if>
+    			<if test="name != null" >
+        			name,
+    			</if>
+    			<if test="phone != null" >
+        			phone,
+    			</if>
+    			<if test="source != null" >
+        			source,
+    			</if>
+    			<if test="firstVisitDate != null" >
+        			first_visit_date,
+    			</if>
+    			<if test="firstVisitRes != null" >
+        			first_visit_res,
+    			</if>
+    			<if test="secondVisitDate != null" >
+        			second_visit_date,
+    			</if>
+    			<if test="secondVisitRes != null" >
+        			second_visit_res,
+    			</if>
+    			<if test="thirdVisitDate != null" >
+        			third_visit_date,
+    			</if>
+    			<if test="thirdVisitRes != null" >
+        			third_visit_res,
+    			</if>
+    			<if test="phoneState != null" >
+        			phone_state
+    			</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        		#{id},
+    		</if>
+    			<if test="createDate != null" >
+        		#{createDate},
+    		</if>
+    			<if test="province != null" >
+        		#{province},
+    		</if>
+    			<if test="phoneProvince != null" >
+        		#{phoneProvince},
+    		</if>
+    			<if test="cityid != null" >
+        		#{cityid},
+    		</if>
+    			<if test="city != null" >
+        		#{city},
+    		</if>
+    			<if test="phoneCity != null" >
+        		#{phoneCity},
+    		</if>
+    			<if test="brandid != null" >
+        		#{brandid},
+    		</if>
+    			<if test="brand != null" >
+        		#{brand},
+    		</if>
+    			<if test="company != null" >
+        		#{company},
+    		</if>
+    			<if test="series != null" >
+        		#{series},
+    		</if>
+    			<if test="model != null" >
+        		#{model},
+    		</if>
+    			<if test="name != null" >
+        		#{name},
+    		</if>
+    			<if test="phone != null" >
+        		#{phone},
+    		</if>
+    			<if test="source != null" >
+        		#{source},
+    		</if>
+    			<if test="firstVisitDate != null" >
+        		#{firstVisitDate},
+    		</if>
+    			<if test="firstVisitRes != null" >
+        		#{firstVisitRes},
+    		</if>
+    			<if test="secondVisitDate != null" >
+        		#{secondVisitDate},
+    		</if>
+    			<if test="secondVisitRes != null" >
+        		#{secondVisitRes},
+    		</if>
+    			<if test="thirdVisitDate != null" >
+        		#{thirdVisitDate},
+    		</if>
+    			<if test="thirdVisitRes != null" >
+        		#{thirdVisitRes},
+    		</if>
+    			<if test="phoneState != null" >
+        		#{phoneState}
+    		</if>
+    	</trim>
+  	</insert>
+	
+    <delete id="deleteLocalCluePoolById" parameterType="Long">
+        delete from local_clue_pool
+    </delete>
+    
+    <delete id="deleteLocalCluePoolByObj" parameterType="com.chexun.dealer.model.clue.LocalCluePool">
+        delete from local_clue_pool
+        <include refid="local_clue_pool_where_conditions"/>
+    </delete>
+    
+  	<delete id="deleteLocalCluePoolByIdList" parameterType="java.util.List">
+    	delete from local_clue_pool 
+    </delete>
+
+    <update id="updateLocalCluePool" parameterType="com.chexun.dealer.model.clue.LocalCluePool">
+        update local_clue_pool SET
+            id = #{id},
+            create_date = #{createDate},
+            province = #{province},
+            phone_province = #{phoneProvince},
+            cityid = #{cityid},
+            city = #{city},
+            phone_city = #{phoneCity},
+            brandid = #{brandid},
+            brand = #{brand},
+            company = #{company},
+            series = #{series},
+            model = #{model},
+            name = #{name},
+            phone = #{phone},
+            source = #{source},
+            first_visit_date = #{firstVisitDate},
+            first_visit_res = #{firstVisitRes},
+            second_visit_date = #{secondVisitDate},
+            second_visit_res = #{secondVisitRes},
+            third_visit_date = #{thirdVisitDate},
+            third_visit_res = #{thirdVisitRes},
+            phone_state = #{phoneState}
+    </update>
+    
+    <update id="updateLocalCluePoolByObj" parameterType="com.chexun.dealer.model.clue.LocalCluePool">
+        update local_clue_pool 
+        <include refid="local_clue_pool_set_conditions"/>
+    </update>
+    
+    <update id="updateLocalCluePoolByObjAndConditions" parameterType="java.util.HashMap">
+        update local_clue_pool 
+        <set>
+        <if test="s.id != null">
+        	id=#{s.id},
+        </if>
+        <if test="s.createDate != null">
+        	create_date=#{s.createDate},
+        </if>
+        <if test="s.province != null">
+        	province=#{s.province},
+        </if>
+        <if test="s.phoneProvince != null">
+        	phone_province=#{s.phoneProvince},
+        </if>
+        <if test="s.cityid != null">
+        	cityid=#{s.cityid},
+        </if>
+        <if test="s.city != null">
+        	city=#{s.city},
+        </if>
+        <if test="s.phoneCity != null">
+        	phone_city=#{s.phoneCity},
+        </if>
+        <if test="s.brandid != null">
+        	brandid=#{s.brandid},
+        </if>
+        <if test="s.brand != null">
+        	brand=#{s.brand},
+        </if>
+        <if test="s.company != null">
+        	company=#{s.company},
+        </if>
+        <if test="s.series != null">
+        	series=#{s.series},
+        </if>
+        <if test="s.model != null">
+        	model=#{s.model},
+        </if>
+        <if test="s.name != null">
+        	name=#{s.name},
+        </if>
+        <if test="s.phone != null">
+        	phone=#{s.phone},
+        </if>
+        <if test="s.source != null">
+        	source=#{s.source},
+        </if>
+        <if test="s.firstVisitDate != null">
+        	first_visit_date=#{s.firstVisitDate},
+        </if>
+        <if test="s.firstVisitRes != null">
+        	first_visit_res=#{s.firstVisitRes},
+        </if>
+        <if test="s.secondVisitDate != null">
+        	second_visit_date=#{s.secondVisitDate},
+        </if>
+        <if test="s.secondVisitRes != null">
+        	second_visit_res=#{s.secondVisitRes},
+        </if>
+        <if test="s.thirdVisitDate != null">
+        	third_visit_date=#{s.thirdVisitDate},
+        </if>
+        <if test="s.thirdVisitRes != null">
+        	third_visit_res=#{s.thirdVisitRes},
+        </if>
+        <if test="s.phoneState != null">
+        	phone_state=#{s.phoneState},
+        </if>
+        </set>
+        <where>
+        <if test="c.id != null">
+        	id=#{c.id} AND 
+        </if>
+        <if test="c.createDate != null">
+        	create_date=#{c.createDate} AND 
+        </if>
+        <if test="c.province != null">
+        	province=#{c.province} AND 
+        </if>
+        <if test="c.phoneProvince != null">
+        	phone_province=#{c.phoneProvince} AND 
+        </if>
+        <if test="c.cityid != null">
+        	cityid=#{c.cityid} AND 
+        </if>
+        <if test="c.city != null">
+        	city=#{c.city} AND 
+        </if>
+        <if test="c.phoneCity != null">
+        	phone_city=#{c.phoneCity} AND 
+        </if>
+        <if test="c.brandid != null">
+        	brandid=#{c.brandid} AND 
+        </if>
+        <if test="c.brand != null">
+        	brand=#{c.brand} AND 
+        </if>
+        <if test="c.company != null">
+        	company=#{c.company} AND 
+        </if>
+        <if test="c.series != null">
+        	series=#{c.series} AND 
+        </if>
+        <if test="c.model != null">
+        	model=#{c.model} AND 
+        </if>
+        <if test="c.name != null">
+        	name=#{c.name} AND 
+        </if>
+        <if test="c.phone != null">
+        	phone=#{c.phone} AND 
+        </if>
+        <if test="c.source != null">
+        	source=#{c.source} AND 
+        </if>
+        <if test="c.firstVisitDate != null">
+        	first_visit_date=#{c.firstVisitDate} AND 
+        </if>
+        <if test="c.firstVisitRes != null">
+        	first_visit_res=#{c.firstVisitRes} AND 
+        </if>
+        <if test="c.secondVisitDate != null">
+        	second_visit_date=#{c.secondVisitDate} AND 
+        </if>
+        <if test="c.secondVisitRes != null">
+        	second_visit_res=#{c.secondVisitRes} AND 
+        </if>
+        <if test="c.thirdVisitDate != null">
+        	third_visit_date=#{c.thirdVisitDate} AND 
+        </if>
+        <if test="c.thirdVisitRes != null">
+        	third_visit_res=#{c.thirdVisitRes} AND 
+        </if>
+        <if test="c.phoneState != null">
+        	phone_state=#{c.phoneState} AND 
+        </if>
+       (status!=2)
+        </where>
+    </update>
+    
+    <update id="batchUpdateLocalCluePool" parameterType="java.util.List">
+		update local_clue_pool
+		<trim prefix="set" suffixOverrides=",">
+      	 	<trim prefix="id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.id!=null">
+						WHEN  THEN #{i.id}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="create_date=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.createDate!=null">
+						WHEN  THEN #{i.createDate}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="province=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.province!=null">
+						WHEN  THEN #{i.province}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="phone_province=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.phoneProvince!=null">
+						WHEN  THEN #{i.phoneProvince}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="cityid=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.cityid!=null">
+						WHEN  THEN #{i.cityid}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="city=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.city!=null">
+						WHEN  THEN #{i.city}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="phone_city=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.phoneCity!=null">
+						WHEN  THEN #{i.phoneCity}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="brandid=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.brandid!=null">
+						WHEN  THEN #{i.brandid}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="brand=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.brand!=null">
+						WHEN  THEN #{i.brand}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="company=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.company!=null">
+						WHEN  THEN #{i.company}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="series=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.series!=null">
+						WHEN  THEN #{i.series}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="model=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.model!=null">
+						WHEN  THEN #{i.model}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="name=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.name!=null">
+						WHEN  THEN #{i.name}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="phone=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.phone!=null">
+						WHEN  THEN #{i.phone}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="source=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.source!=null">
+						WHEN  THEN #{i.source}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="first_visit_date=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.firstVisitDate!=null">
+						WHEN  THEN #{i.firstVisitDate}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="first_visit_res=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.firstVisitRes!=null">
+						WHEN  THEN #{i.firstVisitRes}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="second_visit_date=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.secondVisitDate!=null">
+						WHEN  THEN #{i.secondVisitDate}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="second_visit_res=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.secondVisitRes!=null">
+						WHEN  THEN #{i.secondVisitRes}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="third_visit_date=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.thirdVisitDate!=null">
+						WHEN  THEN #{i.thirdVisitDate}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="third_visit_res=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.thirdVisitRes!=null">
+						WHEN  THEN #{i.thirdVisitRes}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="phone_state=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.phoneState!=null">
+						WHEN  THEN #{i.phoneState}
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where
+		<foreach collection="list" separator="or" item="i" index="index">
+		</foreach>
+	</update>
+    
+    
+
+    <select id="getLocalCluePoolById" resultMap="LocalCluePoolResult" parameterType="Long">
+        select
+        <include refid="local_clue_pool_columns"/>
+        from local_clue_pool
+    </select>
+    
+    <select id="getLocalCluePoolByObj" resultMap="LocalCluePoolResult" parameterType="com.chexun.dealer.model.clue.LocalCluePool">
+        select
+        <include refid="local_clue_pool_columns"/>
+        from local_clue_pool
+        <include refid="local_clue_pool_where_conditions"/>
+    </select>
+	
+    
+    <select id="getLocalCluePoolListByObj" resultMap="LocalCluePoolResult"  parameterType="com.chexun.dealer.model.clue.LocalCluePool">
+        select
+        <include refid="local_clue_pool_columns"/>
+        from local_clue_pool 
+        <include refid="local_clue_pool_where_conditions"/>
+    </select>
+    
+    <select id="getLocalCluePoolListByMap" resultMap="LocalCluePoolResult"  parameterType="java.util.HashMap">
+        select
+        <include refid="local_clue_pool_columns"/>
+        from local_clue_pool 
+        <include refid="local_clue_pool_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <select id="getLocalCluePoolCountByObj" resultType="int" parameterType="com.chexun.dealer.model.clue.LocalCluePool">
+        select count(1) from local_clue_pool
+        <include refid="local_clue_pool_where_conditions"/>
+    </select>
+    
+    
+    
+    <select id="getLocalCluePoolIdByObj" resultType="Long" parameterType="com.chexun.dealer.model.clue.LocalCluePool">
+        select 
+        from local_clue_pool
+        <include refid="local_clue_pool_where_conditions"/>
+    </select>
+	
+    <select id="getLocalCluePoolIdList" resultType="Long" parameterType="com.chexun.dealer.model.clue.LocalCluePool">
+       select  from local_clue_pool where 1=1 
+        id = #{id}
+    </select>
+    
+    <select id="getLocalCluePoolIdListByObj" resultType="Long"  parameterType="com.chexun.dealer.model.clue.LocalCluePool">
+       select  from local_clue_pool 
+        <include refid="local_clue_pool_where_conditions"/>
+    </select>
+    
+    <select id="getLocalCluePoolIdListByMap" resultType="Long"  parameterType="java.util.HashMap">
+        select  from local_clue_pool 
+        <include refid="local_clue_pool_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+</mapper>

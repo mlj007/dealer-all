@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chexun.dealer.model.dealers.DealersAddcarlogMapper">
+ 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>   -->
+    <resultMap id="DealersAddcarlogResult" type="com.chexun.dealer.model.dealers.DealersAddcarlog">
+        <result property="id" column="id"/>
+        <result property="dealerid" column="dealerid"/>
+        <result property="backcash" column="backcash"/>
+        <result property="hirecash" column="hirecash"/>
+        <result property="addcount" column="addcount"/>
+        <result property="createdate" column="createdate"/>
+    </resultMap>
+
+    <sql id="dealers_addcarlog_columns">
+        dealers_addcarlog.id,
+        dealers_addcarlog.dealerid,
+        dealers_addcarlog.backcash,
+        dealers_addcarlog.hirecash,
+        dealers_addcarlog.addcount,
+        dealers_addcarlog.createdate
+    </sql>
+    
+    <sql id="dealers_addcarlog_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="id != null">
+        	and id=#{id} 
+        </if>
+        <if test="dealerid != null">
+        	and dealerid=#{dealerid} 
+        </if>
+        <if test="backcash != null">
+        	and backcash=#{backcash} 
+        </if>
+        <if test="hirecash != null">
+        	and hirecash=#{hirecash} 
+        </if>
+        <if test="addcount != null">
+        	and addcount=#{addcount} 
+        </if>
+        <if test="createdate != null">
+        	and createdate=#{createdate} 
+        </if>
+        </trim>
+    </sql>
+    
+    <sql id="dealers_addcarlog_set_conditions">
+    	<set>
+        <if test="id != null">
+        	id=#{id},
+        </if>
+        <if test="dealerid != null">
+        	dealerid=#{dealerid},
+        </if>
+        <if test="backcash != null">
+        	backcash=#{backcash},
+        </if>
+        <if test="hirecash != null">
+        	hirecash=#{hirecash},
+        </if>
+        <if test="addcount != null">
+        	addcount=#{addcount},
+        </if>
+        <if test="createdate != null">
+        	createdate=#{createdate},
+        </if>
+            id = id
+        </set>
+    </sql>
+
+    <sql id="dealers_addcarlog_properties">
+        #{id},
+        #{dealerid},
+        #{backcash},
+        #{hirecash},
+        #{addcount},
+        #{createdate}
+    </sql>
+
+    <insert id="createDealersAddcarlog" parameterType="com.chexun.dealer.model.dealers.DealersAddcarlog" keyColumn="id" keyProperty="id" useGeneratedKeys="true" >
+        insert INTO dealers_addcarlog (<include refid="dealers_addcarlog_columns"/>) VALUES (<include refid="dealers_addcarlog_properties"/>)
+    </insert>
+	
+	<insert id="insertDealersAddcarlog" parameterType="com.chexun.dealer.model.dealers.DealersAddcarlog" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    	insert into dealers_addcarlog
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        			id,
+    			</if>
+    			<if test="dealerid != null" >
+        			dealerid,
+    			</if>
+    			<if test="backcash != null" >
+        			backcash,
+    			</if>
+    			<if test="hirecash != null" >
+        			hirecash,
+    			</if>
+    			<if test="addcount != null" >
+        			addcount,
+    			</if>
+    			<if test="createdate != null" >
+        			createdate
+    			</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        		#{id},
+    		</if>
+    			<if test="dealerid != null" >
+        		#{dealerid},
+    		</if>
+    			<if test="backcash != null" >
+        		#{backcash},
+    		</if>
+    			<if test="hirecash != null" >
+        		#{hirecash},
+    		</if>
+    			<if test="addcount != null" >
+        		#{addcount},
+    		</if>
+    			<if test="createdate != null" >
+        		#{createdate}
+    		</if>
+    	</trim>
+  	</insert>
+	
+    <delete id="deleteDealersAddcarlogById" parameterType="Long">
+        delete from dealers_addcarlog
+        where
+            		id = #{            			value
+            		}
+    </delete>
+    
+    <delete id="deleteDealersAddcarlogByObj" parameterType="com.chexun.dealer.model.dealers.DealersAddcarlog">
+        delete from dealers_addcarlog
+        <include refid="dealers_addcarlog_where_conditions"/>
+    </delete>
+    
+  	<delete id="deleteDealersAddcarlogByIdList" parameterType="java.util.List">
+    	delete from dealers_addcarlog 
+        	where
+            id
+    		IN 
+    		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </delete>
+
+    <update id="updateDealersAddcarlog" parameterType="com.chexun.dealer.model.dealers.DealersAddcarlog">
+        update dealers_addcarlog SET
+            id = #{id},
+            dealerid = #{dealerid},
+            backcash = #{backcash},
+            hirecash = #{hirecash},
+            addcount = #{addcount},
+            createdate = #{createdate}
+        where
+            id = #{id}
+    </update>
+    
+    <update id="updateDealersAddcarlogByObj" parameterType="com.chexun.dealer.model.dealers.DealersAddcarlog">
+        update dealers_addcarlog 
+        <include refid="dealers_addcarlog_set_conditions"/>
+        where
+            id = #{id}
+    </update>
+    
+    <update id="updateDealersAddcarlogByObjAndConditions" parameterType="java.util.HashMap">
+        update dealers_addcarlog 
+        <set>
+        <if test="s.id != null">
+        	id=#{s.id},
+        </if>
+        <if test="s.dealerid != null">
+        	dealerid=#{s.dealerid},
+        </if>
+        <if test="s.backcash != null">
+        	backcash=#{s.backcash},
+        </if>
+        <if test="s.hirecash != null">
+        	hirecash=#{s.hirecash},
+        </if>
+        <if test="s.addcount != null">
+        	addcount=#{s.addcount},
+        </if>
+        <if test="s.createdate != null">
+        	createdate=#{s.createdate},
+        </if>
+        </set>
+        <where>
+        <if test="c.id != null">
+        	id=#{c.id} AND 
+        </if>
+        <if test="c.dealerid != null">
+        	dealerid=#{c.dealerid} AND 
+        </if>
+        <if test="c.backcash != null">
+        	backcash=#{c.backcash} AND 
+        </if>
+        <if test="c.hirecash != null">
+        	hirecash=#{c.hirecash} AND 
+        </if>
+        <if test="c.addcount != null">
+        	addcount=#{c.addcount} AND 
+        </if>
+        <if test="c.createdate != null">
+        	createdate=#{c.createdate} AND 
+        </if>
+       (status!=2)
+        </where>
+    </update>
+    
+    <update id="batchUpdateDealersAddcarlog" parameterType="java.util.List">
+		update dealers_addcarlog
+		<trim prefix="set" suffixOverrides=",">
+      	 	<trim prefix="id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.id!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.id}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="dealerid=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.dealerid!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.dealerid}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="backcash=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.backcash!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.backcash}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="hirecash=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.hirecash!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.hirecash}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="addcount=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.addcount!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.addcount}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="createdate=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.createdate!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.createdate}
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where
+		<foreach collection="list" separator="or" item="i" index="index">
+            	(id = #{i.id})
+		</foreach>
+	</update>
+    
+    
+
+    <select id="getDealersAddcarlogById" resultMap="DealersAddcarlogResult" parameterType="Long">
+        select
+        <include refid="dealers_addcarlog_columns"/>
+        from dealers_addcarlog
+        where
+            id = #{value}
+    </select>
+    
+    <select id="getDealersAddcarlogByObj" resultMap="DealersAddcarlogResult" parameterType="com.chexun.dealer.model.dealers.DealersAddcarlog">
+        select
+        <include refid="dealers_addcarlog_columns"/>
+        from dealers_addcarlog
+        <include refid="dealers_addcarlog_where_conditions"/>
+    </select>
+	
+    
+    <select id="getDealersAddcarlogListByObj" resultMap="DealersAddcarlogResult"  parameterType="com.chexun.dealer.model.dealers.DealersAddcarlog">
+        select
+        <include refid="dealers_addcarlog_columns"/>
+        from dealers_addcarlog 
+        <include refid="dealers_addcarlog_where_conditions"/>
+    </select>
+    
+    <select id="getDealersAddcarlogListByMap" resultMap="DealersAddcarlogResult"  parameterType="java.util.HashMap">
+        select
+        <include refid="dealers_addcarlog_columns"/>
+        from dealers_addcarlog 
+        <include refid="dealers_addcarlog_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <select id="getDealersAddcarlogCountByObj" resultType="int" parameterType="com.chexun.dealer.model.dealers.DealersAddcarlog">
+        select count(1) from dealers_addcarlog
+        <include refid="dealers_addcarlog_where_conditions"/>
+    </select>
+    
+    
+    
+    <select id="getDealersAddcarlogIdByObj" resultType="Long" parameterType="com.chexun.dealer.model.dealers.DealersAddcarlog">
+        select       id             
+        from dealers_addcarlog
+        <include refid="dealers_addcarlog_where_conditions"/>
+    </select>
+	
+    <select id="getDealersAddcarlogIdList" resultType="Long" parameterType="com.chexun.dealer.model.dealers.DealersAddcarlog">
+       select       id              from dealers_addcarlog where 1=1 
+        id = #{value}
+    </select>
+    
+    <select id="getDealersAddcarlogIdListByObj" resultType="Long"  parameterType="com.chexun.dealer.model.dealers.DealersAddcarlog">
+       select       id              from dealers_addcarlog 
+        <include refid="dealers_addcarlog_where_conditions"/>
+    </select>
+    
+    <select id="getDealersAddcarlogIdListByMap" resultType="Long"  parameterType="java.util.HashMap">
+        select       id              from dealers_addcarlog 
+        <include refid="dealers_addcarlog_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+</mapper>

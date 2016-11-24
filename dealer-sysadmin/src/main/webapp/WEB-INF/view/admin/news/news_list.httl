@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<link type="text/css" href="/statics/plugin/lhgcalendar/skins/lhgcalendar.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<script type="text/javascript" src="/statics/plugin/lhgcalendar/lhgcalendar.min.js"></script>
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+<!--#set(com.chexun.dealer.model.news.DealersNews dealersNews)-->
+<script type="text/javascript">
+	function sub(){
+		var form = document.forms[0];  
+        form.action = "/admin/news/list";  
+		form.method = "post";
+		form.submit();
+	}
+	$(document).ready(function(){
+		$("#create_beginTime").calendar();
+		$("#create_endTime").calendar();
+	});
+	
+	$(function(){
+		$("a[name='del']").click(function(){
+			var id = $(this).parent().siblings("input").val();
+			var typeId = $(this).parent().siblings("input").attr("typeId");
+			if(1 == typeId){
+				if(confirm('确实要隐藏该内容吗?')){
+					$.ajax({ 
+			    		url : "/admin/news/delete", 
+			    		data:"ids="+id+"#"+typeId,
+			    		dataType : "json",
+			    		type: "POST",
+			    		success : function(data) {
+			    			if(data == "1"){
+				    			alert("隐藏成功！");
+				    			window.location.reload(true);
+			    			}
+			    		}
+		    		});
+				}
+			}else{
+				if(confirm('确实要显示该内容吗?')){
+					$.ajax({ 
+			    		url : "/admin/news/delete", 
+			    		data:"ids="+id+"#"+typeId,
+			    		dataType : "json",
+			    		type: "POST",
+			    		success : function(data) {
+			    			if(data == "1"){
+				    			alert("显示成功！");
+				    			window.location.reload(true);
+			    			}
+			    		}
+		    		});
+				}
+			}
+		});
+		
+		$("a[name='edit']").click(function(){
+			var id = $(this).parent().siblings("input").val();
+			window.location.href ="/admin/news/edit?id="+id;
+		});
+		$(document).ready(function(){
+			$(".sel form select option[value='${dealersNews.type}']").attr("selected","selected");
+		});
+	});
+</script>
+</head>
+<body>
+<div class="wrapper">
+	<!--START 左边開始-->
+	${include("/common/left_admin.httl")}
+	<!--END 左边结束-->
+	
+	<!--START 右侧开始-->
+	<div class="right">
+	
+	<!--START 头开始-->
+	${include("/common/top_admin.httl",["topMenuTitle":"新闻管理"])}
+	<!--END 头结束-->
+	
+	<!-- START -->
+    <div class="right-con">
+            <div class="sel"> 
+            	<form action="/admin/news/list" method="post" id="searchForm">
+		            <input type="hidden" id="pageCurrentPage" name="currentPage" value="${page.currentPage}"/>
+	                <span style="padding:0 0 0 10px">文章标题:</span>
+	                <span style="padding:0 0 0 10px"><input type="text" name="title" class="sel-inpt" value="${dealersNews.title}"/></span>
+	                <span style="padding:0 0 0 10px">发布时间：</span>
+                	<input type="text" class="sel-inpt" name="starTime" id="create_beginTime" value="${dealersNews.begintime}" />
+	                <span style="padding:0 5px">至</span>
+	                <input type="text" class="sel-inpt" name="endTime" id="create_endTime" value="${dealersNews.endtime}"/>
+	                <span style="padding:0 0 0 10px">经销商:</span><span style="padding:0 0 0 10px"><input type="text" value="${dealersNews.companyName}" class="sel-inpt" name="dealer"/></span>
+	                <select name="newsType">
+	                	<option value="">--请选择--</option>
+	                	<option value="1">企业新闻</option>
+	                	<option value="2">促销信息</option>
+	                	<option value="3">车友活动</option>
+	                	<option value="4">到店新车</option>
+	                </select>
+	                <input type="button" class="con-sel-search" onclick="return sub();" value="搜索" />
+                </form>
+            </div>
+            <div class="con">
+                <div class="con-bd" id="tab">
+                        <table  width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <th>文章标题</th>
+                                <th>经销商 </th>
+                                <th>分类</th>
+                                <th>发布时间</th>
+                                <th>浏览量</th>
+                                <th>操作</th>
+                            </tr>
+                             <!--#for(com.chexun.dealer.model.news.DealersNews dealersNews : dealersNewsList)-->
+							<tr>
+								<input type="hidden" value="${dealersNews.id}" typeId="${dealersNews.state}"/>
+                                <td><a target="_blank" href="http://dealer.chexun.com/${dealersNews.englishAlias}/News-${dealersNews.type}/article-${dealersNews.id}.html">${dealersNews.title}</td>
+                                <td dealuer="${dealersNews.dealerUserId}">${dealersNews.companyName }</td>
+                                <td>
+                                	#if(dealersNews.type == '1') 
+									       企业新闻
+									#end
+									#if(dealersNews.type == '2') 
+									       促销信息
+									#end
+                                	#if(dealersNews.type == '3') 
+									       车友活动
+									#end
+									#if(dealersNews.type == '4') 
+									       到店新车
+									#end
+                                </td>
+                                <td>${dealersNews.publishtime }</td>
+                                <td>${dealersNews.clickcount }</td>
+                                <td>
+                                	<a href="javascript:void(0);" name="edit">修改</a>
+                                	<a href="javascript:void(0);" 
+                                		#if(dealersNews.state == '1') 
+									       	style="color:red"
+										#end name="del">
+                                		#if(dealersNews.state == '1') 
+									       	隐藏
+										#end
+										#if(dealersNews.state == '2') 
+											显示
+										#end
+                                	</a>
+                                	<!--<a href="javascript:void(0);">推荐</a>-->
+                                </td>
+                            </tr>
+                            <!--#end-->
+                        </table>
+                         ${include("/common/page.httl")}
+                </div>
+            </div>
+     </div>
+            	
+    <!-- END-->
+     <!--END  右侧结束-->
+     <!--START 底部开始-->
+        ${include("/common/footer.httl")}
+     <!--END 底部结束-->
+</div>
+</body>
+</html>

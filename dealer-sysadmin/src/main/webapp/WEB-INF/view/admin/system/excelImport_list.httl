@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>车商道后台管理系统</title>
+    <link type="text/css" href="/statics/css/public.css" rel="stylesheet" />
+    <script type="text/javascript" src="/statics/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/statics/js/public.js"></script>
+    <link href="/statics/plugin/lhgcalendar/skins/lhgcalendar.css" rel="stylesheet" type="text/css" />
+    <script src="/statics/plugin/lhgcalendar/lhgcalendar.min.js" type="text/javascript"></script> 
+    <!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+</head>
+<body>
+	<div class="wrapper">
+		<!--START 左边開始-->
+		${include("/common/left_admin.httl")}
+		<!--END 左边结束-->
+		
+		<!--START 右侧开始-->
+		<div class="right">
+		
+		<!--START 头开始-->
+		${include("/common/top_admin.httl",["topMenuTitle":"线索导入"])}
+		<!--END 头结束-->
+		
+		<!-- START -->
+	    <div class="right-con">
+	        <div class="sel">
+				线索类型：
+	            <select id="selType" name="select">
+	                <option value="-1">全部</option>
+	                <option value="0">询价线索</option>
+	                <option value="1">试驾线索</option>
+	                <option value="2">预约保养</option>
+	            </select>
+	            <input id="hidXSType" type="hidden" value="-1" />
+					导入时间：
+	            <input type="text" id="beginTime" value="" class="put_jxs" />
+					至
+	            <input type="text" id="endTime" value="" class="put_jxs" />
+	            <input type="button" id="search" class="con-sel-search" value="搜索" />
+	            <input type="button" id="excel" class="con-sel-search" value="导出数据" />
+	        </div>
+	        <div class="con">
+	            <span style="float:right;margin-right:30px;"><a style="background: none repeat scroll 0 0 #409cd9;color: #fff;display: block;height: 25px;padding: 0 15px 0 15px;width: 60px;text-align:center;line-height:23px;" href="AddXianSuo.aspx">导入线索</a></span>
+	            <ul class="tabs clearfix">
+	                <li class="active"><a style="cursor: pointer" onclick="SearchState(-1)"><strong>全部</strong></a></li>
+	                <li class="" style="width:150px;"><a style="cursor: pointer" onclick="SearchState(1)"><strong>近三个月导入线索</strong><span>(19354)</span></a></li>
+	                <li class="" style="width:150px;"><a style="cursor: pointer" onclick="SearchState(2)"><strong>三个月前导入线索</strong><span>(0)</span></a></li>
+	            </ul>
+	            <div class="con-bd" id="tab">
+	                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+	                    <tbody>
+				            <tr>
+				                <th class="width00">
+				                </th>
+				                <th class="width02">
+									线索类别
+				                </th>
+				                <th class="width02">
+									线索数量
+				                </th>
+				                <th class="width01">
+									导入日期
+				                </th>
+				                <th>
+									操作者
+				                </th>
+				            </tr>
+				            <!--#for(com.chexun.dealer.model.system.XianSuoRecord xianSuoRecord : XianSuoRecordList)-->
+							<tr>
+                                <td>${xianSuoRecord.id }</td>
+                                <td>
+                                	#if(xianSuoRecord.XSType == '0') 
+									       询价线索
+									#end
+									#if(xianSuoRecord.XSType == '1') 
+									       试驾线索
+									#end
+									#if(xianSuoRecord.XSType == '2') 
+									       预约保养
+									#end
+                                </td>
+                                <td>${xianSuoRecord.count }</td>
+                                <td>${xianSuoRecord.createTime }</td>
+                                <td>${xianSuoRecord.OPName }</td>
+                            </tr>
+                            <!--#end-->
+	                    </tbody>
+	                </table>
+	        			${include("/common/page.httl")}
+	            </div>
+	        </div>
+	    </div>
+	    <!-- END-->
+	 	<!--END  右侧结束-->
+		<!--START 底部开始-->
+	    ${include("/common/footer.httl")}
+		<!--END 底部结束-->
+	    </div> 
+	    </div>
+	</div>
+</body>
+<script type="text/javascript">
+	        $("div[caidan='7'] h3").addClass("nav-cur");
+	        $("div[caidan='7']>div").show();
+	
+	        $(function () {
+	            $("#selType").val($("#hidXSType").val());
+	
+	            $("#beginTime").calendar();
+	            $("#endtime").calendar();
+	
+	            //查询
+	            $("#search").click(function () {
+	                var XSType = $("#selType").val();
+	                var BeginTime = $("#beginTime").val();
+	                var EndTime = $("#endtime").val();
+	                window.location.href = "/admin/ExcelDaoRu.aspx?XSType=" + XSType + "&BeginTime=" + BeginTime + "&EndTime=" + EndTime;
+	            });
+	        });
+	
+	
+	        function SearchState(data) {
+	            var XSType = $("#selType").val();
+	            var BeginTime = $("#beginTime").val();
+	            var EndTime = $("#endtime").val();
+	            window.location.href = "/admin/ExcelDaoRu.aspx?XSType=" + XSType + "&BeginTime=" + BeginTime + "&EndTime=" + EndTime + "&state=" + data;
+	        }
+</script>
+<script type="text/javascript">
+    //退出
+    function outUser() {
+        var urlGo = window.location.href;
+        top.location.href = "http://reg.chexun.com/logout.aspx?gourl=" + urlGo;
+    }
+
+    function leftlink(gourl, obj) {
+        $(".layoutleft li").css("color", "");
+        $(obj).css("color", "#c00")
+        $("#iframe_member_right").attr("src", gourl);
+    }
+</script>
+</html>
+

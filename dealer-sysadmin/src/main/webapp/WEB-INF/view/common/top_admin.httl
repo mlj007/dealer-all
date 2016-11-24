@@ -1,0 +1,24 @@
+<meta charset="utf-8">
+ <script>
+(function () {
+    $.post("/main/checkLogin",function(data){
+		if(data.ret == 1){//已登录
+			if(data.groupId==2){
+				alert("您不是超管！");
+				window.location.href="http://reg.chexun.com";
+			}
+			$('#uname').html("欢迎您，"+data.userName);
+			$('#logout').attr('href','http://reg.chexun.com/logout.aspx?gourl='+window.location.href); 
+		}else{
+			window.location.href="http://reg.chexun.com/logon.aspx?gourl="+window.location.href;
+		}
+	});
+})(this, document);
+</script>
+<div class="user" > <span class="user-r"> <span class="user-icon" id="uname">欢迎您，用户名</span> <a href="#" id="logout"><span id=""></span>退出登录</a> </span> </div>
+<div class="special">
+     <div class="special-hd">
+         <h3>${topMenuTitle}</h3>
+      </div>
+</div>
+<!--END 顶部结束-->

@@ -1,0 +1,311 @@
+<!--#set(com.chexun.dealer.vo.report.DealerShopAccessLogVo dealerShopAccessLogVo)-->
+<!--#set(com.chexun.dealer.vo.report.DealerShopAccessLogVo dealerShopBaojiaLogVo)-->
+<!--#set(com.chexun.dealer.vo.report.DealerShopAccessLogVo dealerShopNewsLogVo)-->
+<!--#set(com.chexun.dealer.model.report.DealersReportQuery dealersReportQuery)-->
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<link type="text/css" href="/statics/plugin/lhgcalendar/skins/lhgcalendar.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/plugin/lhgcalendar/lhgcalendar.min.js"></script>
+<script type="text/javascript" src="/statics/js/common/highcharts.js"></script>
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+</head>
+<body>
+<div class="wrapper">
+	<!--START 左边開始-->
+	${include("/common/left_admin.httl")}
+	<!--END 左边结束-->
+	
+	<!--START 右侧开始-->
+	<div class="right">
+	
+	<!--START 头开始-->
+	${include("/common/top_admin.httl",["topMenuTitle":"流量统计"])}
+	<!--END 头结束-->
+	
+	<!-- START -->
+	<div class="right-con">
+		<form action="/admin/report/llfx.aspx" method="post">
+	        <div class="sel">
+	            统计时间：<input name="startDateTime" type="text" id="startdatetime" value="${dealersReportQuery.startDateTime}" class="iputtxt03" />
+	            至
+	            <input name="endDateTime" type="text" id="enddatetime" value="${dealersReportQuery.endDateTime}" class="iputtxt03" />
+	            <input type="submit" value="搜索" id="search" class="con-sel-search">
+	        </div>
+        </form>
+    </div>
+    <div class="tab">
+        <ul class="tab-hd">
+            <li onclick="setTab(1,4)" class="active" id="tabs1">前台浏览总量</li>
+            <li onclick="setTab(2,4)" id="tabs2" class="">报价浏览总量</li>
+            <li onclick="setTab(3,4)" id="tabs3" class="">资讯浏览总量</li>
+            <li onclick="setTab(4,4)" id="tabs4" class="">车型热度指数TOP10</li>
+        </ul>
+        <div id="tabs-1" class="tab-bd" style="height:800px;">
+            <h3>前台浏览总量：<span>总浏览量：<em>${dealerShopAccessLogVo.allCount}</em> 日均：<em>${dealerShopAccessLogVo.avgCount}</em></span></h3>
+            <div class="content" id="container1">
+            </div> 
+        </div>
+        <div style="display: none;height:800px;" id="tabs-2" class="tab-bd">
+            <h3>前台浏览总量：<span>总浏览量：<em>${dealerShopBaojiaLogVo.allCount}</em> 日均：<em>${dealerShopBaojiaLogVo.avgCount}</em></span></h3>
+            <div class="content" style="width:75%;" id="container2">
+            </div>
+        </div>
+        <div style="display: none;height:800px;" id="tabs-3" class="tab-bd">
+            <h3>前台浏览总量：<span>总浏览量：<em>${dealerShopNewsLogVo.allCount}</em> 日均：<em>${dealerShopNewsLogVo.avgCount}</em></span></h3>
+            <div class="content" style="width:75%;" id="container3">
+            </div>    
+        </div>
+        <div style="display: none;height:800px;" id="tabs-4" class="tab-bd">
+            <h3>车型热度指数TOP10：</h3>
+            <div class="content" style="width:75%;height:700px;" id="container4">
+            </div>    
+        </div>
+    </div>      	
+    <!-- END-->
+    <!--END  右侧结束-->
+	<!--START 底部开始-->
+	   ${include("/common/footer.httl")}
+	<!--END 底部结束-->
+</div>
+<script>
+//定位左侧导航选中的当前项
+$(function(){
+	$("div.nav-box:eq(3) h3").addClass("nav-cur");
+	$("div.nav-box:eq(3) li:eq(2)").css({"background":"#409dda"});
+    $("div.nav-box:eq(3)>div").show();
+    
+    $("#startdatetime").calendar();
+    $("#enddatetime").calendar();
+    
+    Highcharts.setOptions({
+        lang: {
+	        numericSymbols: [' thousands', ' millions'],
+            printChart:'打印图片',
+            downloadJPEG:'下载JPEG图片',
+            downloadPNG:'下载PNG图片',
+            downloadSVG:'下载SVG图片',
+            downloadPDF:'下载PDF文档'
+        }
+    });
+    
+    var chart1;
+    $(document).ready(function () {
+        //定义一个HighCharts 
+        chart1 = new Highcharts.Chart({
+            //配置chart选项
+            chart: {
+                renderTo: 'container1',  //容器名，和body部分的div id要一致
+                type: 'spline'						//图表类型，这里选择折线图
+            },
+            //配置链接及名称选项 
+            credits: {
+                enabled: true,
+                href: "",
+                text: ""
+            },
+            //配置标题
+            title: {
+                text: '前台浏览总量(PV)',
+                y: 10  //默认对齐是顶部，所以这里代表距离顶部10px 
+            },
+            //配置副标题
+            subtitle: {
+                text: '',
+                y: 30
+            },
+            //配置x轴
+            xAxis: {
+                categories: [${dealerShopAccessLogVo.xAxisData}],
+                labels: {
+                    y:20
+                },
+                tickInterval:2
+            },
+            // 配置y轴
+            yAxis: {
+                title: {
+                    text: '数量（PV）'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value + '次'
+                    }
+                },
+                min:0
+            },
+            //配置数据点提示框
+            tooltip: {
+                crosshairs: true,
+                shared: true
+            },
+            //配置数据使其点显示信息
+            plotOptions: {
+                spline: {
+                    dataLabels: {
+                        enabled: false
+                    },
+                    enableMouseTracking: true
+                }
+            },
+            //配置数据列 
+            series: [{
+                name: '浏览次数（PV）',
+                marker: {
+                    symbol: 'square'
+                },
+                data: [${dealerShopAccessLogVo.yAxisData}]
+            }]
+        });
+    });
+    
+    var chart2;
+    $(document).ready(function () {
+
+        //定义一个HighCharts 
+        chart2 = new Highcharts.Chart({
+            //配置chart选项
+            chart: {
+                renderTo: 'container2',  //容器名，和body部分的div id要一致
+                type: 'spline'						//图表类型，这里选择折线图
+            },
+            //配置链接及名称选项 
+            credits: {
+                enabled: true,
+                href: "",
+                text: ""
+            },
+            //配置标题
+            title: {
+                text: '新闻页浏览量(PV)',
+                y: 10  //默认对齐是顶部，所以这里代表距离顶部10px 
+            },
+            //配置副标题
+            subtitle: {
+                text: '',
+                y: 30
+            },
+            //配置x轴
+            xAxis: {
+                categories: [${dealerShopBaojiaLogVo.xAxisData}],
+                labels: {
+                    y:20
+                },
+                tickInterval:2
+            },
+            // 配置y轴
+            yAxis: {
+                title: {
+                    text: '数量（PV）'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value + '次'
+                    }
+                },
+                min:0
+            },
+            //配置数据点提示框
+            tooltip: {
+                crosshairs: true,
+                shared: true
+            },
+            //配置数据使其点显示信息
+            plotOptions: {
+                spline: {
+                    dataLabels: {
+                        enabled: false
+                    },
+                    enableMouseTracking: true
+                }
+            },
+            //配置数据列 
+            series: [{
+                name: '浏览次数（PV）',
+                marker: {
+                    symbol: 'square'
+                },
+                data: [${dealerShopBaojiaLogVo.yAxisData}]
+            }]
+        });
+    });
+    
+    var chart3;
+    $(document).ready(function () {
+
+        //定义一个HighCharts 
+        chart3 = new Highcharts.Chart({
+            //配置chart选项
+            chart: {
+                renderTo: 'container3',  //容器名，和body部分的div id要一致
+                type: 'spline'						//图表类型，这里选择折线图
+            },
+            //配置链接及名称选项 
+            credits: {
+                enabled: true,
+                href: "",
+                text: ""
+            },
+            //配置标题
+            title: {
+                text: '报价页浏览总量(PV)',
+                y: 10  //默认对齐是顶部，所以这里代表距离顶部10px 
+            },
+            //配置副标题
+            subtitle: {
+                text: '',
+                y: 30
+            },
+            //配置x轴
+            xAxis: {
+                categories: [${dealerShopNewsLogVo.xAxisData}],
+                labels: {
+                    y:20
+                },
+                tickInterval:2
+            },
+            // 配置y轴
+            yAxis: {
+                title: {
+                    text: '数量（PV）'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value + '次'
+                    }
+                },
+                min:0
+            },
+            //配置数据点提示框
+            tooltip: {
+                crosshairs: true,
+                shared: true
+            },
+            //配置数据使其点显示信息
+            plotOptions: {
+                spline: {
+                    dataLabels: {
+                        enabled: false
+                    },
+                    enableMouseTracking: true
+                }
+            },
+            //配置数据列 
+            series: [{
+                name: '浏览次数（PV）',
+                marker: {
+                    symbol: 'square'
+                },
+                data: [${dealerShopNewsLogVo.yAxisData}]
+            }]
+        });
+    });
+})
+</script>
+</body>
+</html>

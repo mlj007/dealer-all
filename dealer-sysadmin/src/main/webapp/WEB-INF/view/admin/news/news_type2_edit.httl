@@ -1,0 +1,72 @@
+<dl>
+    <dt><em>*</em>促销车型：</dt>
+    <dd id="tab">
+        <table width="100%" cellspacing="0" cellpadding="0" border="0">
+            <tbody id="ModelList">
+	            <tr>
+	                <th>车型</th>
+	                <th>指导价(万)</th>
+	                <th>优惠幅度(万)</th>
+	                <th>优惠价(万)</th>
+	            </tr>
+                <tr>
+                    <td class="textLeft">
+                        <input type="checkbox" mId="" cId="" name="model">
+                        	款  
+                    </td>
+                    <td>
+                    	
+                    </td>
+                    <td>
+                        <input type="text" value="" class="yhinpt" id="price_" />
+                    </td>
+                    <td>
+                         - 
+                    </td>
+                </tr>
+        	</tbody>
+        </table>
+    </dd>
+</dl>
+<dl>
+    <dt><em>*</em>车型图：</dt>
+    <dd style="height:220px;">
+        <div class="pic">
+            <img width="290" height="195" id="BigPic" src="/statics/images/moren.jpg">
+            <input id="hidBigPic" value="<%=BigPic %>" type="hidden" />
+            <span>
+                <a class="" href="javascript:void(0);" onclick="UpLoadPic('BigPic');">上传</a>
+                <a class="" href="javascript:void(0);" onclick="ShowPicList('BigPic');">图库</a>
+            </span>
+        </div>
+    </dd>
+</dl>
+<dl>
+    <dt>&nbsp;</dt>
+    <dd class="w170">
+        <div class="pic">
+            <img width="150" height="100" id="WQPic" src="/statics/images/moren.jpg">
+            <input id="hidWQPic" value="<%=WQPic %>" type="hidden" />
+            <span>
+                <a class="" href="javascript:void(0);" onclick="UpLoadPic('WQPic');">上传</a>
+                <a class="" href="javascript:void(0);" onclick="ShowPicList('WQPic');">图库</a>
+            </span>
+        </div>
+        <div class="pic">
+            <img width="150" height="100" id="NSPic" src="/statics/images/moren.jpg">
+            <input id="hidNSPic" value="<%=NSPic %>" type="hidden" />
+            <span>
+                <a class="" href="javascript:void(0);" onclick="UpLoadPic('NSPic');">上传</a>
+                <a class="" href="javascript:void(0);" onclick="ShowPicList('NSPic');">图库</a>
+            </span>
+        </div>
+        <div class="pic">
+            <img width="150" height="100" id="QTPic" src="/statics/images/moren.jpg">
+            <input id="hidQTPic" value="<%=QTPic %>" type="hidden" />
+            <span>
+                <a class="" href="javascript:void(0);" onclick="UpLoadPic('QTPic');">上传</a>  
+                <a class="" href="javascript:void(0);" onclick="ShowPicList('QTPic');">图库</a>
+            </span>
+        </div>
+    </dd>
+</dl>

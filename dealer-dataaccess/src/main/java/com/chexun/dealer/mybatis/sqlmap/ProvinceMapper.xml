@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chexun.dealer.model.common.ProvinceMapper">
+ 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>   -->
+    <resultMap id="ProvinceResult" type="com.chexun.dealer.model.common.Province">
+        <result property="id" column="id"/>
+        <result property="regionId" column="region_id"/>
+        <result property="name" column="name"/>
+        <result property="code" column="code"/>
+        <result property="shortName" column="short_name"/>
+    </resultMap>
+
+    <sql id="province_columns">
+        province.id,
+        province.region_id,
+        province.name,
+        province.code,
+        province.short_name
+    </sql>
+    
+    <sql id="province_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="id != null">
+        	and id=#{id} 
+        </if>
+        <if test="regionId != null">
+        	and region_id=#{regionId} 
+        </if>
+        
+        <if test="name != null and name != ''">
+        	and name=#{name} 
+        </if>
+        
+        <if test="code != null and code != ''">
+        	and code=#{code} 
+        </if>
+        
+        <if test="shortName != null and shortName != ''">
+        	and short_name=#{shortName} 
+        </if>
+        </trim>
+    </sql>
+    
+    <sql id="province_set_conditions">
+    	<set>
+        <if test="id != null">
+        	id=#{id},
+        </if>
+        <if test="regionId != null">
+        	region_id=#{regionId},
+        </if>
+        <if test="name != null">
+        	name=#{name},
+        </if>
+        <if test="code != null">
+        	code=#{code},
+        </if>
+        <if test="shortName != null">
+        	short_name=#{shortName},
+        </if>
+            id = id
+        </set>
+    </sql>
+
+    <sql id="province_properties">
+        #{id},
+        #{regionId},
+        #{name},
+        #{code},
+        #{shortName}
+    </sql>
+
+    <insert id="createProvince" parameterType="com.chexun.dealer.model.common.Province" keyColumn="id" keyProperty="id" useGeneratedKeys="true" >
+        insert INTO province (<include refid="province_columns"/>) VALUES (<include refid="province_properties"/>)
+    </insert>
+	
+	<insert id="insertProvince" parameterType="com.chexun.dealer.model.common.Province" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    	insert into province
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        			id,
+    			</if>
+    			<if test="regionId != null" >
+        			region_id,
+    			</if>
+    			<if test="name != null" >
+        			name,
+    			</if>
+    			<if test="code != null" >
+        			code,
+    			</if>
+    			<if test="shortName != null" >
+        			short_name
+    			</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        		#{id},
+    		</if>
+    			<if test="regionId != null" >
+        		#{regionId},
+    		</if>
+    			<if test="name != null" >
+        		#{name},
+    		</if>
+    			<if test="code != null" >
+        		#{code},
+    		</if>
+    			<if test="shortName != null" >
+        		#{shortName}
+    		</if>
+    	</trim>
+  	</insert>
+	
+    <delete id="deleteProvinceById" parameterType="Long">
+        delete from province
+        where
+            		id = #{            			value
+            		}
+    </delete>
+    
+    <delete id="deleteProvinceByObj" parameterType="com.chexun.dealer.model.common.Province">
+        delete from province
+        <include refid="province_where_conditions"/>
+    </delete>
+    
+  	<delete id="deleteProvinceByIdList" parameterType="java.util.List">
+    	delete from province 
+        	where
+            id
+    		IN 
+    		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </delete>
+
+    <update id="updateProvince" parameterType="com.chexun.dealer.model.common.Province">
+        update province SET
+            id = #{id},
+            region_id = #{regionId},
+            name = #{name},
+            code = #{code},
+            short_name = #{shortName}
+        where
+            id = #{id}
+    </update>
+    
+    <update id="updateProvinceByObj" parameterType="com.chexun.dealer.model.common.Province">
+        update province 
+        <include refid="province_set_conditions"/>
+        where
+            id = #{id}
+    </update>
+    
+    <update id="updateProvinceByObjAndConditions" parameterType="java.util.HashMap">
+        update province 
+        <set>
+        <if test="s.id != null">
+        	id=#{s.id},
+        </if>
+        <if test="s.regionId != null">
+        	region_id=#{s.regionId},
+        </if>
+        <if test="s.name != null">
+        	name=#{s.name},
+        </if>
+        <if test="s.code != null">
+        	code=#{s.code},
+        </if>
+        <if test="s.shortName != null">
+        	short_name=#{s.shortName},
+        </if>
+        </set>
+        <where>
+        <if test="c.id != null">
+        	id=#{c.id} AND 
+        </if>
+        <if test="c.regionId != null">
+        	region_id=#{c.regionId} AND 
+        </if>
+        <if test="c.name != null">
+        	name=#{c.name} AND 
+        </if>
+        <if test="c.code != null">
+        	code=#{c.code} AND 
+        </if>
+        <if test="c.shortName != null">
+        	short_name=#{c.shortName} AND 
+        </if>
+       (status!=2)
+        </where>
+    </update>
+    
+    <update id="batchUpdateProvince" parameterType="java.util.List">
+		update province
+		<trim prefix="set" suffixOverrides=",">
+      	 	<trim prefix="id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.id!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.id}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="region_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.regionId!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.regionId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="name=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.name!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.name}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="code=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.code!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.code}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="short_name=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.shortName!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.shortName}
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where
+		<foreach collection="list" separator="or" item="i" index="index">
+            	(id = #{i.id})
+		</foreach>
+	</update>
+    
+    
+
+    <select id="getProvinceById" resultMap="ProvinceResult" parameterType="Long">
+        select
+        <include refid="province_columns"/>
+        from province
+        where
+            id = #{value}
+    </select>
+    
+    <select id="getProvinceByObj" resultMap="ProvinceResult" parameterType="com.chexun.dealer.model.common.Province">
+        select
+        <include refid="province_columns"/>
+        from province
+        <include refid="province_where_conditions"/>
+    </select>
+	
+    
+    <select id="getProvinceListByObj" resultMap="ProvinceResult"  parameterType="com.chexun.dealer.model.common.Province">
+        select
+        <include refid="province_columns"/>
+        from province 
+        <include refid="province_where_conditions"/>
+    </select>
+    
+    <select id="getProvinceListByMap" resultMap="ProvinceResult"  parameterType="java.util.HashMap">
+        select
+        <include refid="province_columns"/>
+        from province 
+        <include refid="province_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <select id="getProvinceCountByObj" resultType="int" parameterType="com.chexun.dealer.model.common.Province">
+        select count(1) from province
+        <include refid="province_where_conditions"/>
+    </select>
+    
+    
+    
+    <select id="getProvinceIdByObj" resultType="Long" parameterType="com.chexun.dealer.model.common.Province">
+        select       id           
+        from province
+        <include refid="province_where_conditions"/>
+    </select>
+	
+    <select id="getProvinceIdList" resultType="Long" parameterType="com.chexun.dealer.model.common.Province">
+       select       id            from province where 1=1 
+        id = #{value}
+    </select>
+    
+    <select id="getProvinceIdListByObj" resultType="Long"  parameterType="com.chexun.dealer.model.common.Province">
+       select       id            from province 
+        <include refid="province_where_conditions"/>
+    </select>
+    
+    <select id="getProvinceIdListByMap" resultType="Long"  parameterType="java.util.HashMap">
+        select       id            from province 
+        <include refid="province_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+</mapper>

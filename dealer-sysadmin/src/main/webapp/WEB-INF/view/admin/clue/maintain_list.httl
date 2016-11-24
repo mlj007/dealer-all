@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+</head>
+<body>
+<div class="wrapper">
+	<!--START 左边開始-->
+	${include("/common/left_admin.httl")}
+	<!--END 左边结束-->
+	
+	<!--START 右侧开始-->
+	<div class="right">
+	
+	<!--START 头开始-->
+	${include("/common/top_admin.httl",["topMenuTitle":"保养管理"])}
+	<!--END 头结束-->
+		
+    <!-- START -->
+    <div class="right-con">
+            <div class="sel"> 
+            	<form action="/admin/clue/bespeakorder/maintainlist" method="post" id="searchForm">
+		            <input type="hidden" id="pageCurrentPage" name="currentPage" value="${page.currentPage}"/>
+	                <span style="padding:0 0 0 10px">经销商所在地区：</span>
+	                <select><option>所在省份</option></select>
+	                <select><option>所在城市</option></select>
+	                <select><option>经营品牌</option></select>
+	                <select><option>选择车系</option></select>
+	                <span style="padding:0 0 0 10px">保养时间：</span>
+	                <input type="text" class="sel-inpt" value="" />
+	                <span style="padding:0 5px">至</span>
+	                <input type="text" class="sel-inpt" value="" />
+	                <span style="padding:0 0 0 10px">经销商：</span> 
+	                <input type="text" class="sel-inpt" value="" />
+	                <span style="padding:0 0 0 10px">状态：</span> 
+	                 <select><option>全部</option></select>
+	                <span style="padding:0 0 0 10px">来源：</span> 
+	                 <select><option>全部</option></select>
+	                <input type="button" class="con-sel-search" value="搜索" />
+                </form>
+            </div>
+            <div class="con">
+            <span style="float:right;margin-right:50px;">共<a href=""><b class="cred">20524</b></a>个提问</span>
+            <span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
+            <ul class="tabs clearfix">
+            	<li class="active">
+            		<a onclick="SearchState(-1)" style="cursor: pointer">
+            			<strong>全部留言</strong>
+            		</a>
+            	</li>
+            	<li>
+	            	<a onclick="SearchState(1)" style="cursor: pointer">
+	            		<strong>已回复</strong><span>(11114)</span>
+					</a>
+            	</li>
+            	<li>
+            		<a onclick="SearchState(0)" style="cursor: pointer">
+						<strong>未回复</strong>
+						<span>(9410)</span>
+					</a>
+            	</li>
+            </ul>
+                <div class="con-bd" id="tab">
+                        <table  width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <th>联系人</th>
+                                <th>电话 </th>
+                                <th>验证码</th>
+                                <th>城市</th>
+                                <th>车系/车型</th>
+                                <th>保养时间  </th>
+                                <th>经销商</th>
+                                <th>状态</th>
+                            </tr>
+                             <!--#for(com.chexun.dealer.model.clue.BespeakOrder bespeakOrder : bespeakOrderList)-->
+							<tr>
+                                <td>${bespeakOrder.contact }</td>
+                                <td>${bespeakOrder.phone }</td>
+                                <td>${bespeakOrder.valid }</td>
+                                <td>${bespeakOrder.cityId }</td>
+                                <td>${bespeakOrder.modelname }/${bespeakOrder.seriesname }</td>
+                                <td>${bespeakOrder.driveTime }</td>
+                                <td>${bespeakOrder.dealerId }</td>
+                                <td>未处理</td>
+                            </tr>
+                            <!--#end-->
+                        </table>
+                         ${include("/common/page.httl")}
+                </div>
+            </div>
+     </div>
+    <!-- END-->
+     <!--END  右侧结束-->
+     <!--START 底部开始-->
+        ${include("/common/footer.httl")}
+     <!--END 底部结束-->
+</div>
+</body>
+</html>

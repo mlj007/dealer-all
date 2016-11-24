@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<link type="text/css" href="/statics/css/public.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<!--#set(com.chexun.dealer.model.dealers.DealersInfo dealersInfo)-->
+<!--#set(com.chexun.dealer.po.dealers.DealersCarPo brandCountAndCarCount)-->
+<!--#set(com.chexun.dealer.po.dealers.DealersCarPo seriesNameAndCarCount)-->
+<!--#set(com.chexun.dealer.model.dealers.DealersContract contract)-->
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+</head>
+<body>
+	<div class="wrapper">
+		<!--START 左边開始-->
+		${include("/common/left_manage.httl")}
+		<!--END 左边结束-->
+		<!--START 右侧开始-->
+		<div class="right">
+			<!--START 头开始-->
+			${include("/common/top_manage.httl",["topMenuTitle":"报价管理"])}
+			<!--END 头结束-->
+			<div class="right-con">
+				<div class="sel">
+           			已发布报价 <b class="cred">${brandCountAndCarCount.brandCount}</b> 个品牌 <b class="cred">${brandCountAndCarCount.carCount}</b> 款车型 
+           			<a href="fbbj.aspx" class="bluebtn">发布车型报价</a> 
+           			<a class="bluebtn btn1" href="JavaScript:void(0);" onclick="javascript:OnKeyUpdate()">报价一键更新</a>
+        		</div>
+        		<div class="con">
+        			<div class="con-bd" id="tab">
+        				<div class="bt_jxs" id="" style="margin-bottom:20px">
+                    		<h2 style="float: left;">${seriesNameAndCarCount.seriesName}</h2>(共<b class="cred">${seriesNameAndCarCount.carCount}</b>款车型)
+                		</div>
+	        			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	                    	<tbody>
+		                        <tr>
+					                <th class="width00">
+					                    <input type="checkbox" name="" value="" onclick="SelectCheckBox(this);">
+					                </th>
+		                			<th>车型</th>
+		                			<th class="width011">指导价<br>(万元)</th>
+		                			<th class="width021">我的报价<br>(万元)</th>
+		                			<th class="width031">更新时间</th>
+				                	<th class="width011">库存</th>
+		                			<th class="width041">操作</th>
+		            			</tr>
+		            			<!--#for(com.chexun.dealer.po.dealers.DealersCarPo car : carlist)-->
+		            			<tr id="125430" class="ModelID" style="background: rgb(238, 238, 238) none repeat scroll 0% 0%;">
+		            				<td>
+										<input class="ck" value="${car.brandId}" type="checkbox">
+									</td>
+									<td>
+										${car.yearName}款 ${car.modelName}
+									</td>
+									<td>
+										${car.price}
+									</td>
+									<td>
+										<input id="pricetext3890297" class="readonly upinput" onfocus="PriceFocus(this)" maxlength="1000" size="40" value="${car.companyPrice}" name="empID" type="text">
+										<input id="edit3890297" class="edit01" cid="3890297" style="display:none" name="editMyBasicInfoBtn" value="" type="button">
+										<input id="update3890297" class="edit02" cid="3890297" value="">
+									</td>
+									<td>
+										${car.dateTime}
+									</td>
+									<td>${car.sellType}	
+										<select name="select" onchange="ChangeSellType(3890297,this);">
+											<option value="1" <!--#if(car.sellType==1)-->selected<!--#end-->>现车</option>
+											<option value="0" <!--#if(car.sellType==0)-->selected<!--#end-->>预定</option>
+										</select>
+									</td>
+									<td>
+										<span>
+											<a onclick="ChangeTime(3890297,125427)" href="javascript:void(0);">更新</a>
+											<a href="javascript:DeleteModel(3890297);DelMongoDealerPrice(125427)">删除</a>
+											<a class="" onclick="RecommendModel(3890297,0,this)" href="javascript:void(0)">推荐</a>
+										</span>
+									</td>
+		            			</tr>
+		            			<!--#end-->
+	                    	</tbody>
+	                	</table>
+                	</div>
+        		</div> 
+			</div>	
+			<!--START 底部开始-->
+			${include("/common/footer.httl")}
+			<!--END 底部结束-->
+		</div>
+		<!--END  右侧结束-->
+	</div>
+</body>
+</html>

@@ -1,0 +1,1377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chexun.dealer.model.news.DealersNewsMapper">
+ 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>   -->
+    <resultMap id="DealersNewsResult" type="com.chexun.dealer.model.news.DealersNews">
+        <result property="id" column="id"/>
+        <result property="content" column="content"/>
+        <result property="createTime" column="create_time"/>
+        <result property="dealerUserId" column="dealer_user_id"/>
+        <result property="title" column="title"/>
+        <result property="state" column="state"/>
+        <result property="type" column="type"/>
+        <result property="isRecommend" column="is_recommend"/>
+        <result property="recommendPage" column="recommend_page"/>
+        <result property="isFirst" column="is_first"/>
+        <result property="recommendTime" column="recommend_time"/>
+        <result property="recommendTitle" column="recommend_title"/>
+        <result property="publishtime" column="publishtime"/>
+        <result property="seriesids" column="seriesids"/>
+        <result property="clickcount" column="clickcount"/>
+        <result property="showother" column="showother"/>
+        <result property="begintime" column="begintime"/>
+        <result property="endtime" column="endtime"/>
+        <result property="cheaptype" column="cheaptype"/>
+        <result property="cheapvalue" column="cheapvalue"/>
+        <result property="modeltype" column="modeltype"/>
+        <result property="pushtype" column="pushtype"/>
+        <result property="pushdate" column="pushdate"/>
+        <result property="pushdifang" column="pushdifang"/>
+        <result property="pushchexun" column="pushchexun"/>
+        <result property="imgurl" column="imgurl"/>
+        <result property="pushdealer" column="pushdealer"/>
+        <result property="pushdealerdate" column="pushdealerdate"/>
+        <result property="pushdealertimes" column="pushdealertimes"/>
+    </resultMap>
+
+    <sql id="dealers_news_columns">
+        dealers_news.id,
+        dealers_news.content,
+        dealers_news.create_time,
+        dealers_news.dealer_user_id,
+        dealers_news.title,
+        dealers_news.state,
+        dealers_news.type,
+        dealers_news.is_recommend,
+        dealers_news.recommend_page,
+        dealers_news.is_first,
+        dealers_news.recommend_time,
+        dealers_news.recommend_title,
+        dealers_news.publishtime,
+        dealers_news.seriesids,
+        dealers_news.clickcount,
+        dealers_news.showother,
+        dealers_news.begintime,
+        dealers_news.endtime,
+        dealers_news.cheaptype,
+        dealers_news.cheapvalue,
+        dealers_news.modeltype,
+        dealers_news.pushtype,
+        dealers_news.pushdate,
+        dealers_news.pushdifang,
+        dealers_news.pushchexun,
+        dealers_news.imgurl,
+        dealers_news.pushdealer,
+        dealers_news.pushdealerdate,
+        dealers_news.pushdealertimes
+    </sql>
+    
+    <sql id="dealers_news_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="id != null">
+        	and id=#{id} 
+        </if>
+        
+        <if test="content != null and content != ''">
+        	and content=#{content} 
+        </if>
+        
+        <if test="createTime != null and createTime != ''">
+        	and create_time=#{createTime} 
+        </if>
+        <if test="dealerUserId != null">
+        	and dealer_user_id=#{dealerUserId} 
+        </if>
+        
+        <if test="title != null and title != ''">
+        	and title=#{title} 
+        </if>
+        <if test="state != null">
+        	and state=#{state} 
+        </if>
+        <if test="type != null">
+        	and type=#{type} 
+        </if>
+        <if test="isRecommend != null">
+        	and is_recommend=#{isRecommend} 
+        </if>
+        
+        <if test="recommendPage != null and recommendPage != ''">
+        	and recommend_page=#{recommendPage} 
+        </if>
+        <if test="isFirst != null">
+        	and is_first=#{isFirst} 
+        </if>
+        
+        <if test="recommendTime != null and recommendTime != ''">
+        	and recommend_time=#{recommendTime} 
+        </if>
+        
+        <if test="recommendTitle != null and recommendTitle != ''">
+        	and recommend_title=#{recommendTitle} 
+        </if>
+        <if test="publishtime != null">
+        	and publishtime=#{publishtime} 
+        </if>
+        
+        <if test="seriesids != null and seriesids != ''">
+        	and seriesids=#{seriesids} 
+        </if>
+        <if test="clickcount != null">
+        	and clickcount=#{clickcount} 
+        </if>
+        <if test="showother != null">
+        	and showother=#{showother} 
+        </if>
+        <if test="begintime != null">
+        	and begintime=#{begintime} 
+        </if>
+        <if test="endtime != null">
+        	and endtime=#{endtime} 
+        </if>
+        <if test="cheaptype != null">
+        	and cheaptype=#{cheaptype} 
+        </if>
+        <if test="cheapvalue != null">
+        	and cheapvalue=#{cheapvalue} 
+        </if>
+        <if test="modeltype != null">
+        	and modeltype=#{modeltype} 
+        </if>
+        <if test="pushtype != null">
+        	and pushtype=#{pushtype} 
+        </if>
+        <if test="pushdate != null">
+        	and pushdate=#{pushdate} 
+        </if>
+        <if test="pushdifang != null">
+        	and pushdifang=#{pushdifang} 
+        </if>
+        <if test="pushchexun != null">
+        	and pushchexun=#{pushchexun} 
+        </if>
+        
+        <if test="imgurl != null and imgurl != ''">
+        	and imgurl=#{imgurl} 
+        </if>
+        <if test="pushdealer != null">
+        	and pushdealer=#{pushdealer} 
+        </if>
+        <if test="pushdealerdate != null">
+        	and pushdealerdate=#{pushdealerdate} 
+        </if>
+        <if test="pushdealertimes != null">
+        	and pushdealertimes=#{pushdealertimes} 
+        </if>
+        </trim>
+    </sql>
+    
+    <sql id="dealers_news_set_conditions">
+    	<set>
+        <if test="id != null">
+        	id=#{id},
+        </if>
+        <if test="content != null">
+        	content=#{content},
+        </if>
+        <if test="createTime != null">
+        	create_time=#{createTime},
+        </if>
+        <if test="dealerUserId != null">
+        	dealer_user_id=#{dealerUserId},
+        </if>
+        <if test="title != null">
+        	title=#{title},
+        </if>
+        <if test="state != null">
+        	state=#{state},
+        </if>
+        <if test="type != null">
+        	type=#{type},
+        </if>
+        <if test="isRecommend != null">
+        	is_recommend=#{isRecommend},
+        </if>
+        <if test="recommendPage != null">
+        	recommend_page=#{recommendPage},
+        </if>
+        <if test="isFirst != null">
+        	is_first=#{isFirst},
+        </if>
+        <if test="recommendTime != null">
+        	recommend_time=#{recommendTime},
+        </if>
+        <if test="recommendTitle != null">
+        	recommend_title=#{recommendTitle},
+        </if>
+        <if test="publishtime != null">
+        	publishtime=#{publishtime},
+        </if>
+        <if test="seriesids != null">
+        	seriesids=#{seriesids},
+        </if>
+        <if test="clickcount != null">
+        	clickcount=#{clickcount},
+        </if>
+        <if test="showother != null">
+        	showother=#{showother},
+        </if>
+        <if test="begintime != null">
+        	begintime=#{begintime},
+        </if>
+        <if test="endtime != null">
+        	endtime=#{endtime},
+        </if>
+        <if test="cheaptype != null">
+        	cheaptype=#{cheaptype},
+        </if>
+        <if test="cheapvalue != null">
+        	cheapvalue=#{cheapvalue},
+        </if>
+        <if test="modeltype != null">
+        	modeltype=#{modeltype},
+        </if>
+        <if test="pushtype != null">
+        	pushtype=#{pushtype},
+        </if>
+        <if test="pushdate != null">
+        	pushdate=#{pushdate},
+        </if>
+        <if test="pushdifang != null">
+        	pushdifang=#{pushdifang},
+        </if>
+        <if test="pushchexun != null">
+        	pushchexun=#{pushchexun},
+        </if>
+        <if test="imgurl != null">
+        	imgurl=#{imgurl},
+        </if>
+        <if test="pushdealer != null">
+        	pushdealer=#{pushdealer},
+        </if>
+        <if test="pushdealerdate != null">
+        	pushdealerdate=#{pushdealerdate},
+        </if>
+        <if test="pushdealertimes != null">
+        	pushdealertimes=#{pushdealertimes},
+        </if>
+            id = id
+        </set>
+    </sql>
+
+    <sql id="dealers_news_properties">
+        #{id},
+        #{content},
+        #{createTime},
+        #{dealerUserId},
+        #{title},
+        #{state},
+        #{type},
+        #{isRecommend},
+        #{recommendPage},
+        #{isFirst},
+        #{recommendTime},
+        #{recommendTitle},
+        #{publishtime},
+        #{seriesids},
+        #{clickcount},
+        #{showother},
+        #{begintime},
+        #{endtime},
+        #{cheaptype},
+        #{cheapvalue},
+        #{modeltype},
+        #{pushtype},
+        #{pushdate},
+        #{pushdifang},
+        #{pushchexun},
+        #{imgurl},
+        #{pushdealer},
+        #{pushdealerdate},
+        #{pushdealertimes}
+    </sql>
+
+    <insert id="createDealersNews" parameterType="com.chexun.dealer.model.news.DealersNews" keyColumn="id" keyProperty="id" useGeneratedKeys="true" >
+        insert INTO dealers_news (<include refid="dealers_news_columns"/>) VALUES (<include refid="dealers_news_properties"/>)
+    </insert>
+	
+	<insert id="insertDealersNews" parameterType="com.chexun.dealer.model.news.DealersNews" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    	insert into dealers_news
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        			id,
+    			</if>
+    			<if test="content != null" >
+        			content,
+    			</if>
+    			<if test="createTime != null" >
+        			create_time,
+    			</if>
+    			<if test="dealerUserId != null" >
+        			dealer_user_id,
+    			</if>
+    			<if test="title != null" >
+        			title,
+    			</if>
+    			<if test="state != null" >
+        			state,
+    			</if>
+    			<if test="type != null" >
+        			type,
+    			</if>
+    			<if test="isRecommend != null" >
+        			is_recommend,
+    			</if>
+    			<if test="recommendPage != null" >
+        			recommend_page,
+    			</if>
+    			<if test="isFirst != null" >
+        			is_first,
+    			</if>
+    			<if test="recommendTime != null" >
+        			recommend_time,
+    			</if>
+    			<if test="recommendTitle != null" >
+        			recommend_title,
+    			</if>
+    			<if test="publishtime != null" >
+        			publishtime,
+    			</if>
+    			<if test="seriesids != null" >
+        			seriesids,
+    			</if>
+    			<if test="clickcount != null" >
+        			clickcount,
+    			</if>
+    			<if test="showother != null" >
+        			showother,
+    			</if>
+    			<if test="begintime != null" >
+        			begintime,
+    			</if>
+    			<if test="endtime != null" >
+        			endtime,
+    			</if>
+    			<if test="cheaptype != null" >
+        			cheaptype,
+    			</if>
+    			<if test="cheapvalue != null" >
+        			cheapvalue,
+    			</if>
+    			<if test="modeltype != null" >
+        			modeltype,
+    			</if>
+    			<if test="pushtype != null" >
+        			pushtype,
+    			</if>
+    			<if test="pushdate != null" >
+        			pushdate,
+    			</if>
+    			<if test="pushdifang != null" >
+        			pushdifang,
+    			</if>
+    			<if test="pushchexun != null" >
+        			pushchexun,
+    			</if>
+    			<if test="imgurl != null" >
+        			imgurl,
+    			</if>
+    			<if test="pushdealer != null" >
+        			pushdealer,
+    			</if>
+    			<if test="pushdealerdate != null" >
+        			pushdealerdate,
+    			</if>
+    			<if test="pushdealertimes != null" >
+        			pushdealertimes
+    			</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        		#{id},
+    		</if>
+    			<if test="content != null" >
+        		#{content},
+    		</if>
+    			<if test="createTime != null" >
+        		#{createTime},
+    		</if>
+    			<if test="dealerUserId != null" >
+        		#{dealerUserId},
+    		</if>
+    			<if test="title != null" >
+        		#{title},
+    		</if>
+    			<if test="state != null" >
+        		#{state},
+    		</if>
+    			<if test="type != null" >
+        		#{type},
+    		</if>
+    			<if test="isRecommend != null" >
+        		#{isRecommend},
+    		</if>
+    			<if test="recommendPage != null" >
+        		#{recommendPage},
+    		</if>
+    			<if test="isFirst != null" >
+        		#{isFirst},
+    		</if>
+    			<if test="recommendTime != null" >
+        		#{recommendTime},
+    		</if>
+    			<if test="recommendTitle != null" >
+        		#{recommendTitle},
+    		</if>
+    			<if test="publishtime != null" >
+        		#{publishtime},
+    		</if>
+    			<if test="seriesids != null" >
+        		#{seriesids},
+    		</if>
+    			<if test="clickcount != null" >
+        		#{clickcount},
+    		</if>
+    			<if test="showother != null" >
+        		#{showother},
+    		</if>
+    			<if test="begintime != null" >
+        		#{begintime},
+    		</if>
+    			<if test="endtime != null" >
+        		#{endtime},
+    		</if>
+    			<if test="cheaptype != null" >
+        		#{cheaptype},
+    		</if>
+    			<if test="cheapvalue != null" >
+        		#{cheapvalue},
+    		</if>
+    			<if test="modeltype != null" >
+        		#{modeltype},
+    		</if>
+    			<if test="pushtype != null" >
+        		#{pushtype},
+    		</if>
+    			<if test="pushdate != null" >
+        		#{pushdate},
+    		</if>
+    			<if test="pushdifang != null" >
+        		#{pushdifang},
+    		</if>
+    			<if test="pushchexun != null" >
+        		#{pushchexun},
+    		</if>
+    			<if test="imgurl != null" >
+        		#{imgurl},
+    		</if>
+    			<if test="pushdealer != null" >
+        		#{pushdealer},
+    		</if>
+    			<if test="pushdealerdate != null" >
+        		#{pushdealerdate},
+    		</if>
+    			<if test="pushdealertimes != null" >
+        		#{pushdealertimes}
+    		</if>
+    	</trim>
+  	</insert>
+	
+    <delete id="deleteDealersNewsById" parameterType="Long">
+        delete from dealers_news
+        where
+            		id = #{            			value
+            		}
+    </delete>
+    
+    <delete id="deleteDealersNewsByObj" parameterType="com.chexun.dealer.model.news.DealersNews">
+        delete from dealers_news
+        <include refid="dealers_news_where_conditions"/>
+    </delete>
+    
+  	<delete id="deleteDealersNewsByIdList" parameterType="java.util.List">
+    	delete from dealers_news 
+        	where
+            id
+    		IN 
+    		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </delete>
+
+    <update id="updateDealersNews" parameterType="com.chexun.dealer.model.news.DealersNews">
+        update dealers_news SET
+            id = #{id},
+            content = #{content},
+            create_time = #{createTime},
+            dealer_user_id = #{dealerUserId},
+            title = #{title},
+            state = #{state},
+            type = #{type},
+            is_recommend = #{isRecommend},
+            recommend_page = #{recommendPage},
+            is_first = #{isFirst},
+            recommend_time = #{recommendTime},
+            recommend_title = #{recommendTitle},
+            publishtime = #{publishtime},
+            seriesids = #{seriesids},
+            clickcount = #{clickcount},
+            showother = #{showother},
+            begintime = #{begintime},
+            endtime = #{endtime},
+            cheaptype = #{cheaptype},
+            cheapvalue = #{cheapvalue},
+            modeltype = #{modeltype},
+            pushtype = #{pushtype},
+            pushdate = #{pushdate},
+            pushdifang = #{pushdifang},
+            pushchexun = #{pushchexun},
+            imgurl = #{imgurl},
+            pushdealer = #{pushdealer},
+            pushdealerdate = #{pushdealerdate},
+            pushdealertimes = #{pushdealertimes}
+        where
+            id = #{id}
+    </update>
+    
+    <update id="updateDealersNewsByObj" parameterType="com.chexun.dealer.model.news.DealersNews">
+        update dealers_news 
+        <include refid="dealers_news_set_conditions"/>
+        where
+            id = #{id}
+    </update>
+    
+    <update id="updateDealersNewsByObjAndConditions" parameterType="java.util.HashMap">
+        update dealers_news 
+        <set>
+        <if test="s.id != null">
+        	id=#{s.id},
+        </if>
+        <if test="s.content != null">
+        	content=#{s.content},
+        </if>
+        <if test="s.createTime != null">
+        	create_time=#{s.createTime},
+        </if>
+        <if test="s.dealerUserId != null">
+        	dealer_user_id=#{s.dealerUserId},
+        </if>
+        <if test="s.title != null">
+        	title=#{s.title},
+        </if>
+        <if test="s.state != null">
+        	state=#{s.state},
+        </if>
+        <if test="s.type != null">
+        	type=#{s.type},
+        </if>
+        <if test="s.isRecommend != null">
+        	is_recommend=#{s.isRecommend},
+        </if>
+        <if test="s.recommendPage != null">
+        	recommend_page=#{s.recommendPage},
+        </if>
+        <if test="s.isFirst != null">
+        	is_first=#{s.isFirst},
+        </if>
+        <if test="s.recommendTime != null">
+        	recommend_time=#{s.recommendTime},
+        </if>
+        <if test="s.recommendTitle != null">
+        	recommend_title=#{s.recommendTitle},
+        </if>
+        <if test="s.publishtime != null">
+        	publishtime=#{s.publishtime},
+        </if>
+        <if test="s.seriesids != null">
+        	seriesids=#{s.seriesids},
+        </if>
+        <if test="s.clickcount != null">
+        	clickcount=#{s.clickcount},
+        </if>
+        <if test="s.showother != null">
+        	showother=#{s.showother},
+        </if>
+        <if test="s.begintime != null">
+        	begintime=#{s.begintime},
+        </if>
+        <if test="s.endtime != null">
+        	endtime=#{s.endtime},
+        </if>
+        <if test="s.cheaptype != null">
+        	cheaptype=#{s.cheaptype},
+        </if>
+        <if test="s.cheapvalue != null">
+        	cheapvalue=#{s.cheapvalue},
+        </if>
+        <if test="s.modeltype != null">
+        	modeltype=#{s.modeltype},
+        </if>
+        <if test="s.pushtype != null">
+        	pushtype=#{s.pushtype},
+        </if>
+        <if test="s.pushdate != null">
+        	pushdate=#{s.pushdate},
+        </if>
+        <if test="s.pushdifang != null">
+        	pushdifang=#{s.pushdifang},
+        </if>
+        <if test="s.pushchexun != null">
+        	pushchexun=#{s.pushchexun},
+        </if>
+        <if test="s.imgurl != null">
+        	imgurl=#{s.imgurl},
+        </if>
+        <if test="s.pushdealer != null">
+        	pushdealer=#{s.pushdealer},
+        </if>
+        <if test="s.pushdealerdate != null">
+        	pushdealerdate=#{s.pushdealerdate},
+        </if>
+        <if test="s.pushdealertimes != null">
+        	pushdealertimes=#{s.pushdealertimes},
+        </if>
+        </set>
+        <where>
+        <if test="c.id != null">
+        	id=#{c.id} AND 
+        </if>
+        <if test="c.content != null">
+        	content=#{c.content} AND 
+        </if>
+        <if test="c.createTime != null">
+        	create_time=#{c.createTime} AND 
+        </if>
+        <if test="c.dealerUserId != null">
+        	dealer_user_id=#{c.dealerUserId} AND 
+        </if>
+        <if test="c.title != null">
+        	title=#{c.title} AND 
+        </if>
+        <if test="c.state != null">
+        	state=#{c.state} AND 
+        </if>
+        <if test="c.type != null">
+        	type=#{c.type} AND 
+        </if>
+        <if test="c.isRecommend != null">
+        	is_recommend=#{c.isRecommend} AND 
+        </if>
+        <if test="c.recommendPage != null">
+        	recommend_page=#{c.recommendPage} AND 
+        </if>
+        <if test="c.isFirst != null">
+        	is_first=#{c.isFirst} AND 
+        </if>
+        <if test="c.recommendTime != null">
+        	recommend_time=#{c.recommendTime} AND 
+        </if>
+        <if test="c.recommendTitle != null">
+        	recommend_title=#{c.recommendTitle} AND 
+        </if>
+        <if test="c.publishtime != null">
+        	publishtime=#{c.publishtime} AND 
+        </if>
+        <if test="c.seriesids != null">
+        	seriesids=#{c.seriesids} AND 
+        </if>
+        <if test="c.clickcount != null">
+        	clickcount=#{c.clickcount} AND 
+        </if>
+        <if test="c.showother != null">
+        	showother=#{c.showother} AND 
+        </if>
+        <if test="c.begintime != null">
+        	begintime=#{c.begintime} AND 
+        </if>
+        <if test="c.endtime != null">
+        	endtime=#{c.endtime} AND 
+        </if>
+        <if test="c.cheaptype != null">
+        	cheaptype=#{c.cheaptype} AND 
+        </if>
+        <if test="c.cheapvalue != null">
+        	cheapvalue=#{c.cheapvalue} AND 
+        </if>
+        <if test="c.modeltype != null">
+        	modeltype=#{c.modeltype} AND 
+        </if>
+        <if test="c.pushtype != null">
+        	pushtype=#{c.pushtype} AND 
+        </if>
+        <if test="c.pushdate != null">
+        	pushdate=#{c.pushdate} AND 
+        </if>
+        <if test="c.pushdifang != null">
+        	pushdifang=#{c.pushdifang} AND 
+        </if>
+        <if test="c.pushchexun != null">
+        	pushchexun=#{c.pushchexun} AND 
+        </if>
+        <if test="c.imgurl != null">
+        	imgurl=#{c.imgurl} AND 
+        </if>
+        <if test="c.pushdealer != null">
+        	pushdealer=#{c.pushdealer} AND 
+        </if>
+        <if test="c.pushdealerdate != null">
+        	pushdealerdate=#{c.pushdealerdate} AND 
+        </if>
+        <if test="c.pushdealertimes != null">
+        	pushdealertimes=#{c.pushdealertimes} AND 
+        </if>
+       (status!=2)
+        </where>
+    </update>
+    
+    <update id="batchUpdateDealersNews" parameterType="java.util.List">
+		update dealers_news
+		<trim prefix="set" suffixOverrides=",">
+      	 	<trim prefix="id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.id!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.id}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="content=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.content!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.content}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="create_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.createTime!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.createTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="dealer_user_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.dealerUserId!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.dealerUserId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="title=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.title!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.title}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="state=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.state!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.state}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="type=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.type!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.type}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="is_recommend=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.isRecommend!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.isRecommend}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="recommend_page=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.recommendPage!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.recommendPage}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="is_first=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.isFirst!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.isFirst}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="recommend_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.recommendTime!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.recommendTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="recommend_title=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.recommendTitle!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.recommendTitle}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="publishtime=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.publishtime!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.publishtime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="seriesids=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.seriesids!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.seriesids}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="clickcount=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.clickcount!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.clickcount}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="showother=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.showother!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.showother}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="begintime=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.begintime!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.begintime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="endtime=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.endtime!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.endtime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="cheaptype=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.cheaptype!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.cheaptype}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="cheapvalue=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.cheapvalue!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.cheapvalue}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="modeltype=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.modeltype!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.modeltype}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="pushtype=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.pushtype!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.pushtype}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="pushdate=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.pushdate!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.pushdate}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="pushdifang=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.pushdifang!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.pushdifang}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="pushchexun=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.pushchexun!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.pushchexun}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="imgurl=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.imgurl!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.imgurl}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="pushdealer=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.pushdealer!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.pushdealer}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="pushdealerdate=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.pushdealerdate!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.pushdealerdate}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="pushdealertimes=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.pushdealertimes!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.pushdealertimes}
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where
+		<foreach collection="list" separator="or" item="i" index="index">
+            	(id = #{i.id})
+		</foreach>
+	</update>
+    
+    
+
+    <select id="getDealersNewsById" resultMap="DealersNewsResult" parameterType="Long">
+        select
+        <include refid="dealers_news_columns"/>
+        from dealers_news
+        where
+            id = #{value}
+    </select>
+    
+    <select id="getDealersNewsByObj" resultMap="DealersNewsResult" parameterType="com.chexun.dealer.model.news.DealersNews">
+        select
+        <include refid="dealers_news_columns"/>
+        from dealers_news
+        <include refid="dealers_news_where_conditions"/>
+    </select>
+	
+    
+    <select id="getDealersNewsListByObj" resultMap="DealersNewsResult"  parameterType="com.chexun.dealer.model.news.DealersNews">
+        select
+        <include refid="dealers_news_columns"/>
+        from dealers_news 
+        <include refid="dealers_news_where_conditions"/>
+    </select>
+    
+    <select id="getDealersNewsListByMap" resultMap="DealersNewsResult"  parameterType="java.util.HashMap">
+        select
+        <include refid="dealers_news_columns"/>
+        from dealers_news 
+        <include refid="dealers_news_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <select id="getDealersNewsCountByObj" resultType="int" parameterType="com.chexun.dealer.model.news.DealersNews">
+        select count(1) from dealers_news
+        <include refid="dealers_news_where_conditions"/>
+    </select>
+    
+    
+    
+    <select id="getDealersNewsIdByObj" resultType="Long" parameterType="com.chexun.dealer.model.news.DealersNews">
+        select       id                                                           
+        from dealers_news
+        <include refid="dealers_news_where_conditions"/>
+    </select>
+	
+    <select id="getDealersNewsIdList" resultType="Long" parameterType="com.chexun.dealer.model.news.DealersNews">
+       select       id                                                            from dealers_news where 1=1 
+        id = #{value}
+    </select>
+    
+    <select id="getDealersNewsIdListByObj" resultType="Long"  parameterType="com.chexun.dealer.model.news.DealersNews">
+       select       id                                                            from dealers_news 
+        <include refid="dealers_news_where_conditions"/>
+    </select>
+    
+    <select id="getDealersNewsIdListByMap" resultType="Long"  parameterType="java.util.HashMap">
+        select       id                                                            from dealers_news 
+        <include refid="dealers_news_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    
+    
+    <!-- 手写SQL -->
+    <resultMap id="DealersNewsAndInfoResult" type="com.chexun.dealer.model.news.DealersNews">
+	    <id property="id" column="id"></id>
+	    <result property="dealerUserId" column="dealer_user_id"/>
+	    <result property="title" column="title"/>
+	    <result property="imgurl" column="ImgUrl"/>
+	    <result property="seriesids" column="SeriesIDs"/>
+	    <result property="type" column="type"/>
+	    <result property="content" column="CONTENT"/>
+	    <result property="showother" column="ShowOther"/>
+	    <result property="isFirst" column="is_first"/>
+	    <result property="state" column="state"/>
+	    <result property="publishtime" column="publishtime"/>
+	    <result property="begintime" column="begintime"/>
+        <result property="endtime" column="endtime"/>
+        <result property="companyName" column="company_name"/>
+        <result property="englishAlias" column="ENGLISH_ALIAS"/>
+	</resultMap>
+	
+	<resultMap id="relevantCarSerices" type="com.chexun.dealer.model.news.RelevantCarSerices">
+	    <result property="ASum" column="ASum"/>
+	    <result property="seriesId" column="SERIES_ID"/>
+	    <result property="brandId" column="BRAND_ID"/>
+	    <result property="seriesName" column="SERIES_NAME"/>
+	    <result property="maxPrice" column="MaxPrice"/>
+	</resultMap>
+	<resultMap id="dealersNoticeCheap" type="com.chexun.dealer.model.news.DealersNoticeCheap">
+	    <result property="userId" column="USER_ID"/>
+	    <result property="newsId" column="NewsID"/>
+	    <result property="modelId" column="MODEL_ID"/>
+	    <result property="modelName" column="MODEL_NAME"/>
+	    <result property="companyPrice" column="CompanyPrice"/>
+	    <result property="price" column="PRICE"/>
+	    <result property="brandId" column="BRAND_ID"/>
+	    <result property="brandName" column="BRAND_NAME"/>
+	    <result property="seriesId" column="SERIES_ID"/>
+	    <result property="seriesName" column="SERIES_NAME"/>
+	    <result property="cheapID" column="CheapID"/>
+	    <result property="cheapPrice" column="CheapPrice"/>
+	    <result property="guidePrice" column="GuidePrice"/>
+	</resultMap>
+	
+	<sql id="dealers_news_where_like_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="id != null">
+        	and id=#{id} 
+        </if>
+        
+        <if test="content != null and content != ''">
+        	and content=#{content} 
+        </if>
+        
+        <if test="createTime != null and createTime != ''">
+        	and create_time=#{createTime} 
+        </if>
+        <if test="dealerUserId != null">
+        	and dealer_user_id=#{dealerUserId} 
+        </if>
+        
+        <if test="title != null and title != ''">
+        	and title like CONCAT('%', #{title},'%')
+        </if>
+        
+        <if test="companyName != null and companyName != ''">
+        	and company_name like CONCAT('%', #{companyName},'%')
+        </if>
+        
+        <if test="state != null">
+        	and state=#{state} 
+        </if>
+        <if test="type != null">
+        	and type=#{type} 
+        </if>
+        <if test="isRecommend != null">
+        	and is_recommend=#{isRecommend} 
+        </if>
+        
+        <if test="recommendPage != null and recommendPage != ''">
+        	and recommend_page=#{recommendPage} 
+        </if>
+        <if test="isFirst != null">
+        	and is_first=#{isFirst} 
+        </if>
+        
+        <if test="recommendTime != null and recommendTime != ''">
+        	and recommend_time=#{recommendTime} 
+        </if>
+        
+        <if test="recommendTitle != null and recommendTitle != ''">
+        	and recommend_title=#{recommendTitle} 
+        </if>
+        <if test="publishtime != null">
+        	and publishtime=#{publishtime} 
+        </if>
+        
+        <if test="seriesids != null and seriesids != ''">
+        	and seriesids=#{seriesids} 
+        </if>
+        <if test="clickcount != null">
+        	and clickcount=#{clickcount} 
+        </if>
+        <if test="showother != null">
+        	and showother=#{showother} 
+        </if>
+        <if test="begintime != null">
+        	and PublishTime &gt;= #{begintime} 
+        </if>
+        <if test="endtime != null">
+        	and PublishTime &lt;= #{endtime} 
+        </if>
+        <if test="cheaptype != null">
+        	and cheaptype=#{cheaptype} 
+        </if>
+        <if test="cheapvalue != null">
+        	and cheapvalue=#{cheapvalue} 
+        </if>
+        <if test="modeltype != null">
+        	and modeltype=#{modeltype} 
+        </if>
+        <if test="pushtype != null">
+        	and pushtype=#{pushtype} 
+        </if>
+        <if test="pushdate != null">
+        	and pushdate=#{pushdate} 
+        </if>
+        <if test="pushdifang != null">
+        	and pushdifang=#{pushdifang} 
+        </if>
+        <if test="pushchexun != null">
+        	and pushchexun=#{pushchexun} 
+        </if>
+        
+        <if test="imgurl != null and imgurl != ''">
+        	and imgurl=#{imgurl} 
+        </if>
+        <if test="pushdealer != null">
+        	and pushdealer=#{pushdealer} 
+        </if>
+        <if test="pushdealerdate != null">
+        	and pushdealerdate=#{pushdealerdate} 
+        </if>
+        <if test="pushdealertimes != null">
+        	and pushdealertimes=#{pushdealertimes} 
+        </if>
+        </trim>
+    </sql>
+	
+	<select id="selectDealersNewsCountByObj" resultType="int" parameterType="com.chexun.dealer.model.news.DealersNews">
+        select count(1) from dealers_info i inner join dealers_news n on i.ID=n.DEALER_USER_ID
+        <include refid="dealers_news_where_like_conditions"/>
+    </select>
+	
+	<select id="selectDealersNewsListByMap" resultMap="DealersNewsAndInfoResult"  parameterType="java.util.HashMap">
+        select n.ID,n.TITLE,n.DEALER_USER_ID,n.STATE,i.COMPANY_NAME,i.ENGLISH_ALIAS,n.TYPE,n.PublishTime,n.ClickCount 
+        from dealers_info i inner join dealers_news n on i.ID=n.DEALER_USER_ID 
+        
+         
+        <trim prefix="where" prefixOverrides="and|or">
+	        <if test="title != null and title != ''">
+	        	and TITLE like CONCAT('%', #{title},'%') 
+	        </if>
+	         
+	        <if test="begintime != null and begintime != ''">
+	        	and PublishTime &gt;= #{begintime} 
+	        </if>
+	        <if test="endtime != null and endtime != ''">
+	        	and PublishTime &lt;= #{endtime} 
+	        </if>
+	        
+	        <if test="companyName != null and companyName != ''">
+	        	and COMPANY_NAME like CONCAT('%', #{companyName}, '%') 
+	        </if>
+	        
+	        <if test="type != null">
+	        	and TYPE=#{type}
+	        </if>
+        </trim>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <update id="updateDealersNewsById" parameterType="com.chexun.dealer.model.news.DealersNews">
+    	UPDATE dealers_news 
+		<include refid="dealers_news_set_conditions"/>
+        where
+            id = #{id}
+    </update>
+    
+    <select id="selectDealersNewsById" resultMap="DealersNewsAndInfoResult" parameterType="int">
+        SELECT
+			n.ID,
+			n.title,
+			n.ImgUrl,
+			n.type,
+			n.CONTENT,
+			n.ShowOther,
+			n.is_first,
+			n.SeriesIDs,
+			i.COMPANY_NAME
+		FROM
+			dealers_news n
+		INNER JOIN dealers_info i ON n.DEALER_USER_ID = i.ID
+        where
+            id = #{value}
+    </select>
+    
+    <select id="selectSeriesById" resultMap="relevantCarSerices" parameterType="Long">
+        SELECT
+			V.ASum,
+			V.SERIES_ID,
+			V.BRAND_ID,
+			V.SERIES_NAME,
+			(
+				SELECT
+					MAX(price)
+				FROM
+					dealers_car n
+				WHERE
+					n.USER_ID = #{value}
+				AND n.STATE = 1
+				AND n.SERIES_ID = V.SERIES_ID
+			) AS MaxPrice
+		FROM
+			(
+				SELECT
+					count(MODEL_ID) AS ASum,
+					SERIES_ID,
+					BRAND_ID,
+					SERIES_NAME
+				FROM
+					dealers_car
+				WHERE
+					USER_ID = #{value}
+				AND STATE = 1
+				GROUP BY
+					SERIES_ID,
+					BRAND_ID,
+					SERIES_NAME
+			) V
+		LEFT JOIN Dealers_Brand_Series_Tab BS ON BS.DEALER_USER_ID = 450789
+		AND BS.SERIES_ID = V.SERIES_ID
+		AND BS.BRAND_ID = V.BRAND_ID
+    </select>
+    <select id="selectSeriesById2" resultMap="relevantCarSerices" parameterType="com.chexun.dealer.model.news.RelevantCarSerices">
+        SELECT
+			series_id,
+			series_name
+		FROM
+			(
+				SELECT
+					V.ASum,
+					V.SERIES_ID,
+					V.BRAND_ID,
+					V.SERIES_NAME,
+					(
+						SELECT
+							MAX(price)
+						FROM
+							dealers_car n
+						WHERE
+							n.USER_ID = #{userId}
+						AND n.STATE = 1
+						AND n.SERIES_ID = V.SERIES_ID
+					) AS MaxPrice
+				FROM
+					(
+						SELECT
+							count(MODEL_ID) AS ASum,
+							SERIES_ID,
+							BRAND_ID,
+							SERIES_NAME
+						FROM
+							dealers_car
+						WHERE
+							USER_ID = #{userId}
+						AND STATE = 1
+						GROUP BY
+							SERIES_ID,
+							BRAND_ID,
+							SERIES_NAME
+					) V
+				LEFT JOIN Dealers_Brand_Series_Tab BS ON BS.DEALER_USER_ID = #{userId}
+				AND BS.SERIES_ID = V.SERIES_ID
+				AND BS.BRAND_ID = V.BRAND_ID
+			) AS V2
+		WHERE
+			series_id = #{seriesId}
+    </select>
+    <select id="selectDealersNoticeCheapByObj" resultMap="dealersNoticeCheap" parameterType="com.chexun.dealer.model.news.DealersNoticeCheap">
+        SELECT
+			D.ID AS NewsID,
+			D.MODEL_ID,
+			D.MODEL_NAME,
+			D.CompanyPrice,
+			D.PRICE,
+			D.BRAND_ID,
+			D.BRAND_NAME,
+			D.SERIES_ID,
+			D.SERIES_NAME,
+			C.ID AS CheapID,
+			C.CheapPrice,
+			C.GuidePrice
+		FROM
+			dealers_car D
+		LEFT JOIN Dealers_Shop_Notice_Cheap C ON C.ModelID = D.MODEL_ID
+		AND NewsID =  #{newsId}
+		WHERE
+			D.STATE = 1
+		AND D.USER_ID =  #{userId}
+		AND D.SERIES_ID =  #{seriesId}
+    </select>
+    
+    
+</mapper>

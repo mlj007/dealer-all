@@ -1,0 +1,115 @@
+<meta charset="utf-8">
+<!--#set(java.lang.String String)-->
+<div class="left">
+        <div class="left-con">
+            <h1 class="left-hd"> <a href="#"><img src="/statics/images/logo.png" /></a> </h1>
+            <!-- START经销商后台  左侧开始 -->
+            <div class="left-bd" id="manage_left" >
+            	<!--#for(com.chexun.dealer.model.permission.Permission parentMenu : parentMenulist)-->
+            	<div class="nav-box">
+            	<!--#set(java.lang.String m)-->
+                    <h3 ><i class="left-i${parentMenu.moduleImg}"></i>${parentMenu.moduleName}<span></span></h3>
+                    <div class="nav-box-bd" <!--#if(parentMenu.moduleId==m )-->style='display: block'<!--#end-->>
+                        <ul>
+                        	<!--#for(com.chexun.dealer.model.permission.Permission module : modulelist)-->
+                        	 	<!--#if(parentMenu.moduleId==module.moduleSuperLevelId)-->
+		                            <li>
+		                           		<a href="${module.moduleUrl}?m=${parentMenu.moduleId}">${module.moduleName}</a>
+		                            </li>
+                             	<!--#end-->
+                    		<!--#end-->
+                    		<!--#if(parentMenu.moduleId=='26')-->
+                    		 	<!--#for(com.chexun.dealer.po.dealers.DealersCarPo carBrandPo : carBrandList)-->
+		                             <li>
+		                             	 <a href="#" <!--#if(carBrandPo.brandId==(String)b)-->class="nav-list nav-list-cur"<!--#else-->class="nav-list"<!--#end-->>${carBrandPo.brandName}</a>
+			                         	 <div class="last-nav" <!--#if(carBrandPo.brandId==(String)b )-->style='display: block'<!--#end-->>
+			                                    <!--#for(com.chexun.dealer.po.dealers.DealersCarPo carSeriesPo : carSeriesList)-->
+			                                    	<!--#if(carBrandPo.brandId==carSeriesPo.brandId)-->
+			                                    		<p><a href="/manage/car/list?seriesId=${carSeriesPo.seriesId}&m=${parentMenu.moduleId}&b=${carBrandPo.brandId}">${carSeriesPo.seriesName}(${carSeriesPo.carCount})</a></p>
+			                                    	<!--#end-->
+			                                    <!--#end-->
+			                             </div>
+		                            </li>
+                            	<!--#end-->
+                             <!--#end-->
+                        </ul>
+                    </div>
+                 </div>
+            	 <!--#end-->
+            	<!--  
+                <div class="nav-box">
+                    <h3><i class="left-i9"></i>我的车商道<span></span></h3>
+                    <div class="nav-box-bd">
+                        <ul>
+                            <li><a href="#">车商道</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="nav-box">
+                    <h3><i class="left-i10"></i>报价管理<span></span></h3>
+                    <div class="nav-box-bd">
+                        <ul>
+                            <li><a href="#" class="nav-list">奥迪</a>
+                            	<div class="last-nav">
+                                    <p><a href="#">奥迪A5(5)</a></p>
+                                    <p><a href="#">奥迪Q7(5)</a></p>
+                                    <p><a href="#">奥迪TT(2)</a></p>
+                            	</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="nav-box">
+                    <h3><i class="left-i2"></i>新闻管理<span></span></h3>
+                    <div class="nav-box-bd">
+                        <ul>
+                            <li><a href="#">企业新闻</a></li>
+                            <li><a href="#">促销信息</a></li>
+                            <li><a href="#">车友活动</a></li>
+                             <li><a href="#">新车到店</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="nav-box">
+                    <h3><i class="left-i1"></i>意向客户管理<span></span></h3>
+                    <div class="nav-box-bd">
+                        <ul>
+                            <li><a href="#">留言管理</a></li>
+                            <li><a href="#">询价管理</a></li>
+                            <li><a href="#">试驾预约</a></li>
+                            <li><a href="#">预约保养</a></li>
+                            <li><a href="#">用户轨迹</a></li>
+                            <li><a href="#">线索池</a></li>
+                            <li><a href="#">线索抢购</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="nav-box">
+                    <h3><i class="left-i6"></i>统计报表<span></span></h3>
+                    <div class="nav-box-bd">
+                        <ul>
+                            <li><a href="#">前台浏览总量</a></li>
+                            <li><a href="#">新闻页浏览量</a></li>
+                            <li><a href="#">报价浏览量</a></li>
+                            <li><a href="#">留言统计</a></li>
+                            <li><a href="#">询价统计</a></li>
+                            <li><a href="#">试驾统计</a></li>
+                            <li><a href="#">保养统计</a></li>
+                            <li><a href="#">轨迹统计</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="nav-box">
+                    <h3><i class="left-i8"></i><a href="#">在线反馈</a></h3>
+                </div>
+                 -->
+                <div class="timer">
+                	授权到期日：2014年12月31日
+                </div>
+            </div>
+            <!-- END  经销商后台  左侧结束 -->
+        </div>
+        <span class="left-hide"></span> <span class="left-show"></span> 
+        <input type="hidden" id="m" value="${m}">
+        </div>
+    <!--END 左边结束-->

@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<link type="text/css" href="/statics/css/public.css" rel="stylesheet" />
+<link type="text/css" href="/statics/plugin/lhgcalendar/skins/lhgcalendar.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<script type="text/javascript" src="/statics/plugin/lhgcalendar/lhgcalendar.min.js"></script>
+<script type="text/javascript" src="/statics/js/common/province_city.js"></script>
+<script type="text/javascript" src="/statics/js/common/brand_series_model.js"></script>
+<script type="text/javascript" src="/statics/js/admin/clue/clue_common.js"></script>
+<script type="text/javascript" src="/statics/js/admin/clue/askingprice_list.js"></script>
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+<!--#set(com.chexun.dealer.vo.clue.AskingPriceVo query)-->
+</head>
+<body>
+<div class="wrapper">
+	<!--START 左边開始-->
+	${include("/common/left_admin.httl")}
+	<!--END 左边结束-->	
+	<!--START 右侧开始-->
+	<div class="right">
+		<!--START 头开始-->
+		${include("/common/top_admin.httl",["topMenuTitle":"询价管理"])}
+		<!--END 头结束-->
+    	<!-- START -->
+    	<div class="right-con">
+            <div class="sel"> 
+        	<form action="/admin/clue/askingprice/list" method="post" id="searchForm">
+	            <input type="hidden" id="pageCurrentPage" name="currentPage" value="${page.currentPage}"/>
+	            <input type="hidden" id="selectedProvinceId" value="${query.provinceId}"/>
+	            <input type="hidden" id="selectedCityId" value="${query.cityId}"/>
+	            <input type="hidden" id="selectedBrandId" value="${query.brandId}"/>
+	            <input type="hidden" id="selectedSeriedId" value="${query.seriesId}"/>
+                <span style="padding:0 0 0 10px">经销商所在地区：</span>
+                <select id="provinceId" name="provinceId" onchange="changeProvince();"><option value="">省份</option></select>
+                <select id="cityId" name="cityId"><option value="">城市</option></select>
+                <select id="brandId" name="brandId"><option value="">品牌</option></select>
+                <select id="seriesId" name="seriesId"><option value="">车系</option></select>
+                <span style="padding:0 0 0 10px">询价时间：</span>
+                <input type="text" id="timeStart" name="timeStart" class="sel-inpt" value="${query.timeStart}"/>
+                <span style="padding:0 5px">至</span>
+                <input type="text" id="timeEnd" name="timeEnd" class="sel-inpt" value="${query.timeEnd}" />
+                <span style="padding:0 0 0 10px">经销商：</span> 
+                <input type="text" class="sel-inpt" name="dealerName" value="${query.dealerName}" />
+                <span style="padding:0 0 0 10px">状态：</span> 
+                <select name="state" id="state">
+                	<option value="-1" <!--#if(state == null || state.toInt==(-1))-->selected<!--#end-->>全部</option>
+					<option value="0" <!--#if(state != null && state.toInt==(0))-->selected<!--#end-->>未处理</option>
+					<option value="1" <!--#if(state.toInt==(1))-->selected<!--#end-->>已处理</option>
+				</select> 
+                <span style="padding:0 0 0 10px">来源：</span> 
+                <select name="source">
+                	<option value="">全部</option>
+					<option value="9" <!--#if(query.source=='9')-->selected<!--#end-->>3G</option>
+					<option value="201" <!--#if(query.source=='201')-->selected<!--#end-->>双11-PC</option>
+					<option value="202" <!--#if(query.source=='202')-->selected<!--#end-->>双11-3G</option>
+					<!--#for(java.lang.String source : sourceList)-->
+					<option value="${source}" <!--#if(query.source==source)-->selected<!--#end-->>${source}</option>
+					<!--#end-->
+                </select>
+                <input type="button" class="con-sel-search" value="搜索"  onclick="query();"/>
+            </form>
+            </div>
+            <div class="con">
+	            <span style="float:right;margin-right:50px;">共<a href=""><b class="cred">${tatalCount}</b></a>个提问</span>
+	            <span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
+	            <ul class="tabs clearfix">
+	            	<li <!--#if(state == null || state.toInt==(-1))-->class="active"<!--#end-->>
+	            		<a onclick="queryByState(-1)" style="cursor: pointer">
+	            			<strong>全部询价</strong>
+	            		</a>
+	            	</li>
+	            	<li <!--#if(state.toInt==(1))-->class="active"<!--#end-->>
+		            	<a onclick="queryByState(1)" style="cursor: pointer">
+		            		<strong>已处理</strong><span>(${replyCount})</span>
+						</a>
+	            	</li>
+	            	<li <!--#if(state != null && state.toInt==(0))-->class="active"<!--#end-->>
+	            		<a onclick="queryByState(0)" style="cursor: pointer">
+							<strong>未处理</strong>
+							<span>(${unReplyCount})</span>
+						</a>
+	            	</li>
+	            </ul>
+                <div class="con-bd" id="tab">
+                    <table  width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th>联系人</th>
+                            <th>电话 </th>
+                            <th>城市</th>
+                            <th>车系/车型</th>
+                            <th>颜色</th>
+                            <th>询价时间 </th>
+                            <th>经销商</th>
+                            <th>状态</th>
+                        </tr>
+                        <!--#for(com.chexun.dealer.po.clue.AskingPricePo askingPrice : askingPriceList)-->
+						<tr>
+                            <td>${askingPrice.username }</td>
+                            <td>${askingPrice.phone }</td>
+                            <td>${askingPrice.cityName}</td>
+                            <td>${askingPrice.brandname } ${askingPrice.seriesname }  ${askingPrice.modelname }</td>
+							<td>${askingPrice.modelcolor }</td>
+                            <td>${askingPrice.createtime.format('yyyy-MM-dd') }</td>
+                            <td>${askingPrice.dealerName }</td>
+                            <td><!--#if(askingPrice.state.toInt==1)-->已处理<!--#else--><span style="color:red;">未处理</span><!--#end--></td>
+                        </tr>
+                        <!--#end-->
+                    </table>
+                    ${include("/common/page.httl")}
+                </div>
+            </div>
+	     </div>
+	     <!-- END-->
+	     <!--END  右侧结束-->
+	     <!--START 底部开始-->
+	        ${include("/common/footer.httl")}
+	     <!--END 底部结束-->
+	</div>	     
+</div>
+</body>
+</html>

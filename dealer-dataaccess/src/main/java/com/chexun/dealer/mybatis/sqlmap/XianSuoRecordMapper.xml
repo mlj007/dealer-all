@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chexun.dealer.model.system.XianSuoRecordMapper">
+ 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>   -->
+    <resultMap id="XianSuoRecordResult" type="com.chexun.dealer.model.system.XianSuoRecord">
+        <result property="id" column="id"/>
+        <result property="XSType" column="XSType"/>
+        <result property="count" column="Count"/>
+        <result property="createTime" column="CreateTime"/>
+        <result property="OPName" column="OPName"/>
+        <result property="source" column="Source"/>
+    </resultMap>
+
+    <sql id="XianSuo_Record_columns">
+        xiansuo_record.id,
+        xiansuo_record.XSType,
+        xiansuo_record.Count,
+        xiansuo_record.CreateTime,
+        xiansuo_record.OPName,
+        xiansuo_record.Source
+    </sql>
+    
+    <sql id="xiansuo_record_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="id != null">
+        	and id=#{id} 
+        </if>
+        <if test="XSType != null and XSType != 0">
+        	and XSType=#{XSType} 
+        </if>
+        <if test="count != null and count != 0">
+        	and Count=#{count} 
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and createTime=#{createTime} 
+        </if>
+        <if test="OPName != null and OPName != ''">
+        	and OPName=#{OPName} 
+        </if>
+        <if test="Source != null and Source != 0">
+        	and Source=#{source} 
+        </if>
+        </trim>
+    </sql>
+    
+    <sql id="xiansuo_record_set_conditions">
+    	<set>
+        <if test="id != null">
+        	and id=#{id} 
+        </if>
+        <if test="XSType != null">
+        	and XSType=#{XSType} 
+        </if>
+        <if test="count != null">
+        	and Count=#{count} 
+        </if>
+        <if test="createTime != null and createTime != ''">
+        	and createTime=#{createTime} 
+        </if>
+        <if test="OPName != null and OPName != ''">
+        	and OPName=#{OPName} 
+        </if>
+        <if test="Source != null">
+        	and Source=#{source} 
+        </if>
+        </set>
+    </sql>
+
+    <sql id="xiansuo_record_properties">
+        #{id},
+        #{XSType},
+        #{count},
+        #{createTime},
+        #{OPName},
+        #{source}
+    </sql>
+    
+    <select id="selectXianSuoRecordCountByObj" resultType="int" parameterType="com.chexun.dealer.model.system.XianSuoRecord">
+        select count(1) from xiansuo_record
+        <include refid="xiansuo_record_where_conditions"/>
+    </select>
+    
+    <select id="selectXianSuoRecordListPage" resultMap="XianSuoRecordResult"  parameterType="java.util.HashMap">
+        SELECT
+			id,
+			XSType,
+			count,
+			createTime,
+			OPName,
+			source
+		FROM
+			xiansuo_record
+        <trim prefix="where" prefixOverrides="and|or">
+			<if test="XSType != null">
+	        	and XSType = #{XSType}
+	        </if>
+        	<if test="begintime != null and begintime != ''">
+	        	and createTime &gt;= #{createTime} 
+	        </if>
+	        <if test="endtime != null and endtime != ''">
+	        	and createTime &lt;= #{createTime} 
+	        </if>
+        </trim>
+        ORDER BY ID DESC
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+</mapper>

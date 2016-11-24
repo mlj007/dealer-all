@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chexun.dealer.model.permission.PermissionUserMapper">
+ 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>   -->
+    <resultMap id="PermissionUserResult" type="com.chexun.dealer.model.permission.PermissionUser">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="roleCode" column="role_code"/>
+    </resultMap>
+
+    <sql id="permission_user_columns">
+        permission_user.id,
+        permission_user.user_id,
+        permission_user.user_name,
+        permission_user.password,
+        permission_user.role_code
+    </sql>
+    
+    <sql id="permission_user_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="id != null">
+        	and id=#{id} 
+        </if>
+        <if test="userId != null">
+        	and user_id=#{userId} 
+        </if>
+        
+        <if test="userName != null and userName != ''">
+        	and user_name=#{userName} 
+        </if>
+        
+        <if test="password != null and password != ''">
+        	and password=#{password} 
+        </if>
+        <if test="roleCode != null">
+        	and role_code=#{roleCode} 
+        </if>
+        </trim>
+    </sql>
+    
+    <sql id="permission_user_set_conditions">
+    	<set>
+        <if test="id != null">
+        	id=#{id},
+        </if>
+        <if test="userId != null">
+        	user_id=#{userId},
+        </if>
+        <if test="userName != null">
+        	user_name=#{userName},
+        </if>
+        <if test="password != null">
+        	password=#{password},
+        </if>
+        <if test="roleCode != null">
+        	role_code=#{roleCode},
+        </if>
+            id = id
+        </set>
+    </sql>
+
+    <sql id="permission_user_properties">
+        #{id},
+        #{userId},
+        #{userName},
+        #{password},
+        #{roleCode}
+    </sql>
+
+    <insert id="createPermissionUser" parameterType="com.chexun.dealer.model.permission.PermissionUser" keyColumn="id" keyProperty="id" useGeneratedKeys="true" >
+        insert INTO permission_user (<include refid="permission_user_columns"/>) VALUES (<include refid="permission_user_properties"/>)
+    </insert>
+	
+	<insert id="insertPermissionUser" parameterType="com.chexun.dealer.model.permission.PermissionUser" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    	insert into permission_user
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        			id,
+    			</if>
+    			<if test="userId != null" >
+        			user_id,
+    			</if>
+    			<if test="userName != null" >
+        			user_name,
+    			</if>
+    			<if test="password != null" >
+        			password,
+    			</if>
+    			<if test="roleCode != null" >
+        			role_code
+    			</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        		#{id},
+    		</if>
+    			<if test="userId != null" >
+        		#{userId},
+    		</if>
+    			<if test="userName != null" >
+        		#{userName},
+    		</if>
+    			<if test="password != null" >
+        		#{password},
+    		</if>
+    			<if test="roleCode != null" >
+        		#{roleCode}
+    		</if>
+    	</trim>
+  	</insert>
+	
+    <delete id="deletePermissionUserById" parameterType="Long">
+        delete from permission_user
+        where
+            		id = #{            			value
+            		}
+    </delete>
+    
+    <delete id="deletePermissionUserByObj" parameterType="com.chexun.dealer.model.permission.PermissionUser">
+        delete from permission_user
+        <include refid="permission_user_where_conditions"/>
+    </delete>
+    
+  	<delete id="deletePermissionUserByIdList" parameterType="java.util.List">
+    	delete from permission_user 
+        	where
+            id
+    		IN 
+    		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </delete>
+
+    <update id="updatePermissionUser" parameterType="com.chexun.dealer.model.permission.PermissionUser">
+        update permission_user SET
+            id = #{id},
+            user_id = #{userId},
+            user_name = #{userName},
+            password = #{password},
+            role_code = #{roleCode}
+        where
+            id = #{id}
+    </update>
+    
+    <update id="updatePermissionUserByObj" parameterType="com.chexun.dealer.model.permission.PermissionUser">
+        update permission_user 
+        <include refid="permission_user_set_conditions"/>
+        where
+            id = #{id}
+    </update>
+    
+    <update id="updatePermissionUserByObjAndConditions" parameterType="java.util.HashMap">
+        update permission_user 
+        <set>
+        <if test="s.id != null">
+        	id=#{s.id},
+        </if>
+        <if test="s.userId != null">
+        	user_id=#{s.userId},
+        </if>
+        <if test="s.userName != null">
+        	user_name=#{s.userName},
+        </if>
+        <if test="s.password != null">
+        	password=#{s.password},
+        </if>
+        <if test="s.roleCode != null">
+        	role_code=#{s.roleCode},
+        </if>
+        </set>
+        <where>
+        <if test="c.id != null">
+        	id=#{c.id} AND 
+        </if>
+        <if test="c.userId != null">
+        	user_id=#{c.userId} AND 
+        </if>
+        <if test="c.userName != null">
+        	user_name=#{c.userName} AND 
+        </if>
+        <if test="c.password != null">
+        	password=#{c.password} AND 
+        </if>
+        <if test="c.roleCode != null">
+        	role_code=#{c.roleCode} AND 
+        </if>
+       (status!=2)
+        </where>
+    </update>
+    
+    <update id="batchUpdatePermissionUser" parameterType="java.util.List">
+		update permission_user
+		<trim prefix="set" suffixOverrides=",">
+      	 	<trim prefix="id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.id!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.id}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="user_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.userId!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.userId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="user_name=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.userName!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.userName}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="password=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.password!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.password}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="role_code=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.roleCode!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.roleCode}
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where
+		<foreach collection="list" separator="or" item="i" index="index">
+            	(id = #{i.id})
+		</foreach>
+	</update>
+    
+    
+
+    <select id="getPermissionUserById" resultMap="PermissionUserResult" parameterType="Long">
+        select
+        <include refid="permission_user_columns"/>
+        from permission_user
+        where
+            id = #{value}
+    </select>
+    
+    <select id="getPermissionUserByObj" resultMap="PermissionUserResult" parameterType="com.chexun.dealer.model.permission.PermissionUser">
+        select
+        <include refid="permission_user_columns"/>
+        from permission_user
+        <include refid="permission_user_where_conditions"/>
+    </select>
+	
+    
+    <select id="getPermissionUserListByObj" resultMap="PermissionUserResult"  parameterType="com.chexun.dealer.model.permission.PermissionUser">
+        select
+        <include refid="permission_user_columns"/>
+        from permission_user 
+        <include refid="permission_user_where_conditions"/>
+    </select>
+    
+    <select id="getPermissionUserListByMap" resultMap="PermissionUserResult"  parameterType="java.util.HashMap">
+        select
+        <include refid="permission_user_columns"/>
+        from permission_user 
+        <include refid="permission_user_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <select id="getPermissionUserCountByObj" resultType="int" parameterType="com.chexun.dealer.model.permission.PermissionUser">
+        select count(1) from permission_user
+        <include refid="permission_user_where_conditions"/>
+    </select>
+    
+    
+    
+    <select id="getPermissionUserIdByObj" resultType="Long" parameterType="com.chexun.dealer.model.permission.PermissionUser">
+        select       id           
+        from permission_user
+        <include refid="permission_user_where_conditions"/>
+    </select>
+	
+    <select id="getPermissionUserIdList" resultType="Long" parameterType="com.chexun.dealer.model.permission.PermissionUser">
+       select       id            from permission_user where 1=1 
+        id = #{value}
+    </select>
+    
+    <select id="getPermissionUserIdListByObj" resultType="Long"  parameterType="com.chexun.dealer.model.permission.PermissionUser">
+       select       id            from permission_user 
+        <include refid="permission_user_where_conditions"/>
+    </select>
+    
+    <select id="getPermissionUserIdListByMap" resultType="Long"  parameterType="java.util.HashMap">
+        select       id            from permission_user 
+        <include refid="permission_user_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+</mapper>

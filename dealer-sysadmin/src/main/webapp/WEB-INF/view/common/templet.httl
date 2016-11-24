@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<!--#var(com.chexun.dealer.model.admin.DealersTab query)-->
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+</head>
+<body>
+<div class="wrapper">
+	<!--START 左边開始-->
+	${include("/common/left_admin.httl")}
+	<!--END 左边结束-->
+	
+	<!--START 右侧开始-->
+	<div class="right">
+	
+	<!--START 头开始-->
+	${include("/common/top_admin.httl",["topMenuTitle":"添加经销商"])}
+	<!--END 头结束-->
+	
+	<!-- START -->
+            	
+            	
+            						<!-- 这里写你的内容 -->
+            	
+            	
+    <!-- END-->
+     <!--END  右侧结束-->
+     <!--START 底部开始-->
+        ${include("/common/footer.httl")}
+     <!--END 底部结束-->
+</div>
+</body>
+</html>

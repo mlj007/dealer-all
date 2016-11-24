@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chexun.dealer.model.common.CityMapper">
+ 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>   -->
+    <resultMap id="CityResult" type="com.chexun.dealer.model.common.City">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="provinceid" column="provinceid"/>
+        <result property="code" column="code"/>
+        <result property="letter" column="letter"/>
+        <result property="shortname" column="shortname"/>
+        <result property="englishname" column="englishname"/>
+    </resultMap>
+
+    <sql id="city_columns">
+        city.id,
+        city.name,
+        city.provinceid,
+        city.code,
+        city.letter,
+        city.shortname,
+        city.englishname
+    </sql>
+    
+    <sql id="city_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="id != null">
+        	and id=#{id} 
+        </if>
+        
+        <if test="name != null and name != ''">
+        	and name=#{name} 
+        </if>
+        <if test="provinceid != null">
+        	and provinceid=#{provinceid} 
+        </if>
+        
+        <if test="code != null and code != ''">
+        	and code=#{code} 
+        </if>
+        
+        <if test="letter != null and letter != ''">
+        	and letter=#{letter} 
+        </if>
+        
+        <if test="shortname != null and shortname != ''">
+        	and shortname=#{shortname} 
+        </if>
+        
+        <if test="englishname != null and englishname != ''">
+        	and englishname=#{englishname} 
+        </if>
+        </trim>
+    </sql>
+    
+    <sql id="city_set_conditions">
+    	<set>
+        <if test="id != null">
+        	id=#{id},
+        </if>
+        <if test="name != null">
+        	name=#{name},
+        </if>
+        <if test="provinceid != null">
+        	provinceid=#{provinceid},
+        </if>
+        <if test="code != null">
+        	code=#{code},
+        </if>
+        <if test="letter != null">
+        	letter=#{letter},
+        </if>
+        <if test="shortname != null">
+        	shortname=#{shortname},
+        </if>
+        <if test="englishname != null">
+        	englishname=#{englishname},
+        </if>
+            id = id
+        </set>
+    </sql>
+
+    <sql id="city_properties">
+        #{id},
+        #{name},
+        #{provinceid},
+        #{code},
+        #{letter},
+        #{shortname},
+        #{englishname}
+    </sql>
+
+    <insert id="createCity" parameterType="com.chexun.dealer.model.common.City" keyColumn="id" keyProperty="id" useGeneratedKeys="true" >
+        insert INTO city (<include refid="city_columns"/>) VALUES (<include refid="city_properties"/>)
+    </insert>
+	
+	<insert id="insertCity" parameterType="com.chexun.dealer.model.common.City" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    	insert into city
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        			id,
+    			</if>
+    			<if test="name != null" >
+        			name,
+    			</if>
+    			<if test="provinceid != null" >
+        			provinceid,
+    			</if>
+    			<if test="code != null" >
+        			code,
+    			</if>
+    			<if test="letter != null" >
+        			letter,
+    			</if>
+    			<if test="shortname != null" >
+        			shortname,
+    			</if>
+    			<if test="englishname != null" >
+        			englishname
+    			</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        		#{id},
+    		</if>
+    			<if test="name != null" >
+        		#{name},
+    		</if>
+    			<if test="provinceid != null" >
+        		#{provinceid},
+    		</if>
+    			<if test="code != null" >
+        		#{code},
+    		</if>
+    			<if test="letter != null" >
+        		#{letter},
+    		</if>
+    			<if test="shortname != null" >
+        		#{shortname},
+    		</if>
+    			<if test="englishname != null" >
+        		#{englishname}
+    		</if>
+    	</trim>
+  	</insert>
+	
+    <delete id="deleteCityById" parameterType="Long">
+        delete from city
+        where
+            		id = #{            			value
+            		}
+    </delete>
+    
+    <delete id="deleteCityByObj" parameterType="com.chexun.dealer.model.common.City">
+        delete from city
+        <include refid="city_where_conditions"/>
+    </delete>
+    
+  	<delete id="deleteCityByIdList" parameterType="java.util.List">
+    	delete from city 
+        	where
+            id
+    		IN 
+    		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </delete>
+
+    <update id="updateCity" parameterType="com.chexun.dealer.model.common.City">
+        update city SET
+            id = #{id},
+            name = #{name},
+            provinceid = #{provinceid},
+            code = #{code},
+            letter = #{letter},
+            shortname = #{shortname},
+            englishname = #{englishname}
+        where
+            id = #{id}
+    </update>
+    
+    <update id="updateCityByObj" parameterType="com.chexun.dealer.model.common.City">
+        update city 
+        <include refid="city_set_conditions"/>
+        where
+            id = #{id}
+    </update>
+    
+    <update id="updateCityByObjAndConditions" parameterType="java.util.HashMap">
+        update city 
+        <set>
+        <if test="s.id != null">
+        	id=#{s.id},
+        </if>
+        <if test="s.name != null">
+        	name=#{s.name},
+        </if>
+        <if test="s.provinceid != null">
+        	provinceid=#{s.provinceid},
+        </if>
+        <if test="s.code != null">
+        	code=#{s.code},
+        </if>
+        <if test="s.letter != null">
+        	letter=#{s.letter},
+        </if>
+        <if test="s.shortname != null">
+        	shortname=#{s.shortname},
+        </if>
+        <if test="s.englishname != null">
+        	englishname=#{s.englishname},
+        </if>
+        </set>
+        <where>
+        <if test="c.id != null">
+        	id=#{c.id} AND 
+        </if>
+        <if test="c.name != null">
+        	name=#{c.name} AND 
+        </if>
+        <if test="c.provinceid != null">
+        	provinceid=#{c.provinceid} AND 
+        </if>
+        <if test="c.code != null">
+        	code=#{c.code} AND 
+        </if>
+        <if test="c.letter != null">
+        	letter=#{c.letter} AND 
+        </if>
+        <if test="c.shortname != null">
+        	shortname=#{c.shortname} AND 
+        </if>
+        <if test="c.englishname != null">
+        	englishname=#{c.englishname} AND 
+        </if>
+       (status!=2)
+        </where>
+    </update>
+    
+    <update id="batchUpdateCity" parameterType="java.util.List">
+		update city
+		<trim prefix="set" suffixOverrides=",">
+      	 	<trim prefix="id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.id!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.id}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="name=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.name!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.name}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="provinceid=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.provinceid!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.provinceid}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="code=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.code!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.code}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="letter=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.letter!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.letter}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="shortname=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.shortname!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.shortname}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="englishname=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.englishname!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.englishname}
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where
+		<foreach collection="list" separator="or" item="i" index="index">
+            	(id = #{i.id})
+		</foreach>
+	</update>
+    
+    
+
+    <select id="getCityById" resultMap="CityResult" parameterType="Long">
+        select
+        <include refid="city_columns"/>
+        from city
+        where
+            id = #{value}
+    </select>
+    
+    <select id="getCityByObj" resultMap="CityResult" parameterType="com.chexun.dealer.model.common.City">
+        select
+        <include refid="city_columns"/>
+        from city
+        <include refid="city_where_conditions"/>
+    </select>
+	
+    
+    <select id="getCityListByObj" resultMap="CityResult"  parameterType="com.chexun.dealer.model.common.City">
+        select
+        <include refid="city_columns"/>
+        from city 
+        <include refid="city_where_conditions"/>
+    </select>
+    
+    <select id="getCityListByMap" resultMap="CityResult"  parameterType="java.util.HashMap">
+        select
+        <include refid="city_columns"/>
+        from city 
+        <include refid="city_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <select id="getCityCountByObj" resultType="int" parameterType="com.chexun.dealer.model.common.City">
+        select count(1) from city
+        <include refid="city_where_conditions"/>
+    </select>
+    
+    
+    
+    <select id="getCityIdByObj" resultType="Long" parameterType="com.chexun.dealer.model.common.City">
+        select       id               
+        from city
+        <include refid="city_where_conditions"/>
+    </select>
+	
+    <select id="getCityIdList" resultType="Long" parameterType="com.chexun.dealer.model.common.City">
+       select       id                from city where 1=1 
+        id = #{value}
+    </select>
+    
+    <select id="getCityIdListByObj" resultType="Long"  parameterType="com.chexun.dealer.model.common.City">
+       select       id                from city 
+        <include refid="city_where_conditions"/>
+    </select>
+    
+    <select id="getCityIdListByMap" resultType="Long"  parameterType="java.util.HashMap">
+        select       id                from city 
+        <include refid="city_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    
+    <!--added 根据id(多个查询)城市列表-->
+    <select id="getCityListByIds" resultMap="CityResult" parameterType="java.util.List">
+        select
+        <include refid="city_columns"/>
+        from city where id IN 
+    		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </select>
+</mapper>

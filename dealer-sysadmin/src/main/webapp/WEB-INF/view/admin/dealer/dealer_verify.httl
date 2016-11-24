@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<script type="text/javascript" src="/statics/js/admin/dealer/dealer_verify.js"></script>
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+</head>
+<body>
+<div class="wrapper">
+	<!--START 左边開始-->
+	${include("/common/left_admin.httl")}
+	<!--END 左边结束-->
+	<!--START 右侧开始-->
+	<div class="right">
+	<!--START 头开始-->
+	${include("/common/top_admin.httl",["topMenuTitle":"经销商审核"])}
+	<!--END 头结束-->
+	<!-- START -->
+         <div class="right-con">
+            <div class="con">
+                <div class="con-bd" id="tab">
+                		<form method="post" action="/admin/dealer/verify" id="searchForm">
+                			<input type="hidden" id="pageCurrentPage" name="currentPage" value="${page.currentPage}"/>
+                		</form>
+                        <table  width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                
+                                <th>经销商名称</th>
+                                <th>注册日期</th>
+                                <th>联系人</th>
+                                <th>联系电话</th>
+                                <th>省份</th>
+                                <th>操作</th>
+                            </tr>
+                           <!--#for(com.chexun.dealer.po.dealers.DealersInfoPo dealersInfo : dealersInfoList)-->
+							<tr>
+                                <td>${dealersInfo.dealerName }</td>
+                                <td>${dealersInfo.createTime } </td>
+                                <td>${dealersInfo.contact }</td>
+                                <td>${dealersInfo.servicePhone } </td>
+                                <td>${dealersInfo.cityName }</td>
+                                <td><a href="javascript:dealerVerify.updaDealerState(${dealersInfo.id})">通过审核</a></td>
+                            </tr>
+                            <!--#end-->
+                        </table>
+                          ${include("/common/page.httl")}
+                </div>
+            </div>
+        </div>
+            	
+    <!-- END-->
+     <!--END  右侧结束-->
+     <!--START 底部开始-->
+        ${include("/common/footer.httl")}
+     <!--END 底部结束-->
+</div>
+</body>
+</html>

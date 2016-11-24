@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<link type="text/css" href="/statics/css/public.css" rel="stylesheet" />
+<link type="text/css" href="/statics/plugin/lhgcalendar/skins/lhgcalendar.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<script type="text/javascript" src="/statics/plugin/lhgcalendar/lhgcalendar.min.js"></script>
+<script type="text/javascript" src="/statics/js/common/province_city.js"></script>
+<script type="text/javascript" src="/statics/js/admin/clue/clue_common.js"></script>
+<script type="text/javascript" src="/statics/js/admin/clue/message_list.js"></script>
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+<!--#set(com.chexun.dealer.vo.clue.DealersMessagesVo query)-->
+</head>
+<body>
+<div class="wrapper">
+	<!--START 左边開始-->
+	${include("/common/left_admin.httl")}
+	<!--END 左边结束-->
+	
+	<!--START 右侧开始-->
+	<div class="right">
+	
+		<!--START 头开始-->
+		${include("/common/top_admin.httl",["topMenuTitle":"留言管理"])}
+		<!--END 头结束-->
+			
+	    <!-- START -->
+	    <div class="right-con">
+            <div class="sel"> 
+            <form action="/admin/clue/message/list" method="post" id="searchForm">
+	            <input type="hidden" id="pageCurrentPage" name="currentPage" value="${page.currentPage}"/>
+	            <input type="hidden" id="selectedProvinceId" value="${query.provinceId}"/>
+	            <input type="hidden" id="selectedCityId" value="${query.cityId}"/>
+	            <input type="hidden" id="isReply" name="isReply" value="${isReply}"/>
+                <span style="padding:0 0 0 10px">经销商所在地区：</span>
+                <select id="provinceId" name="provinceId"><option value="">省份</option></select>
+                <select id="cityId" name="cityId"><option value="">城市</option></select>
+                <span style="padding:0 0 0 10px">留言时间：</span>
+                <input type="text" id="timeStart" name="timeStart" class="sel-inpt" value="${query.timeStart}"/>
+                <span style="padding:0 5px">至</span>
+                <input type="text" id="timeEnd" name="timeEnd" class="sel-inpt" value="${query.timeEnd}" />
+                <span style="padding:0 0 0 10px">经销商：</span> 
+                <input type="text" class="sel-inpt" name="dealerName" value="${query.dealerName}" />
+                <input type="button" class="con-sel-search" value="搜    索" onclick="query();"/>
+                <input type="button" class="con-sel-search" value="导出数据" onclick="exportToExcel();"/>
+            </form>
+            </div>
+            <div class="con">
+	            <span style="float:right;margin-right:50px;">共<a href=""><b class="cred">${tatalCount}</b></a>个提问</span>
+	            <span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
+	            <ul class="tabs clearfix">
+	            	<li <!--#if(isReply.toInt==(-1))-->class="active"<!--#end-->>
+	            		<a onclick="queryByState(-1)" style="cursor: pointer">
+	            			<strong>全部留言</strong>
+	            		</a>
+	            	</li>
+	            	<li <!--#if(isReply.toInt==1)-->class="active"<!--#end-->>
+		            	<a onclick="queryByState(1)" style="cursor: pointer">
+		            		<strong>已回复</strong><span>(${replyCount})</span>
+						</a>
+	            	</li>
+	            	<li <!--#if(isReply.toInt==0)-->class="active"<!--#end-->>
+	            		<a onclick="queryByState(0)" style="cursor: pointer">
+							<strong>未回复</strong>
+							<span>(${unReplyCount})</span>
+						</a>
+	            	</li>
+	            </ul>
+                <div class="con-bd" id="tab">
+                    <table  width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                        	<th><input name="" type="checkbox" value="" onclick="selectCheckBox(this)"></th>
+                            <th>问题</th>
+                            <th width="120">提问时间 </th>
+                            <th>回复内容</th>
+                            <th>经销商</th>
+                            <th width="65">操作</th>
+                        </tr>
+                        <!--#for(com.chexun.dealer.po.clue.DealersMessagesPo dealersMessages : dealersMessagesList)-->
+						<tr id="row_${dealersMessages.id}">
+							<td><input type="checkbox" name="selecedId" value="${dealersMessages.id}"></td>
+                            <td id="message_${dealersMessages.id}">${dealersMessages.messageContent }</td>
+                            <td>${dealersMessages.createTime }</td>
+                            <td id="replyContent_${dealersMessages.id}">${dealersMessages.replyContent }</td>
+                            <td>${dealersMessages.dealerName }</td>
+                            <td><span>
+                            		<a onclick="showReplyBox(${dealersMessages.id})" style="cursor:pointer;">回复</a>
+                            		<a href="javascript:void(0)" onclick="delMessage(${dealersMessages.id})" style="cursor:pointer;">删除</a>
+                            	</span>
+							</td>
+                        </tr>
+                        <!--#end-->
+                    </table>
+                    <div style="float:left;margin-top: 6px;">
+	                    <input type="button" value="全选" name="" onclick="selectCheckbox(true)" class="greybtn" style="height:30px;"/>
+	                    <input type="button" value="删除" name="" class="greybtn" onclick="delSelected();" style="height:30px;"/>
+	                </div>
+                    ${include("/common/page.httl")}
+                </div>
+            </div>
+	     </div>
+     	<!-- END-->
+     	<!--END  右侧结束-->
+     	<!--START 底部开始-->
+        ${include("/common/footer.httl")}
+     	<!--END 底部结束-->
+	</div>
+	
+    <!--弹出层1-->
+    <div id="pop" class="none">
+        <input type="hidden" value="" id="messageId" />
+    	<h3 id="messageContent"></h3>
+        <div style="margin-top:10px;">回复：</div>	
+         <div class="textarea">
+         	<textarea id="replyBoxContent" maxlength="100" cols="" style="margin-top:5px;" rows=""></textarea>
+            <div>回答内容不能超过1000字。</div>
+         	<div><a style="cursor:pointer;" id="btnReply" onclick="saveRepley();">回复</a>
+         		<a style="cursor:pointer;" id="pp-qx" onclick="cancelRepley();">取消</a>
+         	</div>
+         </div>   
+    </div>  
+</body>
+</html>

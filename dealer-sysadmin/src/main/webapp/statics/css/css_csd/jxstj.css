@@ -1,0 +1,1082 @@
+﻿select {
+    border: 1px solid #BEC6D9;
+}
+input {
+    color: #000000;
+    width: 209px;
+}
+.ymtit h1 {
+    background: none repeat scroll 0 0 #FCFCFC;
+    border: 1px solid #E1E1E1;
+    font-size: 14px;
+    font-weight: bold;
+    height: 51px;
+    line-height: 52px;
+    padding-left: 26px;
+}
+.pp_content table, .pz_content table {
+    border: 1px solid #395A9D;
+}
+.pp_content th {
+    background: none repeat scroll 0 0 #6B85B8;
+    color: #FFFFFF;
+    font-weight: lighter;
+    height: 32px;
+    line-height: 34px;
+    text-align: center;
+}
+.pp_content td {
+    border: 1px solid #E1E1E1;
+    line-height: 18px;
+    padding: 8px 15px;
+    text-align: left;
+    vertical-align: top;
+}
+.pp_content td br {
+    margin: 0;
+    padding: 0;
+}
+.pp_content td em {
+    color: #888888;
+    font-style: normal;
+}
+.pp_content td a {
+    color: #4D6EA4;
+    text-decoration: none;
+}
+.pp_content td a:hover {
+    color: #DB0010;
+    text-decoration: underline;
+}
+.pp_content td a.cred {
+    color: #CC0000;
+    text-decoration: none;
+}
+.pp_content td a.cred:hover {
+    color: #DB0010;
+    text-decoration: underline;
+}
+.pp_content td a.cblack {
+    color: #333333;
+}
+.pp_content td a.cblack:hover {
+    color: #DB0010;
+}
+.pp_content .hidden a {
+    color: #666666;
+}
+.pp_content td span a {
+    color: #666666;
+    text-decoration: none;
+}
+.pp_content td span a:hover {
+    color: #DB0010;
+    text-decoration: underline;
+}
+.pp_content td b {
+    color: #CC0000;
+    font-weight: normal;
+}
+.pp_content td b.cblue {
+    color: #4D6EA4;
+}
+.pp_content .pp_footer {
+    background: none repeat scroll 0 0 #F5F5F5;
+    height: 23px;
+    line-height: 23px;
+}
+.pp_content .wida {
+    width: 55px;
+}
+.pp_content .widb {
+    width: 130px;
+}
+.pp_content .widc {
+    width: 220px;
+}
+.pp_content .widd {
+    width: 65px;
+}
+.pp_content .wide {
+    width: 110px;
+}
+.pp_content .widf {
+    width: 95px;
+}
+.pp_content .widg {
+    width: 280px;
+}
+.pp_content .widh {
+    width: 250px;
+}
+.pp_content .widi {
+    width: 85px;
+}
+.pp_content .widj {
+    width: 150px;
+}
+.txtcen td {
+    text-align: center;
+}
+.txtcen .xgbt {
+    cursor: pointer;
+}
+.txtcen .xgbt .tc {
+    background: none repeat scroll 0 0 #F8F8F8;
+    border: 1px solid #DDDDDD;
+    color: #000000;
+    font-family: Tahoma;
+    height: 80px;
+    margin-left: -250px;
+    margin-top: 5px;
+    overflow: hidden;
+    padding: 5px 20px;
+    position: absolute;
+    width: 240px;
+}
+.txtcen .xgbt .tc .tj_bt {
+    padding-top: 12px;
+}
+.txtcen .xgbt .tc .txtc {
+    text-align: center;
+}
+.pp_content td .chuli {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/icon_02.gif") no-repeat scroll right -81px transparent;
+    color: #3366CC;
+    cursor: pointer;
+    text-align: left;
+}
+.pp_content td .chuli .tc {
+    background: none repeat scroll 0 0 #F8F8F8;
+    border: 1px solid #DDDDDD;
+    color: #000000;
+    font-family: Tahoma;
+    height: 40px;
+    margin-left: -18px;
+    margin-top: 15px;
+    overflow: hidden;
+    padding: 5px 10px;
+    position: absolute;
+    width: 65px;
+}
+.pp_content td .chuli .tc label {
+    vertical-align: middle;
+}
+.pp_content td .chuli .tc label.cblue {
+    color: #4D6EA4;
+}
+.ppart01 {
+    padding: 27px 0 0 26px;
+}
+.ppart01 .sjgg {
+    margin-bottom: 0;
+}
+.ppart02 {
+    padding: 27px 0 0 26px;
+}
+.st_footer {
+    background: none repeat scroll 0 0 #F5F5F5;
+    border: 1px solid #E1E1E1;
+    height: 22px;
+    line-height: 22px;
+    margin-bottom: 20px;
+    padding: 10px 20px 11px;
+}
+.pp_list {
+    float: right;
+    line-height: 22px;
+}
+.pp_list span {
+    color: #4D6EA4;
+    font-weight: bold;
+}
+.pp_list i {
+    font-style: normal;
+}
+.pp_list .st_sele {
+    width: 120px;
+}
+.pp_list li {
+    display: inline;
+    float: left;
+    height: 22px;
+    margin-left: 10px;
+}
+.pp_list .zy {
+    border: 1px solid #BEC6D9;
+    color: #4D6EA4;
+    height: 17px;
+    line-height: 17px;
+    text-align: center;
+    width: 25px;
+}
+.pp_cx, .st_cx, .st_cx2, .st_cx3 {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but.gif") no-repeat scroll 0 -30px transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 21px;
+    line-height: 21px;
+    text-align: center;
+    width: 55px;
+}
+.st_cx2, .st_cx3 {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but2.gif") no-repeat scroll 0 0 transparent;
+    height: 25px;
+    width: 85px;
+}
+.st_cx3 {
+    background-position: 0 -43px;
+    width: 63px;
+}
+.sy {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but.gif") no-repeat scroll 0 -59px transparent;
+    border: medium none;
+    color: #666666;
+    cursor: pointer;
+    height: 21px;
+    line-height: 21px;
+    width: 55px;
+}
+.st_sele, .st_sele01, .st_sele02, .st_sele03, .st_sele04, .pic_sele {
+    border: 1px solid #BEC6D9;
+    height: 21px;
+    margin: 0 8px 1px 0;
+    width: 135px;
+}
+.st_sele01 {
+    width: 175px;
+}
+.st_sele02 {
+    width: 85px;
+}
+.st_sele03 {
+    width: 290px;
+}
+.st_sele04 {
+    width: 95px;
+}
+.st_input01, .st_input02 {
+    border: 1px solid #BEC6D9;
+    height: 19px;
+    line-height: 19px;
+    width: 165px;
+}
+.st_input02 {
+    margin-right: 8px;
+    padding-left: 5px;
+    width: 276px;
+}
+.st_hj .inpwa, .st_hj .st_inp {
+    border: 1px solid #BEC6D9;
+}
+.st_hj .inpwa {
+    padding-left: 5px;
+}
+.st_hj {
+    margin: 13px 0 25px;
+}
+.st_hj .st_cx2, .st_hj .st_cx3 {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but2.gif") no-repeat scroll 0 -94px transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    width: 79px;
+}
+.st_hj .st_cx3 {
+    background-position: 0 -231px;
+    width: 85px;
+}
+.pp_inp, .st_inp {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but.gif") no-repeat scroll 192px -183px transparent;
+    border: 1px solid #BEC6D9;
+    height: 19px;
+    line-height: 19px;
+    margin-left: 9px;
+    width: 211px;
+}
+.st_inp {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but.gif") no-repeat scroll 0 -183px #FCFCFC;
+    padding-left: 15px;
+    width: 196px;
+}
+.inpwa {
+    border: 1px solid #BEC6D9;
+    color: #666666;
+    height: 19px;
+    padding-left: 5px;
+    width: 95px;
+}
+.llqdw {
+    position: relative;
+    top: -3px;
+}
+.fbgb {
+    width: 700px;
+}
+.fbginp {
+    background: none repeat scroll 0 0 #FCFCFC;
+    border: 1px solid #BEC6D9;
+    color: #666666;
+    height: 18px;
+    line-height: 18px;
+    padding-left: 5px;
+    width: 267px;
+}
+.hfk {
+    padding: 28px 0;
+}
+.qdfb {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but2.gif") no-repeat scroll 0 -94px transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    width: 79px;
+}
+.sjqx {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/icon_02.gif") repeat-x scroll 0 -178px transparent;
+    height: 32px;
+    line-height: 32px;
+    margin-bottom: 30px;
+}
+.sjqx li {
+    background: none repeat scroll 0 0 #F9F9F9;
+    border: 1px solid #DFDFDF;
+    cursor: pointer;
+    display: inline;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    margin-right: 5px;
+    text-align: center;
+    width: 192px;
+}
+.sjqx li.on {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-bottom: medium none;
+    height: 31px;
+}
+.sjqxpz {
+    margin-bottom: 30px;
+}
+.sjqxpz th {
+    width: 350px;
+}
+.sjqxpz td {
+    text-align: center;
+}
+.sjqxbut {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but.gif") no-repeat scroll 0 -29px transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 23px;
+    line-height: 23px;
+    width: 55px;
+}
+.sjqxan {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but.gif") no-repeat scroll 0 -59px transparent;
+    border: medium none;
+    cursor: pointer;
+    height: 21px;
+    line-height: 21px;
+    width: 55px;
+    
+}
+.ymtit {
+    background: none repeat scroll 0 0 #FCFCFC;
+    border: 1px solid #E1E1E1;
+    height: 52px;
+    line-height: 52px;
+}
+
+.tjjxs h1 {
+    border: medium none;
+}
+.tjjxs span {
+    float: right;
+}
+.tjjxs span em, .tjxs th em {
+    color: #E70000;
+    font-style: normal;
+}
+.tjxs .jyppot {
+    display: none;
+}
+.tjxs .jypp {
+    padding-top: 5px;
+    clear:both;
+}
+.tjxs .jypp .jy_t {
+    font-weight: bold;
+    padding-bottom: 2px;
+    padding-left: 5px;
+}
+.tjxs .jypp span {
+    float: right;
+    padding-right: 10px;
+}
+.tjxs .jypp span a {
+    color: #4C72A1;
+}
+.tjxs th {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #E1E1E1;
+    color: #333333;
+    text-align: right;
+    width: 154px;
+}
+.tjxs span {
+    color: #D50000;
+}
+.tjyl {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but.gif") no-repeat scroll 0 0 transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 22px;
+    line-height: 22px;
+    width: 55px;
+}
+.tj_inp01, .tj_inp02, .tj_inp03, .tj_inp04, .tj_inp05, .tj_inp06, .tj_inp07 {
+    background: none repeat scroll 0 0 #FCFCFC;
+    border: 1px solid #BEC6D9;
+    color: #666666;
+    height: 18px;
+    line-height: 18px;
+    padding-left: 5px;
+    width: 180px;
+}
+.tj_inpLabel
+{
+    background: none repeat scroll 0 0 #FCFCFC;
+    border: 1px solid #BEC6D9;
+    color: #666666;
+    height: 18px;
+    line-height: 18px;
+    padding-left: 5px;
+    width: 250px;
+}
+.tj_inp02 {
+    width: 214px;
+}
+.tj_inp03 {
+    width: 314px;
+}
+.tj_inp04 {
+    width: 38px;
+}
+.tj_inp05 {
+    width: 114px;
+}
+.tj_inp06 {
+    width: 450px;
+}
+.tj_inp07 {
+    color: #666666;
+    width: 234px;
+}
+.sctp {
+    float: left;
+    margin-bottom: 15px;
+    width: 322px;
+}
+
+.sctu {
+    float: left;
+    margin-bottom: 15px;
+    position: relative;
+    width: 116px;
+}
+.sctu img {
+    border: 1px solid #E1E1E1;
+    padding: 2px;
+}
+.sctu span {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/icon_02.gif") no-repeat scroll 0 -235px transparent;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    float: right;
+    height: 15px;
+    position: absolute;
+    right: 0;
+    top: 26px;
+    width: 15px;
+}
+.tj_text, .tj_text01, .tj_text02 {
+    color: #D50000;
+    height: 105px;
+    line-height: 22px;
+    width: 500px;
+}
+.tj_text02 {
+    color: #333333;
+}
+.tj_text01 {
+    height: 250px;
+}
+.tj_textarea
+{
+    height: 200px; width:500px;
+}
+.tj_inp {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but.gif") no-repeat scroll 5px -183px #FCFCFC;
+    border: 1px solid #E1E1E1;
+    color: #666666;
+    height: 18px;
+    line-height: 18px;
+    padding-left: 20px;
+    width: 255px;
+}
+.salesy {
+    margin-bottom: 25px;
+}
+.salesy .st_cx2 {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but2.gif") no-repeat scroll 0 -94px transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    width: 79px;
+}
+.xsgw .list {
+    float: left;
+    line-height: 24px;
+    margin-bottom: 36px;
+    padding-right: 35px;
+    width: 310px;
+}
+.xsgw .list li.pic {
+    float: left;
+    padding-right: 15px;
+}
+.xsgw .list li.pic img {
+    border: 1px solid #DDDDDD;
+    padding: 2px;
+}
+.xsgw .list li a {
+    color: #3366CC;
+}
+.xsgw .list li a:hover {
+    color: #DB0010;
+    text-decoration: underline;
+}
+.xsgw .list li b {
+    font-size: 14px;
+}
+.xsgw .list li span {
+    color: #818181;
+}
+.tj_jxs {
+    padding: 0 12px;
+}
+.jxs_wt {
+    width: 310px;
+}
+.tj_jxs h3 {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+.tj_jxs .list li {
+    height: 22px;
+    padding-bottom: 15px;
+}
+.tj_jxs i {
+    font-style: normal;
+}
+.tjinp_jxs {
+    border: 1px solid #A3B9D8;
+    color: #818181;
+    height: 18px;
+    line-height: 18px;
+    padding-left: 5px;
+    width: 233px;
+}
+.tj_jxs .list {
+    margin-bottom: 20px;
+}
+.zxfb_jxs {
+    width: 778px;
+}
+.zxfb_jxs p {
+    padding-bottom: 20px;
+}
+.zxfb_jxs i {
+    font-style: normal;
+}
+.zin_jxs {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/xzzs_jxs.jpg") no-repeat scroll left top transparent;
+    border: 1px solid #A3B9D8;
+    height: 18px;
+    padding-left: 2px;
+    width: 276px;
+}
+.ymtit {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    border-color: -moz-use-text-color -moz-use-text-color #E1E1E1;
+    border-style: none none solid;
+    border-width: medium medium 1px;
+}
+.ymtit h1 {
+    border: medium none;
+}
+.st_inp {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but.gif") no-repeat scroll 5px -183px #FCFCFC;
+    padding-left: 20px;
+    width: 191px;
+}
+.xjpd {
+    height: 20px;
+    line-height: 20px;
+    padding: 5px 0 5px 5px;
+    width: 160px;
+}
+.xjpd i {
+    display: block;
+    float: right;
+    font-style: normal;
+    height: 20px;
+    padding-left: 8px;
+    width: 24px;
+}
+.xjpd span {
+    float: right;
+    height: 14px;
+    width: 91px;
+}
+.xjpd span.xx5 {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/icon_xx.gif") no-repeat scroll 0 0 transparent;
+}
+.xjpd span.xx4 {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/icon_xx.gif") no-repeat scroll 0 -15px transparent;
+}
+.xjpd span.xx3 {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/icon_xx.gif") no-repeat scroll 0 -30px transparent;
+}
+.xjpd span.xx2 {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/icon_xx.gif") no-repeat scroll 0 -45px transparent;
+}
+.xjpd span.xx1 {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/icon_xx.gif") no-repeat scroll 0 -60px transparent;
+}
+.xjpd span.xx0 {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/icon_xx.gif") no-repeat scroll 0 -75px transparent;
+}
+.v_top {
+    vertical-align: top;
+}
+a.cblue {
+    color: #4D6EA4;
+}
+a.cblue:hover {
+    color: #FF0000;
+}
+.tx_box {
+    clear: both;
+    padding-top: 20px;
+}
+.tx_bt {
+    padding-bottom: 20px;
+    text-align: center;
+}
+.picturenow {
+    float: left;
+    margin: 0 20px;
+    width: 300px;
+}
+.picturenow .small_pic img {
+    border: 1px solid #DDDDDD;
+    padding: 2px;
+}
+.picturenow .large_pic {
+    padding: 5px 0 15px;
+}
+.picturenow .bt_bc, .picturenow .bt_qx {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but2.gif") no-repeat scroll 0 -135px transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 23px;
+    line-height: 23px;
+    text-align: center;
+    width: 73px;
+}
+.picturenow .bt_qx {
+    background-position: 0 -159px;
+    color: #333333;
+    margin-left: 5px;
+}
+.pictureinfuture {
+    float: left;
+    width: 414px;
+}
+.picturenow h3, .pictureinfuture h3 {
+    border-bottom: 1px solid #D8DFEA;
+    color: #000000;
+    font-size: 14px;
+    line-height: 1.5em;
+    margin: 10px 0;
+}
+.pictureinfuture .file_bt {
+    display: block;
+    margin-top: 8px;
+    padding: 0 8px;
+}
+.pictureinfuture p {
+    color: #818181;
+    padding: 5px 0;
+}
+.st_hj b {
+    color: #CC0000;
+    font-weight: normal;
+}
+.lh30 {
+    line-height: 30px;
+}
+.sy1 {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but2.gif") no-repeat scroll 0 -188px transparent;
+    border: medium none;
+    color: #666666;
+    cursor: pointer;
+    height: 21px;
+    line-height: 21px;
+    width: 85px;
+}
+.pp_content td i {
+    color: #4D6EA4;
+    font-style: normal;
+}
+.pp_content .img {
+    text-align: center;
+}
+.pp_content .img img {
+    border: 1px solid #CCCCCC;
+}
+.pp_content .color666 {
+    color: #666666;
+}
+.sjgg {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/icon_02.gif") repeat-x scroll 0 -178px transparent;
+    height: 32px;
+    line-height: 32px;
+    margin-bottom: 30px;
+}
+.sjgg ul {
+    float: left;
+    padding-right: 10px;
+}
+.sjgg p {
+    height: 25px;
+    line-height: 25px;
+    padding-top: 3px;
+}
+.sjgg li {
+    background: none repeat scroll 0 0 #F9F9F9;
+    border: 1px solid #DFDFDF;
+    cursor: pointer;
+    display: inline;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    margin-right: 5px;
+    text-align: center;
+    width: 100px;
+}
+.sjgg li.on {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-bottom: medium none;
+    height: 31px;
+}
+.sjgg_t h3 {
+    font-size: 16px;
+    padding-bottom: 25px;
+}
+.tjgg_l {
+    float: left;
+    width: 700px;
+}
+.tjgg_table th em {
+    color: #E70000;
+    font-style: normal;
+}
+.tjgg_table th {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #E1E1E1;
+    color: #333333;
+    text-align: right;
+    width: 154px;
+}
+.tjgg_table span {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/icon_02.gif") no-repeat scroll 0 -235px transparent;
+    cursor: pointer;
+    display: block;
+    float: left;
+    height: 15px;
+    margin-top: 3px;
+    width: 15px;
+}
+.tjgg_table i {
+    color: #333333 !important;
+    display: block;
+    float: left;
+    padding-right: 3px;
+}
+.tjgg_table p {
+    float: left;
+    height: 22px;
+    line-height: 22px;
+}
+.tjy2 {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but.gif") no-repeat scroll 0 0 transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 22px;
+    line-height: 22px;
+    width: 55px;
+}
+.sctu2 {
+    clear: both;
+    margin-bottom: 15px;
+    padding-top: 15px;
+    position: relative;
+    width: 250px;
+}
+.sctu2 img {
+    border: 1px solid #E1E1E1;
+    padding: 2px;
+}
+.sctu2 span {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/icon_02.gif") no-repeat scroll 0 -235px transparent;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: block;
+    float: right;
+    height: 15px;
+    position: absolute;
+    right: 0;
+    top: 10px;
+    width: 15px;
+}
+.tjgg_r {
+    float: left;
+    padding-left: 20px;
+    width: 360px;
+}
+.tjgg_r .tj_bt {
+    padding: 5px 0;
+    text-align: center;
+}
+.tjgg_r .tj_bt2 {
+    padding-top: 10px;
+}
+.tjgr01, .tjgr02 {
+    background: none repeat scroll 0 0 #F8F8F8;
+    border: 1px solid #DDDDDD;
+    padding: 12px;
+}
+.tjgr01 ul {
+    color: #395A9D;
+    padding: 10px 0;
+}
+.tjgr01 li {
+    height: 26px;
+    line-height: 26px;
+    overflow: hidden;
+}
+.tjgr01 .st_footer {
+    border: medium none;
+    clear: both;
+    line-height: 22px;
+    margin-bottom: 0;
+    text-align: left;
+}
+.tjgr01 .st_footer a {
+    color: #666666;
+}
+.tjgr01 .st_footer a:hover {
+    color: #FC0000;
+}
+.tjgr02 {
+    margin-top: 20px;
+}
+.tjgr02 ul {
+    color: #395A9D;
+    float: left;
+    width: 110px;
+}
+.tjgr02 ul li {
+    height: 26px;
+}
+.tjgg_l .tj_inp01, .tjgg_l .tj_inp05, .tjgg_r .tj_inp01 {
+    color: #999999;
+}
+.tjgg_l .st_footer {
+    text-align: center;
+}
+.tj_dw {
+    position: relative;
+}
+.zx_list .show {
+    color: #333333;
+}
+.zx_list .hidden {
+    color: #666666;
+}
+.zx_list .xg {
+}
+.zx_list .xg .old_t {
+    color: #666666;
+}
+.zx_list .xg .new_t {
+    color: #333333;
+}
+.zx_list .xgbt {
+    cursor: pointer;
+    text-align: left;
+}
+.zx_list .xgbt .tc {
+    background: none repeat scroll 0 0 #F8F8F8;
+    border: 1px solid #DDDDDD;
+    color: #000000;
+    font-family: Tahoma;
+    height: 100px;
+    margin-left: -250px;
+    margin-top: 15px;
+    overflow: hidden;
+    padding: 5px 20px;
+    position: absolute;
+    width: 277px;
+}
+.zx_list .xgbt .tc .tj_bt {
+    padding-top: 8px;
+}
+.zx_list .xgbt .tc .txtc {
+    text-align: center;
+}
+.tuijian_w {
+}
+.tuijian, .tuijian2 {
+    background: none repeat scroll 0 0 #F8F8F8;
+    border: 1px solid #DDDDDD;
+    margin-left: -180px;
+    padding: 10px 15px 15px 23px;
+    position: absolute;
+    text-align: left;
+    width: 250px;
+}
+.tuijian .tj_bt, .tuijian2 .tj_bt {
+    padding-top: 10px;
+    text-align: center;
+}
+.tuijian .st_sele, .tuijian2 .st_sele {
+    margin-right: 5px;
+    width: 115px;
+}
+.tuijian .st_cx, .zx_list .xgbt .st_cx {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but2.gif") no-repeat scroll 0 -94px transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    width: 79px;
+}
+.tuijian2 {
+    left: 140px;
+    margin-left: 0;
+    top: 50px;
+    width: auto;
+}
+.tuijian2 .st_cx {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but2.gif") no-repeat scroll 0 -94px transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    width: 79px;
+}
+.tj_dw .st_cx {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/tan_but2.gif") no-repeat scroll 0 -94px transparent;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    width: 79px;
+}
+.tj_dw i {
+    font-style: normal;
+}
+.px {
+    border: 1px solid #CCCCCC;
+    color: #333333;
+    height: 14px;
+    line-height: 14px;
+    text-align: center;
+    width: 18px;
+}
+.lytable .cz a {
+    color: #3366CC;
+}
+.lytable td {
+    vertical-align: middle;
+}
+.lytable .cz .tc {
+    background: none repeat scroll 0 0 #F8F8F8;
+    border: 1px solid #DDDDDD;
+    color: #000000;
+    margin-left: -240px;
+    margin-top: 15px;
+    overflow: hidden;
+    position: absolute;
+    width: 263px;
+}
+.lytable .cz .tc .tctit {
+    background: none repeat scroll 0 0 #F2F2F2;
+    border-bottom: 1px solid #DDDDDD;
+    height: 20px;
+    padding: 5px 10px;
+    text-align: left;
+}
+.lytable .cz .tc .tctit .close {
+    background: url("http://i2.chexun.net/i/DianPing/Manage/images/icon_00.gif") no-repeat scroll -296px 0 transparent;
+    display: block;
+    float: right;
+    height: 9px;
+    margin-top: 4px;
+    width: 9px;
+}
+.lytable .cz .tc .tccont {
+    padding: 10px;
+    text-align: right;
+}
+.lytable .cz .tc .tccont textarea {
+    border: 1px solid #7F9DB9;
+    height: 75px;
+    margin-bottom: 10px;
+    width: 235px;
+}
+.lytable input {
+    color: #000000;
+}
+.cblue {
+    color: #4D6EA4;
+}

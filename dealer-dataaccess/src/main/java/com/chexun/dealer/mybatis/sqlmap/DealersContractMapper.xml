@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chexun.dealer.model.dealers.DealersContractMapper">
+ 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>   -->
+    <resultMap id="DealersContractResult" type="com.chexun.dealer.model.dealers.DealersContract">
+        <result property="id" column="id"/>
+        <result property="dealerid" column="dealerid"/>
+        <result property="contractnum" column="contractnum"/>
+        <result property="contractcar" column="contractcar"/>
+        <result property="contractmoney" column="contractmoney"/>
+        <result property="contractbegin" column="contractbegin"/>
+        <result property="contractend" column="contractend"/>
+        <result property="contractsaler" column="contractsaler"/>
+        <result property="contractremark" column="contractremark"/>
+        <result property="createdate" column="createdate"/>
+    </resultMap>
+
+    <sql id="dealers_contract_columns">
+        dealers_contract.id,
+        dealers_contract.dealerid,
+        dealers_contract.contractnum,
+        dealers_contract.contractcar,
+        dealers_contract.contractmoney,
+        dealers_contract.contractbegin,
+        dealers_contract.contractend,
+        dealers_contract.contractsaler,
+        dealers_contract.contractremark,
+        dealers_contract.createdate
+    </sql>
+    
+    <sql id="dealers_contract_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="id != null">
+        	and id=#{id} 
+        </if>
+        <if test="dealerid != null">
+        	and dealerid=#{dealerid} 
+        </if>
+        
+        <if test="contractnum != null and contractnum != ''">
+        	and contractnum=#{contractnum} 
+        </if>
+        <if test="contractcar != null">
+        	and contractcar=#{contractcar} 
+        </if>
+        <if test="contractmoney != null">
+        	and contractmoney=#{contractmoney} 
+        </if>
+        <if test="contractbegin != null">
+        	and contractbegin=#{contractbegin} 
+        </if>
+        <if test="contractend != null">
+        	and contractend=#{contractend} 
+        </if>
+        
+        <if test="contractsaler != null and contractsaler != ''">
+        	and contractsaler=#{contractsaler} 
+        </if>
+        
+        <if test="contractremark != null and contractremark != ''">
+        	and contractremark=#{contractremark} 
+        </if>
+        <if test="createdate != null">
+        	and createdate=#{createdate} 
+        </if>
+        </trim>
+    </sql>
+    
+    <sql id="dealers_contract_set_conditions">
+    	<set>
+        <if test="id != null">
+        	id=#{id},
+        </if>
+        <if test="dealerid != null">
+        	dealerid=#{dealerid},
+        </if>
+        <if test="contractnum != null">
+        	contractnum=#{contractnum},
+        </if>
+        <if test="contractcar != null">
+        	contractcar=#{contractcar},
+        </if>
+        <if test="contractmoney != null">
+        	contractmoney=#{contractmoney},
+        </if>
+        <if test="contractbegin != null">
+        	contractbegin=#{contractbegin},
+        </if>
+        <if test="contractend != null">
+        	contractend=#{contractend},
+        </if>
+        <if test="contractsaler != null">
+        	contractsaler=#{contractsaler},
+        </if>
+        <if test="contractremark != null">
+        	contractremark=#{contractremark},
+        </if>
+        <if test="createdate != null">
+        	createdate=#{createdate},
+        </if>
+            id = id
+        </set>
+    </sql>
+
+    <sql id="dealers_contract_properties">
+        #{id},
+        #{dealerid},
+        #{contractnum},
+        #{contractcar},
+        #{contractmoney},
+        #{contractbegin},
+        #{contractend},
+        #{contractsaler},
+        #{contractremark},
+        #{createdate}
+    </sql>
+
+    <insert id="createDealersContract" parameterType="com.chexun.dealer.model.dealers.DealersContract" keyColumn="id" keyProperty="id" useGeneratedKeys="true" >
+        insert INTO dealers_contract (<include refid="dealers_contract_columns"/>) VALUES (<include refid="dealers_contract_properties"/>)
+    </insert>
+	
+	<insert id="insertDealersContract" parameterType="com.chexun.dealer.model.dealers.DealersContract" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    	insert into dealers_contract
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        			id,
+    			</if>
+    			<if test="dealerid != null" >
+        			dealerid,
+    			</if>
+    			<if test="contractnum != null" >
+        			contractnum,
+    			</if>
+    			<if test="contractcar != null" >
+        			contractcar,
+    			</if>
+    			<if test="contractmoney != null" >
+        			contractmoney,
+    			</if>
+    			<if test="contractbegin != null" >
+        			contractbegin,
+    			</if>
+    			<if test="contractend != null" >
+        			contractend,
+    			</if>
+    			<if test="contractsaler != null" >
+        			contractsaler,
+    			</if>
+    			<if test="contractremark != null" >
+        			contractremark,
+    			</if>
+    			<if test="createdate != null" >
+        			createdate
+    			</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        		#{id},
+    		</if>
+    			<if test="dealerid != null" >
+        		#{dealerid},
+    		</if>
+    			<if test="contractnum != null" >
+        		#{contractnum},
+    		</if>
+    			<if test="contractcar != null" >
+        		#{contractcar},
+    		</if>
+    			<if test="contractmoney != null" >
+        		#{contractmoney},
+    		</if>
+    			<if test="contractbegin != null" >
+        		#{contractbegin},
+    		</if>
+    			<if test="contractend != null" >
+        		#{contractend},
+    		</if>
+    			<if test="contractsaler != null" >
+        		#{contractsaler},
+    		</if>
+    			<if test="contractremark != null" >
+        		#{contractremark},
+    		</if>
+    			<if test="createdate != null" >
+        		#{createdate}
+    		</if>
+    	</trim>
+  	</insert>
+	
+    <delete id="deleteDealersContractById" parameterType="Long">
+        delete from dealers_contract
+        where
+            		id = #{            			value
+            		}
+    </delete>
+    
+    <delete id="deleteDealersContractByObj" parameterType="com.chexun.dealer.model.dealers.DealersContract">
+        delete from dealers_contract
+        <include refid="dealers_contract_where_conditions"/>
+    </delete>
+    
+  	<delete id="deleteDealersContractByIdList" parameterType="java.util.List">
+    	delete from dealers_contract 
+        	where
+            id
+    		IN 
+    		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </delete>
+
+    <update id="updateDealersContract" parameterType="com.chexun.dealer.model.dealers.DealersContract">
+        update dealers_contract SET
+            id = #{id},
+            dealerid = #{dealerid},
+            contractnum = #{contractnum},
+            contractcar = #{contractcar},
+            contractmoney = #{contractmoney},
+            contractbegin = #{contractbegin},
+            contractend = #{contractend},
+            contractsaler = #{contractsaler},
+            contractremark = #{contractremark},
+            createdate = #{createdate}
+        where
+            id = #{id}
+    </update>
+    
+    <update id="updateDealersContractByObj" parameterType="com.chexun.dealer.model.dealers.DealersContract">
+        update dealers_contract 
+        <include refid="dealers_contract_set_conditions"/>
+        where
+            id = #{id}
+    </update>
+    
+    <update id="updateDealersContractByObjAndConditions" parameterType="java.util.HashMap">
+        update dealers_contract 
+        <set>
+        <if test="s.id != null">
+        	id=#{s.id},
+        </if>
+        <if test="s.dealerid != null">
+        	dealerid=#{s.dealerid},
+        </if>
+        <if test="s.contractnum != null">
+        	contractnum=#{s.contractnum},
+        </if>
+        <if test="s.contractcar != null">
+        	contractcar=#{s.contractcar},
+        </if>
+        <if test="s.contractmoney != null">
+        	contractmoney=#{s.contractmoney},
+        </if>
+        <if test="s.contractbegin != null">
+        	contractbegin=#{s.contractbegin},
+        </if>
+        <if test="s.contractend != null">
+        	contractend=#{s.contractend},
+        </if>
+        <if test="s.contractsaler != null">
+        	contractsaler=#{s.contractsaler},
+        </if>
+        <if test="s.contractremark != null">
+        	contractremark=#{s.contractremark},
+        </if>
+        <if test="s.createdate != null">
+        	createdate=#{s.createdate},
+        </if>
+        </set>
+        <where>
+        <if test="c.id != null">
+        	id=#{c.id} AND 
+        </if>
+        <if test="c.dealerid != null">
+        	dealerid=#{c.dealerid} AND 
+        </if>
+        <if test="c.contractnum != null">
+        	contractnum=#{c.contractnum} AND 
+        </if>
+        <if test="c.contractcar != null">
+        	contractcar=#{c.contractcar} AND 
+        </if>
+        <if test="c.contractmoney != null">
+        	contractmoney=#{c.contractmoney} AND 
+        </if>
+        <if test="c.contractbegin != null">
+        	contractbegin=#{c.contractbegin} AND 
+        </if>
+        <if test="c.contractend != null">
+        	contractend=#{c.contractend} AND 
+        </if>
+        <if test="c.contractsaler != null">
+        	contractsaler=#{c.contractsaler} AND 
+        </if>
+        <if test="c.contractremark != null">
+        	contractremark=#{c.contractremark} AND 
+        </if>
+        <if test="c.createdate != null">
+        	createdate=#{c.createdate} AND 
+        </if>
+       (status!=2)
+        </where>
+    </update>
+    
+    <update id="batchUpdateDealersContract" parameterType="java.util.List">
+		update dealers_contract
+		<trim prefix="set" suffixOverrides=",">
+      	 	<trim prefix="id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.id!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.id}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="dealerid=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.dealerid!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.dealerid}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="contractnum=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.contractnum!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.contractnum}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="contractcar=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.contractcar!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.contractcar}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="contractmoney=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.contractmoney!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.contractmoney}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="contractbegin=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.contractbegin!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.contractbegin}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="contractend=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.contractend!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.contractend}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="contractsaler=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.contractsaler!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.contractsaler}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="contractremark=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.contractremark!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.contractremark}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="createdate=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.createdate!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.createdate}
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where
+		<foreach collection="list" separator="or" item="i" index="index">
+            	(id = #{i.id})
+		</foreach>
+	</update>
+    
+    
+
+    <select id="getDealersContractById" resultMap="DealersContractResult" parameterType="Long">
+        select
+        <include refid="dealers_contract_columns"/>
+        from dealers_contract
+        where
+            id = #{value}
+    </select>
+    
+    <select id="getDealersContractByObj" resultMap="DealersContractResult" parameterType="com.chexun.dealer.model.dealers.DealersContract">
+        select
+        <include refid="dealers_contract_columns"/>
+        from dealers_contract
+        <include refid="dealers_contract_where_conditions"/>
+    </select>
+	
+    
+    <select id="getDealersContractListByObj" resultMap="DealersContractResult"  parameterType="com.chexun.dealer.model.dealers.DealersContract">
+        select
+        <include refid="dealers_contract_columns"/>
+        from dealers_contract 
+        <include refid="dealers_contract_where_conditions"/>
+    </select>
+    
+    <select id="getDealersContractListByMap" resultMap="DealersContractResult"  parameterType="java.util.HashMap">
+        select
+        <include refid="dealers_contract_columns"/>
+        from dealers_contract 
+        <include refid="dealers_contract_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <select id="getDealersContractCountByObj" resultType="int" parameterType="com.chexun.dealer.model.dealers.DealersContract">
+        select count(1) from dealers_contract
+        <include refid="dealers_contract_where_conditions"/>
+    </select>
+    
+    
+    
+    <select id="getDealersContractIdByObj" resultType="Long" parameterType="com.chexun.dealer.model.dealers.DealersContract">
+        select       id                     
+        from dealers_contract
+        <include refid="dealers_contract_where_conditions"/>
+    </select>
+	
+    <select id="getDealersContractIdList" resultType="Long" parameterType="com.chexun.dealer.model.dealers.DealersContract">
+       select       id                      from dealers_contract where 1=1 
+        id = #{value}
+    </select>
+    
+    <select id="getDealersContractIdListByObj" resultType="Long"  parameterType="com.chexun.dealer.model.dealers.DealersContract">
+       select       id                      from dealers_contract 
+        <include refid="dealers_contract_where_conditions"/>
+    </select>
+    
+    <select id="getDealersContractIdListByMap" resultType="Long"  parameterType="java.util.HashMap">
+        select       id                      from dealers_contract 
+        <include refid="dealers_contract_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+</mapper>

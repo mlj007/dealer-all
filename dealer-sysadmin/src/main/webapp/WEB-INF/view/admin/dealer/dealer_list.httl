@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<link type="text/css" href="/statics/plugin/lhgcalendar/skins/lhgcalendar.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<script type="text/javascript" src="/statics/plugin/lhgcalendar/lhgcalendar.min.js"></script>
+<script type="text/javascript" src="/statics/js/common/province_city.js"></script>
+<script type="text/javascript" src="/statics/js/common/brand_series_model.js"></script>
+<script type="text/javascript" src="/statics/js/admin/dealer/dealer_list.js"></script>
+<script type="text/javascript" src="/statics/js/admin/dealer/dealer_common.js"></script>
+
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+<!--#set(com.chexun.dealer.vo.dealers.DealersInfoVo query)-->
+</head>
+<body>
+<div class="wrapper">
+	<!--START 左边開始-->
+	${include("/common/left_admin.httl")}
+	<!--END 左边结束-->
+	
+	<!--START 右侧开始-->
+	<div class="right">
+	
+	<!--START 头开始-->
+	${include("/common/top_admin.httl",["topMenuTitle":"经销商管理"])}
+	<!--END 头结束-->
+	
+	<div class="right-con">
+            <div class="sel"> 
+	             <form action="/admin/index?m=${m}" method="post" id="searchForm">
+	             	<input type="hidden" id="pageCurrentPage" name="currentPage" value="${page.currentPage}"/>
+	             	<input type="hidden" id="selectedBrandId" value="${query.brandId}"/>
+	             	<!--
+	             	<input type="hidden" id="selectedSeriesId" value="${query.seriesId}"/>
+	             	<input type="hidden" id="selectedModelId" value="${query.modelId}"/>
+	             	 -->
+	             	<input type="hidden" id="selectedProvinceId" value="${query.provinceId}"/>
+		            <input type="hidden" id="selectedCityId" value="${query.cityId}"/>
+		            <!-- 
+		            <input type="hidden" id="selectedRegionalId" value="${query.regionalId}"/>
+		            -->				  
+	             	<select id="brandId" name="brandId" ><option value="">--经营品牌--</option></select>
+	             	<!-- 
+	             	<select id="seriesId" name="seriesId" ><option value="">--经营车系--</option></select>
+	             	<select id="modelId" name="modelId" ><option value="">--经营车型--</option></select>
+	             	 -->
+	                <select id="provinceId" name="provinceId" ><option value="">--所在省份--</option></select>
+	                <select id="cityId" name="cityId"><option value="">--所在城市--</option></select>
+	                <!-- 
+	                <select id="regionalId" name="regionalId"><option value="">--所在区域--</option></select>
+	                 -->
+	                <select id="companyType" name="companyType">
+		                <option value="0" <!--#if(query.companyType=='0')-->selected<!--#end-->>公司性质</option>
+	                	<option value="1" <!--#if(query.companyType=='1')-->selected<!--#end-->>4S经销商</option>
+	                	<option value="2" <!--#if(query.companyType=='2')-->selected<!--#end-->>综合经销商</option>
+	                </select>
+	                <select id="dealerlevel" name="dealerlevel">
+	                	 <option value="0" <!--#if(query.dealerlevel=='0')-->selected<!--#end-->>会员级别</option>
+	                	 <option value="20" <!--#if(query.dealerlevel=='20')-->selected<!--#end-->>至雅会员</option>
+		                 <option value="30" <!--#if(query.dealerlevel=='30')-->selected<!--#end-->>至瑞会员</option>
+		                 <option value="40" <!--#if(query.dealerlevel=='40')-->selected<!--#end-->>至胜会员</option>
+		                 <option value="60" <!--#if(query.dealerlevel=='60')-->selected<!--#end-->>后台试用经销商</option>
+		                 <option value="70" <!--#if(query.dealerlevel=='70')-->selected<!--#end-->>免费经销商</option>
+		                 <option value="100" <!--#if(query.dealerlevel=='100')-->selected<!--#end-->>无账号</option>
+	                </select>
+	                <select id="state" name="state">
+	                	<option value="0"  <!--#if(query.state=='0')-->selected<!--#end-->>会员状态</option>
+		                <option value="4"  <!--#if(query.state=='4')-->selected<!--#end-->>隐藏</option>
+		                <option value="6"  <!--#if(query.state=='6')-->selected<!--#end-->>删除</option>
+		                <option value="1"  <!--#if(query.state=='1')-->selected<!--#end-->>正常</option>
+	                </select>
+	                <select id="isrecommendfirst" name="isrecommendfirst">
+	                	<option value="0" <!--#if(query.isrecommendfirst=='0')-->selected<!--#end-->>是否推荐</option>
+		                <option value="1" <!--#if(query.isrecommendfirst=='1')-->selected<!--#end-->>推荐</option>
+		                <option value="3" <!--#if(query.isrecommendfirst=='3')-->selected<!--#end-->>未推荐</option>
+	                </select>
+	                <span style="padding:0 0 0 10px">添加时间：</span>
+	                <input type="text" class="sel-inpt" name="createbeginTime" id="createbeginTime" value="${query.createbeginTime}" />
+	                <span style="padding:0 5px">至</span>
+	                <input type="text" class="sel-inpt" name="createendTime"  id="createendTime" value="${query.createendTime}"   />
+	                <span style="padding:0 0 0 10px">到期时间：</span>
+	                <input type="text" class="sel-inpt" name="expirebeginTime" id="expirebeginTime" value="${query.expirebeginTime}" />
+	                <span style="padding:0 5px">至</span>
+	                 <input type="text" class="sel-inpt" name="expireendTime"  id="expireendTime" value="${query.expireendTime}"   />
+	                <span style="padding:0 0 0 10px">公司名称:</span><span style="padding:0 0 0 10px"><input type="text" name="companyName" id="companyName" value="${query.companyName}"  class="sel-inpt" /></span>
+	                <input type="submit" class="con-sel-search" value="搜索" />
+                </form>
+            </div>
+            <div class="con">
+                <div class="con-bd" id="tab">
+                		<div class="con-con"><span class="fl"><a href="javascript:selectCheckbox(true);">全选</a><a href="javascript:selectCheckbox(false);">反选</a><a href="javascript:dealer_list.updstate();">隐藏</a><a href="javascript:dealer_list.updisrecommendfirst();">推荐</a><a href="javascript:dealer_list.viewwebsite();"  id="viewwebsite">查看前台</a><a href="javascript:dealer_list.viewsystem();">进入后台</a><a href="#">重置密码</a><a href="javascript:dealer_list.updCreatTime();">更新报价</a><a href="javascript:dealer_list.updDealerInfo();">修改信息</a></span><span class="fr"><a href="/admin/dealer/add">添加经销商</a></span></div>
+                        <table  width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <th><input name="" type="checkbox" value="" onclick="selectCheckBox(this)"></th>
+                                <th>经销商简称</th>
+                                <th>地区</th>
+                                <th width="10%">经营品牌</th>
+                                <th>联系电话</th>
+                                <th>上次登录时间</th>
+                                <th>合同开始日期</th>
+                                <th>合同结束日期</th>
+                                <th>会员级别</th>
+                                <th>推荐</th>
+                                <th>性质</th>
+                                <th>APP</th>
+                                <th>iOS</th>
+                                <th>Android</th>
+                                <th>未处理线索</th>
+                            </tr>
+                             <!--#for(com.chexun.dealer.po.dealers.DealersInfoPo dealersInfoPo : dealersInfoList)-->
+							<tr>
+                                <td><input type="checkbox" name="did"  value="${dealersInfoPo.id}"></td>
+                                <td>${dealersInfoPo.dealerShortName }</td>
+                                <td>${dealersInfoPo.cityName }</td>
+                                <td>${dealersInfoPo.brandName }</td>
+                                <td>${dealersInfoPo.salePhone }</td>
+                                <td><span style="color:Red;font-weight:bold;">${dealersInfoPo.lastLoginTime }</span></td>
+                                <td>${dealersInfoPo.beginTime }</td>
+                                <td>${dealersInfoPo.endTime }</td>
+                                <td>
+                                    <!--#if(dealersInfoPo.dealerlevel=='10')-->至尊会员<!--#end-->
+                                	<!--#if(dealersInfoPo.dealerlevel=='20')-->至雅会员<!--#end-->
+                                	<!--#if(dealersInfoPo.dealerlevel=='30')-->至瑞会员<!--#end-->
+                                	<!--#if(dealersInfoPo.dealerlevel=='40')-->至胜会员<!--#end-->
+                                	<!--#if(dealersInfoPo.dealerlevel=='50')-->至优会员<!--#end-->
+                                	<!--#if(dealersInfoPo.dealerlevel=='60')-->后台试用经销商<!--#end-->
+                                	<!--#if(dealersInfoPo.dealerlevel=='70')-->免费经销商<!--#end-->
+                                	<!--#if(dealersInfoPo.dealerlevel=='100')-->无账号<!--#end-->
+                                </td>
+                                <td><span class="dsh"><!--#if(dealersInfoPo.isrecommendfirst=='1')-->推荐<!--#else-->未推荐<!--#end--></span></td>
+                                <td><span class="ss"><!--#if(dealersInfoPo.companyType=='1')-->4S<!--#else-->综合经销商<!--#end--></span></td>
+                                <td>
+                                	<!--#if(dealersInfoPo.state=='1')-->正常<!--#end-->
+                                	<!--#if(dealersInfoPo.state=='4')-->隐藏<!--#end-->
+                                	<!--#if(dealersInfoPo.state=='6')-->删除<!--#end-->
+                                </td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><span class="wtg">0条未处理</span></td>
+                            </tr>
+                             <!--#end-->
+                        </table>
+                        <div class="con-con clearfix" style="margin:20px 0 0 0"><span class="fl"><a href="javascript:selectCheckbox(true);">全选</a><a href="javascript:selectCheckbox(false);">反选</a><a href="javascript:dealer_list.updstate();">隐藏</a><a href="javascript:dealer_list.updisrecommendfirst();">推荐</a><a href="javascript:dealer_list.viewwebsite();"  id="viewwebsite">查看前台</a><a href="#">进入后台</a><a href="#">重置密码</a><a href="javascript:dealer_list.updCreatTime();">更新报价</a><a href="javascript:dealer_list.updDealerInfo();">修改信息</a></span><span class="fr"><a href="/admin/dealer/add">添加经销商</a></span></div>
+                        ${include("/common/page.httl")}
+                </div>
+            </div>
+     </div>
+     <!--END  右侧结束-->
+      <!--START 底部开始-->
+        ${include("/common/footer.httl")}
+      <!--END 底部结束-->
+</div>
+</body>
+</html>

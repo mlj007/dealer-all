@@ -1,0 +1,31 @@
+<meta charset="utf-8">
+<div class="left">
+        <div class="left-con">
+            <h1 class="left-hd"> <a href="#"><img src="/statics/images/logo.png" /></a> </h1>
+            <!-- START经销商管理后台  左侧开始 -->
+            <div class="left-bd" id="admin_left" >
+            	<!--#for(com.chexun.dealer.model.permission.Permission parentMenu : parentMenulist)-->
+            	<div class="nav-box">
+            	<!--#set(java.lang.String m)-->
+                    <h3 ><i class="left-i${parentMenu.moduleImg}"></i>${parentMenu.moduleName}<span></span></h3>
+                    <div class="nav-box-bd" <!--#if(parentMenu.moduleId==m )-->style='display: block'<!--#end-->>
+                        <ul>
+                        	<!--#for(com.chexun.dealer.model.permission.Permission module : modulelist)-->
+                        	 <!--#if(parentMenu.moduleId==module.moduleSuperLevelId)-->
+	                            <li>
+	                            	<a href="${module.moduleUrl}?m=${parentMenu.moduleId}">${module.moduleName}</a> 
+	                            </li>
+                             <!--#end-->
+                    		<!--#end-->
+                        </ul>
+                    </div>
+                 </div>
+            	 <!--#end-->
+            	
+            </div>
+            <!-- END经销商管理后台  左侧结束 -->
+        </div>
+        <span class="left-hide"></span> <span class="left-show"></span> 
+        <input type="hidden" id="m" value="${m}">
+        </div>
+    <!--END 左边结束-->

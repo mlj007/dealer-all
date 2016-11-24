@@ -1,0 +1,1157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chexun.dealer.model.car.DealersCarMapper">
+ 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>   -->
+    <resultMap id="DealersCarResult" type="com.chexun.dealer.model.car.DealersCar">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="brandId" column="brand_id"/>
+        <result property="brandName" column="brand_name"/>
+        <result property="companyId" column="company_id"/>
+        <result property="companyName" column="company_name"/>
+        <result property="seriesId" column="series_id"/>
+        <result property="seriesName" column="series_name"/>
+        <result property="yearId" column="year_id"/>
+        <result property="yearName" column="year_name"/>
+        <result property="modelId" column="model_id"/>
+        <result property="modelName" column="model_name"/>
+        <result property="companyprice" column="companyprice"/>
+        <result property="price" column="price"/>
+        <result property="provinceId" column="province_id"/>
+        <result property="cityId" column="city_id"/>
+        <result property="state" column="state"/>
+        <result property="createTime" column="create_time"/>
+        <result property="isRecommend" column="is_recommend"/>
+        <result property="remarks" column="remarks"/>
+        <result property="clickNum" column="click_num"/>
+        <result property="sort" column="sort"/>
+        <result property="dateTime" column="date_time"/>
+        <result property="gifts" column="gifts"/>
+        <result property="modelRecommend" column="model_recommend"/>
+        <result property="sellType" column="sell_type"/>
+        <result property="promotionType" column="promotion_type"/>
+        <result property="companyWebsite" column="company_website"/>
+        <result property="ycSeriesId" column="yc_series_id"/>
+        <result property="ycModelId" column="yc_model_id"/>
+        <result property="clickcount" column="clickcount"/>
+        <result property="consultprice" column="consultprice"/>
+        <result property="companyWebsite2" column="company_website2"/>
+    </resultMap>
+	<resultMap id="BrandCountAndCarCountResult" type="com.chexun.dealer.po.dealers.DealersCarPo">
+        <result property="brandCount" column="brandCount"/>
+        <result property="carCount" column="carCount"/>
+    </resultMap>
+    <resultMap id="BrandListResult" type="com.chexun.dealer.po.dealers.DealersCarPo">
+        <result property="brandId" column="BRAND_ID"/>
+        <result property="brandName" column="BRAND_NAME"/>
+    </resultMap>
+    <resultMap id="SeriesListResult" type="com.chexun.dealer.po.dealers.DealersCarPo">
+    	<result property="brandId" column="BRAND_ID"/>
+        <result property="seriesId" column="SERIES_ID"/>
+        <result property="seriesName" column="SERIES_NAME"/>
+        <result property="carCount" column="carCount"/>
+    </resultMap>
+    <resultMap id="SeriesNameAndCarCountResult" type="com.chexun.dealer.po.dealers.DealersCarPo">
+        <result property="seriesName" column="SERIES_NAME"/>
+        <result property="carCount" column="carCount"/>
+    </resultMap>
+    <resultMap id="CarListResult" type="com.chexun.dealer.po.dealers.DealersCarPo">
+        <result property="modelId" column="MODEL_ID"/>
+        <result property="modelName" column="MODEL_NAME"/>
+        <result property="yearName" column="YEAR_NAME"/>
+        <result property="companyPrice" column="CompanyPrice"/>
+        <result property="price" column="ConsultPrice"/>
+        <result property="dateTime" column="DATE_TIME"/>
+        <result property="sellType" column="SELL_TYPE"/>
+    </resultMap>
+    <sql id="dealers_car_columns">
+        dealers_car.id,
+        dealers_car.user_id,
+        dealers_car.brand_id,
+        dealers_car.brand_name,
+        dealers_car.company_id,
+        dealers_car.company_name,
+        dealers_car.series_id,
+        dealers_car.series_name,
+        dealers_car.year_id,
+        dealers_car.year_name,
+        dealers_car.model_id,
+        dealers_car.model_name,
+        dealers_car.companyprice,
+        dealers_car.price,
+        dealers_car.province_id,
+        dealers_car.city_id,
+        dealers_car.state,
+        dealers_car.create_time,
+        dealers_car.is_recommend,
+        dealers_car.remarks,
+        dealers_car.click_num,
+        dealers_car.sort,
+        dealers_car.date_time,
+        dealers_car.gifts,
+        dealers_car.model_recommend,
+        dealers_car.sell_type,
+        dealers_car.promotion_type,
+        dealers_car.company_website,
+        dealers_car.yc_series_id,
+        dealers_car.yc_model_id,
+        dealers_car.clickcount,
+        dealers_car.consultprice,
+        dealers_car.company_website2
+    </sql>
+    
+    <sql id="dealers_car_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="id != null">
+        	and id=#{id} 
+        </if>
+        <if test="userId != null">
+        	and user_id=#{userId} 
+        </if>
+        <if test="brandId != null">
+        	and brand_id=#{brandId} 
+        </if>
+        
+        <if test="brandName != null and brandName != ''">
+        	and brand_name=#{brandName} 
+        </if>
+        <if test="companyId != null">
+        	and company_id=#{companyId} 
+        </if>
+        
+        <if test="companyName != null and companyName != ''">
+        	and company_name=#{companyName} 
+        </if>
+        <if test="seriesId != null">
+        	and series_id=#{seriesId} 
+        </if>
+        
+        <if test="seriesName != null and seriesName != ''">
+        	and series_name=#{seriesName} 
+        </if>
+        <if test="yearId != null">
+        	and year_id=#{yearId} 
+        </if>
+        
+        <if test="yearName != null and yearName != ''">
+        	and year_name=#{yearName} 
+        </if>
+        <if test="modelId != null">
+        	and model_id=#{modelId} 
+        </if>
+        
+        <if test="modelName != null and modelName != ''">
+        	and model_name=#{modelName} 
+        </if>
+        <if test="companyprice != null">
+        	and companyprice=#{companyprice} 
+        </if>
+        <if test="price != null">
+        	and price=#{price} 
+        </if>
+        <if test="provinceId != null">
+        	and province_id=#{provinceId} 
+        </if>
+        <if test="cityId != null">
+        	and city_id=#{cityId} 
+        </if>
+        <if test="state != null">
+        	and state=#{state} 
+        </if>
+        <if test="createTime != null">
+        	and create_time=#{createTime} 
+        </if>
+        <if test="isRecommend != null">
+        	and is_recommend=#{isRecommend} 
+        </if>
+        
+        <if test="remarks != null and remarks != ''">
+        	and remarks=#{remarks} 
+        </if>
+        <if test="clickNum != null">
+        	and click_num=#{clickNum} 
+        </if>
+        <if test="sort != null">
+        	and sort=#{sort} 
+        </if>
+        <if test="dateTime != null">
+        	and date_time=#{dateTime} 
+        </if>
+        
+        <if test="gifts != null and gifts != ''">
+        	and gifts=#{gifts} 
+        </if>
+        
+        <if test="modelRecommend != null and modelRecommend != ''">
+        	and model_recommend=#{modelRecommend} 
+        </if>
+        <if test="sellType != null">
+        	and sell_type=#{sellType} 
+        </if>
+        <if test="promotionType != null">
+        	and promotion_type=#{promotionType} 
+        </if>
+        
+        <if test="companyWebsite != null and companyWebsite != ''">
+        	and company_website=#{companyWebsite} 
+        </if>
+        <if test="ycSeriesId != null">
+        	and yc_series_id=#{ycSeriesId} 
+        </if>
+        <if test="ycModelId != null">
+        	and yc_model_id=#{ycModelId} 
+        </if>
+        <if test="clickcount != null">
+        	and clickcount=#{clickcount} 
+        </if>
+        <if test="consultprice != null">
+        	and consultprice=#{consultprice} 
+        </if>
+        
+        <if test="companyWebsite2 != null and companyWebsite2 != ''">
+        	and company_website2=#{companyWebsite2} 
+        </if>
+        </trim>
+    </sql>
+    
+    <sql id="dealers_car_set_conditions">
+    	<set>
+        <if test="id != null">
+        	id=#{id},
+        </if>
+        <if test="userId != null">
+        	user_id=#{userId},
+        </if>
+        <if test="brandId != null">
+        	brand_id=#{brandId},
+        </if>
+        <if test="brandName != null">
+        	brand_name=#{brandName},
+        </if>
+        <if test="companyId != null">
+        	company_id=#{companyId},
+        </if>
+        <if test="companyName != null">
+        	company_name=#{companyName},
+        </if>
+        <if test="seriesId != null">
+        	series_id=#{seriesId},
+        </if>
+        <if test="seriesName != null">
+        	series_name=#{seriesName},
+        </if>
+        <if test="yearId != null">
+        	year_id=#{yearId},
+        </if>
+        <if test="yearName != null">
+        	year_name=#{yearName},
+        </if>
+        <if test="modelId != null">
+        	model_id=#{modelId},
+        </if>
+        <if test="modelName != null">
+        	model_name=#{modelName},
+        </if>
+        <if test="companyprice != null">
+        	companyprice=#{companyprice},
+        </if>
+        <if test="price != null">
+        	price=#{price},
+        </if>
+        <if test="provinceId != null">
+        	province_id=#{provinceId},
+        </if>
+        <if test="cityId != null">
+        	city_id=#{cityId},
+        </if>
+        <if test="state != null">
+        	state=#{state},
+        </if>
+        <if test="createTime != null">
+        	create_time=#{createTime},
+        </if>
+        <if test="isRecommend != null">
+        	is_recommend=#{isRecommend},
+        </if>
+        <if test="remarks != null">
+        	remarks=#{remarks},
+        </if>
+        <if test="clickNum != null">
+        	click_num=#{clickNum},
+        </if>
+        <if test="sort != null">
+        	sort=#{sort},
+        </if>
+        <if test="dateTime != null">
+        	date_time=#{dateTime},
+        </if>
+        <if test="gifts != null">
+        	gifts=#{gifts},
+        </if>
+        <if test="modelRecommend != null">
+        	model_recommend=#{modelRecommend},
+        </if>
+        <if test="sellType != null">
+        	sell_type=#{sellType},
+        </if>
+        <if test="promotionType != null">
+        	promotion_type=#{promotionType},
+        </if>
+        <if test="companyWebsite != null">
+        	company_website=#{companyWebsite},
+        </if>
+        <if test="ycSeriesId != null">
+        	yc_series_id=#{ycSeriesId},
+        </if>
+        <if test="ycModelId != null">
+        	yc_model_id=#{ycModelId},
+        </if>
+        <if test="clickcount != null">
+        	clickcount=#{clickcount},
+        </if>
+        <if test="consultprice != null">
+        	consultprice=#{consultprice},
+        </if>
+        <if test="companyWebsite2 != null">
+        	company_website2=#{companyWebsite2},
+        </if>
+        </set>
+    </sql>
+
+    <sql id="dealers_car_properties">
+        #{id},
+        #{userId},
+        #{brandId},
+        #{brandName},
+        #{companyId},
+        #{companyName},
+        #{seriesId},
+        #{seriesName},
+        #{yearId},
+        #{yearName},
+        #{modelId},
+        #{modelName},
+        #{companyprice},
+        #{price},
+        #{provinceId},
+        #{cityId},
+        #{state},
+        #{createTime},
+        #{isRecommend},
+        #{remarks},
+        #{clickNum},
+        #{sort},
+        #{dateTime},
+        #{gifts},
+        #{modelRecommend},
+        #{sellType},
+        #{promotionType},
+        #{companyWebsite},
+        #{ycSeriesId},
+        #{ycModelId},
+        #{clickcount},
+        #{consultprice},
+        #{companyWebsite2}
+    </sql>
+
+    <insert id="createDealersCar" parameterType="com.chexun.dealer.model.car.DealersCar" keyColumn="id" keyProperty="id" useGeneratedKeys="true" >
+        insert INTO dealers_car (<include refid="dealers_car_columns"/>) VALUES (<include refid="dealers_car_properties"/>)
+    </insert>
+	
+	<insert id="insertDealersCar" parameterType="com.chexun.dealer.model.car.DealersCar" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    	insert into dealers_car
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        			id,
+    			</if>
+    			<if test="userId != null" >
+        			user_id,
+    			</if>
+    			<if test="brandId != null" >
+        			brand_id,
+    			</if>
+    			<if test="brandName != null" >
+        			brand_name,
+    			</if>
+    			<if test="companyId != null" >
+        			company_id,
+    			</if>
+    			<if test="companyName != null" >
+        			company_name,
+    			</if>
+    			<if test="seriesId != null" >
+        			series_id,
+    			</if>
+    			<if test="seriesName != null" >
+        			series_name,
+    			</if>
+    			<if test="yearId != null" >
+        			year_id,
+    			</if>
+    			<if test="yearName != null" >
+        			year_name,
+    			</if>
+    			<if test="modelId != null" >
+        			model_id,
+    			</if>
+    			<if test="modelName != null" >
+        			model_name,
+    			</if>
+    			<if test="companyprice != null" >
+        			companyprice,
+    			</if>
+    			<if test="price != null" >
+        			price,
+    			</if>
+    			<if test="provinceId != null" >
+        			province_id,
+    			</if>
+    			<if test="cityId != null" >
+        			city_id,
+    			</if>
+    			<if test="state != null" >
+        			state,
+    			</if>
+    			<if test="createTime != null" >
+        			create_time,
+    			</if>
+    			<if test="isRecommend != null" >
+        			is_recommend,
+    			</if>
+    			<if test="remarks != null" >
+        			remarks,
+    			</if>
+    			<if test="clickNum != null" >
+        			click_num,
+    			</if>
+    			<if test="sort != null" >
+        			sort,
+    			</if>
+    			<if test="dateTime != null" >
+        			date_time,
+    			</if>
+    			<if test="gifts != null" >
+        			gifts,
+    			</if>
+    			<if test="modelRecommend != null" >
+        			model_recommend,
+    			</if>
+    			<if test="sellType != null" >
+        			sell_type,
+    			</if>
+    			<if test="promotionType != null" >
+        			promotion_type,
+    			</if>
+    			<if test="companyWebsite != null" >
+        			company_website,
+    			</if>
+    			<if test="ycSeriesId != null" >
+        			yc_series_id,
+    			</if>
+    			<if test="ycModelId != null" >
+        			yc_model_id,
+    			</if>
+    			<if test="clickcount != null" >
+        			clickcount,
+    			</if>
+    			<if test="consultprice != null" >
+        			consultprice,
+    			</if>
+    			<if test="companyWebsite2 != null" >
+        			company_website2
+    			</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        		#{id},
+    		</if>
+    			<if test="userId != null" >
+        		#{userId},
+    		</if>
+    			<if test="brandId != null" >
+        		#{brandId},
+    		</if>
+    			<if test="brandName != null" >
+        		#{brandName},
+    		</if>
+    			<if test="companyId != null" >
+        		#{companyId},
+    		</if>
+    			<if test="companyName != null" >
+        		#{companyName},
+    		</if>
+    			<if test="seriesId != null" >
+        		#{seriesId},
+    		</if>
+    			<if test="seriesName != null" >
+        		#{seriesName},
+    		</if>
+    			<if test="yearId != null" >
+        		#{yearId},
+    		</if>
+    			<if test="yearName != null" >
+        		#{yearName},
+    		</if>
+    			<if test="modelId != null" >
+        		#{modelId},
+    		</if>
+    			<if test="modelName != null" >
+        		#{modelName},
+    		</if>
+    			<if test="companyprice != null" >
+        		#{companyprice},
+    		</if>
+    			<if test="price != null" >
+        		#{price},
+    		</if>
+    			<if test="provinceId != null" >
+        		#{provinceId},
+    		</if>
+    			<if test="cityId != null" >
+        		#{cityId},
+    		</if>
+    			<if test="state != null" >
+        		#{state},
+    		</if>
+    			<if test="createTime != null" >
+        		#{createTime},
+    		</if>
+    			<if test="isRecommend != null" >
+        		#{isRecommend},
+    		</if>
+    			<if test="remarks != null" >
+        		#{remarks},
+    		</if>
+    			<if test="clickNum != null" >
+        		#{clickNum},
+    		</if>
+    			<if test="sort != null" >
+        		#{sort},
+    		</if>
+    			<if test="dateTime != null" >
+        		#{dateTime},
+    		</if>
+    			<if test="gifts != null" >
+        		#{gifts},
+    		</if>
+    			<if test="modelRecommend != null" >
+        		#{modelRecommend},
+    		</if>
+    			<if test="sellType != null" >
+        		#{sellType},
+    		</if>
+    			<if test="promotionType != null" >
+        		#{promotionType},
+    		</if>
+    			<if test="companyWebsite != null" >
+        		#{companyWebsite},
+    		</if>
+    			<if test="ycSeriesId != null" >
+        		#{ycSeriesId},
+    		</if>
+    			<if test="ycModelId != null" >
+        		#{ycModelId},
+    		</if>
+    			<if test="clickcount != null" >
+        		#{clickcount},
+    		</if>
+    			<if test="consultprice != null" >
+        		#{consultprice},
+    		</if>
+    			<if test="companyWebsite2 != null" >
+        		#{companyWebsite2}
+    		</if>
+    	</trim>
+  	</insert>
+	
+    <delete id="deleteDealersCarById" parameterType="Long">
+        delete from dealers_car
+    </delete>
+    
+    <delete id="deleteDealersCarByObj" parameterType="com.chexun.dealer.model.car.DealersCar">
+        delete from dealers_car
+        <include refid="dealers_car_where_conditions"/>
+    </delete>
+    
+  	<delete id="deleteDealersCarByIdList" parameterType="java.util.List">
+    	delete from dealers_car 
+    </delete>
+
+    <update id="updateDealersCar" parameterType="com.chexun.dealer.model.car.DealersCar">
+        update dealers_car SET
+            id = #{id},
+            user_id = #{userId},
+            brand_id = #{brandId},
+            brand_name = #{brandName},
+            company_id = #{companyId},
+            company_name = #{companyName},
+            series_id = #{seriesId},
+            series_name = #{seriesName},
+            year_id = #{yearId},
+            year_name = #{yearName},
+            model_id = #{modelId},
+            model_name = #{modelName},
+            companyprice = #{companyprice},
+            price = #{price},
+            province_id = #{provinceId},
+            city_id = #{cityId},
+            state = #{state},
+            create_time = #{createTime},
+            is_recommend = #{isRecommend},
+            remarks = #{remarks},
+            click_num = #{clickNum},
+            sort = #{sort},
+            date_time = #{dateTime},
+            gifts = #{gifts},
+            model_recommend = #{modelRecommend},
+            sell_type = #{sellType},
+            promotion_type = #{promotionType},
+            company_website = #{companyWebsite},
+            yc_series_id = #{ycSeriesId},
+            yc_model_id = #{ycModelId},
+            clickcount = #{clickcount},
+            consultprice = #{consultprice},
+            company_website2 = #{companyWebsite2}
+    </update>
+    
+    <update id="updateDealersCarByObj" parameterType="com.chexun.dealer.model.car.DealersCar">
+        update dealers_car 
+        <include refid="dealers_car_set_conditions"/>
+    </update>
+    
+    <update id="updateDealersCarByObjAndConditions" parameterType="java.util.HashMap">
+        update dealers_car 
+        <set>
+        <if test="s.id != null">
+        	id=#{s.id},
+        </if>
+        <if test="s.userId != null">
+        	user_id=#{s.userId},
+        </if>
+        <if test="s.brandId != null">
+        	brand_id=#{s.brandId},
+        </if>
+        <if test="s.brandName != null">
+        	brand_name=#{s.brandName},
+        </if>
+        <if test="s.companyId != null">
+        	company_id=#{s.companyId},
+        </if>
+        <if test="s.companyName != null">
+        	company_name=#{s.companyName},
+        </if>
+        <if test="s.seriesId != null">
+        	series_id=#{s.seriesId},
+        </if>
+        <if test="s.seriesName != null">
+        	series_name=#{s.seriesName},
+        </if>
+        <if test="s.yearId != null">
+        	year_id=#{s.yearId},
+        </if>
+        <if test="s.yearName != null">
+        	year_name=#{s.yearName},
+        </if>
+        <if test="s.modelId != null">
+        	model_id=#{s.modelId},
+        </if>
+        <if test="s.modelName != null">
+        	model_name=#{s.modelName},
+        </if>
+        <if test="s.companyprice != null">
+        	companyprice=#{s.companyprice},
+        </if>
+        <if test="s.price != null">
+        	price=#{s.price},
+        </if>
+        <if test="s.provinceId != null">
+        	province_id=#{s.provinceId},
+        </if>
+        <if test="s.cityId != null">
+        	city_id=#{s.cityId},
+        </if>
+        <if test="s.state != null">
+        	state=#{s.state},
+        </if>
+        <if test="s.createTime != null">
+        	create_time=#{s.createTime},
+        </if>
+        <if test="s.isRecommend != null">
+        	is_recommend=#{s.isRecommend},
+        </if>
+        <if test="s.remarks != null">
+        	remarks=#{s.remarks},
+        </if>
+        <if test="s.clickNum != null">
+        	click_num=#{s.clickNum},
+        </if>
+        <if test="s.sort != null">
+        	sort=#{s.sort},
+        </if>
+        <if test="s.dateTime != null">
+        	date_time=#{s.dateTime},
+        </if>
+        <if test="s.gifts != null">
+        	gifts=#{s.gifts},
+        </if>
+        <if test="s.modelRecommend != null">
+        	model_recommend=#{s.modelRecommend},
+        </if>
+        <if test="s.sellType != null">
+        	sell_type=#{s.sellType},
+        </if>
+        <if test="s.promotionType != null">
+        	promotion_type=#{s.promotionType},
+        </if>
+        <if test="s.companyWebsite != null">
+        	company_website=#{s.companyWebsite},
+        </if>
+        <if test="s.ycSeriesId != null">
+        	yc_series_id=#{s.ycSeriesId},
+        </if>
+        <if test="s.ycModelId != null">
+        	yc_model_id=#{s.ycModelId},
+        </if>
+        <if test="s.clickcount != null">
+        	clickcount=#{s.clickcount},
+        </if>
+        <if test="s.consultprice != null">
+        	consultprice=#{s.consultprice},
+        </if>
+        <if test="s.companyWebsite2 != null">
+        	company_website2=#{s.companyWebsite2},
+        </if>
+        </set>
+        <where>
+        <if test="c.id != null">
+        	id=#{c.id} AND 
+        </if>
+        <if test="c.userId != null">
+        	user_id=#{c.userId} AND 
+        </if>
+        <if test="c.brandId != null">
+        	brand_id=#{c.brandId} AND 
+        </if>
+        <if test="c.brandName != null">
+        	brand_name=#{c.brandName} AND 
+        </if>
+        <if test="c.companyId != null">
+        	company_id=#{c.companyId} AND 
+        </if>
+        <if test="c.companyName != null">
+        	company_name=#{c.companyName} AND 
+        </if>
+        <if test="c.seriesId != null">
+        	series_id=#{c.seriesId} AND 
+        </if>
+        <if test="c.seriesName != null">
+        	series_name=#{c.seriesName} AND 
+        </if>
+        <if test="c.yearId != null">
+        	year_id=#{c.yearId} AND 
+        </if>
+        <if test="c.yearName != null">
+        	year_name=#{c.yearName} AND 
+        </if>
+        <if test="c.modelId != null">
+        	model_id=#{c.modelId} AND 
+        </if>
+        <if test="c.modelName != null">
+        	model_name=#{c.modelName} AND 
+        </if>
+        <if test="c.companyprice != null">
+        	companyprice=#{c.companyprice} AND 
+        </if>
+        <if test="c.price != null">
+        	price=#{c.price} AND 
+        </if>
+        <if test="c.provinceId != null">
+        	province_id=#{c.provinceId} AND 
+        </if>
+        <if test="c.cityId != null">
+        	city_id=#{c.cityId} AND 
+        </if>
+        <if test="c.state != null">
+        	state=#{c.state} AND 
+        </if>
+        <if test="c.createTime != null">
+        	create_time=#{c.createTime} AND 
+        </if>
+        <if test="c.isRecommend != null">
+        	is_recommend=#{c.isRecommend} AND 
+        </if>
+        <if test="c.remarks != null">
+        	remarks=#{c.remarks} AND 
+        </if>
+        <if test="c.clickNum != null">
+        	click_num=#{c.clickNum} AND 
+        </if>
+        <if test="c.sort != null">
+        	sort=#{c.sort} AND 
+        </if>
+        <if test="c.dateTime != null">
+        	date_time=#{c.dateTime} AND 
+        </if>
+        <if test="c.gifts != null">
+        	gifts=#{c.gifts} AND 
+        </if>
+        <if test="c.modelRecommend != null">
+        	model_recommend=#{c.modelRecommend} AND 
+        </if>
+        <if test="c.sellType != null">
+        	sell_type=#{c.sellType} AND 
+        </if>
+        <if test="c.promotionType != null">
+        	promotion_type=#{c.promotionType} AND 
+        </if>
+        <if test="c.companyWebsite != null">
+        	company_website=#{c.companyWebsite} AND 
+        </if>
+        <if test="c.ycSeriesId != null">
+        	yc_series_id=#{c.ycSeriesId} AND 
+        </if>
+        <if test="c.ycModelId != null">
+        	yc_model_id=#{c.ycModelId} AND 
+        </if>
+        <if test="c.clickcount != null">
+        	clickcount=#{c.clickcount} AND 
+        </if>
+        <if test="c.consultprice != null">
+        	consultprice=#{c.consultprice} AND 
+        </if>
+        <if test="c.companyWebsite2 != null">
+        	company_website2=#{c.companyWebsite2} AND 
+        </if>
+       (status!=2)
+        </where>
+    </update>
+    
+    <update id="batchUpdateDealersCar" parameterType="java.util.List">
+		update dealers_car
+		<trim prefix="set" suffixOverrides=",">
+      	 	<trim prefix="id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.id!=null">
+						WHEN  THEN #{i.id}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="user_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.userId!=null">
+						WHEN  THEN #{i.userId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="brand_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.brandId!=null">
+						WHEN  THEN #{i.brandId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="brand_name=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.brandName!=null">
+						WHEN  THEN #{i.brandName}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="company_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.companyId!=null">
+						WHEN  THEN #{i.companyId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="company_name=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.companyName!=null">
+						WHEN  THEN #{i.companyName}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="series_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.seriesId!=null">
+						WHEN  THEN #{i.seriesId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="series_name=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.seriesName!=null">
+						WHEN  THEN #{i.seriesName}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="year_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.yearId!=null">
+						WHEN  THEN #{i.yearId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="year_name=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.yearName!=null">
+						WHEN  THEN #{i.yearName}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="model_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.modelId!=null">
+						WHEN  THEN #{i.modelId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="model_name=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.modelName!=null">
+						WHEN  THEN #{i.modelName}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="companyprice=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.companyprice!=null">
+						WHEN  THEN #{i.companyprice}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="price=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.price!=null">
+						WHEN  THEN #{i.price}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="province_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.provinceId!=null">
+						WHEN  THEN #{i.provinceId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="city_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.cityId!=null">
+						WHEN  THEN #{i.cityId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="state=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.state!=null">
+						WHEN  THEN #{i.state}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="create_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.createTime!=null">
+						WHEN  THEN #{i.createTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="is_recommend=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.isRecommend!=null">
+						WHEN  THEN #{i.isRecommend}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="remarks=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.remarks!=null">
+						WHEN  THEN #{i.remarks}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="click_num=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.clickNum!=null">
+						WHEN  THEN #{i.clickNum}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="sort=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.sort!=null">
+						WHEN  THEN #{i.sort}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="date_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.dateTime!=null">
+						WHEN  THEN #{i.dateTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="gifts=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.gifts!=null">
+						WHEN  THEN #{i.gifts}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="model_recommend=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.modelRecommend!=null">
+						WHEN  THEN #{i.modelRecommend}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="sell_type=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.sellType!=null">
+						WHEN  THEN #{i.sellType}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="promotion_type=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.promotionType!=null">
+						WHEN  THEN #{i.promotionType}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="company_website=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.companyWebsite!=null">
+						WHEN  THEN #{i.companyWebsite}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="yc_series_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.ycSeriesId!=null">
+						WHEN  THEN #{i.ycSeriesId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="yc_model_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.ycModelId!=null">
+						WHEN  THEN #{i.ycModelId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="clickcount=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.clickcount!=null">
+						WHEN  THEN #{i.clickcount}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="consultprice=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.consultprice!=null">
+						WHEN  THEN #{i.consultprice}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="company_website2=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.companyWebsite2!=null">
+						WHEN  THEN #{i.companyWebsite2}
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where
+		<foreach collection="list" separator="or" item="i" index="index">
+		</foreach>
+	</update>
+    
+    
+
+    <select id="getDealersCarById" resultMap="DealersCarResult" parameterType="Long">
+        select
+        <include refid="dealers_car_columns"/>
+        from dealers_car
+    </select>
+    
+    <select id="getDealersCarByObj" resultMap="DealersCarResult" parameterType="com.chexun.dealer.model.car.DealersCar">
+        select
+        <include refid="dealers_car_columns"/>
+        from dealers_car
+        <include refid="dealers_car_where_conditions"/>
+    </select>
+	
+    
+    <select id="getDealersCarListByObj" resultMap="DealersCarResult"  parameterType="com.chexun.dealer.model.car.DealersCar">
+        select
+        <include refid="dealers_car_columns"/>
+        from dealers_car 
+        <include refid="dealers_car_where_conditions"/>
+    </select>
+    
+    <select id="getDealersCarListByMap" resultMap="DealersCarResult"  parameterType="java.util.HashMap">
+        select
+        <include refid="dealers_car_columns"/>
+        from dealers_car 
+        <include refid="dealers_car_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <select id="getDealersCarCountByObj" resultType="int" parameterType="com.chexun.dealer.model.car.DealersCar">
+        select count(1) from dealers_car
+        <include refid="dealers_car_where_conditions"/>
+    </select>
+    
+    
+    
+    <select id="getDealersCarIdByObj" resultType="Long" parameterType="com.chexun.dealer.model.car.DealersCar">
+        select 
+        from dealers_car
+        <include refid="dealers_car_where_conditions"/>
+    </select>
+	
+    <select id="getDealersCarIdList" resultType="Long" parameterType="com.chexun.dealer.model.car.DealersCar">
+       select  from dealers_car where 1=1 
+        id = #{id}
+    </select>
+    
+    <select id="getDealersCarIdListByObj" resultType="Long"  parameterType="com.chexun.dealer.model.car.DealersCar">
+       select  from dealers_car 
+        <include refid="dealers_car_where_conditions"/>
+    </select>
+    
+    <select id="getDealersCarIdListByMap" resultType="Long"  parameterType="java.util.HashMap">
+        select  from dealers_car 
+        <include refid="dealers_car_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <!-- 已发布报价 品牌数量和款车型数量 -->
+    <select id="getBrandCountAndCarCountByMap" resultMap="BrandCountAndCarCountResult"  parameterType="java.util.HashMap">
+        select * from (select count(*)carCount from dealers_car dc where dc.USER_ID=#{dealerId})tab1,
+		(select count(*)brandCount from (select dc.BRAND_ID,dc.USER_ID from dealers_car dc
+		 where dc.USER_ID=#{dealerId} group by dc.BRAND_ID) tab)tab2
+    </select>
+    <!-- 报价管理菜单品牌列表 -->
+    <select id="getBrandListByMap" resultMap="BrandListResult"  parameterType="java.util.HashMap">
+       select dc.BRAND_ID,dc.BRAND_NAME from dealers_car dc where dc.USER_ID=#{dealerId} group by dc.BRAND_ID
+    </select>
+    <!-- 报价管理菜单品牌子菜单的车系列表 -->
+    <select id="getSeriesListByMap" resultMap="SeriesListResult"  parameterType="java.util.HashMap">
+       select dc.BRAND_ID,dc.SERIES_ID,dc.SERIES_NAME,count(dc.MODEL_ID)carCount from dealers_car dc 
+       where dc.USER_ID=#{dealerId} group by dc.SERIES_ID
+    </select>
+    <!-- 报价管理列表统计数据 车系和车型数量 -->
+    <select id="getSeriesNameAndCarCountByMap" resultMap="SeriesNameAndCarCountResult"  parameterType="java.util.HashMap">
+       select dc.SERIES_NAME,count(dc.MODEL_ID)carCount from dealers_car dc where dc.USER_ID=#{dealerId}
+       and  dc.SERIES_ID=#{seriesId} group by dc.BRAND_NAME
+    </select>
+    <!-- 报价管理列表 -->
+    <select id="getCarListByMap" resultMap="CarListResult"  parameterType="java.util.HashMap">
+       select dc.MODEL_ID,dc.MODEL_NAME,dc.YEAR_NAME,dc.CompanyPrice,dc.ConsultPrice,dc.DATE_TIME,dc.SELL_TYPE 
+       from dealers_car dc where dc.USER_ID=#{dealerId} and  dc.SERIES_ID=#{seriesId}
+    </select>
+</mapper>

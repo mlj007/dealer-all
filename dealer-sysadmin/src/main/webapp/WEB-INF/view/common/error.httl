@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>3G</title>
+<link href="/statics/css/style1.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="/statics/js/jquery.js"></script>
+
+<script language="javascript">
+$(function(){
+    $('.error').css({'position':'absolute','left':($(window).width()-490)/2});
+	$(window).resize(function(){  
+    $('.error').css({'position':'absolute','left':($(window).width()-490)/2});
+    })  
+});  
+
+function reflashPage(){
+	window.location.reload();
+}
+</script>
+</head>
+<body style="background:#edf6fa;">
+    
+    <div class="error">
+    <h2>非常遗憾，系统出现错误！</h2>
+    <p><a href="javascript:reflashPage();" style="color:blue;">请尝试刷新</a></p>
+    <p>如有问题，请与管理员联系!</p>
+    <p>错误信息：${errorMsg }</p>
+    </div>
+</body>
+</html>

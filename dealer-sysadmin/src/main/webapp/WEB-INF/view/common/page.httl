@@ -1,0 +1,27 @@
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+<link type="text/css" href="/statics/css/page.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/js/common/page.js"></script>
+<script type="text/javascript">
+var totalPageSize="${page.totalPageSize}";//总页码
+
+$(document).ready(function(){
+  //显示中间部分页数
+  showPageNumber(${page.currentPage},${page.totalPageSize});
+});
+</script>
+
+<div class="pg" style="margin-top: 6px;">
+<!--#if(page.last)-->
+<!--#else-->
+	<a href="javascript:goPage(${page.totalPageSize});">尾页</a>
+	<a href="javascript:goPage(${page.currentPage+1});" id="nextpage" style="width:50px;">下一页</a>	
+<!--#end-->
+	<span id="pageNumberSpan"></span>
+<!--#if(page.first)-->	
+<!--#else-->	
+	<a href="javascript:goPage(${page.currentPage-1});" style="width:50px;">上一页</a>
+	<a href="javascript:goPage(1);">首页</a>
+<!--#end-->
+	<span>共${page.totalResultSize}条</span> 
+	<span>${page.currentPage}/${page.totalPageSize}页</span>
+</div>

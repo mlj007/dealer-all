@@ -1,0 +1,222 @@
+<!--#set(com.chexun.dealer.vo.report.DealerLevelCountVo dealerLevelCountVo)-->
+<!--#set(com.chexun.dealer.vo.report.DealerNewsTypeCountVo dealerNewsTypeCountVo)-->
+<!--#set(com.chexun.dealer.vo.report.DealerMessageCountVo dealerMessageCountVo)-->
+<!--#set(com.chexun.dealer.model.report.DealersReportQuery dealersReportQuery)-->
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<link type="text/css" href="/statics/plugin/lhgcalendar/skins/lhgcalendar.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/plugin/lhgcalendar/lhgcalendar.min.js"></script>
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+</head>
+<body>
+<div class="wrapper">
+	<!--START 左边開始-->
+	${include("/common/left_admin.httl")}
+	<!--END 左边结束-->
+	
+	<!--START 右侧开始-->
+	<div class="right">
+	
+	<!--START 头开始-->
+	${include("/common/top_admin.httl",["topMenuTitle":"数据统计"])}
+	<!--END 头结束-->
+	
+	<!-- START -->
+	<div class="right-con">
+    	<div class="sel">  
+    		<form action="/admin/report/tjsj.aspx" method="post">
+	            <span>统计时间:</span> 
+	            <span style="padding:0 0 0 10px"><input name="startDateTime" type="text" id="startdatetime" value="${dealersReportQuery.startDateTime}" class="sel-inpt"></span>
+	            <span style="padding:0 5px">至</span>
+	            <span style="padding:0 0 0 10px"><input name="endDateTime" type="text" id="enddatetime" value="${dealersReportQuery.endDateTime}" class="sel-inpt"></span>                
+	            <input type="submit" id="search" value="搜索" class="con-sel-search" />
+            </form>
+        </div>
+            
+        <div class="con">
+            <div id="tab" class="con-bd">
+                <h3>经销商统计：共<em>${dealerLevelCountVo.dealerAllCount}</em>家经销商</h3>
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <th>
+                            	至尊
+                            </th>
+                            <th>
+                            	至雅
+                            </th>
+                            <th>
+                            	至瑞
+                            </th>
+                            <th>
+                            	至胜
+                            </th>
+                            <th>
+                            	至优
+                            </th>
+                            <th>
+                            	试用
+                            </th>
+                            <th>
+                            	免费
+                            </th>
+                            <th>
+                            	无账号
+                            </th>
+                        </tr>
+                        <tr style="background: none repeat scroll 0% 0% rgb(238, 238, 238);">
+                            <td>
+                                ${dealerLevelCountVo.dealerLevel10}
+                            </td>
+                            <td>
+                                ${dealerLevelCountVo.dealerLevel20}
+                            </td>
+                            <td>
+                                ${dealerLevelCountVo.dealerLevel30}
+                            </td>
+                            <td>
+                                ${dealerLevelCountVo.dealerLevel40}
+                            </td>
+                            <td>
+                                ${dealerLevelCountVo.dealerLevel50}
+                            </td>
+                            <td>
+                                ${dealerLevelCountVo.dealerLevel60}
+                            </td>
+                            <td>
+                                ${dealerLevelCountVo.dealerLevel70}
+                            </td>
+                            <td>
+                                ${dealerLevelCountVo.dealerLevel100}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h3>资讯统计：共 <em>${dealerNewsTypeCountVo.getAllCount()}</em> 条资讯</h3>
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <th>
+                            	企业信息
+                            </th>
+                            <th>
+                            	促销信息
+                            </th>
+                            <th>
+                            	车友活动
+                            </th>
+                            <th>
+                            	新车上市
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                        <tr style="background: none repeat scroll 0% 0% rgb(238, 238, 238);">
+                            <td>
+                                ${dealerNewsTypeCountVo.qiyeNewsCount}
+                            </td>
+                            <td>
+                                ${dealerNewsTypeCountVo.cuxiaoNewsCount}
+                            </td>
+                            <td>
+                                ${dealerNewsTypeCountVo.cheyouNewsCount}
+                            </td>
+                            <td>
+                                ${dealerNewsTypeCountVo.xincheNewsCount}
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h3>线索统计：共 <em>${dealerMessageCountVo.allCount}</em> 条线索</h3>
+                <table width="100%" cellspacing="0" cellpadding="0" border="0">
+                    <tbody>
+                        <tr>
+                            <th>
+                            	留言
+                            </th>
+                            <th>
+                            	询价
+                            </th>
+                            <th>
+                            	试驾
+                            </th>
+                            <th>                            	
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                        <tr style="background: none repeat scroll 0% 0% rgb(238, 238, 238);">
+                            <td>
+                                ${dealerMessageCountVo.allMessageCount}
+                                	（未回复：${dealerMessageCountVo.untreatedMessageCount}）
+                            </td>
+                            <td>
+                                ${dealerMessageCountVo.allXunjiaCount}
+                                	（未处理：${dealerMessageCountVo.untreatedXunjiaCount}）
+                            </td>
+                            <td>
+                                ${dealerMessageCountVo.allShijiaCount}
+                                	（未处理：${dealerMessageCountVo.untreatedShijiaCount}）
+                            </td>
+                            <td>
+                                
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>                
+            </div>
+        </div>
+    </div>      	
+    <!-- END-->
+    <!--END  右侧结束-->
+	<!--START 底部开始-->
+	   ${include("/common/footer.httl")}
+	<!--END 底部结束-->
+</div>
+<script>
+//定位左侧导航选中的当前项
+$(function(){
+	$("div.nav-box:eq(3) h3").addClass("nav-cur");
+	$("div.nav-box:eq(3) li:eq(1)").css({"background":"#409dda"});
+    $("div.nav-box:eq(3)>div").show();
+    
+    $("#startdatetime").calendar();
+    $("#enddatetime").calendar();
+})
+</script>
+</body>
+</html>

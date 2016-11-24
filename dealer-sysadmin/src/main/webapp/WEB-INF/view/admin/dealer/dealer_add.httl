@@ -1,0 +1,540 @@
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<link type="text/css" href="/statics/plugin/lhgcalendar/skins/lhgcalendar.css" rel="stylesheet" />
+<style type="text/css">
+.shenqing400 {
+	background: #4aa4df;
+	color: #333;
+	border: none;
+	width: 150px;
+	height: 26px;
+	line-height: 26px;
+	margin-left: 68px;
+	cursor: pointer;
+}
+</style>
+
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<script type="text/javascript" src="/statics/plugin/lhgcalendar/lhgcalendar.min.js"></script>
+<script type="text/javascript" src="/statics/js/common/province_city.js"></script>
+<script type="text/javascript" src="/statics/js/admin/dealer/dealer_add.js"></script>
+<script type="text/javascript" src="/statics/js/common/brand_series_model.js"></script>
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+<!--#set(com.chexun.dealer.model.dealers.DealersInfo dealersInfo)-->
+</head>
+<body>
+	<div class="wrapper">
+		<!--START 左边開始-->
+		${include("/common/left_admin.httl")}
+		<!--END 左边结束-->
+
+		<!--START 右侧开始-->
+		<div class="right">
+
+			<!--START 头开始-->
+			${include("/common/top_admin.httl",["topMenuTitle":"添加经销商"])}
+			<!--END 头结束-->
+			<div class="special">
+
+				<div class="tab">
+					<ul class="tab-hd">
+						<li id="tabs1" class="active" onClick="dealer_add.setTab(1,7)">基本信息</li>
+						<li id="tabs2" onClick="dealer_add.setTab(2,7)">账号</li>
+						<li id="tabs3" onClick="dealer_add.setTab(3,7)">车商道权限</li>
+						<li id="tabs4" onClick="dealer_add.setTab(4,7)">车E购权限</li>
+						<li id="tabs5" onClick="dealer_add.setTab(5,7)">400电话</li>
+						<li id="tabs6" onClick="dealer_add.setTab(6,7)">电商资质</li>
+						<li id="tabs7" onClick="dealer_add.setTab(7,7)">修改记录</li>
+					</ul>
+
+					<div class="tab-bd" id="tabs-1">
+						<form action="/admin/dealer/save" method="post" id="saveForm">
+							<div class="special-zy">
+								<span></span>注：标<em>*</em>内容均必填
+							</div>
+							<dl>
+								<dt>
+									<em>*</em>经销商全称：
+								</dt>
+								<dd>
+									<input type="text" name="companyName" id="companyName" value="${dealersInfo.companyName}" /> <span>标题不得少于6个字，不得多于16个字</span>
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+									<em>*</em>经销商简称：
+								</dt>
+								<dd><!-- style="border: 1px solid red"  class="ts"-->
+									<input type="text" name="companyShortName"
+										id="companyShortName"  value="${dealersInfo.companyShortName}"/> <span
+										>8个以内中文字</span>
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+									<em>*</em>英文别名：
+								</dt>
+								<dd><!-- class="tg"  -->
+									<input type="text" name="englishAlias" id="englishAlias" value="${dealersInfo.englishAlias}"/> <span
+										></span>
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+									<em>*</em>销售电话：
+								</dt>
+								<dd>
+									<input type="text" name="salePhone" id="salePhone" value="${dealersInfo.salePhone}"/>
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+									<em>*</em>公司地址：
+								</dt>
+								<dd>
+									<input type="text" name="companyAddress" id="companyAddress" value="${dealersInfo.companyAddress}"/>
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+									<em>*</em>公司性质：
+								</dt>
+								<dd>
+									<label> <input name="companyType" <!--#if(dealersInfo.companyType=='1')-->checked="checked"<!--#end--> type="radio" value="1"> 4s店
+									</label> <label> <input name="companyType" <!--#if(dealersInfo.companyType=='2')-->checked="checked"<!--#end--> type="radio" value="2"> 综合经销商
+									</label>
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+									<em>*</em>省份：
+								</dt>
+								<dd>
+									<input type="hidden" id="selectedProvinceId" value="${dealersInfo.provinceId}" /> 
+									<input type="hidden" id="selectedCityId" value="${dealersInfo.cityId}" />
+								    <input type="hidden" id="selectedRegionalId" value="${dealersInfo.regionalId}" /> 
+								    <input type="hidden" id="dealersId" value="${dealersInfo.id}" /> 
+									<input type="hidden" id="saveOkstate" value="" /> 
+									<select id="provinceId" name="provinceId">
+										<option value="">--所在省份--</option>
+									</select>
+									<select id="cityId" name="cityId">
+										<option value="">--所在城市--</option>
+									</select>
+									<select id="regionalId" name="regionalId">
+										<option value="">--所在区域--</option>
+									</select>
+								</dd>
+							</dl>
+							<dl style="height: 230px;">
+								<dt>
+									<em>*</em>经营品牌：
+								</dt>
+								<dd>
+
+									<div id="brandId" class="tab-box"></div>
+									<div id="companyId" class="tab-box">
+										<h3></h3>
+										<a class="seriesList" sid="1101" style="cursor: pointer"
+											sel="0"></a>
+									</div>
+									<div class="tab-btn">
+										<a href="javascript:dealer_add.selectCar();"
+											class="tab-btn-tj">添加</a> <a
+											href="javascript:dealer_add.deleteCar();" class="tab-btn-bg">删除</a>
+									</div>
+									<div id="selectCarList" class="tab-box">
+										 <!--#for(com.chexun.dealer.po.dealers.CarCompanySetPo carCompanySetPo : companySetList)-->
+										 	<div id="selectCar${carCompanySetPo.companyId}">
+												<h3>
+													<span class="companyLisr">${carCompanySetPo.companyName}</span>
+												</h3>
+												 <!--#for(com.chexun.dealer.model.car.DealersCar dealersCar : dealersCarList)-->
+												 	<!--#if(dealersCar.companyId==carCompanySetPo.companyId)-->
+												 	<div class="divid" onclick="dealer_add.selectCarRemove(this)">
+														<a class="seriesList" letter="${dealersCar.companyName}" cid="${dealersCar.companyId}" cname="${dealersCar.companyName}" bid="${dealersCar.brandId}" bname="${dealersCar.brandName}" sid="${dealersCar.seriesId}" sname="${dealersCar.seriesName}" style="cursor: pointer" sel="0">${dealersCar.seriesName}</a>
+														<input id="brandId0" name="dealersCar[0].brandId" value="${dealersCar.brandId}" type="hidden">
+														<input id="brandName0" name="dealersCar[0].brandName" value="${dealersCar.brandName}" type="hidden">
+														<input id="companyId0" name="dealersCar[0].companyId" value="${dealersCar.companyId}" type="hidden">
+														<input id="companyName0" name="dealersCar[0].companyName" value="${dealersCar.companyName}" type="hidden">
+														<input id="seriesId0" name="dealersCar[0].seriesId" value="${dealersCar.seriesId}" type="hidden">
+														<input id="sname0" name="dealersCar[0].seriesName" value="${dealersCar.seriesName}" type="hidden">
+													</div>
+													<!--#end-->
+												 <!--#end-->
+											</div>
+										 <!--#end-->
+									</div>
+								</dd>
+							</dl>
+							<dl>
+								<dt>&nbsp;</dt>
+								<dd class="tab-last" style="height: 22px;">
+									<a href="javascript:dealer_add.addDealerInfo(1);"
+										class="tab-btn-bg">完成</a><a
+										href="javascript:dealer_add.addDealerInfo(2);"
+										class="tab-btn-bg">下一步绑定账号</a>
+								</dd>
+							</dl>
+						</form>
+					</div>
+
+					<!-- 
+					<div class="tab-bd" id="tabs-2" style="display: none">
+						<form action="/admin/dealer/upddealersInfo" method="post"
+							id="saveForm">
+							<div class="special-zy">
+								<span></span>注：标<em>*</em>内容均必填
+							</div>
+							<dl>
+								<dt>经销商全称：</dt>
+								<dd id="tabs-2-showName">北京亚之杰合众汽车销售服务有限责任公司</dd>
+							</dl>
+							<dl>
+								<dt>经销商简称：</dt>
+								<dd id="tabs-2-showShortName">亚之杰合众</dd>
+							</dl>
+							<dl>
+								<dt>
+									<em>*</em>登录账号：
+								</dt>
+								<dd>
+									<input type="text" id="userName" value="" />
+								</dd>
+							</dl>
+							<dl>
+								<dt>&nbsp;</dt>
+								<dd class="tab-last" style="height: 22px;">
+									<a href="javascript:dealer_add.dealerBindUserNameVerify()"
+										class="tab-btn-bg">确定</a><a href="#" class="tab-b">取消</a>
+								</dd>
+							</dl>
+						</form>
+					</div>
+					 -->
+					 <!-- 
+					<div class="tab-bd" id="tabs-3" style="display: none">
+
+						<div class="special-zy">
+							<span></span>注：标<em>*</em>内容均必填
+						</div>
+						<dl>
+							<dt>经销商全称：</dt>
+							<dd id="tabs-3-showName">北京亚之杰合众汽车销售服务有限责任公司</dd>
+						</dl>
+						<dl>
+							<dt>经销商简称：</dt>
+							<dd id="tabs-3-showShortName">亚之杰合众</dd>
+						</dl>
+						<dl>
+							<dt>
+								<em>*</em>会员级别：
+							</dt>
+							<dd>
+								<select id="companyType" name="companyType">
+									<option value="0" selected="selected">会员级别</option>
+									<option value="10">至尊会员</option>
+									<option value="20">至雅会员</option>
+									<option value="30">至瑞会员</option>
+									<option value="40">至胜会员</option>
+									<option value="50">至优会员</option>
+									<option value="60">后台试用经销商</option>
+									<option value="70">免费经销商</option>
+									<option value="100">无账号</option>
+								</select>
+							</dd>
+						</dl>
+						<dl>
+							<dt>
+								<em>*</em>促销文章推送数量：
+							</dt>
+							<dd>
+								<input type="text" value="22" id="pushcount" name="pushcount" /><span>剩余:20</span>
+							</dd>
+						</dl>
+						<dl>
+							<dt>
+								<em>*</em>有效期：
+							</dt>
+							<dd>
+								<input type="text" id="beginTime" value="2014-01-01" /><span
+									style="padding: 0 10px 0 0">至</span><input type="text"
+									id="endTime" value="2014-01-01" />
+							</dd>
+						</dl>
+						<dl>
+							<dt>
+								<em>*</em>会员状态：
+							</dt>
+							<dd>
+								<select id="state" name="state">
+									<option value="0" selected>会员状态</option>
+									<option value="4">隐藏</option>
+									<option value="6">删除</option>
+									<option value="1">正常</option>
+								</select>
+							</dd>
+						</dl>
+						<dl>
+							<dt>&nbsp;</dt>
+							<dd class="tab-last" style="height: 22px;">
+								<a href="javascript:dealer_add.updDealerPower();"
+									class="tab-btn-bg">确定</a><a href="#" class="tab-b">取消</a>
+							</dd>
+						</dl>
+
+
+					</div>
+					 -->
+					 <!--  
+					<div class="tab-bd" id="tabs-4" style="display: none">
+
+						<div class="special-zy">
+							<span></span>注：标<em>*</em>内容均必填
+						</div>
+						<dl>
+							<dt>经销商全称：</dt>
+							<dd id="tabs-4-showName">北京亚之杰合众汽车销售服务有限责任公司</dd>
+						</dl>
+
+						<dl>
+							<dt style="font-weight: bold;">车E购优惠车型数量设置</dt>
+							<dd>&nbsp;</dd>
+						</dl>
+						<dl>
+							<dt>
+								<em>*</em>有效期：
+							</dt>
+							<dd>至</dd>
+						</dl>
+						<dl>
+							<dt>
+								<em>*</em>车E购车辆台数：
+							</dt>
+							<dd>
+								<span id="txtNum"> </span>台
+							</dd>
+						</dl>
+						<dl>
+							<dt>
+								<em>*</em>回款金额：
+							</dt>
+							<dd>
+								<input type="text" value="" id="backcash" />元/电商佣金： <input
+									type="text" value="" id="hirecash" />元 <a class="tab-btn-bg"
+									href="javascript:dealer_add.addCommission();"
+									style="cursor: pointer" id="combtn2">保存</a>
+							</dd>
+						</dl>
+						<dl>
+							<dt>
+								<em>*</em>合同编号：
+							</dt>
+							<dd>
+								<input type="text" value="" id="contractnum" /> 合同金额：
+								<input type="text" value="" id="contractmoney" /> 合同台数：
+								<input type="text" value="" id="contractcar" /> 合同起止：
+								<input type="text" value="" id="contractbegin" /> 至
+								<input type="text" value="" id="contractend" />
+							</dd>
+						</dl>
+						<dl>
+							<dt>
+								<em>*</em>渠道销售：
+							</dt>
+							<dd>
+								<input type="text" value="" id="contractsaler" /> 合同备注：<input
+									type="text" value="" id="contractremark" />
+							</dd>
+						</dl>
+						
+						<dl>
+							<dt style="font-weight: bold; text-align: left;">保证金管理</dt>
+							<dd>&nbsp;</dd>
+						</dl>
+						<dl>
+							<dt></dt>
+							<dd style="font-weight: bold;">
+								总保证金：<span style="color: #FF7F00;"></span>元，冻结保证金：<span style="color: #FF7F00;"></span>元，可用保证金：<span style="color: #FF7F00;"></span>元
+							</dd>
+						</dl>
+						<dl>
+							<dt>缴纳：</dt>
+							<dd>
+								<input type="text" value="" id="AddBaoZhengJin" />
+							</dd>
+						</dl>
+						<dl>
+							<dt>退还：</dt>
+							<dd>
+								<input type="text" value="" id="JianBaoZhengJin" />
+							</dd>
+						</dl>
+						<h4>
+							<input type="checkbox" id="ckbShop" style="margin: 6px 3px 0 0; float:left;">开启积分赠送功能
+						</h4>
+						<dl>
+							<dt>
+								累积出售车辆<em></em>台
+							</dt>
+							<dd>&nbsp;</dd>
+						</dl>
+						<dl>
+							<dt>
+								剩余可售车辆<em></em>台
+							</dt>
+							<dd>&nbsp;</dd>
+						</dl>
+						
+						<dl>
+							<dt>&nbsp;</dt>
+							<dd style="height: 22px;" class="tab-last">
+								<a class="tab-btn-bg"
+									href="javascript:dealer_add.addEbuyPower();"
+									style="cursor: pointer" id="combtn">保存</a> <a class="tab-b"
+									href="/admin/Index.aspx">取消</a>
+							</dd>
+						</dl>
+					</div>
+					-->
+					<!-- 
+					<div class="tab-bd" id="tabs-5" style="display: none">
+						<div class="special-zy">
+							<span></span>注：标<em>*</em>内容均必填
+						</div>
+						<dl>
+							<dt>经销商全称：</dt>
+							<dd id="tabs-4-showName">北京亚之杰合众汽车销售服务有限责任公司</dd>
+						</dl>
+						<dl>
+							<dt>经销商简称：</dt>
+							<dd></dd>
+						</dl>
+						<dl>
+							<button class="shenqing400" onclick="showShenQing();">申请400号码</button>
+						</dl>
+					</div>
+					 -->
+					<div class="tab-bd" id="tabs-6" style="display: none">
+						<h3>资质证书</h3>
+						<table width="100%" border="0">
+							<tr>
+								<td>1、营业执照副本</td>
+								<td>2、组织机构代码证</td>
+								<td>3、税务登记证副本</td>
+								<td>4、代理授权书</td>
+							</tr>
+							<tr>
+								<td>
+									<input name="" type="checkbox" value="" id="ckbZhiZhao" disabled /> 
+								 	<a target="_blank" href="">
+								 		<img width="180px" height="120px" src="" />
+								 	</a>  
+								 	<img  src="/statics/images/imgm.jpg" />
+								</td>
+								<td>
+									<input name="" type="checkbox" value="" id="ckbJiGou" disabled/> 
+									<a target="_blank" href="">
+										<img width="180px" height="120px" src="" />
+									</a> 
+									<img  src="/statics/images/imgm.jpg" /> 
+								</td>
+								<td>
+									<input name="" type="checkbox" value="" id="ckbShuiWu" disabled/> 
+								    <a target="_blank" href="">
+								   		<img width="180px" height="120px" src="" />
+								    </a> 
+								    <img  src="/statics/images/imgm.jpg" />
+								</td>
+								<td>
+									<input name="" type="checkbox" value="" id="ckbShouQuan" disabled/>  
+									<a target="_blank" href="">
+										<img width="180px" height="120px" src="" />
+									</a>
+									<img  src="/statics/images/imgm.jpg" />
+								</td>
+							</tr>
+							<tr>
+								<td><img src="" /></td>
+								<td><img src="" /></td>
+								<td><img src="" /></td>
+								<td><img src="" /></td>
+							</tr>
+						</table>
+						<p>
+							<a style="cursor: pointer;" id="tongguo" onclick="dealer_add.reviewedSuccess();" class="tab-btn-bg">通过</a><a
+								style="cursor: pointer;" id="notongguo"  onclick="dealer_add.reviewedLost()" class="tab-btn-bg">未通过</a>
+						</p>
+						<h3>认证周期</h3>
+						<p>
+							授权有效期：
+							 <input type="text" style="width: 130px" class="put_jxs" value="" id="beginTime1"  />
+							 &nbsp;至&nbsp; 
+							 <input type="text" style="width: 130px" class="put_jxs" value="" id="endTime1" />
+							 <!--  
+							 <a style="cursor: pointer;" id="btnUpdate" class="tab-btn-bg">修改</a>
+							 -->
+							
+						</p>
+						<p style="margin: 50px 0 30px 0;">
+						<p>
+							<span style=""><img src="/statics/images/imgm.jpg" /></span> <span>&nbsp;表示未上传图片</span>
+						</p>
+						<p>
+							<span style=""><img src="/statics/images/imgn.jpg" /></span> <span>&nbsp;表示已上传图片，未审核</span>
+						</p>
+						<p>
+							<span style=""><img src="/statics/images/imgy.jpg" /></span> <span>&nbsp;表示已上传图片，通过审核</span>
+						</p>
+						<p>
+							<span style=""><img src="/statics/images/imgnn.jpg" /></span> <span>&nbsp;表示已上传图片，未通过审核</span>
+						</p>
+						</p>
+					</div>
+					<div class="tab-bd" id="tabs-7" style="display: none">
+						<form method="post" action="">
+	                        <div>
+	                        	操作者：<input id="txtUserName" name="UserName" value="" style="width:100px;" type="text" />
+	                        	修改内容项:<input id="txtEditerType" name="EditerType" value="" style="width:100px;" type="text" />
+	                        	修改后内容:<input id="txtEditerContent" name="EditerContent" value="" style="width:300px;" type="text" />
+	                        </div>
+	                        <div style="margin-top:10px;">
+	                        	修改时间：
+	                        	<input id="beginTime" name="beginTime" value="" class="put_jxs" style="width:150px;" type="text">
+	                        	<span style="padding: 0 5px">至</span>
+	                        	<input id="endTime" name="endTime" value="" class="put_jxs" style="width:150px;" type="text">
+	                        	<button class="con-sel-search" type="submit">搜索</button>
+	                        </div>
+                    	</form>
+                    	<div class="con">
+					        <div id="tab" class="con-bd" style="margin-left:0px;">
+					            <div style="" id="tabs-4">
+					                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+					                    <tbody>
+					                        <tr style="background: none repeat scroll 0% 0% rgb(238, 238, 238);">
+					                            <th>操作者</th><th>修改内容项</th><th>修改前内容</th><th>修改后内容</th><th>修改时间</th>
+					                        </tr>
+					                        <tr><td></td><td></td><td></td><td></td><td></td>
+					                         </tr>
+					                    </tbody>
+					                </table>
+					                <div class="page">
+					                   
+					                </div>
+					            </div>
+						</div>
+					</div>
+			</div>
+		</div>
+		<!--END  右侧结束-->
+		<!--START 底部开始-->
+		${include("/common/footer.httl")}
+		<!--END 底部结束-->
+	</div>
+</body>
+</html>

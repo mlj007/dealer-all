@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<link type="text/css" href="/statics/plugin/lhgcalendar/skins/lhgcalendar.css" rel="stylesheet" />
+<style type="text/css">
+.shenqing400 {
+	background: #4aa4df;
+	color: #333;
+	border: none;
+	width: 150px;
+	height: 26px;
+	line-height: 26px;
+	margin-left: 68px;
+	cursor: pointer;
+}
+</style>
+<style type="text/css">
+        .special td input{width:auto; float:left}        
+        .special td {
+            font-size: 14px;
+            padding: 5px 0;
+        }        
+        .tab-bd h3 {
+            color: #666;
+            font-size: 16px;
+            padding: 20px 0;
+        }
+        .tab-bd p a {
+            margin: 0 20px 0 0;
+            padding: 3px 25px;
+        }
+        body a:link, a:visited {
+        }
+        .tab-btn-bg {
+            background: url("/statics/images/special-bg.png") repeat-x scroll 0 0 rgba(0, 0, 0, 0);
+            border: 1px solid #3e99d6;
+            color: #fff;
+        }        
+        .clear {
+            clear: both;
+            font-size: 1px;
+            height: 0;
+            line-height: 0;
+            margin: 0 auto;
+        }
+    </style>
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<script type="text/javascript" src="/statics/plugin/lhgcalendar/lhgcalendar.min.js"></script>
+<script type="text/javascript" src="/statics/js/common/province_city.js"></script>
+<script type="text/javascript" src="/statics/js/admin/dealer/dealer_add.js"></script>
+<script type="text/javascript" src="/statics/js/common/brand_series_model.js"></script>
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+<!--#set(com.chexun.dealer.vo.dealers.DealerRecordVo query)-->
+</head>
+<body>
+	<div class="wrapper">
+		<!--START 左边開始-->
+		${include("/common/left_admin.httl")}
+		<!--END 左边结束-->
+
+		<!--START 右侧开始-->
+		<div class="right">
+
+			<!--START 头开始-->
+			${include("/common/top_admin.httl",["topMenuTitle":"添加经销商"])}
+			<!--END 头结束-->
+			<div class="special">
+
+				<div class="tab">
+					<ul class="tab-hd">
+						<li id="tabs1"  onClick="dealer_add.setTab(1,7)">基本信息</li>
+						<li id="tabs2" onClick="dealer_add.setTab(2,7)">账号</li>
+						<li id="tabs3" onClick="dealer_add.setTab(3,7)">车商道权限</li>
+						<li id="tabs4" onClick="dealer_add.setTab(4,7)">车E购权限</li>
+						<li id="tabs5" onClick="dealer_add.setTab(5,7)">400电话</li>
+						<li id="tabs6" onClick="dealer_add.setTab(6,7)">电商资质</li>
+						<li id="tabs7" class="active" onClick="dealer_add.setTab(7,7)">修改记录</li>
+					</ul>
+					<div class="tab-bd" id="tabs-7" style="">
+						<form method="post" action="" id="searchForm">
+						<input type="hidden" id="pageCurrentPage" name="currentPage" value="${page.currentPage}"/>
+						<input type="hidden" id="dealersId" value="${dealerid}">
+	                        <div>
+	                        	操作者：<input id="txtUserName" name="username" value="${query.username}" style="width:100px;" type="text" />
+	                        	修改内容项:<input id="txtEditerType" name="editertype" value="${query.editertype}" style="width:100px;" type="text" />
+	                        	修改后内容:<input id="txtEditerContent" name="editercontent" value="${query.editercontent}" style="width:300px;" type="text" />
+	                        </div>
+	                        <div style="margin-top:10px;">
+	                        	修改时间：
+	                        	<input id="beginTime" name="beginTime" value="${query.beginTime}" class="put_jxs" style="width:150px;" type="text">
+	                        	<span style="padding: 0 5px">至</span>
+	                        	<input id="endTime" name="endTime" value="${query.endTime}" class="put_jxs" style="width:150px;" type="text">
+	                        	<button class="con-sel-search" type="submit">搜索</button>
+	                        </div>
+                    	</form>
+                    	<div class="con">
+					        <div id="tab" class="con-bd" style="margin-left:0px;">
+					            <div style="" id="tabs-4">
+					                <table cellspacing="0" cellpadding="0" border="0" width="100%">
+					                    <tbody>
+					                        <tr style="background: none repeat scroll 0% 0% rgb(238, 238, 238);">
+					                            <th>操作者</th><th>修改内容项</th><th>修改前内容</th><th>修改后内容</th><th>修改时间</th>
+					                        </tr>
+					                        <!--#for(com.chexun.dealer.model.dealers.DealerRecord dealerRecord : dealerRecordList)-->
+					                        <tr>
+					                        	<td>${dealerRecord.username}</td>
+					                        	<td>${dealerRecord.editertype}</td>
+					                        	<td>${dealerRecord.editerqian }</td>
+					                        	<td>${dealerRecord.editercontent }</td>
+					                        	<td>${dealerRecord.createdate }</td>
+					                        </tr>
+					                    	<!--#end-->
+					                    </tbody>
+					                </table>
+					                 ${include("/common/page.httl")}
+					            </div>
+						</div>
+					</div>
+			</div>
+		</div>
+		<!--END  右侧结束-->
+		<!--START 底部开始-->
+		${include("/common/footer.httl")}
+		<!--END 底部结束-->
+	</div>
+</body>
+</html>

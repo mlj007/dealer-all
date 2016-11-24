@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<link type="text/css"
+	href="/statics/plugin/lhgcalendar/skins/lhgcalendar.css"
+	rel="stylesheet" />
+<style type="text/css">
+.shenqing400 {
+	background: #4aa4df;
+	color: #333;
+	border: none;
+	width: 150px;
+	height: 26px;
+	line-height: 26px;
+	margin-left: 68px;
+	cursor: pointer;
+}
+</style>
+<style type="text/css">
+.special td input {
+	width: auto;
+	float: left
+}
+
+.special td {
+	font-size: 14px;
+	padding: 5px 0;
+}
+
+.tab-bd h3 {
+	color: #666;
+	font-size: 16px;
+	padding: 20px 0;
+}
+
+.tab-bd p a {
+	margin: 0 20px 0 0;
+	padding: 3px 25px;
+}
+
+body a:link, a:visited {
+	
+}
+
+.tab-btn-bg {
+	background: url("/statics/images/special-bg.png") repeat-x scroll 0 0
+		rgba(0, 0, 0, 0);
+	border: 1px solid #3e99d6;
+	color: #fff;
+}
+
+.clear {
+	clear: both;
+	font-size: 1px;
+	height: 0;
+	line-height: 0;
+	margin: 0 auto;
+}
+</style>
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<script type="text/javascript"
+	src="/statics/plugin/lhgcalendar/lhgcalendar.min.js"></script>
+<script type="text/javascript" src="/statics/js/common/province_city.js"></script>
+<script type="text/javascript"
+	src="/statics/js/admin/dealer/dealer_add.js"></script>
+<script type="text/javascript"
+	src="/statics/js/common/brand_series_model.js"></script>
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+<!--#set(com.chexun.dealer.model.dealers.DealersInfo dealersInfo)-->
+<!--#set(com.chexun.dealer.model.dealers.DealersAddcarlog dealersAddcarlog)-->
+<!--#set(com.chexun.dealer.model.dealers.DealersContract dealersContract)-->
+</head>
+<body>
+	<div class="wrapper">
+		<!--START 左边開始-->
+		${include("/common/left_admin.httl")}
+		<!--END 左边结束-->
+
+		<!--START 右侧开始-->
+		<div class="right">
+
+			<!--START 头开始-->
+			${include("/common/top_admin.httl",["topMenuTitle":"添加经销商"])}
+			<!--END 头结束-->
+			<div class="special">
+				<div class="tab">
+					<ul class="tab-hd">
+						<li id="tabs1" onClick="dealer_add.setTab(1,7)">基本信息</li>
+						<li id="tabs2" onClick="dealer_add.setTab(2,7)">账号</li>
+						<li id="tabs3" onClick="dealer_add.setTab(3,7)">车商道权限</li>
+						<li id="tabs4" class="active" onClick="dealer_add.setTab(4,7)">车E购权限</li>
+						<li id="tabs5" onClick="dealer_add.setTab(5,7)">400电话</li>
+						<li id="tabs6" onClick="dealer_add.setTab(6,7)">电商资质</li>
+						<li id="tabs7" onClick="dealer_add.setTab(7,7)">修改记录</li>
+					</ul>
+					<form action="/admin/dealer/upddealersInfo" method="post">
+						<input type="hidden" id="dealersId" value="${dealersInfo.id}">
+						<div class="tab-bd" id="tabs-4">
+
+							<div class="special-zy">
+								<span></span>注：标<em>*</em>内容均必填
+							</div>
+							<dl>
+								<dt>经销商全称：</dt>
+								<dd id="tabs-4-showName">${dealersInfo.companyName}</dd>
+							</dl>
+
+							<dl>
+								<dt style="font-weight: bold;">车E购优惠车型数量设置</dt>
+								<dd>&nbsp;</dd>
+							</dl>
+							<dl>
+								<dt>
+									<em>*</em>有效期：
+								</dt>
+								<dd>至</dd>
+							</dl>
+							<dl>
+								<dt>
+									<em>*</em>车E购车辆台数：
+								</dt>
+								<dd>
+									<span id="txtNum"> </span>台
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+									<em>*</em>回款金额：
+								</dt>
+								<dd>
+									<input type="text" value="${dealersAddcarlog.backcash}" id="backcash" />元/电商佣金： <input
+										type="text" value="${dealersAddcarlog.hirecash}" id="hirecash" />元 <a class="tab-btn-bg"
+										href="javascript:dealer_add.addCommission();"
+										style="cursor: pointer" id="combtn2">保存</a>
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+									<em>*</em>合同编号：
+								</dt>
+								<dd>
+									<input type="text" value="${dealersContract.contractnum}" id="contractnum" /> 合同金额： <input
+										type="text" value="${dealersContract.contractmoney}" id="contractmoney" /> 合同台数： <input
+										type="text" value="${dealersContract.contractcar}" id="contractcar" /> 合同起止： <input
+										type="text" value="${dealersContract.contractbegin}" id="contractbegin" /> 至 <input
+										type="text" value="${dealersContract.contractend}" id="contractend" />
+								</dd>
+							</dl>
+							<dl>
+								<dt>
+									<em>*</em>渠道销售：
+								</dt>
+								<dd>
+									<input type="text" value="${dealersContract.contractsaler}" id="contractsaler" /> 合同备注：
+									<input	type="text" value="${dealersContract.contractremark}" id="contractremark" />
+								</dd>
+							</dl>
+							<dl>
+								<dt>&nbsp;</dt>
+								<dd style="height: 22px;" class="tab-last">
+									<a class="tab-btn-bg"
+										href="javascript:dealer_add.addEbuyPower();"
+										style="cursor: pointer" id="combtn">保存</a> <a class="tab-b"
+										href="/admin/Index.aspx">取消</a>
+								</dd>
+							</dl>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!--END  右侧结束-->
+		<!--START 底部开始-->
+		${include("/common/footer.httl")}
+		<!--END 底部结束-->
+	</div>
+</body>
+</html>

@@ -1,0 +1,695 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chexun.dealer.model.clue.DealersMessagesMapper">
+ 	<!-- 以下两个<cache>标签二选一,第一个可以输出日志,第二个不输出日志 -->  
+    <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache"/>  -->
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>   -->
+    <resultMap id="DealersMessagesResult" type="com.chexun.dealer.model.clue.DealersMessages">
+        <result property="id" column="id"/>
+        <result property="dealerId" column="dealer_id"/>
+        <result property="messageContent" column="message_content"/>
+        <result property="ip" column="ip"/>
+        <result property="userName" column="user_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="state" column="state"/>
+        <result property="modelId" column="model_id"/>
+        <result property="replyContent" column="reply_content"/>
+        <result property="replyTime" column="reply_time"/>
+        <result property="userId" column="user_id"/>
+        <result property="phone" column="phone"/>
+        <result property="salerid" column="salerid"/>
+        <result property="salername" column="salername"/>
+        <result property="isReply" column="is_reply"/>
+    </resultMap>
+
+    <sql id="dealers_messages_columns">
+        dealers_messages.id,
+        dealers_messages.dealer_id,
+        dealers_messages.message_content,
+        dealers_messages.ip,
+        dealers_messages.user_name,
+        dealers_messages.create_time,
+        dealers_messages.state,
+        dealers_messages.model_id,
+        dealers_messages.reply_content,
+        dealers_messages.reply_time,
+        dealers_messages.user_id,
+        dealers_messages.phone,
+        dealers_messages.salerid,
+        dealers_messages.salername,
+        dealers_messages.is_reply
+    </sql>
+    
+    <sql id="dealers_messages_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+        <if test="id != null">
+        	and id=#{id} 
+        </if>
+        <if test="dealerId != null">
+        	and dealer_id=#{dealerId} 
+        </if>
+        
+        <if test="messageContent != null and messageContent != ''">
+        	and message_content=#{messageContent} 
+        </if>
+        
+        <if test="ip != null and ip != ''">
+        	and ip=#{ip} 
+        </if>
+        
+        <if test="userName != null and userName != ''">
+        	and user_name=#{userName} 
+        </if>
+        <if test="createTime != null">
+        	and create_time=#{createTime} 
+        </if>
+        <if test="state != null">
+        	and state=#{state} 
+        </if>
+        <if test="modelId != null">
+        	and model_id=#{modelId} 
+        </if>
+        
+        <if test="replyContent != null and replyContent != ''">
+        	and reply_content=#{replyContent} 
+        </if>
+        <if test="replyTime != null">
+        	and reply_time=#{replyTime} 
+        </if>
+        <if test="userId != null">
+        	and user_id=#{userId} 
+        </if>
+        
+        <if test="phone != null and phone != ''">
+        	and phone=#{phone} 
+        </if>
+        <if test="salerid != null">
+        	and salerid=#{salerid} 
+        </if>
+        
+        <if test="salername != null and salername != ''">
+        	and salername=#{salername} 
+        </if>
+        <if test="isReply != null">
+        	and is_reply=#{isReply} 
+        </if>
+        </trim>
+    </sql>
+    
+    <sql id="dealers_messages_set_conditions">
+    	<set>
+        <if test="id != null">
+        	id=#{id},
+        </if>
+        <if test="dealerId != null">
+        	dealer_id=#{dealerId},
+        </if>
+        <if test="messageContent != null">
+        	message_content=#{messageContent},
+        </if>
+        <if test="ip != null">
+        	ip=#{ip},
+        </if>
+        <if test="userName != null">
+        	user_name=#{userName},
+        </if>
+        <if test="createTime != null">
+        	create_time=#{createTime},
+        </if>
+        <if test="state != null">
+        	state=#{state},
+        </if>
+        <if test="modelId != null">
+        	model_id=#{modelId},
+        </if>
+        <if test="replyContent != null">
+        	reply_content=#{replyContent},
+        </if>
+        <if test="replyTime != null">
+        	reply_time=#{replyTime},
+        </if>
+        <if test="userId != null">
+        	user_id=#{userId},
+        </if>
+        <if test="phone != null">
+        	phone=#{phone},
+        </if>
+        <if test="salerid != null">
+        	salerid=#{salerid},
+        </if>
+        <if test="salername != null">
+        	salername=#{salername},
+        </if>
+        <if test="isReply != null">
+        	is_reply=#{isReply},
+        </if>
+            id = id
+        </set>
+    </sql>
+
+    <sql id="dealers_messages_properties">
+        #{id},
+        #{dealerId},
+        #{messageContent},
+        #{ip},
+        #{userName},
+        #{createTime},
+        #{state},
+        #{modelId},
+        #{replyContent},
+        #{replyTime},
+        #{userId},
+        #{phone},
+        #{salerid},
+        #{salername},
+        #{isReply}
+    </sql>
+
+    <insert id="createDealersMessages" parameterType="com.chexun.dealer.model.clue.DealersMessages" keyColumn="id" keyProperty="id" useGeneratedKeys="true" >
+        insert INTO dealers_messages (<include refid="dealers_messages_columns"/>) VALUES (<include refid="dealers_messages_properties"/>)
+    </insert>
+	
+	<insert id="insertDealersMessages" parameterType="com.chexun.dealer.model.clue.DealersMessages" keyColumn="id" keyProperty="id" useGeneratedKeys="true">
+    	insert into dealers_messages
+    	<trim prefix="(" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        			id,
+    			</if>
+    			<if test="dealerId != null" >
+        			dealer_id,
+    			</if>
+    			<if test="messageContent != null" >
+        			message_content,
+    			</if>
+    			<if test="ip != null" >
+        			ip,
+    			</if>
+    			<if test="userName != null" >
+        			user_name,
+    			</if>
+    			<if test="createTime != null" >
+        			create_time,
+    			</if>
+    			<if test="state != null" >
+        			state,
+    			</if>
+    			<if test="modelId != null" >
+        			model_id,
+    			</if>
+    			<if test="replyContent != null" >
+        			reply_content,
+    			</if>
+    			<if test="replyTime != null" >
+        			reply_time,
+    			</if>
+    			<if test="userId != null" >
+        			user_id,
+    			</if>
+    			<if test="phone != null" >
+        			phone,
+    			</if>
+    			<if test="salerid != null" >
+        			salerid,
+    			</if>
+    			<if test="salername != null" >
+        			salername,
+    			</if>
+    			<if test="isReply != null" >
+        			is_reply
+    			</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides="," >
+    			<if test="id != null" >
+        		#{id},
+    		</if>
+    			<if test="dealerId != null" >
+        		#{dealerId},
+    		</if>
+    			<if test="messageContent != null" >
+        		#{messageContent},
+    		</if>
+    			<if test="ip != null" >
+        		#{ip},
+    		</if>
+    			<if test="userName != null" >
+        		#{userName},
+    		</if>
+    			<if test="createTime != null" >
+        		#{createTime},
+    		</if>
+    			<if test="state != null" >
+        		#{state},
+    		</if>
+    			<if test="modelId != null" >
+        		#{modelId},
+    		</if>
+    			<if test="replyContent != null" >
+        		#{replyContent},
+    		</if>
+    			<if test="replyTime != null" >
+        		#{replyTime},
+    		</if>
+    			<if test="userId != null" >
+        		#{userId},
+    		</if>
+    			<if test="phone != null" >
+        		#{phone},
+    		</if>
+    			<if test="salerid != null" >
+        		#{salerid},
+    		</if>
+    			<if test="salername != null" >
+        		#{salername},
+    		</if>
+    			<if test="isReply != null" >
+        		#{isReply}
+    		</if>
+    	</trim>
+  	</insert>
+	
+    <delete id="deleteDealersMessagesById" parameterType="Long">
+        delete from dealers_messages
+        where
+            		id = #{            			value
+            		}
+    </delete>
+    
+    <delete id="deleteDealersMessagesByObj" parameterType="com.chexun.dealer.model.clue.DealersMessages">
+        delete from dealers_messages
+        <include refid="dealers_messages_where_conditions"/>
+    </delete>
+    
+  	<delete id="deleteDealersMessagesByIdList" parameterType="java.util.List">
+    	delete from dealers_messages 
+        	where
+            id
+    		IN 
+    		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+    </delete>
+
+    <update id="updateDealersMessages" parameterType="com.chexun.dealer.model.clue.DealersMessages">
+        update dealers_messages SET
+            id = #{id},
+            dealer_id = #{dealerId},
+            message_content = #{messageContent},
+            ip = #{ip},
+            user_name = #{userName},
+            create_time = #{createTime},
+            state = #{state},
+            model_id = #{modelId},
+            reply_content = #{replyContent},
+            reply_time = #{replyTime},
+            user_id = #{userId},
+            phone = #{phone},
+            salerid = #{salerid},
+            salername = #{salername},
+            is_reply = #{isReply}
+        where
+            id = #{id}
+    </update>
+    
+    <update id="updateDealersMessagesByObj" parameterType="com.chexun.dealer.model.clue.DealersMessages">
+        update dealers_messages 
+        <include refid="dealers_messages_set_conditions"/>
+        where
+            id = #{id}
+    </update>
+    
+    <update id="updateDealersMessagesByObjAndConditions" parameterType="java.util.HashMap">
+        update dealers_messages 
+        <set>
+        <if test="s.id != null">
+        	id=#{s.id},
+        </if>
+        <if test="s.dealerId != null">
+        	dealer_id=#{s.dealerId},
+        </if>
+        <if test="s.messageContent != null">
+        	message_content=#{s.messageContent},
+        </if>
+        <if test="s.ip != null">
+        	ip=#{s.ip},
+        </if>
+        <if test="s.userName != null">
+        	user_name=#{s.userName},
+        </if>
+        <if test="s.createTime != null">
+        	create_time=#{s.createTime},
+        </if>
+        <if test="s.state != null">
+        	state=#{s.state},
+        </if>
+        <if test="s.modelId != null">
+        	model_id=#{s.modelId},
+        </if>
+        <if test="s.replyContent != null">
+        	reply_content=#{s.replyContent},
+        </if>
+        <if test="s.replyTime != null">
+        	reply_time=#{s.replyTime},
+        </if>
+        <if test="s.userId != null">
+        	user_id=#{s.userId},
+        </if>
+        <if test="s.phone != null">
+        	phone=#{s.phone},
+        </if>
+        <if test="s.salerid != null">
+        	salerid=#{s.salerid},
+        </if>
+        <if test="s.salername != null">
+        	salername=#{s.salername},
+        </if>
+        <if test="s.isReply != null">
+        	is_reply=#{s.isReply},
+        </if>
+        </set>
+        <where>
+        <if test="c.id != null">
+        	id=#{c.id} AND 
+        </if>
+        <if test="c.dealerId != null">
+        	dealer_id=#{c.dealerId} AND 
+        </if>
+        <if test="c.messageContent != null">
+        	message_content=#{c.messageContent} AND 
+        </if>
+        <if test="c.ip != null">
+        	ip=#{c.ip} AND 
+        </if>
+        <if test="c.userName != null">
+        	user_name=#{c.userName} AND 
+        </if>
+        <if test="c.createTime != null">
+        	create_time=#{c.createTime} AND 
+        </if>
+        <if test="c.state != null">
+        	state=#{c.state} AND 
+        </if>
+        <if test="c.modelId != null">
+        	model_id=#{c.modelId} AND 
+        </if>
+        <if test="c.replyContent != null">
+        	reply_content=#{c.replyContent} AND 
+        </if>
+        <if test="c.replyTime != null">
+        	reply_time=#{c.replyTime} AND 
+        </if>
+        <if test="c.userId != null">
+        	user_id=#{c.userId} AND 
+        </if>
+        <if test="c.phone != null">
+        	phone=#{c.phone} AND 
+        </if>
+        <if test="c.salerid != null">
+        	salerid=#{c.salerid} AND 
+        </if>
+        <if test="c.salername != null">
+        	salername=#{c.salername} AND 
+        </if>
+        <if test="c.isReply != null">
+        	is_reply=#{c.isReply} AND 
+        </if>
+       (status!=2)
+        </where>
+    </update>
+    
+    <update id="batchUpdateDealersMessages" parameterType="java.util.List">
+		update dealers_messages
+		<trim prefix="set" suffixOverrides=",">
+      	 	<trim prefix="id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.id!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.id}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="dealer_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.dealerId!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.dealerId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="message_content=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.messageContent!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.messageContent}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="ip=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.ip!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.ip}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="user_name=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.userName!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.userName}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="create_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.createTime!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.createTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="state=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.state!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.state}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="model_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.modelId!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.modelId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="reply_content=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.replyContent!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.replyContent}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="reply_time=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.replyTime!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.replyTime}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="user_id=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.userId!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.userId}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="phone=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.phone!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.phone}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="salerid=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.salerid!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.salerid}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="salername=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.salername!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.salername}
+					</if>
+				</foreach>
+			</trim>
+      	 	<trim prefix="is_reply=CASE" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.isReply!=null">
+						WHEN 
+            			id = #{i.id}
+        				 THEN #{i.isReply}
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where
+		<foreach collection="list" separator="or" item="i" index="index">
+            	(id = #{i.id})
+		</foreach>
+	</update>
+    
+    
+
+    <select id="getDealersMessagesById" resultMap="DealersMessagesResult" parameterType="Long">
+        select
+        <include refid="dealers_messages_columns"/>
+        from dealers_messages
+        where
+            id = #{value}
+    </select>
+    
+    <select id="getDealersMessagesByObj" resultMap="DealersMessagesResult" parameterType="com.chexun.dealer.model.clue.DealersMessages">
+        select
+        <include refid="dealers_messages_columns"/>
+        from dealers_messages
+        <include refid="dealers_messages_where_conditions"/>
+    </select>
+	
+    
+    <select id="getDealersMessagesListByObj" resultMap="DealersMessagesResult"  parameterType="com.chexun.dealer.model.clue.DealersMessages">
+        select
+        <include refid="dealers_messages_columns"/>
+        from dealers_messages 
+        <include refid="dealers_messages_where_conditions"/>
+    </select>
+    
+    <select id="getDealersMessagesListByMap" resultMap="DealersMessagesResult"  parameterType="java.util.HashMap">
+        select
+        <include refid="dealers_messages_columns"/>
+        from dealers_messages 
+        <include refid="dealers_messages_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    <select id="getDealersMessagesCountByObj" resultType="int" parameterType="com.chexun.dealer.model.clue.DealersMessages">
+        select count(1) from dealers_messages
+        <include refid="dealers_messages_where_conditions"/>
+    </select>
+    
+    
+    
+    <select id="getDealersMessagesIdByObj" resultType="Long" parameterType="com.chexun.dealer.model.clue.DealersMessages">
+        select       id                               
+        from dealers_messages
+        <include refid="dealers_messages_where_conditions"/>
+    </select>
+	
+    <select id="getDealersMessagesIdList" resultType="Long" parameterType="com.chexun.dealer.model.clue.DealersMessages">
+       select       id                                from dealers_messages where 1=1 
+        id = #{value}
+    </select>
+    
+    <select id="getDealersMessagesIdListByObj" resultType="Long"  parameterType="com.chexun.dealer.model.clue.DealersMessages">
+       select       id                                from dealers_messages 
+        <include refid="dealers_messages_where_conditions"/>
+    </select>
+    
+    <select id="getDealersMessagesIdListByMap" resultType="Long"  parameterType="java.util.HashMap">
+        select       id                                from dealers_messages 
+        <include refid="dealers_messages_where_conditions"/>
+        limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER} 
+    </select>
+    
+    
+    <!--added留言与经销商关联查询接口返回值-->
+    <resultMap id="DealersMessagesPoResult" type="com.chexun.dealer.po.clue.DealersMessagesPo">
+        <result property="id" column="id"/>
+        <result property="dealerId" column="dealer_id"/>
+        <result property="messageContent" column="message_content"/>
+        <result property="ip" column="ip"/>
+        <result property="userName" column="user_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="state" column="state"/>
+        <result property="modelId" column="model_id"/>
+        <result property="replyContent" column="reply_content"/>
+        <result property="replyTime" column="reply_time"/>
+        <result property="userId" column="user_id"/>
+        <result property="phone" column="phone"/>
+        <result property="salerid" column="salerid"/>
+        <result property="salername" column="salername"/>
+        <result property="dealerName" column="company_name"/>
+    </resultMap>
+    
+    <!--added留言与经销商关联查询条件-->
+    <sql id="query_where_conditions">
+    	<trim prefix="where" prefixOverrides="and|or">
+	        <if test="id != null">
+	        	and dealers_messages.id=#{id} 
+	        </if>
+	        <if test="dealerName != null and dealerName != ''">
+	        	and dealers_info.company_name like "%"#{dealerName}"%"
+	        </if>
+	        <if test="provinceId != null">
+	        	and dealers_info.province_id=#{provinceId} 
+	        </if>
+	        <if test="cityId != null">
+	        	and dealers_info.city_id=#{cityId} 
+	        </if>
+	        <if test="state != null">
+	        	and dealers_messages.state=#{state} 
+	        </if>
+	        <if test="isReply != null">
+	        	and dealers_messages.is_reply=#{isReply} 
+	        </if>		   
+	        <if test="timeEnd != null and timeEnd != ''">
+	        	and dealers_messages.create_time &lt;= str_to_date(#{timeEnd}, '%Y-%m-%d %H:%i:%s')
+	        </if>
+	        <if test="timeStart != null and timeStart != ''">
+	        	and dealers_messages.create_time &gt;= str_to_date(#{timeStart}, '%Y-%m-%d %H:%i:%s')
+	        </if>     
+	        <if test="dealerId != null">
+	        	and dealers_messages.dealer_id=#{dealerId} 
+	        </if>
+    	</trim>
+    </sql>
+    
+    <!--added留言与经销商关联查询总数统计-->
+    <select id="queryMessageCount" resultType="int" parameterType="com.chexun.dealer.vo.clue.DealersMessagesVo">
+        select count(1) from dealers_messages left join dealers_info on dealers_messages.dealer_id=dealers_info.id 
+        <include refid="query_where_conditions"/>
+    </select>
+    
+    <!--added留言与经销商关联查询-->
+    <select id="queryMessageList" resultMap="DealersMessagesPoResult" parameterType="java.util.HashMap">
+        select
+        	<include refid="dealers_messages_columns"/>
+        	,dealers_info.COMPANY_NAME 
+        from dealers_messages left join dealers_info on dealers_messages.dealer_id=dealers_info.id 
+        <include refid="query_where_conditions"/>
+        	limit #{offset,jdbcType=INTEGER},#{limit,jdbcType=INTEGER}
+    </select>
+</mapper>

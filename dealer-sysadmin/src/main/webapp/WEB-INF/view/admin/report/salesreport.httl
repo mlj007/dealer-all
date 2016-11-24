@@ -1,0 +1,245 @@
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+</head>
+<body>
+<div class="wrapper">
+	<!--START 左边開始-->
+	${include("/common/left_admin.httl")}
+	<!--END 左边结束-->
+	
+	<!--START 右侧开始-->
+	<div class="right">
+	
+	<!--START 头开始-->
+	${include("/common/top_admin.httl",["topMenuTitle":"电商统计"])}
+	<!--END 头结束-->
+	
+	<!-- START -->
+    <div class="right-con">
+	    <div class="sel">
+	        <form method="post" action="dstj.aspx" id="searchForm">
+	        <input type="hidden" id="pageCurrentPage" name="currentPage" value="${page.currentPage}"/>
+	        <input type="hidden" id="hid_brandId" name="h1" value="0" />
+	        <input type="hidden" id="hid_provinceId" name="h2" value="0" />
+	        <input type="hidden" id="hid_cityId" name="h3" value="0" />
+	        <select id="brandId" name="brandId">
+	            <option value="0">--经营品牌--</option>
+	        </select>
+	        <select id="provinceId" name="provinceId">
+	            <option value="0">--所在省份--</option>
+	        </select>
+	        <select id="cityId" name="cityId">
+	            <option value="0">--所在城市--</option>
+	        </select>
+	        <select id="gongzixingzhi" name="gongzixingzhi">
+	            <option value="0">--公司性质--</option>
+	            <option value="1">4S经销商</option>
+	            <option value="2">综合经销商</option>
+	        </select>
+	        	经销商名称：
+	        <input name="companyName" type="text" id="companyName" value=""
+	            class="input_txt02" />
+	        <button class="con-sel-search" type="submit">
+	            搜索</button>
+	        <input type="button" id="excel" class="con-sel-search" value="导出数据" />
+	        </form>
+	    </div>
+	    
+	    <div class="con">
+	        <div class="con-bd" id="tab">
+	        	<div style=" width:100%; overflow:auto;">
+	        		<table cellpadding="0" cellspacing="0" border="0" width="1400px">
+		                <tbody>
+		                    <tr>
+		                        <th style="width: 12%">
+		                        	经销商全称
+		                        </th>
+		                        <th style="width: 6%">
+		                        	渠道销售
+		                        </th>
+		                        <th style="width: 4%">
+		                        	地区
+		                        </th>
+		                        <th style="width: 8%">
+		                        	会员级别
+		                        </th>
+		                        <th style="width: 4%">
+		                        	性质
+		                        </th>
+		                        <th style="width: 5%">
+		                        	活动场次
+		                        </th>
+		                        <th style="width: 5%">
+		                        	成交台数
+		                        </th>
+		                        <th style="width: 5%">
+		                        	剩余台数
+		                        </th>
+		                        <th style="width: 7%">
+		                        	合同编号
+		                        </th>
+		                        <th style="width: 6%">
+		                        	合同金额(元)
+		                        </th>
+		                        <th style="width: 6%">
+		                        	合同起始
+		                        </th>
+		                        <th style="width: 6%">
+		                        	合同结束
+		                        </th>
+		                        <th style="width: 7%">
+		                        	累计回款(元)
+		                        </th>
+		                        <th>
+		                        	合同备注
+		                        </th>
+		                    </tr>
+		                    <!--#for(com.chexun.dealer.model.report.DealersMallReport dealersMallReport : dealersMallReports)-->
+		                    <tr>
+                                <td>
+                                    ${dealersMallReport.companyname }
+                                </td>
+                                <td>
+                                    ${dealersMallReport.contractsaler }
+                                </td>
+                                <td>
+                                    ${dealersMallReport.cityname }
+                                </td>
+                                <td>
+                                    ${dealersMallReport.dealerlevel }
+                                </td>
+                                <td>
+									${dealersMallReport.companytype }
+                                </td>
+                                <td>
+									${dealersMallReport.huodong }
+                                </td>
+                                <td>
+									${dealersMallReport.salecount }
+                                </td>
+                                <td>
+                                    ${dealersMallReport.allshopcount-dealersMallReport.salecount }
+                                </td>
+                                <td>
+                                    ${dealersMallReport.contractnum }
+                                </td>
+                                <td>
+                                    ${dealersMallReport.contractmoney }
+                                </td>
+                                <td>
+                                    ${dealersMallReport.contractbegin }
+                                </td>
+                                <td>
+                                    ${dealersMallReport.contractend }
+                                </td>
+                                <td>
+                                    ${dealersMallReport.backcash }
+                                </td>
+                                <td>
+                                    ${dealersMallReport.contractremark }
+                                </td>
+                            </tr>
+		                    <!--#end-->		                    
+		                </tbody>		                
+		            </table>		            
+	        	</div>     
+	        	${include("/common/page.httl")}      
+	        </div>
+	    </div>
+	</div>  
+	     	
+    <!-- END-->
+    <!--END  右侧结束-->
+	<!--START 底部开始-->
+	   ${include("/common/footer.httl")}
+	<!--END 底部结束-->
+</div>
+<script>
+//定位左侧导航选中的当前项
+$(function(){
+	$("div.nav-box:eq(3) h3").addClass("nav-cur");
+	$("div.nav-box:eq(3) li:eq(0)").css({"background":"#409dda"});
+    $("div.nav-box:eq(3)>div").show();
+})
+</script>
+<script type="text/javascript">
+    var CarbrandDefault = "<option value='0'>--经营品牌--</option>";
+    var ProvinceDefault = "<option value='0'>--所在省份--</option>";
+    var CityDefault = "<option value='0'>--所在城市--</option>";
+    $(function () {
+        $.getScript("http://api.tool.chexun.com/pc/downBrandInfo.do?callback=setCarbrand");
+        $.getScript("http://dealer.chexun.com/api/GetProvinceInfo.ashx?callback=setProvince");
+
+        $("#gongzixingzhi").val($("#hid_gongzixingzhi").val());
+        $("#gongzixingzhi").bind("change", function () { $("#hid_gongzixingzhi").val($("#gongzixingzhi").val()) })
+        $("#huiyuanxingzhi").val($("#hid_huiyuanxingzhi").val());
+        $("#huiyuanxingzhi").bind("change", function () { $("#hid_huiyuanxingzhi").val($("#huiyuanxingzhi").val()) })
+
+        $("#huiyuanjibie").val($("#hid_huiyuanjibie").val());
+        $("#huiyuanjibie").bind("change", function () { $("#hid_huiyuanjibie").val($("#huiyuanjibie").val()) })
+        $("#zhuangtai").val($("#hid_zhuangtai").val());
+        $("#zhuangtai").bind("change", function () { $("#hid_zhuangtai").val($("#zhuangtai").val()) })
+        $("#istuijian").val($("#hid_istuijian").val());
+        $("#istuijian").bind("change", function () { $("#hid_istuijian").val($("#istuijian").val()) })
+
+    })
+
+    //绑定品牌
+    function setCarbrand(data) {
+        var hidbrand = $("#hid_brandId").val();
+        var str = CarbrandDefault;
+        for (var i = 0; i < data.length; i++) {
+        	if(data[i].brandId == hidbrand){
+        		str += "<option value='" + data[i].brandId + "' selected='selected'>" + data[i].brandName + "</option>";
+        	}else{
+        		str += "<option value='" + data[i].brandId + "'>" + data[i].brandName + "</option>";
+        	}            
+        }
+        $("#brandId").html(str).bind("change", function () { $("#hid_brandId").val($("#brandId").val()) });
+        $("#brandId").val(hidbrand);
+    }
+
+    //绑定所在省
+    function setProvince(data) {
+        var hid_provinceId = $("#hid_provinceId").val();
+        var str = ProvinceDefault;
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].provinceId == hid_provinceId) {
+                str += "<option value='" + data[i].provinceId + "' selected='selected'>" + data[i].provinceName + "</option>";
+            } else {
+                str += "<option value='" + data[i].provinceId + "'>" + data[i].provinceName + "</option>";
+            }
+        }
+        $("#provinceId").html(str).bind("change", function () {
+            $("#hid_provinceId").val($("#provinceId").val());
+            var url = "http://dealer.chexun.com/api/GetCityInfo.ashx?provinceId=" + $("#provinceId").val() + "&callback=setCity";
+            $.getScript(url);
+        });
+
+        $("#provinceId").change();
+    }
+
+    //绑定所在市
+    function setCity(data) {
+        var hid_cityId = $("#hid_cityId").val();
+
+        var str = CityDefault;
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].cityId == hid_cityId) {
+                str += "<option value='" + data[i].cityId + "' selected='selected'>" + data[i].cityName + "</option>";
+            } else {
+                str += "<option value='" + data[i].cityId + "'>" + data[i].cityName + "</option>";
+            }
+        }
+        $("#cityId").html(str).bind("change", function () { $("#hid_cityId").val($("#cityId").val()) });
+    }
+</script>
+</body>
+</html>

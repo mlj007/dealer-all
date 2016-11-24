@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<!--#set(com.chexun.dealer.model.dealers.DealersInfo dealersInfo)-->
+<!--#set(com.chexun.dealer.po.dealers.DealersCarPo dealersCarPo)-->
+<!--#set(com.chexun.dealer.model.dealers.DealersContract contract)-->
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+</head>
+<body>
+<div class="wrapper">
+	<!--START 左边開始-->
+	${include("/common/left_manage.httl")}
+	<!--END 左边结束-->
+	<!--START 右侧开始-->
+	<div class="right">
+	<!--START 头开始-->
+	${include("/common/top_manage.httl",["topMenuTitle":"首页"])}
+	<!--END 头结束-->
+	 <div class="right-box">    
+            
+           <div  class="right-box-hd">
+            	<div class="special-zy"><span></span>温馨提示：<a href="#">绑定手机号</a>，可及时接收意向客户 </div>
+                	<p><strong class="fl">您目前待处理的有：</strong><a href="#">留言<span>${messageCount}</span>条</a><a href="#">询价<span>${askingPriceCount}</span>条</a><a href="#">试驾报名<span>${bespeakOrderCount}</span>条</a><!-- <a href="#">预约保养<span>0</span>条</a> --> 今日活跃度：<em>40</em>  登陆账号销售积分：0</p>
+                    <p>你的车E购佣金优惠车辆剩余<em>${contract.contractcar}台</em>，超出限额后将按<em>1000元每台</em>的佣金收取 </p>
+                    <p>您的电商保证金已低于<em>${contract.contractmoney}</em>元,低于<em>2000</em>元时将不能参与电商订金活动 </p>
+            </div>
+            <div class="right-box-bd clearfix">
+            	<h2>常用功能：<span>请选择以下功能：</span></h2>  
+            	<dl>
+                	<dt><a href="#"><img src="/statics/images/i-1.png" /></a></dt>
+                    <dd><h3>发布电商车型</h3><p>您总共发布了:</p><p><a href="#">1 个品牌</a><a href="#">58 款车</a></p></dd>
+                </dl>
+                <dl>
+                	<dt><a href="#"><img src="/statics/images/i-2.png" /></a></dt>
+                    <dd><h3>维护架上车型</h3><p>上次更新时间：</p><p>2014年04月08日</p><p>17:30:37</p></dd>
+                </dl>
+                <dl>
+                	<dt><a href="#"><img src="/statics/images/i-3.png" /></a></dt>
+                    <dd><h3>发布车型报价</h3><p>您总共发布了:</p><p><a href="#">${dealersCarPo.brandCount} 个品牌</a><a href="#">${dealersCarPo.carCount} 款车</a></p></dd>
+                </dl>
+                <dl>
+                	<dt><a href="#"><img src="/statics/images/i-4.png" /></a></dt>
+                    <dd><h3>报价一键更新</h3><p>上次更新时间：</p><p>${updatetime}</p><p></p></dd>
+                </dl>
+                <dl>
+                	<dt><a href="#"><img src="/statics/images/i-5.png" /></a></dt>
+                    <dd><h3>发布新闻资讯</h3><p>您总共发布了:</p><p><a href="#">${newsCount} 篇新闻</a></p></dd>
+                </dl>
+                <dl>
+                	<dt><a href="#"><img src="/statics/images/i-6.png" /></a></dt>
+                    <dd><h3>一周数据统计</h3><p>店铺浏览量:<a href="#">1026</a></p><p>新闻浏览量:<a href="#">280</a></p><p>报价浏览量:<a href="#">375</a></p></dd>
+                </dl>
+            </div>  
+        </div>
+            
+            <!--START 底部开始-->
+            ${include("/common/footer.httl")}
+            <!--END 底部结束-->
+     </div>
+     <!--END  右侧结束-->
+	</div>
+</div>
+</body>
+</html>

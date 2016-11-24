@@ -1,0 +1,178 @@
+<!doctype html>
+<html>
+<head>
+<title>车商道后台</title>
+<meta charset="utf-8">
+<link type="text/css" href="/statics/css/style.css" rel="stylesheet" />
+<link type="text/css" href="/statics/plugin/lhgcalendar/skins/lhgcalendar.css" rel="stylesheet" />
+<script type="text/javascript" src="/statics/js/jq.js"></script>
+<script type="text/javascript" src="/statics/js/public.js"></script>
+<script type="text/javascript" src="/statics/plugin/lhgcalendar/lhgcalendar.min.js"></script>
+<!--#set(com.chexun.base.framework.core.entity.PageEntity page)-->
+<!--#set(com.chexun.dealer.model.clue.PhoneRecords phoneRecords)-->
+<script type="text/javascript">
+	var cityid = $(".sel form select:eq(1)").val();
+	function sub(){
+		var form = document.forms[0];  
+        form.action = "/admin/clue/phonerecords/list";  
+		form.method = "post";
+		form.submit();
+	}
+	$(document).ready(function(){
+		$(".sel form select:eq(1)").append("<option value=''>所在城市</option>");
+		$(".sel form select:eq(0) option[value='${phoneRecords.provinceid}']").attr("selected","selected");
+		$(".sel form select:eq(1) option[value='${phoneRecords.cityid}']").attr("selected","selected");
+		$("#create_beginTime").calendar();
+		$("#create_endTime").calendar();
+	});
+	$(function(){
+		$(".sel form select:eq(0)").change(function(){
+			$(".sel form select:eq(1) option").remove();
+			var provinceid = $("select[name='province']").val();
+			$.ajax({ 
+	    		url : "/admin/clue/phonerecords/city", 
+	    		data:"provinceid="+provinceid,
+	    		dataType : "json",
+	    		type: "POST",
+	    		success : function(data) {
+	    			var sel = $(".sel form select:eq(1)").append("<option value=''>所在城市</option>");
+	    			$.each(data,function(index,value){
+	    				sel.append("<option value='"+value.id+"'>"+ value.name + "</option>");
+	    			});
+	    		}
+    		});
+		});
+		
+		$('.playblue').on('click',function(e){  
+			$('.video').show();
+			var playUrl = $(e.target).attr("video");
+			$('.video embed').attr("src",playUrl);  
+		});
+		$('.g-close').on('click',function(){  
+			$('.video').hide();  
+			$('.video embed').removeAttr("src");  
+			$('.video embed').innerHTML(""); 
+		});
+		
+	});
+</script>
+</head>
+<body>
+<div class="wrapper">
+	<!--START 左边開始-->
+	${include("/common/left_admin.httl")}
+	<!--END 左边结束-->
+	
+	<!--START 右侧开始-->
+	<div class="right">
+	
+	<!--START 头开始-->
+	${include("/common/top_admin.httl",["topMenuTitle":"400电话管理"])}
+	<!--END 头结束-->
+	<div class="video">
+		<span class="g-close"></span>
+		<embed loop="-1" autostart="true">
+		</embed>
+	</div>
+    <!-- START -->
+    <div class="right-con">
+            <div class="sel"> 
+            	<form action="/admin/clue/phonerecords/list" method="post" id="searchForm">
+		            <input type="hidden" id="pageCurrentPage" name="currentPage" value="${page.currentPage}"/>
+	                <span style="padding:0 0 0 10px">经销商所在地区：</span>
+	                <select name="province">
+	                	<option>所在省份</option>
+                    	<!--#for(com.chexun.dealer.model.common.Province province : provinceList)-->
+	                		<option value="${province.id}">${province.name}</option>
+                    	<!--#end-->
+	                </select>
+                	<select name="city">
+	                	<!--#for(com.chexun.dealer.model.common.City city : cityList)-->
+	                		<option value="${city.id}">${city.name}</option>
+                    	<!--#end-->
+	                </select>
+						来电时间：
+					<input id="create_beginTime" name="begintime" class="put_jxs" value="${phoneRecords.begintime}" type="text">
+						至
+					<input id="create_endTime" name="endtime" class="put_jxs" value="${phoneRecords.endtime}" type="text">
+	                <span style="padding:0 0 0 10px">经销商：</span> 
+	                <input type="text" class="sel-inpt" name="companyName" value="${phoneRecords.companyName}" />
+			                	分机号：
+					<input id="txtFenJi" class="iputtxt02" name="extensionNum" value="${phoneRecords.extensionNum}" type="text">
+	                <input type="button" class="con-sel-search" value="搜索" onclick="sub();"/>
+                </form>
+            </div>
+            <div class="con">
+            <span style="float:right;margin-right:50px;">共<a href=""><b class="cred">20524</b></a>个提问</span>
+            <span id="transmark" style="display: none; width: 0px; height: 0px;"></span>
+            <ul class="tabs clearfix">
+            	<li class="active">
+            		<a onclick="SearchState(-1)" style="cursor: pointer">
+            			<strong>全部留言</strong>
+            		</a>
+            	</li>
+            	<li>
+	            	<a onclick="SearchState(1)" style="cursor: pointer">
+	            		<strong>已接通</strong><span>(11114)</span>
+					</a>
+            	</li>
+            	<li>
+            		<a onclick="SearchState(0)" style="cursor: pointer">
+						<strong>未接通</strong>
+						<span>(9410)</span>
+					</a>
+            	</li>
+            </ul>
+                <div class="con-bd" id="tab">
+                        <table  width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <th>ID </th>
+                                <th>经销商 </th>
+                                <th>主叫号码</th>
+                                <th>来电时间</th>
+                                <th>通话时长</th>
+                                <th>通话状态  </th>
+                                <th>操作</th>
+                            </tr>
+                           <!--#for(com.chexun.dealer.model.clue.PhoneRecords phoneRecords : phoneRecordsList)-->
+							<tr>
+                                <td>${phoneRecords.id }</td>
+                                <td>${phoneRecords.companyName }</td>
+                                <td>${phoneRecords.caller }</td>
+                                <td>${phoneRecords.callerStartTime }</td>
+                                <td>${phoneRecords.calledCalltime }秒</td>
+                                <td>
+                                	#if(phoneRecords.calledCalltime == '0') 
+									     未接听
+									#end
+									#if(phoneRecords.calledCalltime != '0') 
+									     已接听
+									#end
+                                </td>
+                                <td>
+									#if(phoneRecords.calledCalltime == '0') 
+										<a>
+											<span class="playgrey">播放</span>
+										</a>
+									#end
+									#if(phoneRecords.calledCalltime != '0') 
+										<a href="javascript:void(0);">
+											<span class="playblue" video="${phoneRecords.playurl}" style="">播放</span>
+										</a>
+									#end
+                                </td>
+                            </tr>
+                            <!--#end-->
+                        </table>
+                         ${include("/common/page.httl")}
+                </div>
+            </div>
+     </div>
+    <!-- END-->
+     <!--END  右侧结束-->
+     <!--START 底部开始-->
+        ${include("/common/footer.httl")}
+     <!--END 底部结束-->
+</div>
+</body>
+</html>
